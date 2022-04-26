@@ -1,0 +1,111 @@
+<app-header *ngIf="!showInfo" title="SERVICIOS"></app-header>
+<div *ngIf="destino != undefined && !showInfo">
+    <ion-note class="title">CATEGORÍAS DISPONIBLES</ion-note>
+    <ion-note class="title">{{destino.centre}}</ion-note>
+    <div class="containerChangeCenter">
+        <ion-icon class="icBackCenters" name="chevron-back"></ion-icon>
+        <ion-note class="changeCenter" *ngIf="destino != undefined" (click)="changeCenter()">CAMBIAR<br>CENTRO</ion-note>
+    </div>
+    <hr>
+</div>
+<ion-content #content [scrollEvents]="true">
+    <!-- SELECCIÓN O BÚSQUEDA DE CENTRO -->
+    <ng-container *ngIf="destino == undefined; else listado;">
+        <ion-note class="selectCenter">SELECCIONAR O BUSCAR CENTRO DE DESTINO:</ion-note>
+        <ion-searchbar [(ngModel)]="searchCenter" #search type="text" inputmode="text" showCancelButton="focus" cancelButtonText="CANCELAR" placeholder="¿Centro a buscar?" autocorrect="on" animated (ionClear)="clearSearch()" (ionChange)="searchingCenter()"></ion-searchbar>
+        <hr>
+        <ion-list lines="none">
+            <ion-item *ngFor="let c of centrosShow" (click)="selectCenter(c)">
+                <ion-label class="centerName">{{c.name}}</ion-label>
+                <ion-icon class="icCenter" name="chevron-forward" slot="end"></ion-icon>
+            </ion-item>
+        </ion-list>
+    </ng-container>
+    <!-- LISTADO DE CATEGORIAS Y SERVICIOS DISPONIBLES-->
+    <ng-template #listado>
+        <ng-container *ngIf="!showInfo; else showingInfo">
+            <ion-item class="containerCategory" lines="none" *ngFor="let category of categoryOfServices; let i=index;">
+                <ion-grid class="ion-no-padding">
+                    <ion-row>
+                        <ion-col class="imgService" size="4" size-xs="4" size-sm="4" size-md="4" size-lg="4">
+                            <ion-img [ngClass]="['imgCategory', 'animated', 'fadeIn']" [src]="category.image_portrait"></ion-img>
+                        </ion-col>
+                        <ion-col size="8" size-xs="8" size-sm="8" size-md="8" size-lg="8">
+                            <ion-row class="titleRow">
+                                <ion-note class="categoryService">{{category.name | uppercase}}</ion-note>
+                            </ion-row>
+                            <ion-row class="description" (click)="infoService(i, category)">
+                                <ion-col size="12">
+                                    <p>{{sliceText.transform(category.description,100,120)}}</p>
+                                </ion-col>
+                                <ion-note class="moreInformation">Más Info</ion-note>
+                                <ion-grid class="containerPrices">
+                                    <ion-row *ngFor="let serv of category.services; let pos=index;">
+                                        <ion-col size="9" *ngIf="pos < 3">
+                                            <ion-note class="priceStl">{{sliceText.transform(serv.name, 20,25)}}</ion-note>
+                                        </ion-col>
+                                        <ion-col size="3" *ngIf="pos < 3">
+                                            <ion-note class="monto">{{serv.price}}€</ion-note>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-button class="btnService" expand="full" (click)="recommendService(undefined, category)">
+                            RECOMENDAR SERVICIO</ion-button>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+        </ng-container>
+    </ng-template>
+    <!-- INFORMACIÓN DETALLADA DE LOS SERVICIOS DE CATEGORÍAS-->
+    <ng-template #showingInfo>
+        <ion-img [ngClass]="['imageInfo', 'animated', 'fadeIn', 'fast']" [src]="userSelection.category.image" ion-image></ion-img>
+        <ion-grid>
+            <ion-row class="rowService" *ngFor="let s of userSelection.services; let i=index;">
+                <ion-col size="3" class="colThumb">
+                    <ion-thumbnail>
+                        <img class="thumbnailsStl" [src]="s.image">
+                    </ion-thumbnail>
+                </ion-col>
+                <ion-col size="8" class="ion-text-center">
+                    <div class="selectingInfo" (click)="moreInfo(i)">
+                        <ion-note id="svcTitle{{i}}" class="titleSvcBtn">{{s.name |uppercase}}</ion-note>
+                    </div>
+                </ion-col>
+                <ion-col size="1">
+                    <ion-icon name="{{serviceInfoPos != i ? 'chevron-forward' : 'chevron-back' }}" style="height: 100% !important;"></ion-icon>
+                </ion-col>
+                <ion-row *ngIf="serviceInfoPos == i" class="containerInfoDetailsSvc">
+                    <div class="detailsServices">
+                        <ion-note class="descriptionSvc">{{userSelection.services[i].description}}</ion-note>
+                        <ion-col size="6">
+                            <ion-segment-button class="infoSegment" layout="icon-top" (click)="recommendService(userSelection.services[i], userSelection.category)">
+                                <ion-icon name="pricetags"></ion-icon>
+                                <ion-note class="moreInfo">PVP: {{userSelection.services[i].price}}€</ion-note>
+                            </ion-segment-button>
+                        </ion-col>
+                        <ion-col size="6">
+                            <ion-segment-button class="infoSegment" layout="icon-top" (click)="goInfoService(userSelection.services[i])">
+                                <ion-icon name="globe"></ion-icon>
+                                <ion-note class="moreInfo">MÁS INFO</ion-note>
+                            </ion-segment-button>
+                        </ion-col>
+                    </div>
+                </ion-row>
+            </ion-row>
+        </ion-grid>
+    </ng-template>
+    <ion-fab #fab *ngIf="showInfo && !fabShowInfo" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="showingServices()">
+            <ion-icon class="icFab" name="add-circle"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="start"></ion-fab-list>
+    </ion-fab>
+</ion-content>
+<ion-button *ngIf="!showInfo" class="goBack" expand="block" (click)="goBack()">
+    <ion-icon name="home" slot="start" class="home"></ion-icon>VOLVER</ion-button>
+<ion-button *ngIf="showInfo" class="goBack" expand="block" (click)="changeService()">
+    <ion-icon name="return-up-back" slot="start" class="home"></ion-icon>CAMBIAR CATEGORÍA</ion-button>

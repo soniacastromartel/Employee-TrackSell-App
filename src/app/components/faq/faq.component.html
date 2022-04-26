@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="backFAQ()">
+                <ion-icon name="arrow-back-circle" color="light" size="large"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <p>
+            PREGUNTAS FRECUENTES
+        </p>
+    </ion-toolbar>
+    <div class="searchContainer">
+        <ion-searchbar #search debounce="800" placeholder='Su búsqueda aquí' (ionChange)="userSearching()"
+            (ionCancel)="cancelSearch()" (ionClear)="cancelSearch()"></ion-searchbar>
+    </div>
+</ion-header>
+
+<ion-content #content>
+    <ng-container *ngIf="optionsFAQ !== undefined; else emptyFaq">
+        <div class="containerFAQ">
+
+            <ion-list *ngFor="let question of optionsShow;let i=index">
+                <ion-item class="sectionFAQ" lines="none" *ngIf="!optionsShow[i]?.hidden">
+                    <ion-segment-button id="questionFAQ" (click)="openOptFAQ(i)">
+                        <ion-icon class="icFaq" name="{{optionsShow[i]?.ic}}"></ion-icon>
+                        <ion-note class="baseOpt">{{optionsShow[i]?.categoria}}</ion-note>
+                    </ion-segment-button>
+                </ion-item>
+
+                <div *ngIf="optCtrl[i]">
+                    <ion-chip class="question" *ngFor="let question of optionsShow[i]?.data"
+                        (click)="showQuestion(question, i)">
+                        <ion-note class="resOpt">{{question?.pregunta}}</ion-note>
+                    </ion-chip>
+                </div>
+
+            </ion-list>
+
+        </div>
+    </ng-container>
+
+    <ng-template #emptyFaq>
+        <div>
+            <ion-img class="emptyView" src="assets/imgs/nodata.png"></ion-img>
+            <ion-label class="emptyDataLbl">{{noData}}</ion-label>
+        </div>
+    </ng-template>
+</ion-content>
+
+<div class="containerVersion">
+    <ion-segment-button (click)="reUpdatingApp()" *ngIf="isShowPendingUpdate">
+        <ion-icon name="warning" class="icUpdate" size="large"></ion-icon><br>ACTUALIZACIÓN PENDIENTE
+    </ion-segment-button>
+    <hr class="separator">
+    <ion-img class="logoVersion" src="assets/imgs/logo.png"></ion-img>
+    <ion-label class="versionApp">VERSIÓN {{version}}</ion-label>
+</div>

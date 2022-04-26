@@ -1,0 +1,65 @@
+[{
+        "categoria": "ACCESO A LA APLICACIÓN",
+        "ic": "add-circle",
+        "data": [{
+                "pregunta": "¿Cómo puedo acceder a la aplicación?",
+                "respuesta": "<br>PARA PODER ACCEDER A LA APLICACIÓN ES NECESARIO SOLICITAR ACCESO DESDE LA OPCIÓN ACCESIBLE DESDE LA PANTALLA PRINCIPAL.<br>PULSE EL BOTÓN <br><strong>¡SOLICITAR ACCESO!</strong><br><br>, COMPLETE Y ENVÍE EL FORMULARIO CON LOS DATOS SOLICITADOS PARA REALIZAR LA SOLICITUD. <br>TRAS EL ENVÍO DE LA SOLICITUD SE REALIZARÁ UNA VALIDACIÓN DE LA CUENTA DEL EMPLEADO. UNA VEZ VALIDADA LA CUENTA, EL USUARIO RECIBIRÁ UN CORREO CON LOS CREDENCIALES INICIALES PARA REALIZAR EL PRIMER LOGIN*.<br><br>PARA ACCEDER INTRODUZCA SU ID DE USUARIO Y SU CONTRASEÑA Y PULSE EL BOTÓN DE <strong>ACCEDER</strong> PARA INICIAR SESIÓN EN SU CUENTA DE EMPLEADO.<br><br>* Los credenciales deberán ser cambiados en el primer acceso."
+            },
+            {
+                "pregunta": "He perdido/olvidado mi contraseña de acceso, ¿cómo puedo recuperarla?",
+                "respuesta": "<br>PARA REESTABLECER LA CONSTRASEÑA DE SU CUENTA PUEDE UTILIZAR LA OPCIÓN DE ¿CONTRASEÑA OLVIDADA?. INTRODUZCA SU ID DE USUARIO Y PULSE ENVIAR PARA PROCEDER A REALIZAR LA SOLICITUD, SI SU CUENTA SE ENCUENTRA VALIDADA Y APTA SE PERMITIRÁ LA OPCIÓN DE CAMBIO DE CONTRASEÑA AUTOMÁTICA*.<br><br>* Para poder realizar el cambio de contraseña automático el usuario debe haber iniciado sesión previamente, (al menos una vez)."
+            },
+            {
+                "pregunta": "Tengo problema para acceder con mis credenciales.",
+                "respuesta": "<br>SI SURGEN PROBLEMAS A LA HORA DE ACCEDER CON SUS CREDENCIALES, RECOMENDAMOS SOLICITAR UNA NUEVA CONTRASEÑA Y REALIZAR EL CAMBIO DE LA MISMA, PARA INTENTAR POSTERIORMENTE ACCEDER CON LOS NUEVOS DATOS.<br><br>SI TRAS LA OPERACIÓN SIGUE SIN PODER ACCEDER, POR FAVOR CONTACTE CON SU SUPERVISOR"
+            }
+        ]
+    },
+
+    {
+        "categoria": "VISUALIZAR Y MODIFICAR DATOS",
+        "ic": "add-circle",
+        "data": [
+            {
+                "pregunta": "¿Puedo ver los incentivos generados con mis recomendaciones?",
+                "respuesta": "¡Por supuesto!, La app cuenta con una sección dedicada donde podrás controlar tus incentivos con vistas en RESUMEN o EN DETALLE para que no te pierdas nada."
+            },
+			{
+                "pregunta": "¿Puedo modificar mis datos?",
+                "respuesta": "No, no se permite la modificación de NINGÚN dato, ni personal ni asociado a su cuenta, si necesita realizar alguna modificación de datos, por favor póngase en contacto con el dpto de RRHH."
+            }
+        ]
+    },
+
+    {
+        "categoria": "RECOMENDAR SERVICIOS",
+        "ic": "add-circle",
+        "data": [{
+                "pregunta": "¿Puedo recomendar servicios desde la aplicación?",
+                "respuesta": "Por supuesto, puedes registrar nuevas ventas desde varios puntos en la app:\n1- Desde la lista de servicios, haz tu selección y cuando encuentres el servicio adecuado, pulsa el botón RECOMENDAR SERVICIO y serás redirigid@ al formulario de venta.\n2- Desde la sección MI PLAN DE INCENTIVOS en la parte inferior encontrarás el botón NUEVA RECOMENDACIÓN, al pulsarlo serás redireccionad@ al formulario de venta.\n3- Desde el home principal pulsa el botón REGISTRO DE VENTA para acceder al formulario de venta.\n"
+            },
+            {
+                "pregunta": "¿Puedo recomendar servicios a personas que no son pacientes de Icot?",
+                "respuesta": "Si, estamos encantados de tener nuevos pacientes con nosotros, completa el formulario con todos sus datos, la será gestionada en la mayor brevedad posible"
+            }
+        ]
+    },
+
+    {
+        "categoria": "PROBLEMAS TÉCNICOS",
+        "ic": "add-circle",
+        "data": [{
+                "pregunta": "Intento realizar alguna acción y no me lo permite.",
+                "respuesta": "RESP"
+            },
+            {
+                "pregunta": "Cierre inesperado.",
+                "respuesta": "En caso de cierre inesperado"
+            },
+            {
+                "pregunta": "Otros problemas técnicos",
+                "respuesta": "RESPU"
+            }
+        ]
+    }
+]

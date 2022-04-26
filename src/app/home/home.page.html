@@ -1,0 +1,53 @@
+<div class="base">
+
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-img class="faq" src="assets/imgs/faq.png" (click)="openFAQ()"></ion-img>
+        </ion-buttons>
+    </ion-toolbar>
+
+    <ion-content #content class="content">
+
+        <ion-img id="logo" class="logo" [src]="logo" (click)="developerEnvironment()"></ion-img>
+
+        <div class="containerForm">
+
+            <form [formGroup]="userForm" autocomplete="off">
+                <ion-label class="field" position="floating">USUARIO</ion-label>
+                <ion-row>
+                    <ion-col size="11" class="containerInput">
+                        <ion-input formControlName="user" type="text" id="user" name="user" autocapitalize="off" (ionFocus)="logScroll()" (ionChange)="showDeleteField()" [placeholder]="userForm.controls.user.value">
+                        </ion-input>
+                    </ion-col>
+                    <ion-col size="1" class="containerInput ion-text-center">
+                        <ion-icon [name]="iconAux" class='showUnshowP' size="medium" (click)="clearUserName()"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <br>
+                <ion-label class="field" position="floating">CONTRASEÑA</ion-label>
+                <ion-row>
+                    <ion-col size="11" class="containerInput">
+                        <ion-input formControlName="pass" [type]="!showPass ? 'password' : 'text'" id="pass" name="pass" (ionFocus)="logScroll()">
+                        </ion-input>
+                    </ion-col>
+
+                    <ion-col size="1" class="containerInput ion-text-center">
+                        <ion-icon [name]="showPass == false ? 'eye-off' : 'eye'" class='showUnshowP' size="medium" (click)="showUnshowPass()"></ion-icon>
+                    </ion-col>
+                </ion-row>
+
+            </form>
+
+            <ion-note class="recovery" (click)="recoveryPass()">¿CONTRASEÑA OLVIDADA?</ion-note>
+            <ion-note class="newAccess" (click)="newAccess()">¡SOLICITAR ACCESO!</ion-note>
+
+        </div>
+        <br>
+
+    </ion-content>
+
+</div>
+
+<ion-footer class="ion-no-border">
+    <ion-button [disabled]="!userForm.valid" type="submit" id="submit" name="submit" expand="block" (click)="checkUser()">ACCEDER</ion-button>
+</ion-footer>

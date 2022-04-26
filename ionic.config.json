@@ -1,0 +1,7 @@
+{
+  "name": "icotPersonal",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,4 @@
+<ion-item lines="none" *ngFor="let opt of optsEmployeeSubMenu;let i=index;" (click)="actionsTo(i)">
+    <ion-icon name="{{opt.ic}}" size="large"></ion-icon>
+    <p>{{opt.title}}</p>
+</ion-item>

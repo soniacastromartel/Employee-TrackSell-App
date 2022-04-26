@@ -1,0 +1,203 @@
+@media (min-width: 320px) and (max-width: 767px) {
+    .baseOpt {
+        font-size: small;
+        font-weight: bold;
+        color: var(--ion-color-myblack);
+        margin: 1em;
+        display: block;
+        text-align: center;
+    }
+    .resOpt {
+        width: 100% !important;
+        text-align: center;
+        font-size: small;
+        font-weight: bold;
+        color: var(--ion-color-myblack);
+        margin: 2em;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1280px) {
+    .baseOpt {
+        font-size: large;
+        font-weight: bold;
+        color: var(--ion-color-myblack);
+        margin: 1em;
+        display: block;
+        text-align: center;
+    }
+    .resOpt {
+        width: 100% !important;
+        text-align: center;
+        font-size: large;
+        font-weight: bold;
+        color: var(--ion-color-myblack);
+        margin: 2em;
+    }
+}
+
+@media (min-width: 1281px) {
+    .baseOpt {
+        font-size: large;
+        font-weight: bold;
+        color: var(--ion-color-myblack);
+        margin: 1em;
+        display: block;
+        text-align: center;
+    }
+    .resOpt {
+        width: 100% !important;
+        text-align: center;
+        font-size: large;
+        font-weight: bold;
+        color: var(--ion-color-myblack);
+        margin: 2em;
+    }
+}
+
+ion-toolbar {
+    --background: var(--ion-color-icot);
+}
+
+ion-searchbar {
+    --icon-color: white;
+    --clear-button-color: white;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    --placeholder-color: white
+}
+
+ion-chip {
+    border: 2px solid var(--ion-color-icot);
+    margin: 10px;
+}
+
+ion-note {
+    margin: 16px;
+}
+
+ion-label {
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+p {
+    color: white;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+b {
+    --color: var(--ion-color-icot);
+}
+
+hr {
+    height: 2px;
+}
+
+ion-item {
+    border: 0% !important;
+    padding: 0% !important;
+}
+
+ion-segment-button {
+    font-weight: 900;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.icFaq {
+    color: var(--ion-color-icot);
+}
+
+.searchContainer {
+    background-color: var(--ion-color-icot);
+}
+
+.separator {
+    height: 3px;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 16px;
+    background: var(--ion-color-icot);
+}
+
+.containerVersion {
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: small;
+    margin-bottom: 10px;
+}
+
+.logoVersion {
+    width: 50px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+}
+
+.question {
+    width: 90% !important;
+    text-align: center !important;
+    font-size: small;
+    font-weight: bold;
+    font-family: monospace;
+    color: black;
+    padding-top: 3.2em;
+    padding-bottom: 3.2em;
+}
+
+.containerQuestion {
+    border: 5px solid yellow;
+}
+
+.containerFAQ {
+    margin: 0;
+    padding: 0;
+}
+
+.sectionFAQ {
+    height: 75px;
+}
+
+.arrow_policy {
+    float: right;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.info_pp {
+    font-size: small;
+    text-align: center;
+    font-weight: 900;
+    margin: 0;
+    color: var(--ion-color-icot);
+}
+
+.emptyDataLbl {
+    display: block;
+    text-align: center;
+}
+
+.versionApp {
+    color: var(--ion-color-myblack);
+}
+
+.icUpdate {
+    color: var(--ion-color-icot);
+    animation-name: alerting;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes alerting {
+    25% {
+        opacity: 15%;
+    }
+    75% {
+        opacity: 100%;
+    }
+}

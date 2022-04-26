@@ -1,0 +1,24 @@
+<div class="header">
+    <ion-icon [name]="dataAlert.ic" size="medium"></ion-icon>
+    <h5>{{dataAlert.title}}</h5>
+    <ion-icon name="alert-circle" size="medium"></ion-icon>
+</div>
+<div>
+    <br>
+    <ion-note>{{dataAlert.msg}}</ion-note>
+    <br>
+    <ion-item lines="none">
+        <ion-note class="lblCheck">{{retryLabel}}</ion-note>
+        <ion-checkbox slot="end" [(ngModel)]="retrySend" color="danger"></ion-checkbox>
+    </ion-item>
+</div>
+<ion-grid>
+    <ion-row>
+        <ion-col size="6">
+            <ion-button fill="clear" expand="full" color="dark" (click)="action(false)"> CANCELAR</ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button class="btnAcept" fill="clear" expand="full" (click)="action(true)">OK</ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>

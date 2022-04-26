@@ -1,0 +1,127 @@
+@media (min-width: 320px) and (max-width: 767px) {
+  .lblSale {
+    font-size: x-small;
+}
+}
+@media (min-width: 768px) and (max-width: 1280px){
+  .lblSale {
+    font-size: small;
+}
+}
+@media (min-width: 1281px) {
+  .lblSale {
+    font-size: medium;
+}
+}
+
+ion-card-header {
+    padding: 0.5em;
+    text-align: center;
+}
+
+hr {
+    height: 3px;
+    background-color: var(--ion-color-icot);
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    padding: 0;
+}
+
+ion-checkbox {
+  --border-color: var(--ion-color-icot);
+  --background-checked: var(--ion-color-icot);
+  --border-color-checked: white;
+}
+
+.titleCard {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    color: var(--ion-color-icot);
+}
+
+.dataService {
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 1em;
+    border: 5px solid var(--ion-color-icot) !important;
+    margin-bottom: 0 auto;
+    margin-top: 0 auto;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    //background-color: white;
+}
+
+.imgSvc {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 100% !important;
+}
+
+.serviceCard {
+    font-weight: 900;
+    font-family: monospace;
+    font-size: small;
+}
+
+.lblCard {
+    color: var(--ion-color-myblack);
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.btnCancel {
+    --background: black !important;
+    --background-hover: black;
+    --background-activated: black;
+    --color: var(--clear-button-color);
+    font-weight: 900;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.btnConfirm {
+    --background: var(--ion-color-icot);
+    --background-hover: var(--ion-color-icot);
+    --background-activated: var(--ion-color-icot);
+    --color: white !important;
+    font-weight: 900;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.lblSale {
+    color: var(--ion-color-myblack);
+    font-weight: 600;
+}
+
+.lblPatient {
+    margin-left: 1em;
+    color: var(--ion-color-icot);
+    font-size: small;
+    font-weight: 900;
+    font-family: monospace;
+}
+
+.infoSale {
+    text-align: center;
+    display: block;
+    height: 100%;
+    --color: var(--ion-color-icot);
+    font-weight: 600;
+    margin: 0 auto !important;
+    font-size: small;
+}
+
+.dataPatient {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: var(--ion-color-myblack);
+    font-weight: bold;
+    text-align: right;
+    display: block;
+    margin-right: 1em;
+}
+
+.containerDescriptor {
+    display: flex!important;
+    align-content: center!important;
+    align-items: center!important;
+}

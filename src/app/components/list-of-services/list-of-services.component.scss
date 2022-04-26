@@ -1,0 +1,400 @@
+// Phones
+@media (min-width: 320px) and (max-width: 500px) {
+  .categoryService {
+    font-size: small;
+}
+.description {
+  font-size: x-small;
+}
+.priceStl {
+  font-size: xx-small;
+}
+.monto {
+  font-size: xx-small;
+}
+.btnService {
+  font-size: medium;
+}
+}
+
+// Tablets
+@media (min-width: 501px) and (max-width: 767px) {
+  .categoryService {
+    font-size: medium;
+}
+.description {
+  font-size: small;
+}
+.priceStl {
+  font-size: small;
+}
+.monto {
+  font-size: small;
+}
+.btnService {
+  font-size: large;
+}
+}
+
+//
+@media (min-width: 768px) and (max-width: 1280px){
+  .categoryService {
+    font-size: medium;
+}
+.description {
+  font-size: small;
+}
+.priceStl {
+  font-size: x-small;
+}
+.monto {
+  font-size: x-small;
+}
+.btnService {
+  font-size: large;
+}
+}
+// Desktop
+@media (min-width: 1281px) {
+  .categoryService {
+    font-size: large;
+}
+.description {
+  font-size: medium;
+}
+.priceStl {
+  font-size: small;
+}
+.monto {
+  font-size: small;
+}
+.btnService {
+  font-size: x-large;
+}
+}
+
+ion-searchbar {
+    --cancel-button-color: var(--ion-color-icot);
+    --icon-color: var(--ion-color-icot);
+    --color: var(--ion-color-myblack);
+    float: inline-start;
+    --placeholder-color: var(--ion-color-myblack);
+}
+
+ion-grid {
+    width: 100% !important;
+}
+
+ion-icon {
+    color: var(--ion-color-icot);
+}
+
+ion-badge {
+    --background: var(--ion-color-icot);
+    color: white;
+    padding: 10px;
+}
+
+ion-fab-button {
+    --background: var(--ion-color-icot);
+    --background-hover: var(--ion-color-icot);
+    --background-activated: var(--ion-color-icot);
+}
+
+ion-thumbnail {
+    width: 100%;
+    height: 100%;
+}
+
+p {
+    margin-top: 0;
+}
+
+hr {
+    margin: 16px;
+    height: 3px;
+    background-color: var(--ion-color-icot);
+}
+
+.goBack {
+    --background: var(--ion-color-icot);
+    --background-hover: var(--ion-color-icot);
+    --background-activated: var(--ion-color-icot);
+    --color-hover: white;
+    --color: white;
+    margin: 16px;
+    font-weight: bold;
+    font-size: small;
+}
+
+.titleSvcBtn {
+    width: 70% !important;
+    color: var(--ion-color-myblack);
+    font-size: small;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.icBackCenters {
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.title {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    color: var(--ion-color-myblack);
+    font-size: small;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-bottom: 0.5em;
+}
+
+.selectingInfo {
+    height: 100% !important;
+}
+
+.containerChangeCenter {
+    margin-top: 5px;
+    text-align: left;
+}
+
+.changeCenter {
+    font-size: xx-small;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 16px;
+    font-family: monospace;
+    color: var(--ion-color-icot);
+}
+
+.imgCategory {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+}
+
+.icFab{
+  color: white;
+}
+
+.descriptionSvc {
+    display: block;
+    padding-left: 1em !important;
+    padding-top: 1em !important;
+    padding-right: 1em !important;
+    padding-bottom: 0% !important;
+    font-family: Calibri;
+    color: var(--ion-color-myblack);
+    font-weight: 600;
+    text-align: left;
+}
+
+.selectCenter {
+    font-size: small;
+    font-family: monospace;
+    color: var(--ion-color-myblack);
+    font-weight: bold;
+    margin: 16px;
+    text-align: left;
+    display: block;
+}
+
+.thumbnailsStl {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.rowService {
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+.containerInfoDetailsSvc {
+    width: 100% !important;
+    display: block;
+}
+
+.colThumb {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+}
+
+.icCenter {
+    color: var(--ion-color-icot);
+}
+
+.btnService {
+    --background: var(--ion-color-icot);
+    --background-hover: var(--ion-color-icot);
+    --background-activated: var(--ion-color-icot);
+    --color-hover: white;
+    --color: white;
+    --color-activated: white;
+    height: 40px;
+    width: 100% !important;
+    font-family: monospace;
+    font-weight: 900;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding: 0;
+}
+
+.btnService:hover {
+    font-size: large;
+}
+
+.btnService:active {
+    font-size: large;
+}
+
+.imgService {
+    width: 100%;
+    border: 2px solid var(--ion-color-icot);
+}
+
+.titleRow {
+    font-size: small;
+    text-align: center;
+    display: block;
+    background: var(--ion-color-icot);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 5px;
+}
+
+.categoryService {
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.description {
+    text-align: left;
+    margin: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+}
+
+.moreInfo {
+    width: 100% !important;
+    text-align: left;
+    font-weight: bold;
+    font-size: x-small;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 10px;
+    color: var(--ion-color-icot);
+}
+
+.priceStl {
+    display: block;
+    width: 100% !important;
+    text-align: right;
+    float: inline-end;
+    color: var(--ion-color-myblack);
+}
+
+.monto {
+    color: var(--ion-color-icot);
+    font-weight: bold;
+}
+
+.service {
+    font-size: xx-small;
+    font-weight: bold;
+    font-family: monospace;
+    color: black;
+    margin: 2px;
+    display: block;
+    text-align: right;
+}
+
+.containerPrices {
+    width: 100% !important;
+    text-align: right;
+    padding-top: 2.5em;
+}
+
+.containerCategory {
+    margin: 16 !important;
+    padding: 0 !important;
+}
+
+.imageInfo {
+    border: 2px solid var(--ion-color-icot);
+    width: 100% !important;
+    height: 200px;
+    object-fit: fill;
+}
+
+.priceCard {
+    border: none !important;
+    margin-bottom: 2em;
+}
+
+.titleService {
+    color: var(--ion-color-icot);
+    font-weight: 900;
+    font-family: monospace;
+    display: block;
+    text-align: left;
+    margin-left: 1em;
+}
+
+.detailsServices {
+    //white-space: pre-wrap;
+    white-space: pre-wrap;
+    text-align: center !important;
+}
+
+.centerName {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.priceService {
+    font-weight: bold;
+    color: var(--ion-color-icot);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tableHeaderService {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.moreInformation {
+    color: var(--ion-color-icot);
+    font-weight: bold;
+    text-align: left;
+    display: block;
+    width: 100%  !important;
+}
+
+.infoSegment {
+    width: 30% !important;
+    display: inline-block;
+    text-align: center;
+}
+
+.moreInfo {
+    color: var(--ion-color-myblack);
+    margin-top: 0.5em;
+    display: inline;
+    text-align: center;
+}
+
+
+.home{
+  color: white;
+}

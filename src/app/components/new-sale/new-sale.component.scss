@@ -1,0 +1,173 @@
+@media (min-width: 320px) and (max-width: 767px) {
+  .optRadio {
+    font-size: x-small;
+}
+}
+@media (min-width: 768px) and (max-width: 1280px){
+  .optRadio {
+    font-size: small;
+}
+}
+@media (min-width: 1281px) {
+  .optRadio {
+    font-size: small;
+}
+}
+
+ion-icon {
+    color: white;
+}
+
+ion-item {
+    text-align: center;
+}
+
+ion-card-header {
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: medium;
+    color: var(--ion-color-icot);
+}
+
+ion-select {
+    border: 3px solid var(--ion-color-icot);
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: small;
+    font-family: monospace;
+    --placeholder-color: var(--ion-color-myblack);
+}
+
+ion-label {
+    font-size: x-small;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+ion-radio-group {
+    display: block;
+    text-align: center;
+}
+
+ion-radio {
+    margin-right: 10px;
+    --color: var(--ion-color-icot);
+}
+
+ion-input {
+    border: 3px solid var(--ion-color-icot);
+    font-weight: bold;
+    font-family: monospace;
+    --placeholder-color: var(--ion-color-myblack);
+    min-height: 40px;
+}
+
+ion-textarea {
+    border: 3px solid var(--ion-color-icot);
+    font-weight: bold;
+    font-family: monospace;
+    padding: 5px;
+    --placeholder-color: var(--ion-color-myblack);
+}
+
+ion-button {
+    --background: var(--ion-color-icot);
+    --background-hover: var(--ion-color-icot);
+    --background-activated: var(--ion-color-icot);
+    --color-hover: white;
+    --color: white;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: center;
+    font-weight: bold;
+    font-size: small;
+}
+
+hr {
+    background-color: var(--ion-color-icot);
+    height: 3px;
+    margin-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+form {
+    margin-top: 16px;
+}
+
+.backServiceCard {
+    color: var(--ion-color-icot);
+    float: left;
+    margin-left: 0.2em;
+    margin-top: 0.2em;
+}
+
+.serviceDate {
+    --background: var(--ion-color-icot);
+    float: right !important;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: small;
+    margin-right: 1em !important;
+    font-weight: bold;
+}
+
+.ventaServiceStl {
+    padding-top: 1em;
+    padding-bottom: 0;
+}
+
+.icClear {
+    color: var(--ion-color-icot);
+}
+
+.configuradorLbl {
+    width: 100%;
+    font-size: medium;
+    font-weight: 900;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    color: var(--ion-color-icot);
+}
+
+#quantity{
+  text-align: center;
+}
+
+.containerTypeServ, .containerDiscount{
+    display: block;
+    margin-bottom: 0.5em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+#dateServ{
+  margin-top: 16px;
+  text-align: center;
+  height: 100%;
+}
+
+#noteDate{
+  color: var(--ion-color-icot);
+  font-weight: 900;
+  font-size: large;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.optRadio {
+    margin-right: 0.3em;
+    font-weight: bold;
+}
+
+.changingValues {
+    float: right;
+    color: var(--ion-color-icot);
+}
+
+.inputForm{
+  margin-top: 5px;
+}
+
+.lblBtn{
+  color: white;
+}

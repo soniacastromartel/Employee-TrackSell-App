@@ -1,0 +1,60 @@
+<ion-content>
+    <div>
+        <ion-img [ngClass]="['imgCenterStl', 'animated', 'fadeIn']" [src]="centro?.image"></ion-img>
+    </div>
+    <ion-note class="titleCentre">{{centro?.centre}}</ion-note>
+    <hr class="sep1">
+    <hr class="sep2">
+    <hr class="sep3">
+    <br><br>
+    <ion-grid class="dataCenter">
+        <ion-row>
+            <ion-col class="ion-text-left" size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
+                <ion-note class="employeeData">DIRECCIÓN: </ion-note>
+            </ion-col>
+            <ion-col class="ion-text-right" size="9" size-xs="9" size-sm="9" size-md="9" size-lg="9" *ngIf="centro != undefined">
+                <ion-note class="dataEmployee">{{centro?.centre_address}}</ion-note>
+            </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-col class="ion-text-left" size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
+                <ion-note class="employeeData">TELÉFONO: </ion-note>
+            </ion-col>
+            <ion-col class="ion-text-right" size="9" size-xs="9" size-sm="9" size-md="9" size-lg="9" *ngIf="centro != undefined">
+                <ion-note class="dataEmployee">{{centro?.centre_phone}}</ion-note>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-left" size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
+                <ion-note class="employeeData">EMAIL: </ion-note>
+            </ion-col>
+            <ion-col class="ion-text-right" size="9" size-xs="9" size-sm="9" size-md="9" size-lg="9" *ngIf="centro != undefined">
+                <ion-note class="dataEmployee" >{{centro?.centre_email}}</ion-note>
+            </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-col class="ion-text-left" size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
+                <ion-note class="employeeData">HORARIO: </ion-note>
+            </ion-col>
+            <ion-col class="ion-text-right" size="9" size-xs="9" size-sm="9" size-md="9" size-lg="9" *ngIf="centro != undefined">
+                <ion-note class="dataEmployee">{{centro?.timetable}}</ion-note>
+            </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-col class="ion-text-left" size="3" size-xs="3" size-sm="3" size-md="3" size-lg="3">
+                <ion-note class="employeeData">SUPERVISOR: </ion-note>
+            </ion-col>
+            <ion-col class="ion-text-right" size="9" size-xs="9" size-sm="9" size-md="9" size-lg="9" *ngIf="centro != undefined">
+                <div (click)="contactTo(centro.centre_email)">
+                    <ion-note class="supervisorLbl">{{centro?.supervisor | uppercase}}</ion-note>
+                    <ion-icon class="icMail" name="mail"></ion-icon>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-button expand="block" (click)="goBack()">
+    <ion-icon name="home" slot="start" class="home"></ion-icon>VOLVER</ion-button>

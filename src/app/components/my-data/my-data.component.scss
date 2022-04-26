@@ -1,0 +1,228 @@
+@media (min-width: 320px) and (max-width: 767px) {
+.employeeData {
+  font-size: x-small;
+  font-weight: 900;
+  color: var(--ion-color-myblack);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 0;
+}
+.dataEmployee {
+  font-size: small;
+  color: var(--ion-color-myblack);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0;
+}
+}
+@media (min-width: 768px) and (max-width: 1280px){
+.employeeData {
+  font-size: small;
+  font-weight: 900;
+  color: var(--ion-color-myblack);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 0;
+}
+.dataEmployee {
+  font-size: medium;
+  color: var(--ion-color-myblack);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0;
+}
+}
+@media (min-width: 1281px) {
+.employeeData {
+  font-size: medium;
+  font-weight: 900;
+  color: var(--ion-color-myblack);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 0;
+}
+.dataEmployee {
+  font-size: large;
+  color: var(--ion-color-myblack);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0;
+}
+}
+
+ion-button {
+    --background: var(--ion-color-icot);
+    --background-hover: var(--ion-color-icot);
+    --background-activated: var(--ion-color-icot);
+    --color-hover: white;
+    --color: white;
+    margin: 16px;
+    font-weight: bold;
+    font-size: small;
+}
+
+ion-label {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+ion-avatar {
+    width: 90%;
+    height: 50%;
+    border: 2px solid black;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+ion-img {
+    max-height: 200px;
+}
+
+ion-col {
+    padding: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+ion-chip {
+    text-align: center;
+    --background: var(--ion-color-icot);
+}
+
+hr {
+    height: 3px;
+    background-color: var(--ion-color-icot);
+}
+
+ion-icon {
+    color: var(--ion-color-icot);
+    margin-left: 10px;
+}
+
+ion-label {
+    margin: 16px;
+}
+
+.titleCentre {
+    display: block;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 900;
+    text-decoration: underline;
+    color: var(--ion-color-icot);
+    font-size: large;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.containerAvatar {
+    padding: 10px;
+    margin-top: 16px;
+}
+
+.sep1 {
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 5px;
+}
+
+.sep2 {
+    margin-left: 32px;
+    margin-right: 32px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.sep3 {
+    margin-left: 48px;
+    margin-right: 48px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.userEmployeeData {
+    font-size: small;
+    font-weight: 900;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 0;
+}
+
+.categoryData {
+    width: 100% !important;
+    font-size: x-small;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    padding: 0;
+    color: var(--ion-color-icot);
+    text-align: center;
+}
+
+.inputEmployee {
+    font-size: small;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
+    margin-right: 16px;
+    font-weight: 600;
+}
+
+.dataUser {
+    padding: 0;
+    margin-right: 5px;
+}
+
+.grid {
+    display: grid;
+}
+
+.dataCenter {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    padding: 0;
+}
+
+.actionchip {
+    margin: 16px;
+    color: white;
+    font-size: small;
+    font-weight: bold;
+    font-family: monospace;
+    text-align: end;
+}
+
+.containerActions {
+    text-align: center;
+}
+
+.icUpdate {
+    margin-right: 10px;
+}
+
+.icMail {
+    float: right !important;
+}
+
+.supervisorLbl {
+    color: var(--ion-color-icot);
+    font-size: small;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home {
+    color: white;
+}
+
+.imgCenterStl {
+    border: 3px solid var(--ion-color-icot);
+    width: 100% !important;
+    height: 200px;
+    object-fit: fill;
+}

@@ -1,0 +1,115 @@
+<app-header title="MIS INCENTIVOS"></app-header>
+<ion-row>
+    <ion-col>
+        <ion-segment value="RESUMEN"> 
+            <ion-segment-button value="RESUMEN" (click)="showDataFor('RESUMEN')">
+                <ion-label>RESUMEN</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="DETALLE" (click)=" showDataFor('DETALLE')">
+                <ion-label>DETALLES</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-col>
+</ion-row>
+<br>
+
+<ion-content>
+<!-- Resumen -->
+    <div *ngIf="isResume">
+    <ion-row class="selector ion-no-padding">
+        <ion-col size="1" class="ion-no-padding" >
+          <ion-icon name="alert-circle" class="icCorte" *ngIf="dateSearch === labelsForSelect[0]" (click)="infoCorte()"></ion-icon>
+        </ion-col>
+        <ion-col size="11" class="ion-no-padding">
+            <ion-select [(ngModel)]="dateSearch" interface="popover" (ionChange)="filterFor()">
+              <ion-select-option *ngFor="let item of labelsForSelect" value="{{item}}">{{item}}</ion-select-option>
+            </ion-select>
+        </ion-col>
+        </ion-row>
+      <ion-item *ngIf="fechaIncentivos">
+        <ion-datetime [(ngModel)]="fechaIncentivos" doneText="SELECCIONAR" cancelText="CANCELAR" value="{{fechaIncentivos}}" displayFormat="{{dateSearch == labelsForSelect[1] ? 'YYYY':'MMMM-YYYY'}}" [monthNames]="monthsValues" (ionChange)="updateSelection($event)"></ion-datetime>
+    </ion-item>
+        <ion-card>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let label of contentLabel; let i=index;">
+                        <ion-col class="ion-text-left" size="9">
+                            <ion-note>{{label}}</ion-note>
+                        </ion-col>
+                        <ion-col class="ion-text-right" size="3">
+                            <ion-note>{{contentData[i]}}</ion-note>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+        <br>
+        <ion-grid class="table">
+            <ion-row class="header">
+                <ion-col size="8">
+                    SERVICIO
+                </ion-col>
+                <ion-col class="dateService" size="4">
+                    FECHA
+                </ion-col>
+            </ion-row>
+            <ion-row class="incentivosContent" *ngFor="let service of services;">
+                <ion-col size="1" *ngIf="service.state === 'Validado' || service.state === 'Pagado'">
+                    <div class="containerQuantity">
+                        <img src="assets/imgs/circle1.png" />
+                        <div>
+                            <ion-note class="quantityStl">{{service.quantity}}</ion-note>
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col class="nameService" size="7"
+                    *ngIf="service.state === 'Validado' || service.state === 'Pagado'">
+                    <ion-note class="content">{{service.service}}</ion-note>
+                </ion-col>
+                <ion-col class="fechaService" size="4"
+                    *ngIf="service.state === 'Validado' || service.state === 'Pagado'">
+                    <ion-note>{{service.started_date}}</ion-note>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <!-- Detalles -->
+
+    <ng-container *ngIf="(contentData[0] > 0 || contentData[1])  > 0; else emptyIncentives">
+        <ion-grid *ngIf="!isResume"
+        class="ion-align-items-center">
+            <ion-row class="headerTabDetails" ion-align-center>
+                <ion-col [size]="sv.size" *ngFor="let sv of tableDetailsLabels" class="colIncentivesDetails">
+                    <ion-note class="headerDataLabel">{{sv.label}}</ion-note>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let service of services" (click)="moreInfo(service)">
+                <ion-col class="detailsTable" size="6">
+                    <ion-note>{{service.service}}</ion-note>
+                </ion-col>
+                <ion-col size="3" class="detailsTable vertical-align-content">
+                    <ion-note class="dataTable">{{service.incentive}} €</ion-note>
+                </ion-col>
+                <ion-col size="3" class="detailsTable vertical-align-content">
+                    <ion-note class="dataTable">{{service.state}}</ion-note>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ng-container>
+
+
+    <ng-template #emptyIncentives>
+        <app-empty-view *ngIf="!loadingData && !isResume"></app-empty-view>
+    </ng-template>
+
+</ion-content>
+<div *ngIf="!isResume">
+    <ion-item lines="none" (click)="newSale()">
+        <ion-icon name="add-circle" slot="start"></ion-icon>
+        <ion-note>REGISTRAR NUEVA VENTA</ion-note>
+    </ion-item>
+</div>
+
+<ion-button expand="block" (click)="goBack()">
+    <ion-icon name="home" slot="start" class="home"></ion-icon>VOLVER
+</ion-button>

@@ -1,0 +1,11 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-note>{{title}}</ion-note>
+    <ion-buttons slot="start">
+        <img class="logo" [src]="logo"/>
+    </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-img class="logo" [src]="faq" (click)="openFAQ()"></ion-img>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

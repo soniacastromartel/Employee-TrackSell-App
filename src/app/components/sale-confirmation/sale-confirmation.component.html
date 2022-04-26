@@ -1,0 +1,115 @@
+<app-header title="CONFIRMACIÓN DE VENTA"></app-header>
+<ion-content fullscreen>
+    <ion-card class="dataService">
+        <ion-card-header>
+            <ion-note class="titleCard">{{venta.service.name | uppercase}}</ion-note>
+        </ion-card-header>
+        <ion-grid class="ventaServiceStl" ion-no-padding>
+            <ion-row>
+                <ion-col size="4">
+                    <ion-img [src]="venta.portada !== undefined ? venta.portada : undefined" class="imgSvc"></ion-img>
+                </ion-col>
+                <ion-col class="serviceCard" size="8">
+                    <ion-row>
+                        <ion-col size="5" size-xs="5" size-sm="5" size-md="4" size-lg="3">
+                            <ion-note class="lblCard">CENTRO: </ion-note>
+                        </ion-col>
+                        <ion-col size="7" size-xs="7" size-sm="7" size-md="5" size-lg="4">
+                            <ion-note class="lblCard">{{venta.cRealizador.name}}</ion-note>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="5" size-xs="5" size-sm="5" size-md="4" size-lg="3">
+                            <ion-note class="lblCard">FECHA: </ion-note>
+                        </ion-col>
+                        <ion-col size="7" size-xs="7" size-sm="7" size-md="5" size-lg="4">
+                            <ion-note class="lblCard">{{venta.fecha}}</ion-note>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="5" size-xs="5" size-sm="5" size-md="4" size-lg="3">
+                            <ion-note class="lblCard">PRECIO: </ion-note>
+                        </ion-col>
+                        <ion-col size="7" size-xs="7" size-sm="7" size-md="5" size-lg="4">
+                            <ion-note class="lblCard">{{venta.service.price}}€</ion-note>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="5" size-xs="5" size-sm="5" size-md="4" size-lg="3">
+                            <ion-note class="lblCard">CANTIDAD: </ion-note>
+                        </ion-col>
+                        <ion-col size="7" size-xs="7" size-sm="7" size-md="5" size-lg="4">
+                            <ion-note class="lblCard">{{venta.cantidad}}</ion-note>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="5" size-xs="5" size-sm="5" size-md="4" size-lg="3">
+                            <ion-note class="lblCard">TOTAL: </ion-note>
+                        </ion-col>
+                        <ion-col size="7" size-xs="7" size-sm="7" size-md="5" size-lg="4">
+                            <ion-note class="lblCard">{{venta.cantidad * venta.service.price}}€</ion-note>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+            <ion-row class="containerDescriptor">
+                <ion-col size="5">
+                    <ion-note class="lblSale">CENTRO PRESCRIPTOR:</ion-note>
+                </ion-col>
+                <ion-col size="7">
+                    <ion-note class="infoSale" align-text-bottom>{{venta.cEmployee.name}}</ion-note>
+                </ion-col>
+            </ion-row>
+            <hr>
+            <ion-row>
+                <ion-col size="4">
+                    <ion-note class="lblSale">PACIENTE:</ion-note>
+                </ion-col>
+                <ion-col size="8" ion-text-center>
+                    <ion-note class="dataPatient">{{venta.pacienteName | uppercase}}</ion-note>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="5">
+                    <ion-note class="lblSale">IDENTIFICACIÓN:</ion-note>
+                </ion-col>
+                <ion-col size="7" ion-text-center>
+                    <ion-note class="dataPatient">{{venta.pacienteId | uppercase}}</ion-note>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5">
+                  <ion-note class="lblSale">DESCUENTO:</ion-note>
+              </ion-col>
+              <ion-col size="7" ion-text-center>
+                  <ion-note class="dataPatient">{{venta.discount.name | uppercase}}</ion-note>
+              </ion-col>
+          </ion-row>
+            <ion-row>
+                <ion-col size="5">
+                    <ion-note class="lblSale">OBSERVACIONES:</ion-note>
+                </ion-col>
+                <ion-col size="7" ion-text-center>
+                    <ion-note class="dataPatient">{{venta.observaciones != undefined && venta.observaciones != '' ? venta.observaciones : '-'}}</ion-note>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+    <br>
+    <ion-item lines="none">
+        <ion-checkbox slot="start" [(ngModel)]="confirm"></ion-checkbox>
+        <ion-note class="lblSale">{{infoAceptacion}}</ion-note>
+    </ion-item>
+</ion-content>
+<ion-toolbar>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="6">
+                <ion-button class="btnCancel" expand="full" color="light" (click)="actionSale(false)">CANCELAR</ion-button>
+            </ion-col>
+            <ion-col size="6">
+                <ion-button [disabled]="!confirm" class="btnConfirm" expand="full" (click)="actionSale(true)">CONFIRMAR</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-toolbar>

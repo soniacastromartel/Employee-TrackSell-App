@@ -1,0 +1,12 @@
+
+    <ion-content fullscreen>
+        <ion-slides #slidesViewer (ionSlidesDidLoad)="slidePlay()" (ionSlideDidChange)="refreshViewer()" (ionSlideTap)="closeViewer()">
+            <ion-slide *ngFor="let p of imgs">
+                <ion-row>
+                        <ion-img src="{{ p }}"></ion-img>
+                </ion-row>
+            </ion-slide>
+        </ion-slides>
+    </ion-content>
+    
+

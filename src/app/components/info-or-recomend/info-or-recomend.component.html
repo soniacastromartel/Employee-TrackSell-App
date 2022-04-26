@@ -1,0 +1,21 @@
+<ion-note style="margin: 1em;">ELEGIR SERVICIO: </ion-note>
+<ion-card class="priceCard">
+  <ion-grid>
+    <ion-row class="ion-text-center">
+      <ion-col size="8" class="tableHeaderService">SERVICIO</ion-col>
+      <ion-col size="4" class="tableHeaderService">PRECIO</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let s of availablesServices" (click)="userOption(s)">
+      <ion-col class="ion-text-center" size="8">
+        <ion-note class="serviceDetails">{{s.name}}</ion-note>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-note class="priceService">{{s.price}}€</ion-note>
+      </ion-col>
+      <ion-col class="ion-text-center" size="1">
+        <ion-icon name="caret-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
+<ion-button expand="full" (click)="userOption(undefined)">CANCELAR</ion-button>

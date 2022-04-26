@@ -1,0 +1,49 @@
+ion-button {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+}
+
+ion-icon {
+    text-align: center;
+    color: var(--ion-color-icot);
+}
+
+h5 {
+    display: inline-block;
+    font-weight: 900;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+}
+
+ion-note {
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin: 0.5em;
+    display: block;
+}
+
+ion-checkbox {
+    margin-left: 1em;
+    margin-right: 1em;
+    color: 2px solid var(--ion-color-icot);
+    --border-color: 2px solid var(--ion-color-icot);
+    --checkmark-color: yellow !important;
+}
+
+.header {
+    text-align: center;
+}
+
+.lblCheck {
+    font-size: small;
+    font-weight: 900;
+    color: var(--ion-color-icot);
+    margin-left: 1em;
+}
+
+.btnAcept {
+    color: var(--ion-color-icot);
+    font-weight: 900;
+}

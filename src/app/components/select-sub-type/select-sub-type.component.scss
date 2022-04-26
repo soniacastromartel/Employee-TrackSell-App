@@ -1,0 +1,63 @@
+ion-list-header {
+    background-color: var(--ion-color-icot);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0.3em;
+    text-align: center;
+}
+
+ion-label {
+    margin: 1em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: medium;
+}
+
+div {
+    background-color: var(--ion-color-icot);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 1em;
+}
+
+ion-button {
+    --background: var(--ion-color-icot);
+    --background-hover: var(--ion-color-icot);
+    --background-activated: var(--ion-color-icot);
+    --color-hover: white;
+    --color: white;
+    --color-activated: white;
+    font-family: monospace;
+    font-weight: 900;
+    text-align: center;
+}
+
+.circle-closed {
+  position: fixed;
+  left: 5px;
+  top: 5px;
+}
+
+.tableHeaderService {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    background-color: var(--ion-color-icot);
+    color: white;
+}
+
+.colDataService {
+    font-weight: 600;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+    padding: 0;
+}
+
+.rowSubType {
+    display: block;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+.containerServices {
+    text-align: center;
+    padding: 1em;
+}

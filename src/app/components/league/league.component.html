@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-label>LIGA DE CENTROS   </ion-label>
+    <ion-buttons slot="start">
+      <ion-button class="backButton" (click)="closedLeague()">
+          <ion-icon name="arrow-back-circle" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-radio-group #typeGroup id="radioOptions" *ngIf="centreDetails === undefined" value='month' (ionChange)="selectingType()">
+      <ion-row class="selectorDate">
+        <ion-note id="searchLeague" (click)="centreDetails === undefined ? selectYear(): ''">{{ consultingMonth ? '' : 'AÑO ' }} {{ dateSearch }}</ion-note>
+        <ion-datetime #selectorDate [(ngModel)]="actualYear" *ngIf="centreDetails === undefined" displayFormat="{{consultingMonth == true ? 'MMM-YYYY' : 'YYYY'}}" pickerFormat="{{consultingMonth == true ? 'MMM-YYYY' : 'YYYY'}}" [monthShortNames]="monthValues" min="2021" max="2085" doneText="SELECCIONAR" cancelText="CANCELAR" (ionChange)="getClasificationLeague(null, $event)"></ion-datetime>
+      </ion-row>
+      <ion-row class="selectorType">
+        <ion-col *ngFor="let type of typeSearch" class="typeSearchCol">
+          <div class="containerRadio">
+            <ion-radio mode="md" value="{{type.value}}"></ion-radio>
+            <ion-label>{{type.name}}</ion-label>
+          </div>              
+        </ion-col>
+      </ion-row>
+    </ion-radio-group>
+  </ion-toolbar>
+</ion-header>
+
+<ng-container *ngIf="centreDetails !== undefined">
+  <ion-label class="labelDetailSearch">DETALLES DE LIGA:<span> <ion-note class="labelCentreSearch">{{ actualYear }}</ion-note> </span></ion-label>
+  <ion-label class="labelDetailSearch">CENTRO DE CONSULTA:  <span> <ion-note class="labelCentreSearch"> {{ centreDetails }}</ion-note> </span></ion-label>
+</ng-container>
+  <ion-row class="headerRow">
+    <ion-col class="headerCol" *ngFor="let theader of columnsHeader;">
+      {{theader}}
+    </ion-col>
+  </ion-row>
+  <ion-content #content [scrollEvents]="true" (ionScroll)="onScroll($event)" (ionScrollEnd)="hiddenArrow()">
+        <ion-grid *ngIf="centreDetails === undefined; else detailsData;" class="ion-no-padding">
+          <ion-row class="row-data" *ngFor="let data of dataShow">
+            <ion-col class="{{ data.position === 1 ? 'dataWinnerCol' : 'dataCentreCol'}}"><ion-note>{{data.position}}</ion-note></ion-col>
+            <ion-col class="dataCentreCol"><ion-note>{{data.centre}}</ion-note></ion-col>
+            <ion-col class="dataCentreCol"><ion-note>{{data.points}}</ion-note></ion-col>
+            <ion-col class="dataCentreCol"><ion-note>{{data.average}}</ion-note></ion-col>
+            <ion-col class="dataCentreCol" *ngIf="!consultingMonth && !loadingData">
+              <div (click)="getClasificationLeague(data.centre)">
+                <ion-icon name="search" size="large" class="iconSearch"></ion-icon>
+                <ion-note class="detailLabel">VER DETALLES</ion-note>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ng-template #detailsData>
+          <ion-grid class="ion-no-padding">
+            <ion-row class="row-data" *ngFor="let data of dataShow">
+              <ion-col class="dataCentreCol"><ion-note>{{data.month['month']}}</ion-note></ion-col>
+              <ion-col class="dataCentreCol"><ion-note>{{data.points}}</ion-note></ion-col>
+              <ion-col class="dataCentreCol"><ion-note>{{data.cv}}</ion-note></ion-col>
+            </ion-row>
+          </ion-grid>
+          <br>
+        </ng-template>
+      <ng-container *ngIf="dataShow !== undefined &&  dataShow.length === 0 && !loadingData">
+          <!-- <app-empty-view style="max-height: 20px;"></app-empty-view> -->
+          <ion-card class="ion-text-center ion-margin">
+            <ion-card-content>
+              <ion-note class="empty-data-info">NO HAY DATOS QUE MOSTRAR PARA EL RANGO DE FECHAS SELECCIONADO</ion-note>
+            </ion-card-content>
+          </ion-card>
+      </ng-container>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-icon class="upDownScroll" [name]="utils.typeScroll" size="large" (click)="onScrolling()"></ion-icon>
+    </ion-fab>
+  </ion-content>
+<ion-button *ngIf="centreDetails !== undefined" class="btnBack" expand="full" (click)="resetValues()"><ion-icon name="return-down-back" slot="start"> </ion-icon>VOLVER A LA CLASIFICACIÓN</ion-button>
