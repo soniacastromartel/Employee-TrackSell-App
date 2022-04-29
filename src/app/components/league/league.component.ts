@@ -38,6 +38,7 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
   searchMonth: number;
   isScrolling: boolean;
 
+
   columnsHeader = [];
   dataShow = undefined;
   centreDetails = undefined;
@@ -76,7 +77,7 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
         this.subcriptionLeague.unsubscribe();
       }
       if (this.selectorDate !== undefined){          
-          this.dateValue = new Date(this.selectorDate.value);
+          this.dateValue = new Date();
           this.searchMonth = null;
           if ((this.actualYear+'').length > 10 || (this.actualYear+'').length < 5) {
             this.actualYear = Number.parseInt(this.actualYear+''.substring(0,4));

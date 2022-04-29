@@ -371,6 +371,11 @@ export class DatacheckService {
     return this.http.get(this.base + this.promotions, this.setHeader(tk));
   }
 
+  /**
+   * Registra el log del
+   * resultado de las operaciones realizadas en la app
+   * @param logRequest opciones a registrar en el log: evento, fecha, pantalla, datos extra...
+   * */
   async logPost(logRequest: any) {
     return this.http.post(this.base + this.logsApp, logRequest, this.options).subscribe();
   }

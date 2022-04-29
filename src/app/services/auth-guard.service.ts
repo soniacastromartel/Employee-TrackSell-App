@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate {
   constructor(
     private router: Router,
     private employeeSvc: EmployeeService,
-    private noti: NotificationsService) { }
+    private notification: NotificationsService) { }
 
 canActivate(): Promise<boolean> {
     return new Promise(async (resolve) => {
@@ -20,7 +20,7 @@ canActivate(): Promise<boolean> {
         if(res){
           resolve(true);
         } else{
-          this.noti.generallyClose();
+          this.notification.generallyClose();
           this.router.navigate([HOME]);
           resolve(false);
         }

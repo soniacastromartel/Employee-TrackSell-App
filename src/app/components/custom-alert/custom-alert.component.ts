@@ -20,7 +20,7 @@ export class CustomAlertComponent implements OnInit {
 
   retrySend = false;
 
-  constructor(private noti: NotificationsService, private params: NavParams) { }
+  constructor(private notification: NotificationsService, private params: NavParams) { }
 
   ngOnInit() {
     this.dataAlert.ic = this.params.get('icon');
@@ -29,7 +29,7 @@ export class CustomAlertComponent implements OnInit {
   }
 
   action(opt: boolean) {
-    this.noti.closePopover({ role: opt, data: this.retrySend });
+    this.notification.closePopover({ role: opt, data: this.retrySend });
   }
 
 }

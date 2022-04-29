@@ -11,7 +11,7 @@ import { Service } from '../../models/service';
 export class InfoOrRecomendComponent implements OnInit {
   availablesServices: Array<Service>;
 
-  constructor(private noti: NotificationsService,
+  constructor(private notification: NotificationsService,
             private params: NavParams) { }
 
   /**
@@ -35,7 +35,7 @@ export class InfoOrRecomendComponent implements OnInit {
    * Close alert
    */
   closePopover(extra?) {
-    this.noti.closePopover(extra);
+    this.notification.closePopover(extra);
   }
 
 }

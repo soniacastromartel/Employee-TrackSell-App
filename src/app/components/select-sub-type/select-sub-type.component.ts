@@ -13,7 +13,7 @@ export class SelectSubTypeComponent implements OnInit {
   // Lista subtipos de servicios
   listOfSubtypes: any;
 
-  constructor(private params: NavParams, private noti: NotificationsService) { }
+  constructor(private params: NavParams, private notification: NotificationsService) { }
 
   ngOnInit() {
     // Carga la lista de subtipo de servicios disponibles
@@ -26,13 +26,13 @@ export class SelectSubTypeComponent implements OnInit {
    * @param service
    */
   selectService(service: Service){
-    this.noti.closePopover(service);
+    this.notification.closePopover(service);
   }
 
   /**
    * Close popover selection
    */
   closeSelection() {
-    this.noti.closePopover();
+    this.notification.closePopover();
   }
 }

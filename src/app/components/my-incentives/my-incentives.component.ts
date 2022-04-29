@@ -61,7 +61,7 @@ export class MyIncentivesComponent implements ViewWillEnter, AfterContentInit {
   subcriptionData: Subscription;
 
   constructor(private notification: NotificationsService,
-    private dataCheck: DatacheckService,
+    private checkSvc: DatacheckService,
     private employeeSvc: EmployeeService,
     private utils: UtilsService,
     public pipeLargeTxt: SliceLargeTextPipe
@@ -74,9 +74,6 @@ export class MyIncentivesComponent implements ViewWillEnter, AfterContentInit {
     this.isResume = true;
     this.dateSearch = this.labelsForSelect[0];
     this.actualDate = new Date();
-    // if (!this.contentData || this.contentData.length == 0){
-    //   this.filterFor();
-    // } //si no hay contenido en contentData, llama al método (No hace falta al parecer)
     this.filterFor();
 
   }
@@ -168,7 +165,7 @@ export class MyIncentivesComponent implements ViewWillEnter, AfterContentInit {
       }
     }
 
-    await this.dataCheck.getIncentivesForEmployee(this.employeeSvc.employee.username, this.employeeSvc.actualToken, month, year)
+    await this.checkSvc.getIncentivesForEmployee(this.employeeSvc.employee.username, this.employeeSvc.actualToken, month, year)
       .then(result => {
         this.subcriptionData = result.subscribe((incentives: any) => {
           if (incentives.data) {

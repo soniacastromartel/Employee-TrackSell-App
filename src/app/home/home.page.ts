@@ -26,6 +26,8 @@ import {
   IOS_TYPE, ONLY_IOS_ACTION, PERSON_ICON, CLOSE_ICON, NEW_REQUEST_ACCESS, LOG_TYPE, LOG_PLACE
 } from '../app.constants';
 
+import * as CryptoJS from 'crypto-js';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -42,6 +44,9 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
 
   // Icon show username field
   iconAux = '';
+
+  //Encryption key field
+  encKey= 'secretKey';
 
   // Form for users to access the app
   userForm = new FormGroup({
@@ -103,7 +108,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
           if (res === undefined || (res.dni === null || res.name === null)) {
             this.routeAccessEmployee = -1;
           } else {
-            console.log(res);
             this.routeAccessEmployee = 0;
           }
         });
@@ -298,7 +302,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
       .then(async (result: any) => {
         if (result !== undefined) {
           if (result !== EMPTY_STRING) {
-            console.log(result);
             // Inicio previo ok
             if (employeeRegisterData?.username != null) {
               this.utils.controlToNotifications(MAX_TIME_LOADING);
@@ -309,7 +312,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
                   : null
               ).then((res) => {
                 res.subscribe(async (r: any) => {
-                  console.log(r);
                   this.notification.cancelLoad();
                   this.utils.cancelControlNotifications();
                   switch (r.message) {
@@ -376,7 +378,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
               this.notification.alertBaseNotifications(PASSWORD_CHANGED.title, PASSWORD_CHANGED.msg);
             } else {
               // NO SE ACTUALIZÓ LA CONTRASEÑA
-              this.utils.actionLog(LOG_TYPE[1], ERROR_CHANGE_PASSWORD.msg, user.username + ' ' + user.pass, LOG_PLACE[1]);
               this.notification.alertBaseNotifications(ERROR_CHANGE_PASSWORD.title, ERROR_CHANGE_PASSWORD.msg);
             }
           });
@@ -399,6 +400,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
       case RESPONSE_NO_VALID:
         // CUENTA NO ENCONTRADA
         this.notification.alertBaseNotifications(NOT_FOUND.title, NOT_FOUND.msg);
+
         break;
       case RESPONSE_INVALID_CREDENTIALS:
         // CREDENCIALES INCORRECTOS
@@ -523,11 +525,12 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
       }
       // Se guardan los datos en el dispositivo [NOMBRE, DNI, USERNAME]
       this.employeSvc.set(NAME, fullName);
-      this.employeSvc.set(DNI, dni);
+      this.employeSvc.set(DNI,dni);
       this.routeAccessEmployee = 0;
       this.employeSvc.set(ROUTE_CONTROL_ACCESS, this.routeAccessEmployee);
     }
   }
+
 
   // Clear form
   resetForm() {

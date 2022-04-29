@@ -37,20 +37,20 @@ export class SaleConfirmationComponent implements OnInit {
     // Recogida de datos de venta
     const data = this.params.get('data');
     if (data !== undefined) {
-    this.venta.employee = data.employee;
-    this.venta.cRealizador = data.cRealizador;
-    this.venta.service = data.service;
-    this.venta.cEmployee = data.cEmployee;
-    this.venta.cantidad = data.cantidad;
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    data.portada === undefined ?
-      this.venta.portada = BASE_URL + data.service.category_image_port:
-      this.venta.portada = data.portada;
-    this.venta.pacienteId = data.pacienteId;
-    this.venta.pacienteName = data.pacienteName;
-    this.venta.fecha = data.fecha;
-    this.venta.observaciones = data.observaciones;
-    this.venta.discount = data.discount;
+      this.venta.employee = data.employee;
+      this.venta.cRealizador = data.cRealizador;
+      this.venta.service = data.service;
+      this.venta.cEmployee = data.cEmployee;
+      this.venta.cantidad = data.cantidad;
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      data.portada === undefined ?
+        this.venta.portada = BASE_URL + data.service.category_image_port :
+        this.venta.portada = data.portada;
+      this.venta.pacienteId = data.pacienteId;
+      this.venta.pacienteName = data.pacienteName;
+      this.venta.fecha = data.fecha;
+      this.venta.observaciones = data.observaciones;
+      this.venta.discount = data.discount;
     }
   }
 

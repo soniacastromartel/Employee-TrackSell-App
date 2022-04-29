@@ -12,15 +12,15 @@ export class ConnectionService {
   connectSubscription: Subscription;
   disconnectSubscription: Subscription;
 
-  constructor(private net: Network, private noti: NotificationsService) {
+  constructor(private net: Network, private notification: NotificationsService) {
     if (this.net.type === this.net.Connection.NONE) {
-      this.noti.noConnectionDevice(NO_CONNECTION);
+      this.notification.noConnectionDevice(NO_CONNECTION);
     }
     this.disconnectSubscription = this.net.onDisconnect().subscribe(() => {
-      this.noti.noConnectionDevice(NO_CONNECTION);
+      this.notification.noConnectionDevice(NO_CONNECTION);
     });
         this.connectSubscription = this.net.onConnect().subscribe(() => {
-          this.noti.closeAlert();
+          this.notification.closeAlert();
     });
   }
 

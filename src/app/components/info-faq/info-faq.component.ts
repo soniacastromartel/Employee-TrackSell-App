@@ -23,7 +23,7 @@ export class InfoFAQComponent implements OnInit {
   };
 
   constructor(private params: NavParams,
-              private noti: NotificationsService,
+              private notification: NotificationsService,
               private pageSvc: PageService) { }
 
   // Se recoge la informacion del FAQ a mostrar
@@ -55,7 +55,7 @@ export class InfoFAQComponent implements OnInit {
    * Regresar SECTION FAQ
    */
   back() {
-    this.noti.closeModal();
+    this.notification.closeModal();
   }
 
 }

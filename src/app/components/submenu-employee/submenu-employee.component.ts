@@ -17,7 +17,7 @@ export class SubmenuEmployeeComponent {
 
   constructor(private call: PhoneService,
               private pageSvc: PageService,
-              private noti: NotificationsService) {}
+              private notification: NotificationsService) {}
 
   actionsTo(opt: number){
     switch (opt){
@@ -40,7 +40,7 @@ export class SubmenuEmployeeComponent {
 
   openBoard(){
     this.pageSvc.openBoard(BoardSupervisorComponent);
-    this.noti.closePopover();
+    this.notification.closePopover();
   }
 
 }

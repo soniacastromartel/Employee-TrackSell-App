@@ -13,59 +13,59 @@ export class CentersUtilsService {
   /**
    * Centros disponibles
    */
-  centers: Centre[]= undefined;
+  centers: Centre[] = undefined;
 
   // Subcription control
   centersSubcription: Subscription;
 
-  constructor(private employeeSvc: EmployeeService, private dataCheck: DatacheckService) { }
+  constructor(private employeeSvc: EmployeeService, private checkSvc: DatacheckService) { }
 
   /***
    * Comprobacion centros en local
    */
-  async localCenters(){
-    if (this.centers === undefined){
+  async localCenters() {
+    if (this.centers === undefined) {
       this.employeeSvc.employeeBd.get('centers').then(async (res) => {
-      if(res == null){
-        await this.getCenterOfSystem();
-      } else{
-        this.centers = res;
-        return true;
-      }
-    }).catch(ex => false);
+        if (res == null) {
+          await this.getCenterOfSystem();
+        } else {
+          this.centers = res;
+          return true;
+        }
+      }).catch(ex => false);
     }
   }
 
   /**
    * Recogida centros sistema
    */
-async getCenterOfSystem(){
-    await this.dataCheck.getCenters().then(res => {
-    this.centersSubcription = res.subscribe((listCenters: any)=>{
-      if (listCenters !== undefined){
-        this.centers = listCenters.data;
-        this.employeeSvc.employeeBd.set('centers', this.centers);
-        return true;
-      }
-    });
-  }).catch(ex => false);
-}
+  async getCenterOfSystem() {
+    await this.checkSvc.getCenters().then(res => {
+      this.centersSubcription = res.subscribe((listCenters: any) => {
+        if (listCenters !== undefined) {
+          this.centers = listCenters.data;
+          this.employeeSvc.employeeBd.set('centers', this.centers);
+          return true;
+        }
+      });
+    }).catch(ex => false);
+  }
 
-/**
- * Método auxiliar
- *
- * @returns objeto base de tipo CENTRE
- */
-    async centerDefault(){
-      return {
-        id: -1,
-        centre: '',
-        centre_address: ' ',
-        centre_email: '',
-        centre_phone:0 ,
-        timetable: '',
-        island: '',
-        supervisor: ''
+  /**
+   * Método auxiliar
+   *
+   * @returns objeto base de tipo CENTRE
+   */
+  async centerDefault() {
+    return {
+      id: -1,
+      centre: '',
+      centre_address: ' ',
+      centre_email: '',
+      centre_phone: 0,
+      timetable: '',
+      island: '',
+      supervisor: ''
     };
   }
 }

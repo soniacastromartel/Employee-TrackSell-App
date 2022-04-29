@@ -16,10 +16,10 @@ logo = LOGO_PATH;
 // Icon FAQ header
 faq = FAQ;
 
-constructor(private noti: NotificationsService) { }
+constructor(private notification: NotificationsService) { }
 
   // Open FAQ App
     openFAQ() {
-    this.noti.pageSvc.openFAQ(FaqComponent, true);
+    this.notification.pageSvc.openFAQ(FaqComponent, true);
   }
 }

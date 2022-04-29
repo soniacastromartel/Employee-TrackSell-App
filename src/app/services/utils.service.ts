@@ -24,7 +24,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { File, DirectoryEntry} from '@ionic-native/file/ngx';
 import { EmployeeService } from './employee.service';
 import { ConnectionService } from './connection.service';
-import { Error } from '../models/error';
+import { Error } from '../models/Error';
 
 @Injectable({
   providedIn: 'root'

@@ -84,12 +84,12 @@ export class NewSaleComponent implements ViewWillEnter{
   serviceSubcription: Subscription;
   discountSubcription: Subscription;
 
-  constructor(private noti: NotificationsService,
+  constructor(private notification: NotificationsService,
               private params: NavParams,
               private utils: UtilsService,
               private centersUtils: CentersUtilsService,
               private employeeSvc: EmployeeService,
-              private dataCheck: DatacheckService,
+              private checkSvc: DatacheckService,
               public textTransform: TextTransformPipe,
               private pageSvc: PageService) { }
 
@@ -108,10 +108,10 @@ export class NewSaleComponent implements ViewWillEnter{
         // Carga de centros (Realizador)
         if (centerRealizador === undefined) {
           if (this.centersUtils.centers === undefined) {
-            this.noti.loadingData(LOADING_CENTERS);
+            this.notification.loadingData(LOADING_CENTERS);
             await this.centersUtils.getCenterOfSystem().then(() => {
               this.centers = this.centersUtils.centers;
-              this.noti.cancelLoad();
+              this.notification.cancelLoad();
               this.utils.cancelControlNotifications();
             });
           } else {
@@ -150,7 +150,7 @@ export class NewSaleComponent implements ViewWillEnter{
     } else {
       await this.loadServiceToSale(this.serviceSale);
     }
-    this.noti.cancelLoad();
+    this.notification.cancelLoad();
     this.utils.cancelControlNotifications();
   }
 
@@ -160,22 +160,22 @@ export class NewSaleComponent implements ViewWillEnter{
    */
   servicesOfCenter() {
     if (this.venta.controls.cRealizador.value !== null) {
-      if (!this.noti.loadData){
+      if (!this.notification.loadData){
         this.utils.controlToNotifications(MAX_TIME_LOADING);
-        this.noti.loadingData(LOADING_DATA);
+        this.notification.loadingData(LOADING_DATA);
       }
       this.servicesAvailables = [];
       const cRealizador = this.venta.controls.cRealizador.value;
         if(cRealizador !== undefined){
           // Recogida de servicios segun centro
-          this.dataCheck.getServicesOf(cRealizador.id, true, this.employeeSvc.actualToken).then((result) => {
+          this.checkSvc.getServicesOf(cRealizador.id, true, this.employeeSvc.actualToken).then((result) => {
             this.serviceSubcription = result.subscribe((collection: any) => {
               const services: any[] = collection.data;
               this.categoryImgCardList = [];
               services.forEach((s: any) => {
                 this.servicesAvailables.push(s);
               });
-              this.noti.cancelLoad();
+              this.notification.cancelLoad();
               this.utils.cancelControlNotifications();
               this.serviceSubcription.unsubscribe();
             });
@@ -264,29 +264,29 @@ export class NewSaleComponent implements ViewWillEnter{
         if (res) {
           this.builderSale = this.buildingSale();
           this.utils.controlToNotifications(MAX_TIME_LOADING);
-          this.noti.loadingData(LOADING_CONTENT);
+          this.notification.loadingData(LOADING_CONTENT);
           // Registro de venta de empleado
-          await this.dataCheck.saleForEmployee(this.builderSale, this.employeeSvc.actualToken)
+          await this.checkSvc.saleForEmployee(this.builderSale, this.employeeSvc.actualToken)
           .then((result) => {
             this.saleSubcription = result.subscribe(() => {
-              this.noti.cancelLoad();
+              this.notification.cancelLoad();
               this.utils.cancelControlNotifications();
-              this.noti.alertBaseNotifications(VENTA_CONFIRMADA.title, VENTA_CONFIRMADA.msg);
+              this.notification.alertBaseNotifications(VENTA_CONFIRMADA.title, VENTA_CONFIRMADA.msg);
               this.goBack();
             }, (ex)=>{
-              this.noti.cancelLoad();
+              this.notification.cancelLoad();
               this.utils.cancelControlNotifications();
                 if((ex.error.message === NO_VALIDATION_FORM && ex.error.data !== undefined && ex.error.data.tracking_date !== undefined &&
                   ex.error.data.tracking_date[0] === ERROR_TRACKING_DATE) || ex.error.message == ERROR_CORTE_INCENTIVES){
-                  this.noti.baseThrowAlerts(FECHA_INVALID.title, FECHA_INVALID.msg);
+                  this.notification.baseThrowAlerts(FECHA_INVALID.title, FECHA_INVALID.msg);
                 } else if(ex.error.message === NO_VALIDATION_FORM && ex.error.data.centre_employee_id[0] === CENTER_REQUIRED_RESPONSE){
-                    this.noti.baseThrowAlerts(CENTER_REQUIRED.title, CENTER_REQUIRED.msg);
+                    this.notification.baseThrowAlerts(CENTER_REQUIRED.title, CENTER_REQUIRED.msg);
                 } else{
-                  this.noti.baseThrowAlerts(ERROR.title, ERROR.msg);
+                  this.notification.baseThrowAlerts(ERROR.title, ERROR.msg);
                 }
             });
           }).catch(ex => {
-            this.noti.baseThrowAlerts(SALE_ERROR.title, SALE_ERROR.msg);
+            this.notification.baseThrowAlerts(SALE_ERROR.title, SALE_ERROR.msg);
           });
         }
       });
@@ -300,9 +300,11 @@ export class NewSaleComponent implements ViewWillEnter{
  */
   updateFields(idx: number, ev: any){
     switch(idx) {
-      case 1: this.selectSV.selectedText = ev.target.value.name;
+      case 1: 
+      this.selectSV.selectedText = ev.target.value.name;
         break;
-      case 2: this.selectCR.selectedText = ev.target.value.name;
+      case 2: 
+      this.selectCR.selectedText = ev.target.value.name;
         break;
     }
   }
@@ -319,7 +321,7 @@ export class NewSaleComponent implements ViewWillEnter{
 
       if (centreId !== undefined && centreId !== -1 && serviceId !== undefined && serviceId !== -1) {
           // Se recogen los descuentos disponibles
-          this.dataCheck.getAvailablesDiscounts(serviceId, centreId)
+          this.checkSvc.getAvailablesDiscounts(serviceId, centreId)
           .then((discounts) => {
             this.discountSubcription = discounts.subscribe((res)=>{
               this.discountAvailables.push({name: 'NO SE APLICA', type:'none'});
@@ -340,14 +342,14 @@ export class NewSaleComponent implements ViewWillEnter{
 
   /* CLOSE SECTION */
   goBack(){
-    this.noti.closeModal();
+    this.notification.closeModal();
   }
 
   /**
    * Vacía el formulario
    */
   clearForm() {
-    this.noti.alertBaseQuestions(RESET_FORM_SALE.title, RESET_FORM_SALE.msg)
+    this.notification.alertBaseQuestions(RESET_FORM_SALE.title, RESET_FORM_SALE.msg)
       .then(res => {
         if (res) {
           this.venta.reset();
@@ -363,8 +365,8 @@ export class NewSaleComponent implements ViewWillEnter{
    */
     private async loadServiceToSale(dataService: any){
       this.utils.controlToNotifications(MAX_TIME_LOADING);
-      this.noti.loadingData(LOADING_CONTENT);
-      this.dataCheck.getDataTracking(this.serviceSale.tracking_id, this.employeeSvc.actualToken)
+      this.notification.loadingData(LOADING_CONTENT);
+      this.checkSvc.getDataTracking(this.serviceSale.tracking_id, this.employeeSvc.actualToken)
         .then((r) => {
           this.serviceSubcription = r.subscribe((data)=>{
             const servPrice = data['service'][0];
@@ -379,14 +381,14 @@ export class NewSaleComponent implements ViewWillEnter{
             this.venta.controls.patientId.setValue(data['patientId']);
             this.venta.controls.patientName.setValue(data['patient_name']);
             this.venta.controls.observaciones.setValue('');
-            this.noti.cancelLoad();
+            this.notification.cancelLoad();
             this.utils.cancelControlNotifications();
             this.servicesOfCenter();
             this.venta.updateValueAndValidity();
             this.getDiscountsServices();
           });
         }).catch((ex) =>{
-          this.noti.baseThrowAlerts(SALE_ERROR.title, ERROR_RECONFIGURE_SALE);
+          this.notification.baseThrowAlerts(SALE_ERROR.title, ERROR_RECONFIGURE_SALE);
         });
     }
 

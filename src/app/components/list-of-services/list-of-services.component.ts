@@ -64,7 +64,7 @@ export class ListOfServicesComponent implements ViewWillEnter, ViewWillLeave {
     private notification: NotificationsService,
     public sliceText: SliceLargeTextPipe,
     private centersUtls: CentersUtilsService,
-    private dataCheck: DatacheckService,
+    private checkSvc: DatacheckService,
     private utils: UtilsService,
     private pageSvc: PageService,
     private iab: InAppBrowser) { }
@@ -116,7 +116,7 @@ async ionViewWillEnter(){
   selectCenter(centro: any) {
     this.utils.controlToNotifications(MAX_TIME_LOADING);
     this.notification.loadingData(LOADING_SERVICES);
-    this.dataCheck.getServicesOf(centro.id, false, this.employeeSvc.actualToken).then((result) => {
+    this.checkSvc.getServicesOf(centro.id, false, this.employeeSvc.actualToken).then((result) => {
           this.servicesSubcription = result.subscribe((category: any) => {
           this.categoryOfServices = category.data;
           this.destino = centro;

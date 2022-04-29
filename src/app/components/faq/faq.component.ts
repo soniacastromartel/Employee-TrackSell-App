@@ -44,7 +44,7 @@ export class FaqComponent implements OnInit, ViewWillEnter {
 
   constructor(
     private notification: NotificationsService,
-    private dataCheck: DatacheckService,
+    private checkSvc: DatacheckService,
     private utils: UtilsService,
     public employeeSvc: EmployeeService
   ) { }
@@ -66,7 +66,7 @@ export class FaqComponent implements OnInit, ViewWillEnter {
 
       this.notification.loadingData(LOADING_CONTENT);
       this.utils.controlToNotifications(MAX_TIME_LOADING);
-      this.subcriptionFAQ = (await this.dataCheck.getOptionsFAQ())
+      this.subcriptionFAQ = (await this.checkSvc.getOptionsFAQ())
         .subscribe((result: any) => {
           if (result !== undefined) {
             this.optionsFAQ = result.data;

@@ -2,23 +2,28 @@
 <ion-content>
     <ion-card class="infoEmployee" (click)="goAction(5)">
         <ion-card-header>
-            <ion-note class="actualUserName">{{user.name.length < 32 ? user.name : user.name.substr(0,33)+'..'}}</ion-note>
-            <ion-icon name="settings-outline" class="icMyData"></ion-icon>
+            <ion-note class="actualUserName">{{user.name.length < 32 ? user.name :
+                    user.name.substr(0,33)+'..'}}</ion-note>
+                    <ion-icon name="settings-outline" class="icMyData"></ion-icon>
         </ion-card-header>
         <ion-card-content>
             <ion-grid>
                 <ion-row>
-                    <ion-col class="containerGrid mt-5" size="3.5" size-xs="3.5" size-sm="3.5" size-md="3.5" size-lg="3.5">
+                    <ion-col class="containerGrid mt-5" size="3.5" size-xs="3.5" size-sm="3.5" size-md="3.5"
+                        size-lg="3.5">
                         <div>
                             <div *ngFor="let dataL of dataLabel">
                                 <ion-note class="dataL">{{ dataL }}</ion-note>
                             </div>
                         </div>
                     </ion-col>
-                    <ion-col class="containerGrid ion-text-center" size="8.5" size-xs="8.5" size-sm="8.5" size-md="8.5" size-lg="8.5">
-                        <div *ngFor="let data of [user.username, user.phone,user.category, user.email]">
+                    <ion-col class="containerGrid ion-text-center" size="8.5" size-xs="8.5" size-sm="8.5" size-md="8.5"
+                        size-lg="8.5">
+                        <div *ngFor="let data of [user.username, user.phone, user.category, user.email]">
                             <div class="containerData">
-                                <ion-note class="dataULarge">{{(data !== undefined && data !== null && data !== '') ? ((data+'').length < 20 ? data.toLowerCase() : (data+'').substr(0,20)+'..')  : '-' }}</ion-note>
+                                <ion-note class="dataULarge">{{(data !== undefined && data !== null && data !== '') ?
+                                    ((data+'').length < 24 ? data : (data+'').substr(0,24)) : '-'
+                                        }}</ion-note>
                             </div>
                         </div>
                     </ion-col>
@@ -37,6 +42,15 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+
+    <!-- <div>
+        <button id="notification-button" ion-button clear>
+            <ion-icon name="notifications">
+              <ion-badge id="notifications-badge" color="danger">5</ion-badge>
+            </ion-icon>              
+        </button>
+    </div> -->
+
 </ion-content>
 <ion-toolbar>
     <ion-slides #slideNotice [options]="slideOpts">

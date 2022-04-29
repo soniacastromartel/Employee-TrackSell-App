@@ -69,9 +69,9 @@ export class RankingsComponent implements OnInit {
   ];
 
   constructor(private employeeSvc: EmployeeService,
-              private noti: NotificationsService,
+              private notification: NotificationsService,
               public utils: UtilsService,
-              private dataCheck: DatacheckService ) { }
+              private checkSvc: DatacheckService ) { }
 
   ngOnInit() {
     this.rankingDate = new Date().toISOString();
@@ -94,7 +94,7 @@ export class RankingsComponent implements OnInit {
    */
   getEmployeeRanking(centre: number, month?: number, year?: number) {
     this.isLoading = true;
-    this.noti.loadingData(LOADING_RANKING);
+    this.notification.loadingData(LOADING_RANKING);
     this.utils.controlToNotifications(MAX_TIME_LOADING);
 
     // Control para el corte de fecha
@@ -106,7 +106,7 @@ export class RankingsComponent implements OnInit {
     }
 
     // Se recoge la lista actual de ranking para el filtro elegido
-    this.dataCheck.getRankingsOf(centre, this.employeeSvc.actualToken, month, year).then(result => {
+    this.checkSvc.getRankingsOf(centre, this.employeeSvc.actualToken, month, year).then(result => {
         result.subscribe((ranking: any) => {
           this.rankings = [];
           const collection: any[] = ranking.data.ranking;
@@ -124,7 +124,7 @@ export class RankingsComponent implements OnInit {
           } else {
             this.rankings = collection;
           }
-          this.noti.cancelLoad();
+          this.notification.cancelLoad();
           this.utils.cancelControlNotifications();
           this.isLoading = false;
       });
@@ -236,6 +236,6 @@ export class RankingsComponent implements OnInit {
 
    /* CLOSE SECTION */
   goBack(){
-    this.noti.closeModal();
+    this.notification.closeModal();
   }
 }

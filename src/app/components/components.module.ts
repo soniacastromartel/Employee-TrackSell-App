@@ -1,4 +1,3 @@
-import { ImgViewerComponent } from './img-viewer/img-viewer.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -15,6 +14,7 @@ import { SaleConfirmationComponent } from './sale-confirmation/sale-confirmation
 import { InfoFAQComponent } from './info-faq/info-faq.component';
 import { LeagueComponent } from './league/league.component';
 import { EmptyViewComponent } from './empty-view/empty-view.component';
+import { ImgViewerComponent } from './img-viewer/img-viewer.component';
 
 @NgModule({
 
