@@ -173,6 +173,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
 
     // Check lista de cambios, ¿version actualizada?
     this.employeeSvc.get(VERSION_APP).then(ver => {
+      console.log('version actual');
       if (ver !== this.utils.version) {
         this.checkSvc.getLastChangesUpdate({ version: this.utils.version })
           .then(changes => {
@@ -180,8 +181,11 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
               if (content.data.changes !== false) {
                 const partes = content.data.changes.split(':');
                 this.notification.alertChangeList(CHANGE_LIST, partes[0], partes[1]);
-                // Se establece la nueva version
+                // Se establece la nueva version en dispositivo y se graba la nueva en version en bd
                 this.employeeSvc.set(VERSION_APP, this.utils.version);
+                this.checkSvc.refreshUpdateVersion(this.employeeSvc.employee.username, VERSION_APP);
+                // Por ultimo se reestablece el contador de obligacion para actualizacion de la aplicacion
+                this.checkSvc.resetUpdateCount(this.employeeSvc.employee.username);
               }
             });
           }).catch(ex => {

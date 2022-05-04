@@ -44,6 +44,7 @@ export const RESET_COUNT_UPDATE = 'api/resetCountUpdate';
 export const DATA_PROMO = 'api/promotions';
 export const QUESTIONS_FAQ = 'api/getDataFAQ';
 export const LAST_CHANGES = 'api/getLastChanges';
+export const UPDATING_VERSION = 'api/updateVersion';
 export const AVAILABLES_DISCOUNTS = 'api/discounts/';
 export const APP_LOGS = 'api/logs';
 

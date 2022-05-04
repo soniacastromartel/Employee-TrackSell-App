@@ -9,7 +9,7 @@ import {
   USER_RECOVERY_PASS, SECRET, CHANGING_PASS, CENTER_EMPLOYEE,
   CATEGORIES_LIST, CENTERS_LIST, INCENTIVES_EMPLOYEE, GET_VERSION, CHECKING_VERSION, DATA_PROMO, QUESTIONS_FAQ,
   LAST_CHANGES, CLASIFICATION_LEAGUE, BASE_URL, SEARCH_TRACKING, AVAILABLES_DISCOUNTS, APP_LOGS, CHECK_NOT_UPDATE,
-  RESET_COUNT_UPDATE, LOG_TYPE
+  RESET_COUNT_UPDATE, LOG_TYPE, UPDATING_VERSION
 } from '../app.constants';
 import { AccessToService } from './access-to.service';
 import { map } from 'rxjs/operators';
@@ -43,6 +43,7 @@ export class DatacheckService {
   private promotions: string;
   private faqQuestions: string;
   private lastChanges: string;
+  private updatingVersion: string;
   private getDiscounts: string;
   private options: any;
   private logsApp: string;
@@ -72,6 +73,7 @@ export class DatacheckService {
     this.promotions = DATA_PROMO;
     this.faqQuestions = QUESTIONS_FAQ;
     this.lastChanges = LAST_CHANGES;
+    this.updatingVersion = UPDATING_VERSION;
     this.getDiscounts = AVAILABLES_DISCOUNTS;
     this.logsApp = APP_LOGS;
 
@@ -114,6 +116,10 @@ export class DatacheckService {
    */
   async getLastChangesUpdate(version: any) {
     return this.http.post(this.base + this.lastChanges, version, this.options);
+  }
+
+  async refreshUpdateVersion(username: string, version: string){
+    return this.http.post(this.base + this.updatingVersion,{user: username, version: version}, this.options);
   }
 
   /**
