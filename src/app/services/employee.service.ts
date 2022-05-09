@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Employee } from '../models/employee';
-import { DNI, NAME, USERNAME, ROUTE_CONTROL_ACCESS } from '../app.constants';
+import { DNI, NAME, USERNAME, ROUTE_CONTROL_ACCESS, ENCRIPTING_KEY } from '../app.constants';
 import { BehaviorSubject } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
 
@@ -15,7 +15,6 @@ export class EmployeeService {
   employee: Employee;
   actualToken: string;
   center: any = {};
-  encKey= 'secretKey';
 
   // Control employee account
   isValidate = false;
@@ -43,14 +42,10 @@ export class EmployeeService {
     // Se comprueban y actualizan los datos en
     // caso necesario.
     this.updateEmployeeData().then(res => {
-      console.log(res);
       if (res !== undefined) {
         if (res.dni !== this.employee.dni) {
-          // this.set(DNI, this.employee.dni);
-          this.set(DNI, CryptoJS.AES.encrypt(this.employee.dni, this.encKey).toString());
-          console.log(res.dni);
-          console.log(this.employee.dni);
-          // console.log(CryptoJS.AES.encrypt(this.employee.dni, this.encKey).toString());
+          this.set(DNI, CryptoJS.AES.encrypt(this.employee.dni, ENCRIPTING_KEY).toString());
+         
         }
         if (res.name !== this.employee.name) {
           this.set(NAME, this.employee.name);
@@ -59,7 +54,6 @@ export class EmployeeService {
           this.set(USERNAME, this.employee.username);
         }
       } else {
-        // this.set(DNI, CryptoJS.AES.encrypt(this.employee.dni, this.encKey).toString());
         this.set(DNI, this.employee.dni);
         this.set(NAME, this.employee.name);
         this.set(USERNAME, this.employee.username);
@@ -82,7 +76,6 @@ export class EmployeeService {
     await this.get(DNI).then((val) => {
       employeeData = {};
       employeeData.dni = val;
-      console.log(val);
 
     });
     await this.get(NAME).then((val) => {

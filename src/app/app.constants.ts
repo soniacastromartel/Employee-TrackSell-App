@@ -9,7 +9,9 @@ export const BIENVENIDA = 'assets/imgs/planincent.png';
 export const NO_CONNECTION_IMG = 'assets/imgs/no-connection.gif';
 export const IC_ARROW_UP = 'arrow-up-circle';
 export const IC_ARROW_DOWN = 'arrow-down-circle';
-export const BASE_URL = 'https://pdi.grupoicot.es:8000/';
+// export const BASE_URL = 'https://pdi.grupoicot.es:8000/';
+// export const BASE_URL = 'https://pdipre.grupoicot.es:8000/';
+export const BASE_URL = 'https://localhost:8000/';
 export const BASE_UPDATE_LINK = 'storage/versiones/';
 export const BASE_UPATE_IOS_PWA_LINK = 'storage/versiones/ios/latest/';
 export const ANDROID_ENVIRONMENT_FILE_PATH = 'files/';
@@ -51,7 +53,6 @@ export const APP_LOGS = 'api/logs';
 /**
 * KEY WORDS
 */
-
 export const DISPLAY_BLOCK = 'block';
 export const NONE = 'none';
 export const NAME = 'name';
@@ -110,7 +111,6 @@ export const IMG_FIELD = 'image_portrait';
 /**
 * ICONS
 */
-
 export const BASE_ICON_ALERT = 'alert-circle';
 export const ACTION_OK_IC = 'checkbox';
 export const TIME_OUT_RESPONSE_IC = 'hourglass';
@@ -120,14 +120,12 @@ export const WARNING_IC = 'warning';
 /**
 * PATTERN
 */
-
 export const PATTERN_PHONE = '[0-9]{9}';
 export const PASS_FORMAT = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[$€+-=<>_.#?!@$%^`&*-]).{8,}$';
 
 /**
 * RESPONSES BACK-END
 */
-
 export const EMPTY_STRING = '';
 export const CANCEL_OPTION = 'cancel';
 export const RESPONSE_NO_VALID = 'no_valid';
@@ -148,7 +146,6 @@ export const CENTRE_NO_ACTIVE = 'Error no hay definido objetivo';
 /**
 * STRING RESOURCES
 */
-
 export const SPANISH_MONTHS_VALUES = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
 export const LABELS_FOR_SELECT_INCENTIVES = ['CORTE ACTUAL', 'POR AÑO', 'POR MES Y AÑO'];
 export const DATA_LABELS = ['USUARIO: ', 'TELÉFONO:', 'CATEGORÍA:', 'EMAIL:'];
@@ -188,17 +185,17 @@ export const INFO_UUID = ', UUID: ';
 export const INFO_VERSION = ', VERSION: ';
 export const INFO_MANUFACTURE = ', FABRICANTE: ';
 export const INFO_SYSTEM = ', SISTEMA: ';
+export const ENCRIPTING_KEY= 'secretKey';
 
 /** 
 * LOGS MESSAGES & TYPES
 */
 export const LOG_TYPE = ['Info', 'Warning', 'Error'];
-export const LOG_PLACE= ['Loggin', 'Recuperación Contraseña', 'Solicitud Acceso'];
+export const LOG_PLACE = ['Loggin', 'Recuperación Contraseña', 'Solicitud Acceso'];
 
 /**
 * MESSAGES NOTIFICATIONS
 */
-
 export const ERROR_DOWNLOAD_UPDATE = 'ERROR DE DESCARGA';
 export const ERROR_CANCEL_UPDATE = 'java.net.SocketException: Socket closed';
 export const ERROR_RECONFIGURE_SALE = 'ERROR AL CARGAR EL SERVICIO';

@@ -10,7 +10,7 @@
     <ion-radio-group #typeGroup id="radioOptions" *ngIf="centreDetails === undefined" value='month' (ionChange)="selectingType()">
       <ion-row class="selectorDate">
         <ion-note id="searchLeague" (click)="centreDetails === undefined ? selectYear(): ''">{{ consultingMonth ? '' : 'AÑO ' }} {{ dateSearch }}</ion-note>
-        <ion-datetime #selectorDate [(ngModel)]="actualYear" *ngIf="centreDetails === undefined" displayFormat="{{consultingMonth == true ? 'MMM-YYYY' : 'YYYY'}}" pickerFormat="{{consultingMonth == true ? 'MMM-YYYY' : 'YYYY'}}" [monthShortNames]="monthValues" min="2021" max="2085" doneText="SELECCIONAR" cancelText="CANCELAR" (ionChange)="getClasificationLeague(null, $event)"></ion-datetime>
+        <ion-datetime #selectorDate [(ngModel)]="myDate" *ngIf="centreDetails === undefined" displayFormat="{{consultingMonth == true ? 'MMM-YYYY' : 'YYYY'}}" pickerFormat="{{consultingMonth == true ? 'MMM-YYYY' : 'YYYY'}}" [monthShortNames]="monthValues" min="2021" max="2085" doneText="SELECCIONAR" cancelText="CANCELAR" (ionChange)="getClasificationLeague(null, $event)"></ion-datetime>
       </ion-row>
       <ion-row class="selectorType">
         <ion-col *ngFor="let type of typeSearch" class="typeSearchCol">
