@@ -173,7 +173,6 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
 
     // Check lista de cambios, ¿version actualizada?
     this.employeeSvc.get(VERSION_APP).then(ver => {
-      console.log('version actual');
       if (ver !== this.utils.version) {
         this.checkSvc.getLastChangesUpdate({ version: this.utils.version })
           .then(changes => {

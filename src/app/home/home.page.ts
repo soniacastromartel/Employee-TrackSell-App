@@ -25,9 +25,6 @@ import {
   ROUTE_CONTROL_ACCESS, VERSION_APP, MODE_ACTIVE, SUM_ACCESS, USER_VALIDADO, YA_VALIDADO, CORDOVA_PLATFORM, ANDROID_TYPE,
   IOS_TYPE, ONLY_IOS_ACTION, PERSON_ICON, CLOSE_ICON, NEW_REQUEST_ACCESS, LOG_TYPE, LOG_PLACE
 } from '../app.constants';
-
-import * as CryptoJS from 'crypto-js';
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -44,9 +41,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
 
   // Icon show username field
   iconAux = '';
-
-  //Encryption key field
-  encKey= 'secretKey';
 
   // Form for users to access the app
   userForm = new FormGroup({
@@ -435,7 +429,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
       const preRegister = res;
       // Recogida de datos
       await this.notification.requestAccess().then(async (solicitud: any) => {
-        console.log(solicitud);
         if (solicitud !== undefined && solicitud.role !== CANCEL_OPTION) {
           const userDni = solicitud.data.dni.toUpperCase().trim();
           const userFullName = solicitud.data.name.toUpperCase().trim();
@@ -467,7 +460,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
                   NEW_REQUEST_ACCESS.msg)
                   .then(responseUser => {
                     if (responseUser) {
-                      console.log(responseUser);
                       this.goRequestAccess(userDni, userFullName, data);
                       this.utils.actionLog(LOG_TYPE[0], NEW_REQUEST_ACCESS.title, userDni + ' ' + userFullName, LOG_PLACE[2])
                     }
@@ -640,7 +632,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
       { dni: userDni, name: uFullName, infoDevice: data }
     ))
       .subscribe((result: any) => {
-        console.log(result);
         this.notification.cancelLoad();
         this.utils.cancelControlNotifications();
         this.responseAccess(result, userDni, uFullName);

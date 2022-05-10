@@ -5,7 +5,6 @@ import { DNI, NAME, USERNAME, ROUTE_CONTROL_ACCESS, ENCRIPTING_KEY } from '../ap
 import { BehaviorSubject } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -45,7 +44,6 @@ export class EmployeeService {
       if (res !== undefined) {
         if (res.dni !== this.employee.dni) {
           this.set(DNI, CryptoJS.AES.encrypt(this.employee.dni, ENCRIPTING_KEY).toString());
-         
         }
         if (res.name !== this.employee.name) {
           this.set(NAME, this.employee.name);
@@ -57,13 +55,11 @@ export class EmployeeService {
         this.set(DNI, this.employee.dni);
         this.set(NAME, this.employee.name);
         this.set(USERNAME, this.employee.username);
-
       }
     });
     this.actualToken = data.data.access_token;
     this.employeeListener.next(this.actualToken);
   }
-
 
   /**
    * Actualizacion de datos locales guardados
@@ -76,7 +72,6 @@ export class EmployeeService {
     await this.get(DNI).then((val) => {
       employeeData = {};
       employeeData.dni = val;
-
     });
     await this.get(NAME).then((val) => {
       employeeData.name = val;
@@ -171,5 +166,4 @@ export class EmployeeService {
       return false;
     }
   }
-
 }

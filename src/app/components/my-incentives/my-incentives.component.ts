@@ -172,7 +172,6 @@ export class MyIncentivesComponent implements ViewWillEnter, AfterContentInit {
             const data = incentives.data;
             this.contentData.push(data.cont_sales, data.total_incentives + EURO_DIGIT);
             data.sales.forEach((element: any) => {
-              // console.log(element);
               this.services.push(element);
             });
           }
@@ -181,7 +180,6 @@ export class MyIncentivesComponent implements ViewWillEnter, AfterContentInit {
           this.utils.cancelControlNotifications();
         });
       }).catch(ex => {
-        console.log(ex);
         if (!ex.error.success && ex.error.message === CENTRE_NO_ACTIVE) {
           this.notification.alertBaseNotifications(INFO_CENTER_NO_ACTIVE.title, INFO_CENTER_NO_ACTIVE.msg);
         } else {

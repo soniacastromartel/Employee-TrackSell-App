@@ -58,8 +58,6 @@ export class MyDataComponent implements OnInit {
         }
       }
     }).catch(ex => {
-      console.error(ex);
-      console.log(ex);
         this.notification.baseThrowAlerts(BAD_OPERATION, ex);
     });
   }
