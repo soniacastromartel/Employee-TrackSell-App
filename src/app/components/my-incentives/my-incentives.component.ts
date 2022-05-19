@@ -257,7 +257,7 @@ async moreInfo(service: ServiceEmployee){
         nextMonth = month + 1;
       }
     }
-    this.notification.alertInfoCorte(CORTE_FROM + SPANISH_MONTHS_VALUES[previousMonth] + CORTE_TO + SPANISH_MONTHS_VALUES[nextMonth]);
+    this.notification.toastBaseInfo('CORTE ACTUAL',CORTE_FROM + SPANISH_MONTHS_VALUES[previousMonth] + CORTE_TO + SPANISH_MONTHS_VALUES[nextMonth], 'top');
   }
 
   /**

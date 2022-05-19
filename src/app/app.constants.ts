@@ -49,6 +49,7 @@ export const LAST_CHANGES = 'api/getLastChanges';
 export const UPDATING_VERSION = 'api/updateVersion';
 export const AVAILABLES_DISCOUNTS = 'api/discounts/';
 export const APP_LOGS = 'api/logs';
+export const UNLOCK_REQUEST= 'api/unlockRequest';
 
 /**
 * KEY WORDS
@@ -61,6 +62,8 @@ export const CENTRE = 'center';
 export const USERNAME = 'username';
 export const PASSWORD = 'password';
 export const ROUTE_CONTROL_ACCESS = 'routeAccess';
+export const PRIVACY_WORD = 'privacy';
+export const UNLOCK_REQUESTED = 'unlockRequest';
 export const PHONE = 'phone';
 export const HC = 'hc';
 export const EURO_DIGIT = ' €';
@@ -72,7 +75,6 @@ export const CLOSE_ICON = 'close';
 export const SECRET = 'InformaticTeam';
 export const EXTRA_CATEGORY = 'Otros';
 export const LOGO_WORD = 'logo';
-export const PRIVACY_WORD = 'privacy';
 export const VERSION_APP = 'version ';
 export const RADIO_LABEL_EN_CURSO = 'CORTE ACTUAL';
 export const RADIO_LABEL_MESYEAR = 'MES Y AÑO';
@@ -317,7 +319,12 @@ export const PRE_REGISTER_LOST = {
 
 export const BLOCK_ACCOUNT = {
   title: '¡CUENTA BLOQUEADA!',
-  msg: 'SU CUENTA SE ENCUENTRA BLOQUEADA, POR FAVOR CONSULTE CON SU SUPERVISOR'
+  msg: 'SU CUENTA SE ENCUENTRA BLOQUEADA, POR FAVOR SOLICITE DESBLOQUEO'
+};
+
+export const REQUEST_IN_PROCESS = {
+  title: 'SOLICITUD EN CURSO',
+  msg: 'SU SOLICITUD ESTÁ SIENDO PROCESADA, GRACIAS'
 };
 
 export const IMCOMPLETE_DATA = {

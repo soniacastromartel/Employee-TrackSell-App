@@ -1,4 +1,4 @@
-import { SESION_EXPIRED } from './../app.constants';
+import { SESION_EXPIRED, UNLOCK_REQUEST, UNLOCK_REQUESTED } from './../app.constants';
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/dot-notation */
@@ -17,7 +17,7 @@ import {
   CABECERA_LOGIN, SCROLLING_TIME, POLICY_PRIVACY, SEND_CHANGE_REQUEST,
   CANCEL_OPTION, DNI, IMCOMPLETE_DATA, LOGO_WORD, PRIVACY_WORD,
   NOT_FOUND, LOADING_CONTENT, PASSWORD_CHANGED, ERROR_CHANGE_PASSWORD, RESPONSE_HACK, DENIED_ACTION,
-  USERNAME, RESPONSE_INVALID_SECRET, RESPONSE_REQUESTED, INIT_SESION_REQUIRED,
+  USERNAME, RESPONSE_INVALID_SECRET, RESPONSE_REQUESTED, REQUEST_IN_PROCESS, INIT_SESION_REQUIRED,
   INCORRECT_SECRET_WORD, RESPONSE_LOGIN_SUCCESFULL, NAME, RESPONSE_OK_RESULT, ERROR, EMPTY_STRING, CONECTING,
   EMPLOYEE_NO_FOUND, INVALID_CREDENTIALS, EMPLOYEE_PENDING_VALIDATION, RESPONSE_NO_VALID, RESPONSE_INVALID_CREDENTIALS,
   RESPONSE_PENDING_VALIDATION, RESPONSE_PENDING_CHANGE_PASSWORD, DASHBOARD,
@@ -41,6 +41,11 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
 
   // Icon show username field
   iconAux = '';
+
+  //Control whether the account is locked or not
+  isLocked: boolean = false;
+  //Control whether the unlock has been requested or not
+  isRequested: boolean = false;
 
   // Form for users to access the app
   userForm = new FormGroup({
@@ -94,8 +99,13 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
    * (Si no se han recogido)
    */
   async ionViewWillEnter() {
+    console.log(this.isRequested);
     this.iconAux = PERSON_ICON;
     this.acceptToPolicy();
+    await this.employeSvc.get(UNLOCK_REQUESTED).then((result) => {
+      this.isRequested = result;
+    })
+    console.log(this.isRequested);
     this.employeSvc.get(ROUTE_CONTROL_ACCESS).then(async result => { //digito (validated) de control de solicitud de acceso
       if (result === null) {//aun no ha intentado acceder nunca
         await this.getLocaleEmployeeDt().then(res => {
@@ -132,9 +142,13 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
             this.utils.readFile(platformType).then(contenido => {
               if (contenido !== undefined) {
                 this.notification.alertBaseNotifications(MODE_ACTIVE.title, MODE_ACTIVE.msg + contenido);
-                this.utils.actionLog(LOG_TYPE[1], MODE_ACTIVE.title, MODE_ACTIVE.msg + contenido);
+                this.utils.appActionLog(LOG_TYPE[1], MODE_ACTIVE.title, MODE_ACTIVE.msg + contenido);
                 this.checkSvc.base = contenido;
               }
+            }).catch(err => {
+              this.utils.createError(err, this.employeSvc.employee.phone, this.route.url).then(result => {
+                this.checkSvc.setErrors(result, UtilsService);
+              });
             });
           }
         });
@@ -199,6 +213,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
   // Check user data login
   async checkUser() {
     let version;
+    let userData;
 
     if (this.loginSubcription !== undefined) {
       this.loginSubcription.unsubscribe();
@@ -225,17 +240,18 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
         .then((result) => {
           this.loginSubcription = result.subscribe(
             (res: any) => {
-              this.utils.actionLog(LOG_TYPE[0], res.message, res.data.user.username, LOG_PLACE[0]);
+              this.utils.appActionLog(LOG_TYPE[0], res.message, res.data.user.username, LOG_PLACE[0]);
               this.actionResultLogin(res);
             }, async (svError) => {
               this.notification.cancelLoad();
               this.utils.cancelControlNotifications();
               if (svError.error.message === RESPONSE_PENDING_CHANGE_PASSWORD) {
                 this.actionResultLogin({ message: RESPONSE_PENDING_CHANGE_PASSWORD });
-                this.utils.actionLog(LOG_TYPE[0], svError.error.message, data.username + ' ' + data.password, LOG_PLACE[0]);
+                this.utils.appErrorLog(LOG_TYPE[2], svError.error.message, data.username + ' ' + data.password, LOG_PLACE[0]);
               } else {
-                this.deniedChangePass(svError.error.message);
-                this.utils.actionLog(LOG_TYPE[0], svError.error.message, data.username + ' ' + data.password, LOG_PLACE[0]);
+                console.log(this.isRequested);
+                this.deniedChangePass(svError.error.message, { username: data.username, name: ' ' });
+                this.utils.appErrorLog(LOG_TYPE[2], svError.error.message, data.username + ' ' + data.password, LOG_PLACE[0]);
                 // Login incorrecto se suma el intento de acceso
                 (await this.checkSvc.checkAccountAccess(data?.username, SUM_ACCESS)).subscribe();
               }
@@ -258,10 +274,13 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
    * @param result Resultado a gestionar
    */
   async actionResultLogin(result: any) {
+    let user = result;
+    console.log(user.data.user.name);
     this.notification.cancelLoad();
     const msg = result.message;
     if (result.success && result.data !== undefined &&
       result.data.access_token !== undefined && msg === RESPONSE_LOGIN_SUCCESFULL) {
+        console.log(result);
       await this.employeSvc.setUser(result);
       this.route.navigate([DASHBOARD]);
       this.resetForm();
@@ -277,7 +296,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
           this.changingUserPass(this.userForm.controls.user.value);
           break; //pendiente de cambiar la password
         case RESPONSE_BLOCK_ACCOUNT:
-          this.notification.alertBaseNotifications(BLOCK_ACCOUNT.title, BLOCK_ACCOUNT.msg,);
+          this.notification.alertBaseNotifications(BLOCK_ACCOUNT.title, BLOCK_ACCOUNT.msg, this.isLocked = true, this.isRequested, { name: user.data.user.name, username: user.data.user.username });
           break; //cuenta bloqueada
       }
     }
@@ -315,11 +334,11 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
                       break;
                     case RESPONSE_REQUESTED:
                       this.deniedChangePass(RESPONSE_OK_RESULT);
-                      this.utils.actionLog(LOG_TYPE[1], r.message, result, LOG_PLACE[1]);
+                      // this.utils.appActionLog(LOG_TYPE[1], r.message, result, LOG_PLACE[1]);
                       break;
                     default:
-                      this.deniedChangePass(r.message);
-                      this.utils.actionLog(LOG_TYPE[1], r.message, result, LOG_PLACE[1]);
+                      this.deniedChangePass(r.message, { name: employeeRegisterData.name, username: employeeRegisterData.username });
+                      // this.utils.appActionLog(LOG_TYPE[1], r.message, result, LOG_PLACE[1]);
                       break;
                   }
                   // Operacion no realizada se suma el intento de acceso
@@ -351,7 +370,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
           user.username = userName;
         }
       });
-      await this.notification.userChangePass(this.utils).then(async (res) => {     
+      await this.notification.userChangePass(this.utils).then(async (res) => {
         if (res.values.pass1 !== EMPTY_STRING) {
           user.pass = res.values.pass1;
         } else {
@@ -368,7 +387,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
             this.utils.cancelControlNotifications();
             if (itsOk.message === RESPONSE_OK_RESULT) {
               //  BIEN CONTRASEÑA CAMBIADA
-              this.utils.actionLog(LOG_TYPE[0], itsOk.message, user.username + ' ' + user.pass, LOG_PLACE[1]);
+              this.utils.appActionLog(LOG_TYPE[0], itsOk.message, user.username + ' ' + user.pass, LOG_PLACE[1]);
               this.notification.alertBaseNotifications(PASSWORD_CHANGED.title, PASSWORD_CHANGED.msg);
             } else {
               // NO SE ACTUALIZÓ LA CONTRASEÑA
@@ -385,7 +404,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
    *
    * @param motive motivo de denegación
    */
-  deniedChangePass(motive: string) {
+  async deniedChangePass(motive: string, data?: any, isRequested?: boolean) {
     switch (motive) {
       case RESPONSE_OK_RESULT:
         // VALIDACIÓN OK PERO NO HAY DATOS PREVIOS
@@ -414,11 +433,20 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
         break;
       case RESPONSE_BLOCK_ACCOUNT:
         //CUENTA BLOQUEADA POR INTENTOS DE ACCESO SUPERADOS
-        this.notification.alertBaseNotifications(BLOCK_ACCOUNT.title, BLOCK_ACCOUNT.msg);
+        this.isRequested = await this.employeSvc.get(UNLOCK_REQUESTED);
+        await this.notification.alertBaseNotifications(BLOCK_ACCOUNT.title, BLOCK_ACCOUNT.msg, true, this.isRequested, data).then(() => {
+          if (!this.isRequested || this.isRequested == null) {
+            this.lockAccount(data, true);
+          } else {
+            this.notification.toastBaseInfo(REQUEST_IN_PROCESS.title, REQUEST_IN_PROCESS.msg, 'middle');
+          }
+        });
 
         break;
     }
   }
+
+
 
   /*
   * Solicitud de nuevo accesso
@@ -450,7 +478,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
             if (preRegister === undefined ||
               (preRegister !== undefined && preRegister.dni === null && preRegister.name === null)) {
               this.goRequestAccess(userDni, userFullName, data);
-              this.utils.actionLog(LOG_TYPE[0], REQUEST_ACCESS.title, userDni + ' ' + userFullName, LOG_PLACE[2])
+              this.utils.appActionLog(LOG_TYPE[0], REQUEST_ACCESS.title, userDni + ' ' + userFullName, LOG_PLACE[2])
               // Solicitud enviada, no ha iniciado sesión
             } else if (this.routeAccessEmployee === 0) {
               // Datos guardados previamente pero no son iguales
@@ -461,25 +489,25 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
                   .then(responseUser => {
                     if (responseUser) {
                       this.goRequestAccess(userDni, userFullName, data);
-                      this.utils.actionLog(LOG_TYPE[0], NEW_REQUEST_ACCESS.title, userDni + ' ' + userFullName, LOG_PLACE[2])
+                      this.utils.appActionLog(LOG_TYPE[0], NEW_REQUEST_ACCESS.title, userDni + ' ' + userFullName, LOG_PLACE[2])
                     }
                   });
               } else {
                 // Datos guardados previamente pero son iguales
                 this.notification.alertBaseNotifications(REQUEST_ACCESS.title, REQUEST_ACCESS.msg);
-                this.utils.actionLog(LOG_TYPE[0], REQUEST_ACCESS.title, userDni + ' ' + userFullName, LOG_PLACE[2])
+                this.utils.appActionLog(LOG_TYPE[0], REQUEST_ACCESS.title, userDni + ' ' + userFullName, LOG_PLACE[2])
               }
               // Solicitud enviada y procesada. Ya inicio sesión
             } else if (this.routeAccessEmployee === 1) {
               this.notification.alertBaseNotifications(PRE_REGISTER_LOST.title, PRE_REGISTER_LOST.msg);
-              this.utils.actionLog(LOG_TYPE[0], PRE_REGISTER_LOST.title, userDni + ' ' + userFullName, LOG_PLACE[2])
+              this.utils.appActionLog(LOG_TYPE[0], PRE_REGISTER_LOST.title, userDni + ' ' + userFullName, LOG_PLACE[2])
             }
           } else {
             // Operacion no realizada
             this.notification.cancelLoad();
             this.utils.cancelControlNotifications();
             this.notification.alertBaseNotifications(IMCOMPLETE_DATA.title, IMCOMPLETE_DATA.msg);
-            this.utils.actionLog(LOG_TYPE[1], IMCOMPLETE_DATA.msg, userDni + ' ' + userFullName, LOG_PLACE[2])
+            this.utils.appActionLog(LOG_TYPE[1], IMCOMPLETE_DATA.msg, userDni + ' ' + userFullName, LOG_PLACE[2])
           }
         }
       }).catch((ex) => {
@@ -507,7 +535,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
         break;
       case RESPONSE_BLOCK_ACCOUNT:
         //CUENTA BLOQUEADA
-        this.notification.alertBaseNotifications(BLOCK_ACCOUNT.title, BLOCK_ACCOUNT.msg);
+        this.notification.alertBaseNotifications(BLOCK_ACCOUNT.title, BLOCK_ACCOUNT.msg, this.isLocked = true, this.isRequested, { name: fullName });
         break;
     }
     if (result.message === RESPONSE_OK_RESULT || result.message === RESPONSE_REQUESTED) {
@@ -517,9 +545,10 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
       }
       // Se guardan los datos en el dispositivo [NOMBRE, DNI, USERNAME]
       this.employeSvc.set(NAME, fullName);
-      this.employeSvc.set(DNI,dni);
+      this.employeSvc.set(DNI, dni);
       this.routeAccessEmployee = 0;
       this.employeSvc.set(ROUTE_CONTROL_ACCESS, this.routeAccessEmployee);
+      this.employeSvc.set(UNLOCK_REQUESTED, this.isRequested);
     }
   }
 
@@ -614,7 +643,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
     if (this.loginSubcription !== undefined) {
       this.loginSubcription.unsubscribe();
     }
-    this.platform.pause.subscribe(()=>{
+    this.platform.pause.subscribe(() => {
       this.employeSvc.employeeListener.next(undefined);
       this.notification.alertBaseNotifications(SESION_EXPIRED.title, SESION_EXPIRED.msg);
     });
@@ -643,4 +672,15 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
         }
       });
   }
+
+  async lockAccount(data: any, isRequested) {
+    await this.checkSvc.unlockRequest(data).then(() => {
+      this.employeSvc.set(UNLOCK_REQUESTED, isRequested);
+    });
+  }
+
+  private lockedToast() {
+    this.notification.toastBaseInfo(REQUEST_IN_PROCESS.title, REQUEST_IN_PROCESS.msg, 'middle');
+  }
+
 }

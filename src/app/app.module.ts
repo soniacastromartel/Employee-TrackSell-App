@@ -8,7 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NotificationsService } from './services/notifications.service';
 import { ComponentsModule } from './components/components.module';
 import { DatacheckService } from './services/datacheck.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { EmployeeService } from './services/employee.service';
@@ -21,6 +21,8 @@ import ApkUpdater from 'cordova-plugin-apkupdater';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { ErrorHandlerInterceptor } from './interceptors/error-handler.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, SliceLargeTextPipe, TextTransformPipe],
@@ -41,6 +43,8 @@ import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/n
   exports: [ReactiveFormsModule, FormsModule, ComponentsModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     NotificationsService,
     DatacheckService,
     AppVersion,
@@ -55,4 +59,4 @@ import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/n
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

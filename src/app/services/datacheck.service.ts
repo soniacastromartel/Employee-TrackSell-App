@@ -9,7 +9,7 @@ import {
   USER_RECOVERY_PASS, SECRET, CHANGING_PASS, CENTER_EMPLOYEE,
   CATEGORIES_LIST, CENTERS_LIST, INCENTIVES_EMPLOYEE, GET_VERSION, CHECKING_VERSION, DATA_PROMO, QUESTIONS_FAQ,
   LAST_CHANGES, CLASIFICATION_LEAGUE, BASE_URL, SEARCH_TRACKING, AVAILABLES_DISCOUNTS, APP_LOGS, CHECK_NOT_UPDATE,
-  RESET_COUNT_UPDATE, LOG_TYPE, UPDATING_VERSION
+  RESET_COUNT_UPDATE, LOG_TYPE, UPDATING_VERSION, UNLOCK_REQUEST
 } from '../app.constants';
 import { AccessToService } from './access-to.service';
 import { map } from 'rxjs/operators';
@@ -47,6 +47,7 @@ export class DatacheckService {
   private getDiscounts: string;
   private options: any;
   private logsApp: string;
+  private unlock_request: string;
 
   constructor(private http: HttpClient,
     private accesing: AccessToService) {
@@ -76,6 +77,8 @@ export class DatacheckService {
     this.updatingVersion = UPDATING_VERSION;
     this.getDiscounts = AVAILABLES_DISCOUNTS;
     this.logsApp = APP_LOGS;
+    this.unlock_request= UNLOCK_REQUEST;
+    
 
     this.options = {
       headers: {
@@ -87,13 +90,28 @@ export class DatacheckService {
   }
 
   /**
+ * Crea la cabecera de la consulta (Reutilizable)
+ *
+ * @param tk Token de acceso de empleado
+ * @returns Cabecera generada
+ */
+  // setHeader(tk: string) {
+  //   return {
+  //     headers: new HttpHeaders({
+  //       'Accept': 'application/json',
+  //       'Authorization': 'Bearer ' + tk
+  //     })
+  //   };
+  // }
+
+  /**
    * Comprobacion version app
    *
    * @param version Version actual instalada en dispositivo
    * @returns Nueva version estable disponible o no
    */
   async checkingVersion(version: string, tk: string) {
-    return this.http.get(this.base + this.checkVersion + '?version=' + version, this.setHeader(tk));
+    return this.http.get(this.base + this.checkVersion + '?version=' + version);
   }
 
   /**
@@ -118,8 +136,8 @@ export class DatacheckService {
     return this.http.post(this.base + this.lastChanges, version, this.options);
   }
 
-  async refreshUpdateVersion(username: string, version: string){
-    return this.http.post(this.base + this.updatingVersion,{user: username, version: version}, this.options);
+  async refreshUpdateVersion(username: string, version: string) {
+    return this.http.post(this.base + this.updatingVersion, { user: username, version: version }, this.options);
   }
 
   /**
@@ -165,21 +183,6 @@ export class DatacheckService {
   }
 
   /**
-   * Crea la cabecera de la consulta (Reutilizable)
-   *
-   * @param tk Token de acceso de empleado
-   * @returns Cabecera generada
-   */
-  setHeader(tk: string) {
-    return {
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + tk
-      })
-    };
-  }
-
-  /**
    * Opciones de preguntas y respuestas para el FAQ
    *
    * @returns Data FAQ
@@ -206,6 +209,16 @@ export class DatacheckService {
   async newEmployeeAccess(info: any) {
     return this.http.post(this.base + this.newAccess, info, this.options);
   }
+
+   /**
+   * Solicitud de desbloqueo de cuenta de usuario
+   *
+   * @param data User data
+   * @returns request response
+   */
+    async unlockRequest(data: any) {
+      return this.http.post(this.base + this.unlock_request, data, this.options).subscribe();
+    }
 
   /**
    * Realiza solicitud de restauración de contraseña
@@ -257,7 +270,7 @@ export class DatacheckService {
    * @param username Empleado del centro a buscar
    */
   async getEmployeeCenter(username: string, tk: string) {
-    return this.http.get(this.base + this.getCenterOfEmployee + username, this.setHeader(tk));
+    return this.http.get(this.base + this.getCenterOfEmployee + username);
   }
 
   /**
@@ -272,9 +285,9 @@ export class DatacheckService {
    */
   async getIncentivesForEmployee(username: string, tk: string, m?: number, y?: number) {
     if (m === undefined) {
-      return this.http.post(this.base + this.incentives, { username: username, year: y }, this.setHeader(tk));
+      return this.http.post(this.base + this.incentives, { username: username, year: y });
     } else {
-      return this.http.post(this.base + this.incentives, { username: username, month: m, year: y }, this.setHeader(tk));
+      return this.http.post(this.base + this.incentives, { username: username, month: m, year: y });
     }
   }
 
@@ -286,7 +299,7 @@ export class DatacheckService {
    * @returns Lista de datos relacionado con el tracking que se busca
    */
   async getDataTracking(idTracking: number, tk: string) {
-    return this.http.get(this.base + this.searchTracking + '?id=' + idTracking, this.setHeader(tk));
+    return this.http.get(this.base + this.searchTracking + '?id=' + idTracking);
   }
 
   /**
@@ -297,7 +310,7 @@ export class DatacheckService {
    * @returns Lista de servicios disponible para el centro
    */
   async getServicesOf(centerId: number, orderDiff: boolean, tk: string) {
-    return this.http.get(this.base + this.servicesOfCenter + centerId + '/' + orderDiff, this.setHeader(tk));
+    return this.http.get(this.base + this.servicesOfCenter + centerId + '/' + orderDiff);
   }
 
   /**
@@ -308,7 +321,7 @@ export class DatacheckService {
    * @returns Result operation
    */
   async saleForEmployee(venta: any, tk: string) {
-    return this.http.post(this.base + this.sellingService, venta, this.setHeader(tk));
+    return this.http.post(this.base + this.sellingService, venta);
   }
 
   /**
@@ -321,10 +334,10 @@ export class DatacheckService {
   async getRankingsOf(centreId: number, tk: string, month?: number, year?: number) {
     if (centreId !== undefined) {
       // CONSULTA PARA MI CENTRO
-      return this.http.post(this.base + this.getRankings, { centre_id: centreId, month: month, year: year }, this.setHeader(tk));
+      return this.http.post(this.base + this.getRankings, { centre_id: centreId, month: month, year: year });
     } else {
       // CONSULTA PRA GRUPO
-      return this.http.post(this.base + this.getRankings, { month: month, year: year }, this.setHeader(tk));
+      return this.http.post(this.base + this.getRankings, { month: month, year: year });
     }
   }
 
@@ -340,8 +353,7 @@ export class DatacheckService {
   async getClasificationLeague(centreId, month, year: number, tk: string) {
     return this.http.post(
       this.base + this.clasificationLeague,
-      { centre: centreId, month: month, year: year, type: 'data' },
-      this.setHeader(tk));
+      { centre: centreId, month: month, year: year, type: 'data' });
   }
 
   /**
@@ -351,7 +363,7 @@ export class DatacheckService {
    * @returns Resultado operación
    */
   async setErrors(error: any, extraCompo: any) {
-    extraCompo.actionLog(LOG_TYPE[2], error.screen, error.error);
+    extraCompo.appErrorLog(LOG_TYPE[2], error.screen, error.error);
     return this.http.post(this.base + this.saveErrors, error, this.options)
       .subscribe(res => {
         console.log(res);
@@ -374,7 +386,7 @@ export class DatacheckService {
    * @returns Lista de promotions
    */
   async getPromotionsForApp(tk: string) {
-    return this.http.get(this.base + this.promotions, this.setHeader(tk));
+    return this.http.get(this.base + this.promotions);
   }
 
   /**

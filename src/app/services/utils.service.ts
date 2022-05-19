@@ -13,7 +13,9 @@ import { MIN_VERSION_APP, PASS_FORMAT, BASE_UPDATE_LINK, BASE_URL, TIME_OUT_RESP
   COLLECTING_INFO,
   MAX_TIME_LOADING,
   NORMAL_TIME_WAIT,
-  BASE_UPATE_IOS_PWA_LINK} from '../app.constants';
+  BASE_UPATE_IOS_PWA_LINK,
+  UNLOCK_REQUEST,
+  REQUEST_IN_PROCESS} from '../app.constants';
 import { NotificationsService } from './notifications.service';
 import { AccessToService } from './access-to.service';
 import { AppVersion } from '@ionic-native/app-version/ngx';
@@ -265,7 +267,7 @@ export class UtilsService {
           await this.checkNotUpdate().then(async (count)=> {
             let auxSub = count.subscribe((res:any)=>{
               // Si no ha omitido la descarga de actualizacion mas de 3 veces
-              if (res.data < 3) {
+              if (res.data < 30) {
           // Si está conectado al wifi se permite realizar la descarga
             if(this.connection.typeConnection()){
               updateSubcription.unsubscribe();
@@ -315,6 +317,13 @@ export class UtilsService {
       }
       this.notification.alertOp = false;
     });
+  }
+
+  /**
+   * Muestra el toast de solicitud de desbloqueo en curso
+   */
+   async unlockRequested(isRequested: boolean){
+    await this.notification.toastBaseInfo(REQUEST_IN_PROCESS.title, REQUEST_IN_PROCESS.msg, 'middle');
   }
 
   /**
@@ -523,18 +532,31 @@ export class UtilsService {
   * Registro de eventos sucedidos en la App
   *
   * @param message Representa informacion adicional
-    * @param action Representa la accion sucesida
+    * @param issue Representa la accion sucedida
+    * @param screen Pantalla donde ha sucedido
   * 
   */
-    async actionLog(type: string, issue: string, message: string, screen?: string) {
-      const logRequest = {
-        type: type,
-        action: issue,
-        message: message,
-        screen: screen
-      };
-      this.checkSvc.logPost(logRequest);
-    }
+   async appActionLog(type: string, issue: string, message: string, screen?: string) {
+    const logRequest = {
+      type: type,
+      action: issue,
+      message: message,
+      channel: 'app',
+      screen: screen
+    };
+    this.checkSvc.logPost(logRequest);
+  }
+
+  async appErrorLog(type: string, issue: string, message: string, screen?: string) {
+    const logRequest = {
+      type: type,
+      action: issue,
+      message: message,
+      channel: 'appError',
+      screen: screen
+    };
+    this.checkSvc.logPost(logRequest);
+  }
 
   /**
    * Metodo auxiliar para la gestion en caso de error con loading en curso (En catch)

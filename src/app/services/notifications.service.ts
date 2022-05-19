@@ -1,13 +1,15 @@
 /* eslint-disable max-len */
 /* eslint-disable arrow-body-style */
 /* eslint-disable @typescript-eslint/quotes */
-import { CREDENTIALS_EMPTY } from './../app.constants';
+import { CREDENTIALS_EMPTY, REQUEST_IN_PROCESS, UNLOCK_REQUESTED } from './../app.constants';
 import { Injectable } from '@angular/core';
 import { PageService } from './page.service';
 import { Service } from '../models/service';
 import { UPDATE_NOT_ALLOW, INFO_WIFI_REQUIRED_UPDATE } from '../app.constants';
-import { CREDENTIALS_NOT_SAME, CONFIRM_USERNAME, INSERT_USERNAME, PLACEHOLDER_USERNAME,
-    TITLE_UPDATE, INFO_UPDATE, CREDENTIALS_FORMAT_ERROR } from '../app.constants';
+import {
+  CREDENTIALS_NOT_SAME, CONFIRM_USERNAME, INSERT_USERNAME, PLACEHOLDER_USERNAME,
+  TITLE_UPDATE, INFO_UPDATE, CREDENTIALS_FORMAT_ERROR
+} from '../app.constants';
 import {
   AlertController,
   LoadingController,
@@ -15,6 +17,7 @@ import {
   PopoverController,
   ToastController,
 } from '@ionic/angular';
+import { DatacheckService } from './datacheck.service';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +42,8 @@ export class NotificationsService {
     protected loadingCtrl: LoadingController,
     protected popoCtrl: PopoverController,
     protected toastCtrl: ToastController,
-    public pageSvc: PageService
+    public pageSvc: PageService,
+    public checkSvc: DatacheckService
   ) { }
 
   /**
@@ -107,7 +111,7 @@ export class NotificationsService {
     await updating.onDidDismiss().then(() => {
       this.loadOp = false;
       this.loadData = false;
-    }, (ex)=>{
+    }, (ex) => {
       this.loadOp = false;
       this.loadData = false;
     });
@@ -117,7 +121,7 @@ export class NotificationsService {
    * Informa al usuario de nueva
    * version estable de la app
    */
-    async notAllowUpdate() {
+  async notAllowUpdate() {
     this.alertOp = true;
     const updating = await this.alertCtrl.create({
       header: UPDATE_NOT_ALLOW,
@@ -127,9 +131,9 @@ export class NotificationsService {
       id: 'infoUpdate',
       mode: 'ios',
       buttons: [, {
-          text: 'OK',
-          cssClass: 'btnLater'
-        }
+        text: 'OK',
+        cssClass: 'btnLater'
+      }
       ]
     });
     await updating.present();
@@ -143,7 +147,7 @@ export class NotificationsService {
    */
   async rememberPass(employeeData: any) {
     let data;
-    const msg = (employeeData !== undefined && employeeData.username !== null) ? '<br><label>'+ CONFIRM_USERNAME +'</label>' : '<br><label>' +  INSERT_USERNAME + '</label>';
+    const msg = (employeeData !== undefined && employeeData.username !== null) ? '<br><label>' + CONFIRM_USERNAME + '</label>' : '<br><label>' + INSERT_USERNAME + '</label>';
     const userPlaceholder = (employeeData !== undefined && employeeData.username !== null) ? employeeData.username : PLACEHOLDER_USERNAME;
     this.alertOp = true;
     const rememberPs = await this.alertCtrl.create({
@@ -204,11 +208,11 @@ export class NotificationsService {
     });
   }
 
-/**
- * Toast informativo para mostrar más info
- * si se realiza click en la tabla
- */
-  async showAlertMoreInfo(){
+  /**
+   * Toast informativo para mostrar más info
+   * si se realiza click en la tabla
+   */
+  async showAlertMoreInfo() {
     const moreInfo = await this.toastCtrl.create({
       message: 'CLICK PARA MÁS INFO<ion-img src="assets/imgs/dedo.png"/>',
       mode: 'ios',
@@ -245,20 +249,17 @@ export class NotificationsService {
   }
 
   /**
-   * Notificación reuitilozable
+   * Notificación reuitilizable
    *
    * @param title Título notificación
    * @param msg Mensaje notificación
+   * @param isBloqued variable de control cuenta bloqueada
    */
-  async alertBaseNotifications(title: string, msg: string) {
+  async alertBaseNotifications(title: string, msg: string, isLocked: boolean = false, isRequested: boolean = false, data?: any) {
     this.alertOp = true;
-    const invalid = await this.alertCtrl.create({
-      header: title,
-      message: '<br><ion-note>' + msg + '</ion-note>',
-      cssClass: 'baseNotification',
-      backdropDismiss: false,
-      mode: 'ios',
-      buttons: [
+    let buttons = [];
+    if (!isLocked) {
+      buttons = [
         {
           text: 'OK',
           cssClass: 'btnAlert',
@@ -266,12 +267,43 @@ export class NotificationsService {
             this.closeAlert();
           },
         },
-      ],
+      ];
+    } else {
+      buttons = [
+        {
+          // role: 'hola',
+          text: 'SOLICITAR',
+          cssClass: 'btnAlert',
+          handler: () => {
+            // if (!isRequested || isRequested == null) {
+            //   await this.checkSvc.unlockRequest(data).then(() => {
+            //     this.employeSvc.set(UNLOCK_REQUESTED, isRequested);
+            //   }
+            // }else{
+            //   console.log('adios MariCarmen');
+            //   this.toastBaseInfo(REQUEST_IN_PROCESS.title, REQUEST_IN_PROCESS.msg, 'middle');
+            // }
+
+          },
+        },
+      ];
+    }
+    const baseAlert = await this.alertCtrl.create({
+      header: title,
+      message: '<br><ion-note>' + msg + '</ion-note>',
+      cssClass: 'baseNotification',
+      backdropDismiss: false,
+      mode: 'ios',
+      buttons: buttons
     });
-    invalid.present();
-    await invalid.onDidDismiss().then(() => {
-      this.alertOp = false;
-    });
+    await baseAlert.present();
+    return await baseAlert.onDidDismiss();
+    //  return await baseAlert.onDidDismiss().then((d) => {
+    //     this.alertOp = false;
+    //     this.extraData = d.role;
+    //   });
+    // return this.extraData;
+
   }
 
   /**
@@ -332,7 +364,7 @@ export class NotificationsService {
     await load.onDidDismiss().then(() => {
       this.loadOp = false;
       this.loadData = false;
-    }, (ex)=>{
+    }, (ex) => {
       this.loadOp = false;
       this.loadData = false;
     });
@@ -391,7 +423,7 @@ export class NotificationsService {
           text: 'CANCELAR',
           role: 'cancel',
           cssClass: 'btnCancel',
-          handler: (data) =>{
+          handler: (data) => {
             this.closeAlert();
             return undefined;
           }
@@ -402,9 +434,9 @@ export class NotificationsService {
           handler: (data) => {
             if (data.pass1 !== '' && data.pass2 !== '') {
               if (data.pass1 === data.pass2) {
-                if(compoAux.formatPass(data.pass1)){
+                if (compoAux.formatPass(data.pass1)) {
                   return data;
-                } else{
+                } else {
                   this.alertBaseNotifications(CREDENTIALS_FORMAT_ERROR.title, CREDENTIALS_FORMAT_ERROR.msg);
                 }
               } else {
@@ -573,27 +605,29 @@ export class NotificationsService {
     infoES.present();
     await infoES.onDidDismiss().then((d) => {
       this.alertOp = false;
-      this.extraData =  d.role;
+      this.extraData = d.role;
     });
     return this.extraData;
   }
 
   /**
-   * Alerta de informacion corte fechas
+   * Toast Reutilizable
+   * @param header encabezado
+   * @param info mensaje a mostrar
    */
-  async alertInfoCorte(info: string){
+  async toastBaseInfo(header: string, info: string, position: any) {
     this.alertOp = true;
-    const iCorte = await this.toastCtrl.create({
-      header: 'CORTE ACTUAL',
+    const infoToast = await this.toastCtrl.create({
+      header: header,
       message: '<br>' + info,
       duration: 2000,
       animated: true,
       cssClass: 'toastNotifications',
       mode: 'ios',
-      position: 'top',
+      position: position,
     });
-    iCorte.present();
-    iCorte.onDidDismiss().then(()=>{
+    infoToast.present();
+    infoToast.onDidDismiss().then(() => {
       this.alertOp = false;
     });
   }
@@ -657,7 +691,7 @@ export class NotificationsService {
    * @param msg Mensaje de alerta
    * @returns User selection
    */
-  async resetRequestAccess(title: string, msg: string){
+  async resetRequestAccess(title: string, msg: string) {
     this.alertOp = true;
     const resetRequest = await this.alertCtrl.create({
       header: title,
@@ -677,10 +711,10 @@ export class NotificationsService {
         text: 'CANCELAR',
         role: 'cancel',
         cssClass: 'btnCancel',
-        handler: ()=>{
+        handler: () => {
           return undefined;
         }
-      },{
+      }, {
         text: 'OK',
         cssClass: 'btnAlert',
         handler: () => {
@@ -690,7 +724,7 @@ export class NotificationsService {
     });
 
     resetRequest.present();
-    return await resetRequest.onDidDismiss().then((data)=>{
+    return await resetRequest.onDidDismiss().then((data) => {
       this.alertOp = false;
       return data;
     });
@@ -736,9 +770,9 @@ export class NotificationsService {
     return extraData;
   }
 
-  async baseThrowAlerts(title: string, mensaje: string){
+  async baseThrowAlerts(title: string, mensaje: string) {
     const throwEjec = await this.alertCtrl.create({
-      message: '<ion-icon name="alert-circle"></ion-icon><br><h6>' + title + '</h6>'+'<br>' + mensaje,
+      message: '<ion-icon name="alert-circle"></ion-icon><br><h6>' + title + '</h6>' + '<br>' + mensaje,
       backdropDismiss: false,
       mode: 'ios',
       id: 'notiError',
@@ -763,7 +797,7 @@ export class NotificationsService {
    * enviar
    * @returns Correo a enviar el mail
    */
-  async selectMailSend(mails: string[]){
+  async selectMailSend(mails: string[]) {
     this.alertOp = true;
     let dataAux;
     const sendingMail = await this.alertCtrl.create({
@@ -774,15 +808,15 @@ export class NotificationsService {
       backdropDismiss: false,
       inputs: [
         {
-        type: 'radio',
-        cssClass: 'inputStl',
-        value: mails[0],
-        name: 'mail1',
-        label: mails[0],
-        handler: ()=> {
-          dataAux = mails[0];
-          this.alertCtrl.dismiss();
-        }
+          type: 'radio',
+          cssClass: 'inputStl',
+          value: mails[0],
+          name: 'mail1',
+          label: mails[0],
+          handler: () => {
+            dataAux = mails[0];
+            this.alertCtrl.dismiss();
+          }
         },
         {
           type: 'radio',
@@ -790,15 +824,15 @@ export class NotificationsService {
           value: mails[1],
           name: 'mail2',
           label: mails[1],
-          handler: ()=> {
+          handler: () => {
             dataAux = mails[1];
             this.alertCtrl.dismiss();
           }
         }
-    ]
+      ]
     });
     await sendingMail.present();
-    return await sendingMail.onDidDismiss().then(()=>{
+    return await sendingMail.onDidDismiss().then(() => {
       this.alertOp = false;
       return dataAux;
     });
@@ -864,10 +898,10 @@ export class NotificationsService {
 
   async closeModal(extra?) {
     const modaling = await this.modalCrtl.getTop();
-    if(extra !== undefined){
+    if (extra !== undefined) {
       await this.modalCrtl.dismiss(extra);
-    } else{
-        if (modaling !== undefined) {
+    } else {
+      if (modaling !== undefined) {
         await this.modalCrtl.dismiss();
       }
     }
