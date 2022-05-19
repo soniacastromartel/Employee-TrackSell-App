@@ -90,21 +90,6 @@ export class DatacheckService {
   }
 
   /**
- * Crea la cabecera de la consulta (Reutilizable)
- *
- * @param tk Token de acceso de empleado
- * @returns Cabecera generada
- */
-  // setHeader(tk: string) {
-  //   return {
-  //     headers: new HttpHeaders({
-  //       'Accept': 'application/json',
-  //       'Authorization': 'Bearer ' + tk
-  //     })
-  //   };
-  // }
-
-  /**
    * Comprobacion version app
    *
    * @param version Version actual instalada en dispositivo

@@ -12,8 +12,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     constructor(private toast: ToastController,
         private utilsSvc: UtilsService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        //  console.log(request.body);
-     return next.handle(request).pipe(
+        return next.handle(request).pipe(
             // retry(2),
             map(res => {
                 return res
@@ -33,14 +32,11 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     errorHandler(error: HttpErrorResponse, request: HttpRequest<any>) {
         let errorMsg = '';
         if (error.error instanceof ErrorEvent) {
-            console.log('This is client side error');
             errorMsg = `Error: ${error.error.message}`;
         } else {
-            // console.log('This is server side error');
             errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
         }
-        // console.log(request);
-         this.utilsSvc.appErrorLog(LOG_TYPE[2],error.name, errorMsg);
+        this.utilsSvc.appErrorLog(LOG_TYPE[2],error.name, errorMsg);
         return throwError(error);
     }
 

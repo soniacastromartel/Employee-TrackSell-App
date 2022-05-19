@@ -1,14 +1,13 @@
 /* eslint-disable max-len */
 /* eslint-disable arrow-body-style */
 /* eslint-disable @typescript-eslint/quotes */
-import { CREDENTIALS_EMPTY, REQUEST_IN_PROCESS, UNLOCK_REQUESTED } from './../app.constants';
 import { Injectable } from '@angular/core';
 import { PageService } from './page.service';
 import { Service } from '../models/service';
 import { UPDATE_NOT_ALLOW, INFO_WIFI_REQUIRED_UPDATE } from '../app.constants';
 import {
   CREDENTIALS_NOT_SAME, CONFIRM_USERNAME, INSERT_USERNAME, PLACEHOLDER_USERNAME,
-  TITLE_UPDATE, INFO_UPDATE, CREDENTIALS_FORMAT_ERROR
+  TITLE_UPDATE, INFO_UPDATE, CREDENTIALS_FORMAT_ERROR, CREDENTIALS_EMPTY
 } from '../app.constants';
 import {
   AlertController,
@@ -17,7 +16,6 @@ import {
   PopoverController,
   ToastController,
 } from '@ionic/angular';
-import { DatacheckService } from './datacheck.service';
 
 @Injectable({
   providedIn: 'root',
@@ -42,8 +40,7 @@ export class NotificationsService {
     protected loadingCtrl: LoadingController,
     protected popoCtrl: PopoverController,
     protected toastCtrl: ToastController,
-    public pageSvc: PageService,
-    public checkSvc: DatacheckService
+    public pageSvc: PageService
   ) { }
 
   /**
@@ -271,20 +268,8 @@ export class NotificationsService {
     } else {
       buttons = [
         {
-          // role: 'hola',
           text: 'SOLICITAR',
           cssClass: 'btnAlert',
-          handler: () => {
-            // if (!isRequested || isRequested == null) {
-            //   await this.checkSvc.unlockRequest(data).then(() => {
-            //     this.employeSvc.set(UNLOCK_REQUESTED, isRequested);
-            //   }
-            // }else{
-            //   console.log('adios MariCarmen');
-            //   this.toastBaseInfo(REQUEST_IN_PROCESS.title, REQUEST_IN_PROCESS.msg, 'middle');
-            // }
-
-          },
         },
       ];
     }
@@ -298,12 +283,6 @@ export class NotificationsService {
     });
     await baseAlert.present();
     return await baseAlert.onDidDismiss();
-    //  return await baseAlert.onDidDismiss().then((d) => {
-    //     this.alertOp = false;
-    //     this.extraData = d.role;
-    //   });
-    // return this.extraData;
-
   }
 
   /**

@@ -1,4 +1,3 @@
-import { SESION_EXPIRED, UNLOCK_REQUEST, UNLOCK_REQUESTED } from './../app.constants';
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/dot-notation */
@@ -23,7 +22,7 @@ import {
   RESPONSE_PENDING_VALIDATION, RESPONSE_PENDING_CHANGE_PASSWORD, DASHBOARD,
   PRE_REGISTER_LOST, RESPONSE_BLOCK_ACCOUNT, BLOCK_ACCOUNT, RESPONSE_REGISTERED, USER_EXIST_SYSTEM, REQUEST_ACCESS, ERROR_IN_LOGIN,
   ROUTE_CONTROL_ACCESS, VERSION_APP, MODE_ACTIVE, SUM_ACCESS, USER_VALIDADO, YA_VALIDADO, CORDOVA_PLATFORM, ANDROID_TYPE,
-  IOS_TYPE, ONLY_IOS_ACTION, PERSON_ICON, CLOSE_ICON, NEW_REQUEST_ACCESS, LOG_TYPE, LOG_PLACE
+  IOS_TYPE, ONLY_IOS_ACTION, PERSON_ICON, CLOSE_ICON, NEW_REQUEST_ACCESS, LOG_TYPE, LOG_PLACE, SESION_EXPIRED, UNLOCK_REQUEST, UNLOCK_REQUESTED
 } from '../app.constants';
 @Component({
   selector: 'app-home',
@@ -99,13 +98,11 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
    * (Si no se han recogido)
    */
   async ionViewWillEnter() {
-    console.log(this.isRequested);
     this.iconAux = PERSON_ICON;
     this.acceptToPolicy();
     await this.employeSvc.get(UNLOCK_REQUESTED).then((result) => {
       this.isRequested = result;
     })
-    console.log(this.isRequested);
     this.employeSvc.get(ROUTE_CONTROL_ACCESS).then(async result => { //digito (validated) de control de solicitud de acceso
       if (result === null) {//aun no ha intentado acceder nunca
         await this.getLocaleEmployeeDt().then(res => {
@@ -249,7 +246,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
                 this.actionResultLogin({ message: RESPONSE_PENDING_CHANGE_PASSWORD });
                 this.utils.appErrorLog(LOG_TYPE[2], svError.error.message, data.username + ' ' + data.password, LOG_PLACE[0]);
               } else {
-                console.log(this.isRequested);
                 this.deniedChangePass(svError.error.message, { username: data.username, name: ' ' });
                 this.utils.appErrorLog(LOG_TYPE[2], svError.error.message, data.username + ' ' + data.password, LOG_PLACE[0]);
                 // Login incorrecto se suma el intento de acceso
@@ -258,10 +254,10 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
             }
           );
         }).catch((ex) => {
-          this.notification.cancelLoad();
-          this.utils.cancelControlNotifications();
-          this.notification.baseThrowAlerts(ERROR_IN_LOGIN.title, ERROR_IN_LOGIN.msg);
-          this.utils.createError(ex, this.employeSvc.employee.phone, this.route.url).then(result => {
+            this.notification.cancelLoad();
+            this.utils.cancelControlNotifications();
+            this.notification.baseThrowAlerts(ERROR_IN_LOGIN.title, ERROR_IN_LOGIN.msg);
+            this.utils.createError(ex, this.employeSvc.employee.phone, this.route.url).then(result => {
             this.checkSvc.setErrors(result, UtilsService);
           });
         });
@@ -275,12 +271,10 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
    */
   async actionResultLogin(result: any) {
     let user = result;
-    console.log(user.data.user.name);
     this.notification.cancelLoad();
     const msg = result.message;
     if (result.success && result.data !== undefined &&
       result.data.access_token !== undefined && msg === RESPONSE_LOGIN_SUCCESFULL) {
-        console.log(result);
       await this.employeSvc.setUser(result);
       this.route.navigate([DASHBOARD]);
       this.resetForm();
@@ -334,11 +328,9 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
                       break;
                     case RESPONSE_REQUESTED:
                       this.deniedChangePass(RESPONSE_OK_RESULT);
-                      // this.utils.appActionLog(LOG_TYPE[1], r.message, result, LOG_PLACE[1]);
                       break;
                     default:
                       this.deniedChangePass(r.message, { name: employeeRegisterData.name, username: employeeRegisterData.username });
-                      // this.utils.appActionLog(LOG_TYPE[1], r.message, result, LOG_PLACE[1]);
                       break;
                   }
                   // Operacion no realizada se suma el intento de acceso

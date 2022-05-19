@@ -59,8 +59,6 @@ export class EmployeeService {
       }
     });
     this.actualToken = data.data.access_token;
-    // console.log(this.actualToken);
-    // console.log(data.data);
     this.employeeListener.next(this.actualToken);
   }
 
