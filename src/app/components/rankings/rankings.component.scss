@@ -33,6 +33,11 @@ hr {
     margin: 0.5em;
 }
 
+img{
+    width: 100%;
+    height: auto;
+}
+
 ion-datetime {
     text-align: right !important;
     font-weight: 900;
@@ -78,6 +83,7 @@ ion-fab-button {
 
 ion-card {
     padding: 1em;
+    // --background: transparent;
 }
 
 ion-button {
@@ -248,5 +254,11 @@ ion-button {
     color: var(--ion-color-icot);
     font-size: xx-large;
     font-weight: 900;
-    text-align: left;
 }
+
+.column {
+    display: flex;
+    // justify-content: center;
+    // align-items: center;
+    text-align: center;
+  }

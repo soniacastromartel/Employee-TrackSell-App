@@ -27,8 +27,10 @@ export class CentersUtilsService {
     if (this.centers === undefined) {
       this.employeeSvc.employeeBd.get('centers').then(async (res) => {
         if (res == null) {
+          console.log(res);
           await this.getCenterOfSystem();
         } else {
+          console.log(res);
           this.centers = res;
           return true;
         }

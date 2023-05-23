@@ -67,11 +67,15 @@
     --ion-color-light-contrast-rgb: 0, 0, 0;
     --ion-color-light-shade: #d7d8da;
     --ion-color-light-tint: #f5f6f9;
-    /** Personallity **/
+    /** Personality **/
     --ion-color-icot: #b01c2e;
+    --ion-color-accent:#AF1C1C;
+    --ion-color-mysecondary: #F2DADA;
     --ion-color-myblack: #00000a;
     --ion-color-greyblack: #000000;
-    --ion-color-mywhite: #ffffff;
+    --ion-color-mywhite: #F2DADA;
+    --ion-color-mygradient: linear-gradient(#b01c2e,#F2DADA);
+    --ion-color-mygradient2: linear-gradient(white,#F2DADA);
     //c62828
 }
 
@@ -210,7 +214,7 @@
   */
 
   .md body {
-    --ion-background-color: var(--ion-color-step-50);;
+    --ion-background-color: var(--ion-color-step-50);
     --ion-background-color-rgb: 18,18,18;
 
     --ion-text-color: #ffffff;
@@ -251,4 +255,5 @@
     --ion-color-mywhite: var(--ion-color-step-50);
     --clear-button-color: white;
   }
+
 }

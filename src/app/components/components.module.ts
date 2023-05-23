@@ -15,6 +15,8 @@ import { InfoFAQComponent } from './info-faq/info-faq.component';
 import { LeagueComponent } from './league/league.component';
 import { EmptyViewComponent } from './empty-view/empty-view.component';
 import { ImgViewerComponent } from './img-viewer/img-viewer.component';
+import { UserDataComponent } from './user-data/user-data.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
 
@@ -31,7 +33,9 @@ import { ImgViewerComponent } from './img-viewer/img-viewer.component';
     InfoFAQComponent,
     LeagueComponent,
     EmptyViewComponent,
-    ImgViewerComponent
+    ImgViewerComponent,
+    UserDataComponent,
+    FooterComponent
   ],
 
   imports: [
@@ -53,6 +57,8 @@ import { ImgViewerComponent } from './img-viewer/img-viewer.component';
     InfoFAQComponent,
     LeagueComponent,
     EmptyViewComponent,
-    ImgViewerComponent
-  ]})
-export class ComponentsModule {}
+    ImgViewerComponent,
+    FooterComponent
+  ]
+})
+export class ComponentsModule { }

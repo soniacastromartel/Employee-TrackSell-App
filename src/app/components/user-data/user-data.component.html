@@ -1,0 +1,34 @@
+
+<app-header title="MI CUENTA"></app-header>
+<ion-content translucent>
+  <ion-grid fixed>
+    <div>
+      <ion-card class="card">
+        <div class="img-wrapper">
+          <img [src]="user.img!=null ? user.img : 'assets/imgs/user.svg'" />
+          <!-- <ion-button color="medium" (click)="openGalery()">
+            <ion-icon slot="icon-only" name="camera" color="dark">
+            </ion-icon>
+          </ion-button> -->
+
+        </div>
+        <ion-card-header>
+          <ion-card-subtitle>{{user.name}}</ion-card-subtitle>
+          <ion-card-title>Mis Datos</ion-card-title>
+
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let user of [user.username, user.email, user.category, user.phone];let i= index">
+              <ion-label><strong>{{dataLabels[i]}}</strong>
+                <p>{{user}}</p>
+              </ion-label>
+              <ion-icon [name]="icons[i]" slot="start"></ion-icon>
+            </ion-item>
+          </ion-list>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-grid>
+</ion-content>

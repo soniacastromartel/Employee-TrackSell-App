@@ -1,0 +1,44 @@
+[
+    {
+        "title": "LISTA DE SERVICIOS",
+        "subtitle": "SERVICIOS",
+        "icon": "newspaper",
+        "img": "assets/imgs/coordinacion.jpg",
+        "description": "Listado de todos los servicios disponibles por centro."
+
+    },
+    {
+        "title": "MI PLAN DE INCENTIVOS",
+        "subtitle": "INCENTIVOS",
+        "icon": "trending-up",
+        "img": "assets/imgs/incentivos3.jpg",
+        "description": "Aquí podrás ver todos los detalles de tu plan de incentivos."
+
+
+    },
+    {
+        "title": "REGISTRO DE VENTA",
+        "subtitle": "VENTA",
+        "icon": "logo-euro",
+        "img": "assets/imgs/ventas.jpg",
+        "description": "Entra para registrar una nueva venta y acumular los incentivos a tu plan."
+
+
+    },
+    {
+        "title": "RANKINGS",
+        "subtitle": "RANKINGS",
+        "icon": "podium",
+        "img": "assets/imgs/ranking3.jpg",
+        "description": "Ranking de los empleados con mayor venta por centro o del grupo."
+
+    },
+    {
+        "title": "LIGA DE CENTROS",
+        "subtitle": "LIGA",
+        "icon": "medal",
+        "img": "assets/imgs/liga2.jpg",
+        "description": "Liga de los centros por puntos. ¿Quién será el ganador del año?"
+
+    }
+]

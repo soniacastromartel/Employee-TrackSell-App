@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import {
   SERVICES_OF_CENTER, SELLING_SERVICES, RANKINGS_OF_EMPLOYEES,
   NEW_ACCESS, ERROR_APP, ACCESS_COUNT, LOGIN_APP,
-  USER_RECOVERY_PASS, SECRET, CHANGING_PASS, CENTER_EMPLOYEE,
+  USER_RECOVERY_PASS, SECRET, CHANGING_PASS, CENTER_EMPLOYEE as EMPLOYEE_INFO,
   CATEGORIES_LIST, CENTERS_LIST, INCENTIVES_EMPLOYEE, GET_VERSION, CHECKING_VERSION, DATA_PROMO, QUESTIONS_FAQ,
   LAST_CHANGES, CLASIFICATION_LEAGUE, BASE_URL, SEARCH_TRACKING, AVAILABLES_DISCOUNTS, APP_LOGS, CHECK_NOT_UPDATE,
   RESET_COUNT_UPDATE, LOG_TYPE, UPDATING_VERSION, UNLOCK_REQUEST
@@ -14,6 +14,8 @@ import {
 import { AccessToService } from './access-to.service';
 import { map } from 'rxjs/operators';
 import { EventEmitter } from '@angular/core';
+import { Componente } from '../models/componente';
+import { Section } from '../models/section';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +28,7 @@ export class DatacheckService {
   private changingPass: string;
   private recoveryPass: string;
   private getCategories: string;
-  private getCenterOfEmployee: string;
+  private employeeInfo: string;
   private getAllCenters: string;
   private incentives: string;
   private searchTracking: string;
@@ -56,7 +58,7 @@ export class DatacheckService {
     this.newAccess = NEW_ACCESS;
     this.changingPass = CHANGING_PASS;
     this.recoveryPass = USER_RECOVERY_PASS;
-    this.getCenterOfEmployee = CENTER_EMPLOYEE;
+    this.employeeInfo = EMPLOYEE_INFO;
     this.getAllCenters = CENTERS_LIST;
     this.getCategories = CATEGORIES_LIST;
     this.incentives = INCENTIVES_EMPLOYEE;
@@ -89,6 +91,35 @@ export class DatacheckService {
     };
   }
 
+    /**
+ * Crea la cabecera de la consulta (Reutilizable)
+ *
+ * @param tk Token de acceso de empleado
+ * @returns Cabecera generada
+ */
+  setHeader(tk: string) {
+    return {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + tk
+      })
+    };
+  }
+
+  /**
+   * Devuelve un array con las opciones del menú
+   */
+  getMenuOpts(){
+    return this.http.get <Componente[]>('/assets/data/sidebar-opts.json');
+  }
+
+  /**
+   * Devuelve un array con las secciones del home
+   */
+  getSections(){
+    return this.http.get <Section[]>('/assets/data/sections.json');
+  }
+
   /**
    * Comprobacion version app
    *
@@ -96,7 +127,7 @@ export class DatacheckService {
    * @returns Nueva version estable disponible o no
    */
   async checkingVersion(version: string, tk: string) {
-    return this.http.get(this.base + this.checkVersion + '?version=' + version);
+    return this.http.get(this.base + this.checkVersion + '?version=' + version, this.setHeader(tk));
   }
 
   /**
@@ -250,12 +281,12 @@ export class DatacheckService {
   }
 
   /**
-   * RECOGER LOS DATOS DEL CENTRO DEL EMPLEADO
+   * RECOGER LOS DATOS DEL EMPLEADO
    *
    * @param username Empleado del centro a buscar
    */
-  async getEmployeeCenter(username: string, tk: string) {
-    return this.http.get(this.base + this.getCenterOfEmployee + username);
+  async getEmployeeInfo(username: string, tk: string) {
+    return this.http.get(this.base + this.employeeInfo + username, this.setHeader(tk));
   }
 
   /**
@@ -270,9 +301,9 @@ export class DatacheckService {
    */
   async getIncentivesForEmployee(username: string, tk: string, m?: number, y?: number) {
     if (m === undefined) {
-      return this.http.post(this.base + this.incentives, { username: username, year: y });
+      return this.http.post(this.base + this.incentives, { username: username, year: y }, this.setHeader(tk));
     } else {
-      return this.http.post(this.base + this.incentives, { username: username, month: m, year: y });
+      return this.http.post(this.base + this.incentives, { username: username, month: m, year: y }, this.setHeader(tk));
     }
   }
 
@@ -284,7 +315,7 @@ export class DatacheckService {
    * @returns Lista de datos relacionado con el tracking que se busca
    */
   async getDataTracking(idTracking: number, tk: string) {
-    return this.http.get(this.base + this.searchTracking + '?id=' + idTracking);
+    return this.http.get(this.base + this.searchTracking + '?id=' + idTracking, this.setHeader(tk));
   }
 
   /**
@@ -295,7 +326,7 @@ export class DatacheckService {
    * @returns Lista de servicios disponible para el centro
    */
   async getServicesOf(centerId: number, orderDiff: boolean, tk: string) {
-    return this.http.get(this.base + this.servicesOfCenter + centerId + '/' + orderDiff);
+    return this.http.get(this.base + this.servicesOfCenter + centerId + '/' + orderDiff, this.setHeader(tk));
   }
 
   /**
@@ -306,7 +337,7 @@ export class DatacheckService {
    * @returns Result operation
    */
   async saleForEmployee(venta: any, tk: string) {
-    return this.http.post(this.base + this.sellingService, venta);
+    return this.http.post(this.base + this.sellingService, venta, this.setHeader(tk));
   }
 
   /**
@@ -319,10 +350,10 @@ export class DatacheckService {
   async getRankingsOf(centreId: number, tk: string, month?: number, year?: number) {
     if (centreId !== undefined) {
       // CONSULTA PARA MI CENTRO
-      return this.http.post(this.base + this.getRankings, { centre_id: centreId, month: month, year: year });
+      return this.http.post(this.base + this.getRankings, { centre_id: centreId, month: month, year: year }, this.setHeader(tk));
     } else {
       // CONSULTA PRA GRUPO
-      return this.http.post(this.base + this.getRankings, { month: month, year: year });
+      return this.http.post(this.base + this.getRankings, { month: month, year: year }, this.setHeader(tk));
     }
   }
 
@@ -338,7 +369,7 @@ export class DatacheckService {
   async getClasificationLeague(centreId, month, year: number, tk: string) {
     return this.http.post(
       this.base + this.clasificationLeague,
-      { centre: centreId, month: month, year: year, type: 'data' });
+      { centre: centreId, month: month, year: year, type: 'data' }, this.setHeader(tk));
   }
 
   /**
@@ -371,7 +402,7 @@ export class DatacheckService {
    * @returns Lista de promotions
    */
   async getPromotionsForApp(tk: string) {
-    return this.http.get(this.base + this.promotions);
+    return this.http.get(this.base + this.promotions, this.setHeader(tk));
   }
 
   /**

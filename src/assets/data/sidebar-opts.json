@@ -1,0 +1,21 @@
+[
+{
+    "icon": "person-circle-outline",
+    "name": "Mi Cuenta"
+},
+{
+    "icon": "business-outline",
+    "name": "Mi Centro"
+   
+},
+{
+    "icon": "help-circle-outline",
+    "name": "Preguntas Frequentes"
+ 
+},
+{
+    "icon": "log-out-outline",
+    "name": "Cerrar Sesión"
+   
+}
+]

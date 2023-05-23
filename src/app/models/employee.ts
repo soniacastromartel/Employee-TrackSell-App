@@ -15,5 +15,6 @@ export interface Employee {
   category: number;
   validated: number;
   pending_password: string;
+  img: string;
 }
 

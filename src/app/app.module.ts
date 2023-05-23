@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, IonicSwiper } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -24,6 +24,11 @@ import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/n
 import { ErrorHandlerInterceptor } from './interceptors/error-handler.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
+
+import { CookieService } from 'ngx-cookie-service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment'; 
+
 @NgModule({
   declarations: [AppComponent, SliceLargeTextPipe, TextTransformPipe],
   entryComponents: [],
@@ -38,25 +43,36 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ComponentsModule
+    ComponentsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }), 
+
   ],
-  exports: [ReactiveFormsModule, FormsModule, ComponentsModule],
+  exports: [ReactiveFormsModule, FormsModule, ComponentsModule], 
+  //exports: [ReactiveFormsModule, FormsModule],
   providers: [
+    Storage, 
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    NotificationsService,
-    DatacheckService,
-    AppVersion,
-    EmployeeService,
-    Storage,
-    Device,
-    Network,
-    ApkUpdater,
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    NotificationsService, 
+    DatacheckService, 
+    AppVersion, 
+    EmployeeService,   
+    Device, 
+    Network, 
+    ApkUpdater, 
+    File, 
+    ScreenOrientation,
+    CookieService ,
     InAppBrowser,
-    File,
-    ScreenOrientation
-  ],
-  bootstrap: [AppComponent],
+
+      ],
+    bootstrap: [AppComponent], 
+ 
 })
 export class AppModule { }

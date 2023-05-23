@@ -171,7 +171,7 @@ export class NotificationsService {
           },
         },
         {
-          text: 'Solicitar',
+          text: 'Aceptar',
           cssClass: 'btnAlert',
           handler: (dt) => {
             data = dt.username;

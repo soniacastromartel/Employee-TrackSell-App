@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "pdiapp-172df",
+    "pdiApp": "pdiapp-172df"
+  },
+  "targets": {},
+  "etags": {}
+}

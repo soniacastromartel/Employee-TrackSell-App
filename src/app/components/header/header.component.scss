@@ -3,17 +3,37 @@ ion-note{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   display: block;
-  color: var(--ion-color-myblack);
+  color: white;
   font-size: small;
 }
 
 ion-toolbar{
-  --background: var(--ion-color-step-50);
+  --background: var(--ion-color-icot);
+  --color: white;
 }
 
 .logo {
-  width: 50px;
-  margin-left: 5px;
+  width: 40px;
+  height: 30px;  margin-left: 5px;
   margin-right: 5px;
 }
+
+ion-icon {
+  font-size: 38px;
+  color: var(white)
+}
+
+.icon-size{
+  font-size: 33px;
+}
+
+ion-badge {
+  position: absolute; 
+  font-size: 8pt;
+  right: 16px;
+  top: -3px; 
+  color: green;
+}
+
+
 

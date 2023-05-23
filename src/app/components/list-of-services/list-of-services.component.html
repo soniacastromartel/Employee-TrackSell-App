@@ -1,21 +1,24 @@
 <app-header *ngIf="!showInfo" title="SERVICIOS"></app-header>
-<div *ngIf="destino != undefined && !showInfo">
-    <ion-note class="title">CATEGORÍAS DISPONIBLES</ion-note>
-    <ion-note class="title">{{destino.centre}}</ion-note>
-    <div class="containerChangeCenter">
-        <ion-icon class="icBackCenters" name="chevron-back"></ion-icon>
-        <ion-note class="changeCenter" *ngIf="destino != undefined" (click)="changeCenter()">CAMBIAR<br>CENTRO</ion-note>
-    </div>
-    <hr>
-</div>
+
 <ion-content #content [scrollEvents]="true">
+
+    <div class="bg-transparent" *ngIf="destino != undefined && !showInfo">
+        <ion-note class="title">CATEGORÍAS DISPONIBLES</ion-note>
+        <ion-note class="title">{{destino.centre}}</ion-note>
+        <div class="containerChangeCenter">
+            <ion-icon class="icBackCenters" name="chevron-back"></ion-icon>
+            <ion-note class="changeCenter" *ngIf="destino != undefined" (click)="changeCenter()">CAMBIAR<br>CENTRO</ion-note>
+        </div>
+        <hr>
+    </div>
+    
     <!-- SELECCIÓN O BÚSQUEDA DE CENTRO -->
     <ng-container *ngIf="destino == undefined; else listado;">
         <ion-note class="selectCenter">SELECCIONAR O BUSCAR CENTRO DE DESTINO:</ion-note>
         <ion-searchbar [(ngModel)]="searchCenter" #search type="text" inputmode="text" showCancelButton="focus" cancelButtonText="CANCELAR" placeholder="¿Centro a buscar?" autocorrect="on" animated (ionClear)="clearSearch()" (ionChange)="searchingCenter()"></ion-searchbar>
         <hr>
-        <ion-list lines="none">
-            <ion-item *ngFor="let c of centrosShow" (click)="selectCenter(c)">
+        <ion-list class="bg-transparent">
+            <ion-item *ngFor="let c of centrosShow" (click)="selectCenter(c)" color="none" lines="none">
                 <ion-label class="centerName">{{c.name}}</ion-label>
                 <ion-icon class="icCenter" name="chevron-forward" slot="end"></ion-icon>
             </ion-item>
@@ -24,7 +27,7 @@
     <!-- LISTADO DE CATEGORIAS Y SERVICIOS DISPONIBLES-->
     <ng-template #listado>
         <ng-container *ngIf="!showInfo; else showingInfo">
-            <ion-item class="containerCategory" lines="none" *ngFor="let category of categoryOfServices; let i=index;">
+            <ion-item class="containerCategory" lines="none" color="none" *ngFor="let category of categoryOfServices; let i=index;">
                 <ion-grid class="ion-no-padding">
                     <ion-row>
                         <ion-col class="imgService" size="4" size-xs="4" size-sm="4" size-md="4" size-lg="4">
@@ -105,7 +108,7 @@
         <ion-fab-list side="start"></ion-fab-list>
     </ion-fab>
 </ion-content>
-<ion-button *ngIf="!showInfo" class="goBack" expand="block" (click)="goBack()">
-    <ion-icon name="home" slot="start" class="home"></ion-icon>VOLVER</ion-button>
+<!-- <ion-button *ngIf="!showInfo" class="goBack" expand="block" (click)="goBack()">
+    <ion-icon name="home" slot="start" class="home"></ion-icon>VOLVER</ion-button> -->
 <ion-button *ngIf="showInfo" class="goBack" expand="block" (click)="changeService()">
     <ion-icon name="return-up-back" slot="start" class="home"></ion-icon>CAMBIAR CATEGORÍA</ion-button>

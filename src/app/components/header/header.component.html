@@ -1,11 +1,13 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-note>{{title}}</ion-note>
     <ion-buttons slot="start">
-        <img class="logo" [src]="logo"/>
-    </ion-buttons>
+      <ion-button (click)="goBack()">
+          <ion-icon name="arrow-back-circle" color="light" size="large"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+    <ion-note>{{title}}</ion-note>
     <ion-buttons slot="end">
-        <ion-img class="logo" [src]="faq" (click)="openFAQ()"></ion-img>
+      <img class="logo" src="assets/imgs/whitelogo.png" translucent/>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

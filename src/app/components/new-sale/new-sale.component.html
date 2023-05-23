@@ -1,11 +1,13 @@
 <app-header title="REGISTRO DE VENTA"></app-header>
-<ion-item lines="none">
-    <ion-icon name="close" slot="start" class="icClear" *ngIf="venta.valid" (click)="clearForm()"></ion-icon>
-    <ion-note class="configuradorLbl">
-        CONFIGURADOR DE SERVICIO
-    </ion-note>
-</ion-item>
+
 <ion-content #content>
+    <ion-item lines="none" color="none">
+        <ion-icon name="refresh-outline" slot="start" class="icClear" *ngIf="venta.valid" (click)="clearForm()"></ion-icon>
+        <ion-note class="configuradorLbl">
+            CONFIGURADOR DE SERVICIO
+        </ion-note>
+    </ion-item>
+
     <form [formGroup]="venta">
             <div class="containerTypeServ">
                 <ion-row>
@@ -96,21 +98,11 @@
         </div>
         <br>
     </form>
-</ion-content>
-<ion-toolbar>
+
     <ion-grid>
-        <ion-row>
-            <ion-col size="4.5">
-                <ion-button (click)="goBack()" expand="block" type="button" name="btnBack">
-                    <ion-icon name="home" slot="start" class="home"></ion-icon>
-                    <ion-note class="lblBtn">VOLVER</ion-note>
-                </ion-button>
-            </ion-col>
-            <ion-col size="7.5">
-                <ion-button [disabled]="!venta.valid" expand="block" type="submit" name="submit" id="submit" (click)="sendSale()">
-                    <ion-icon name="reader" slot="start" class="home"></ion-icon><ion-note class="lblBtn">CONFIRMAR DATOS</ion-note>
-                </ion-button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-</ion-toolbar>
+        <ion-button [disabled]="!venta.valid" expand="block" type="submit" name="submit" id="submit" (click)="sendSale()">
+            <ion-icon name="thumbs-up" slot="start" class="home"></ion-icon><ion-note class="lblBtn">CONFIRMAR DATOS</ion-note>
+        </ion-button>
+</ion-grid>
+</ion-content>
+

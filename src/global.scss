@@ -1,40 +1,49 @@
-    /*
+/*
  * App Global CSS
  * ----------------------------------------------------------------------------
  */
 
+   
+
     .baseNotification {
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-weight: bold;
+
         div.alert-head.sc-ion-alert-ios {
             background-color: var(--ion-color-icot);
             padding-left: 0.5em;
             padding-right: 0.5em;
+
             h2 {
                 color: white;
             }
         }
+
         .btnCancel {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: var(--ion-color-myblack);
             font-weight: 600;
         }
+
         .btnAlert {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             font-size: large;
             color: var(--ion-color-icot);
             font-weight: bold;
         }
+
         .especial {
             color: var(--ion-color-icot);
             font-weight: 900;
         }
+
         ion-icon {
             color: var(--ion-color-icot);
             width: 20px;
             height: 20px;
             float: left !important;
         }
+
         ion-note {
             color: var(--ion-color-myblack);
         }
@@ -43,32 +52,39 @@
     .changingListStl {
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-weight: bold;
+
         .btnCancel {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: var(--ion-color-myblack);
             font-weight: 600;
         }
+
         .btnAlert {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             font-size: large;
             color: var(--ion-color-icot);
             font-weight: bold;
         }
+
         .subtitle {
             color: var(--ion-color-icot);
             font-weight: 600;
         }
+
         .ic1 {
             float: left !important;
         }
+
         .ic2 {
             float: right !important;
         }
+
         ion-icon {
             color: var(--ion-color-icot);
             width: 30px;
             height: 30px;
         }
+
         ion-note {
             color: var(--ion-color-myblack);
         }
@@ -78,21 +94,25 @@
         div.alert-head.sc-ion-alert-ios {
             background-color: var(--ion-color-icot);
             margin-bottom: 1em;
+
             h2 {
                 color: white;
             }
         }
+
         .btnCancel {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: var(--ion-color-myblack);
             font-weight: 600;
         }
+
         .btnAlert {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             font-size: large;
             color: var(--ion-color-icot);
             font-weight: bold;
         }
+
         .btnDelete {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             font-size: large;
@@ -104,42 +124,49 @@
     .retrySend {
         div.alert-head.sc-ion-alert-ios {
             background-color: var(--ion-color-icot);
+
             h2 {
                 color: white;
             }
         }
+
         .btnCancel {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: var(--ion-color-myblack);
             font-weight: 600;
         }
+
         .btnAlert {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             font-size: large;
             color: var(--ion-color-icot);
             font-weight: bold;
         }
+
         .checkStl {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
             div.alert-checkbox-label.sc-ion-alert-ios {
                 color: var(--ion-color-icot);
                 font-weight: 900;
                 font-size: small;
             }
+
             .alert-checkbox-icon.sc-ion-alert-ios {
                 background-color: var(--ion-color-icot);
             }
         }
     }
 
-    .updatingStl{
-        ion-label{
+    .updatingStl {
+        ion-label {
             display: block;
             text-align: center;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             font-weight: 900;
             color: var(--ion-color-icot);
         }
+
         ion-img {
             border: 4px solid var(--ion-color-icot);
         }
@@ -148,14 +175,17 @@
     .questionsStl {
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-weight: bold;
+
         h2.alert-title.sc-ion-alert-ios {
             color: var(--ion-color-icot);
             font-weight: bold;
         }
+
         div.alert-message.sc-ion-alert-ios {
             font-size: small;
             font-weight: bold;
         }
+
         .btnQuestion {
             color: var(--ion-color-icot);
             font-weight: bold;
@@ -166,21 +196,25 @@
         h2.alert-title.sc-ion-alert-ios {
             color: var(--ion-color-icot);
         }
+
         div.alert-message.sc-ion-alert-ios {
             color: var(--ion-color-myblack);
             font-weight: bold;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
+
         .stlInput {
             color: var(--ion-color-myblack);
             border: 2px solid var(--ion-color-icot);
             font-family: monospace;
             font-weight: bold;
         }
+
         .btnAlert {
             color: var(--ion-color-icot);
             font-weight: bold;
         }
+
         .btnCancel {
             color: var(--ion-color-myblack);
             font-weight: bold;
@@ -189,23 +223,28 @@
 
     .stlRemeberPass {
         border: 2px solid var(--ion-color-icot);
+
         h2 {
             font-family: monospace;
             font-weight: 900;
             color: var(--ion-color-icot) !important;
         }
+
         label {
             font-weight: bold;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
+
         .btnAlert {
             color: var(--ion-color-icot);
             font-weight: bold;
         }
+
         .btnCancel {
             color: var(--ion-color-myblack) !important;
             font-weight: bold;
         }
+
         .alertStl {
             font-weight: bold;
             font-family: monospace;
@@ -219,18 +258,22 @@
             color: var(--ion-color-icot);
             font-weight: bold;
         }
+
         div.alert-message.sc-ion-alert-ios {
             font-weight: 900;
         }
+
         .inputStl {
             font-size: small;
             font-weight: 600;
             display: block;
         }
+
         // TEXT
         [aria-checked=true].sc-ion-alert-ios .alert-radio-label.sc-ion-alert-ios {
             color: var(--ion-color-icot);
         }
+
         // MARK
         [aria-checked=true].sc-ion-alert-ios .alert-radio-inner.sc-ion-alert-ios {
             border-color: black;
@@ -240,15 +283,18 @@
     // Avisos de errores
     .throwBaseStl {
         font-weight: 900;
+
         h6 {
             font-weight: bold;
             color: var(--ion-color-icot) !important;
         }
+
         ion-icon {
             color: var(--ion-color-icot);
             width: 20px;
             height: 20px;
         }
+
         .btnAlert {
             font-family: monospace;
             font-size: large;
@@ -256,32 +302,34 @@
             font-weight: 900;
         }
     }
+
     /**
 * REVISAR STYLE TOAST, NOT WORKING!!!!
 */
 
-.toastNotifications{
-text-align: center;
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
---background: var(--ion-color-icot);
-color: white;
-}
-
-.toastStl {
-    font-weight: bold;
-    font-family: monospace;
-    .btnAlert {
-        background-color: red;
-        --background: red;
+    .toastNotifications {
+        text-align: center;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        --background: var(--ion-color-icot);
+        color: white;
     }
-}
 
-.stlLoad {
-    --spinner-color: var(--ion-color-icot);
-    font-family: monospace;
-    font-weight: 900;
-    text-align: center;
-}
+    .toastStl {
+        font-weight: bold;
+        font-family: monospace;
+
+        .btnAlert {
+            background-color: red;
+            --background: red;
+        }
+    }
+
+    .stlLoad {
+        --spinner-color: var(--ion-color-icot);
+        font-family: monospace;
+        font-weight: 900;
+        text-align: center;
+    }
 
     .stlEmployeeService {
         h2 {
@@ -290,9 +338,11 @@ color: white;
             color: white !important;
             margin: 0.5em;
         }
+
         ion-grid {
             padding: 0;
         }
+
         ion-row {
             padding-top: 0;
             padding-left: 0;
@@ -300,9 +350,11 @@ color: white;
             padding-bottom: 1em;
             text-align: start;
         }
+
         ion-col {
             padding: 0;
         }
+
         ion-note {
             color: var(--ion-color-icot);
             font-weight: 900;
@@ -314,25 +366,30 @@ color: white;
             font-weight: 900;
             font-size: large;
         }
+
         .btnAlert {
             color: ghostwhite;
             background-color: var(--ion-color-icot);
             font-weight: 900;
             font-size: large;
         }
+
         .lblCol {
             text-align: start;
             font-family: monospace;
             font-size: small;
         }
+
         .dataCol {
             text-align: center;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             font-weight: bold;
         }
+
         div.alert-head.sc-ion-alert-ios {
             background-color: var(--ion-color-icot);
         }
+
         div.alert-wrapper.ion-overlay-wrapper.sc-ion-alert-ios {
             width: 100% !important;
         }
@@ -351,17 +408,20 @@ color: white;
             margin: 0 !important;
             padding: 5px !important;
         }
+
         ion-note {
             font-weight: bold;
             color: var(--ion-color-myblack);
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
+
         .alertBtn {
             font-family: monospace;
             font-size: large;
             color: var(--ion-color-icot);
             font-weight: bold;
         }
+
         div.alert-head.sc-ion-alert-ios {
             background-color: var(--ion-color-icot);
         }
@@ -378,21 +438,25 @@ color: white;
     // REQUEST ACCESS
     .requestAccessStl {
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
         h2 {
             text-align: center;
             font-weight: bold;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
+
         .btnCancel {
             color: var(--ion-color-myblack) !important;
             font-weight: bold;
         }
+
         .stlInput {
             color: var(--ion-color-myblack);
             border: 2px solid var(--ion-color-icot);
             font-family: monospace;
             font-weight: bold;
         }
+
         .btnAlert {
             color: var(--ion-color-icot);
             font-weight: bold;
@@ -402,27 +466,32 @@ color: white;
     // PRIVACY POLITIC
     .stlPrivacy {
         font-size: small;
-        a{
+
+        a {
             color: var(--ion-color-icot);
         }
 
         div.sc-ion-alert-md {
             --min-width: 90%;
         }
+
         div.alert-head.sc-ion-alert-md {
             border-left: 3px solid var(--ion-color-icot);
             border-right: 3px solid var(--ion-color-icot);
             border-top: 3px solid var(--ion-color-icot);
+
             h2 {
                 color: var(--ion-color-myblack);
                 font-weight: 900;
             }
+
             h2#alert-1-sub-hdr.alert-sub-title.sc-ion-alert-md {
                 color: var(--ion-color-icot);
                 font-size: x-small;
                 font-weight: 900;
             }
         }
+
         div#alert-1-msg.alert-message.sc-ion-alert-md {
             color: var(--ion-color-myblack);
             font-weight: bold;
@@ -431,20 +500,24 @@ color: white;
             border-right: 3px solid var(--ion-color-icot);
             white-space: pre-wrap;
         }
+
         div.alert-button-group.sc-ion-alert-md {
             border-left: 3px solid var(--ion-color-icot);
             border-right: 3px solid var(--ion-color-icot);
             border-bottom: 3px solid var(--ion-color-icot);
         }
+
         .btnPrivacyF {
             color: var(--ion-color-myblack);
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
+
         .btnPrivacyT {
             color: var(--ion-color-icot);
             font-weight: bold;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
+
         .moreInfo {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: var(--ion-color-icot);
@@ -460,33 +533,40 @@ color: white;
             word-spacing: unset;
             font-weight: 600;
         }
+
         ion-icon {
             color: var(--ion-color-icot);
             width: 25px;
             height: 25px;
         }
+
         img {
             width: 25px;
             height: 25px;
         }
+
         .enlace {
             color: var(--ion-color-icot);
             font-weight: 900;
         }
+
         .btnAlert {
             color: var(--ion-color-icot);
             font-weight: 900 !important;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
+
         .btnLater {
             color: var(--ion-color-myblack);
             font-weight: 900 !important;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
+
         .notUpdate {
             color: var(--ion-color-icot);
             font-weight: 900;
         }
+
         div.alert-wrapper.ion-overlay-wrapper.sc-ion-alert-ios {
             width: 100% !important;
         }
@@ -495,18 +575,22 @@ color: white;
     // DEVICE NO CONECTION
     .noConStl {
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
         ion-note {
             --color: var(--ion-color-icot);
             font-weight: 900;
         }
+
         h5 {
             font-weight: bold;
             font-family: monospace;
             margin-bottom: 1.5em;
         }
+
         ion-label {
             font-weight: 600;
         }
+
         img {
             object-fit: cover;
             max-height: 80px;
@@ -518,22 +602,27 @@ color: white;
     .action-sheet-group {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bold;
+
         .action-sheet-div {
             border: 2px solid var(--ion-color-icot);
         }
+
         button.action-sheet-button {
             color: var(--ion-color-icot);
             font-family: monospace;
             text-align: center;
         }
+
         button.action-sheet-button.ion-activatable.ion-focusable.action-sheet-cancel.sc-ion-action-sheet-md {
             color: var(--ion-color-myblack);
             font-weight: bold;
         }
+
         button.action-sheet-button.ion-activatable.ion-focusable.action-sheet-cancel.sc-ion-action-sheet-ios {
             color: var(--ion-color-myblack);
             font-weight: bold;
         }
+
         button.action-sheet-button.ion-activatable.ion-focusable.action-sheet-.select-interface-option.md.sc-ion-action-sheet-ios {
             --button-color-hover: var(--ion-color-icot);
             --button-color-focus: var(--ion-color-icot);
@@ -551,14 +640,17 @@ color: white;
 
     .resetRequestStl {
         border: none;
+
         ion-label {
             font-size: small;
             color: var(--ion-color-icot);
             font-weight: bold;
         }
+
         ion-checkbox {
             float: left;
         }
+
         .btnAlert {
             border: none;
             color: var(--ion-color-icot);
@@ -626,6 +718,7 @@ color: white;
     .questionStl {
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         white-space: pre-line;
+
         div.alert-head.sc-ion-alert-ios {
             h2 {
                 color: var(--ion-color-icot);
@@ -633,12 +726,15 @@ color: white;
                 font-weight: 900;
             }
         }
+
         div#alert-2-msg.alert-message.sc-ion-alert-ios {
             height: 100% !important;
         }
+
         div.alert-wrapper.ion-overlay-wrapper.sc-ion-alert-ios {
             padding-bottom: 1em;
         }
+
         ion-img {
             max-height: 120px;
             margin-top: 2em;
@@ -648,6 +744,7 @@ color: white;
     // Picker select day
     div.picker-toolbar-cancel.picker-toolbar-button.sc-ion-picker-ios {
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
         button.picker-button.ion-activatable.sc-ion-picker-ios {
             color: black;
         }
@@ -664,8 +761,9 @@ color: white;
 
     // Ion-Card with border in color icot
     ion-card.ios.hydrated {
-        border: 4px solid var(--ion-color-icot)
+        // border: 4px solid var(--ion-color-icot)
     }
+
     /* Animaciones */
 
     .animated {
@@ -686,14 +784,51 @@ color: white;
         from {
             opacity: 0;
         }
+
         to {
             opacity: 1;
         }
     }
 
+    ion-toolbar {
+        color: var(--ion-color-icot)
+    }
+
+    ion-icon {
+        // font-size: 38px;
+        color: var(--ion-color-icot)
+    }
+
+    ion-content {
+        --background: transparent;
+        background-image: url('assets/imgs/icot_background.png');
+        background-position: center center;
+        background-repeat: repeat;
+        background-size: cover;
+    }
+
+
+    .bg-transparent {
+        background: transparent;
+    }
+
     .fadeIn {
         animation-name: fadeIn;
     }
+
+    .title {
+        display: block;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+        font-size: small;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        margin-bottom: 0.5em;
+    }
+
+
+
+
     /* Core CSS required for Ionic components to work properly */
 
     @import "~@ionic/angular/css/core.css";
@@ -710,3 +845,5 @@ color: white;
     @import "~@ionic/angular/css/text-alignment.css";
     @import "~@ionic/angular/css/text-transformation.css";
     @import "~@ionic/angular/css/flex-utils.css";
+
+    @import '~swiper/swiper-bundle';

@@ -8,6 +8,10 @@ import { UtilsService } from '../services/utils.service';
 import { LOG_TYPE } from '../app.constants';
 
 @Injectable()
+/**
+   * Clase para el manejo centralizado de errores en peticiones Http
+   *
+   */
 export class ErrorHandlerInterceptor implements HttpInterceptor {
     constructor(private toast: ToastController,
         private utilsSvc: UtilsService) { }
@@ -36,7 +40,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         } else {
             errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
         }
-        this.utilsSvc.appErrorLog(LOG_TYPE[2],error.name, errorMsg);
+        this.utilsSvc.appErrorLog(LOG_TYPE[2], error.name, errorMsg);
         return throwError(error);
     }
 

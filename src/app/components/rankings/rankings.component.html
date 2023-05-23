@@ -1,45 +1,75 @@
 <app-header title="RANKINGS"></app-header>
 
-<ion-row>
-    <ion-col>
-        <ion-segment #selector value="centro" swipeGesture="true" (ionChange)="typeRanking($event)">
-            <ion-segment-button value="centro">
-                <ion-label>MI CENTRO</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="grupo">
-                <ion-label>GRUPO</ion-label>
-            </ion-segment-button>
-        </ion-segment>
-    </ion-col>
-</ion-row>
 
-<ion-note class="typeSearchDate">CONSULTA: </ion-note>
-<ion-datetime *ngIf="selectedRadioItem != 'actual'" [(ngModel)]="rankingDate" [displayFormat]="displayFormatDate" [pickerFormat]="displayFormatDate" doneText="SELECCIONAR" cancelText="CANCELAR" value="{{rankingDate}}" [monthNames]="monthsValues" (ionChange)="rankingRefresh(selectedRadioItem == 'monthYear' ? 1 : 2)"></ion-datetime>
-<div class="containerRadioBtns">
-    <ion-radio-group [value]="radioList[0].value" mode="md" (ionChange)="radioSelect($event)" #radioGroup>
-        <ion-row class="ion-text-center">
-            <ion-col size="4" *ngFor="let radio of radioList">
-                <ion-note class="typeSearchDate">{{radio.text}}</ion-note>
-                <ion-row>
-                    <ion-col>
-                        <ion-radio [value]="radio.value"></ion-radio>
-                    </ion-col>
-                </ion-row>
-            </ion-col>
-        </ion-row>
-    </ion-radio-group>
-</div>
 
 <ion-content #content [scrollEvents]="true" (ionScroll)="onScroll($event)" (ionScrollEnd)="hiddenArrow()">
+
+    <ion-row>
+        <ion-col>
+            <ion-segment #selector value="centro" swipeGesture="true" (ionChange)="typeRanking($event)">
+                <ion-segment-button value="centro">
+                    <ion-label>MI CENTRO</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="grupo">
+                    <ion-label>GRUPO</ion-label>
+                </ion-segment-button>
+            </ion-segment>
+        </ion-col>
+    </ion-row>
+
+    <ion-note *ngIf="selectedRadioItem != 'actual'" class="typeSearchDate">CONSULTA: </ion-note>
+
+    <ion-item lines="none" color="none">
+        <ion-datetime *ngIf="selectedRadioItem != 'actual'" [(ngModel)]="rankingDate"
+            [displayFormat]="displayFormatDate" [pickerFormat]="displayFormatDate" doneText="SELECCIONAR"
+            cancelText="CANCELAR" value="{{rankingDate}}" [monthNames]="monthsValues"
+            (ionChange)="rankingRefresh(selectedRadioItem == 'monthYear' ? 1 : 2)"></ion-datetime>
+    </ion-item>
+
+    <div class="containerRadioBtns">
+        <ion-radio-group [value]="radioList[0].value" mode="md" (ionChange)="radioSelect($event)" #radioGroup>
+            <ion-row class="ion-text-center">
+                <ion-col size="4" *ngFor="let radio of radioList">
+                    <ion-note class="typeSearchDate">{{radio.text}}</ion-note>
+                    <ion-row>
+                        <ion-col>
+                            <ion-radio [value]="radio.value"></ion-radio>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+    </div>
+
+
+
     <ion-slides #slides (ionSlideNextStart)="toSlides(1)" (ionSlidePrevStart)="toSlides(0)">
         <ion-slide *ngFor="let type of [1,2]">
-            <ng-container *ngIf="rankings != undefined && rankings.length > 0 && !isLoading; else emptyView;">
-                <ion-list lines="none">
+            <ng-container class="bg-transparent" *ngIf="rankings != undefined && rankings.length > 0 && !isLoading; else emptyView;">
+                <ion-list class="bg-transparent"  lines="none" color="none">
+
+                    <ion-card>
+                          <ion-row>
+                            <ion-col size="6">
+                              <img src="assets/imgs/ranking1.jpg" style="width: 100%; height: auto;">
+                            </ion-col>
+                            <ion-col size="6">
+                              <ion-card-header>
+                                <ion-card-title class="myPosition">{{userPosition}}</ion-card-title>
+                              </ion-card-header>
+                              <ion-card-content class="myPositionLbl">
+                               Mi Posición
+                              </ion-card-content>
+                            </ion-col>
+                          </ion-row>
+                      </ion-card>
+
                     <ion-grid>
                         <ion-row *ngFor="let r of rankings" class="rowDataIncentives">
                             <ion-col size="1.5" class="containerImg">
                                 <ion-row class="coronaRow">
-                                    <ion-img class="coronaFirst" *ngIf="r.position == 1" src="assets/imgs/corona1.png"></ion-img>
+                                    <ion-img class="coronaFirst" *ngIf="r.position == 1"
+                                        src="assets/imgs/corona1.png"></ion-img>
                                 </ion-row>
                                 <div class="imgHolder">
                                     <ion-img src="assets/imgs/circle.png"></ion-img>
@@ -71,15 +101,7 @@
                         </ion-row>
                     </ion-grid>
                     <hr>
-                    <ion-card *ngIf="userPosition !== undefined" class="positionCard">
-                        <ion-col size="3">
-                            <ion-img class="copaRnk" src="assets/imgs/Copa.png "></ion-img>
-                        </ion-col>
-                        <ion-col size="9 ">
-                            <ion-note class="myPositionLbl">MI POSICIÓN: </ion-note>
-                            <ion-note class="myPosition">{{userPosition}}</ion-note>
-                        </ion-col>
-                    </ion-card>
+
                 </ion-list>
             </ng-container>
             <ng-template #emptyView>
@@ -93,6 +115,3 @@
         <ion-icon class="upDownScroll" [name]="utils.typeScroll" size="large" (click)="onScrolling()"></ion-icon>
     </ion-fab>
 </ion-content>
-<ion-button expand="block" (click)="goBack()">
-    <ion-icon name="home" slot="start" class="home"></ion-icon>VOLVER
-</ion-button>

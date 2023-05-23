@@ -1,7 +1,7 @@
-import { IMG_FIELD } from './../../app.constants';
+import { IMG_FIELD, USERNAME } from './../../app.constants';
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/quotes */
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NotificationsService } from '../../services/notifications.service';
 import { PageService } from '../../services/page.service';
 import { MyDataComponent } from '../../components/my-data/my-data.component';
@@ -13,7 +13,7 @@ import {
   MAX_TIME_LOADING, QUERY_COUNT_ACCESS, ANDROID_TYPE, DATA_LABELS, MIN_VERSION_APP
 } from '../../app.constants';
 import { Platform, ViewWillEnter, IonSlides, ViewDidEnter } from '@ionic/angular';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Employee } from '../../models/employee';
 import { MyIncentivesComponent } from '../../components/my-incentives/my-incentives.component';
 import { ListOfServicesComponent } from '../../components/list-of-services/list-of-services.component';
@@ -25,26 +25,41 @@ import { ConnectionService } from '../../services/connection.service';
 import { DatacheckService } from '../../services/datacheck.service';
 import { LeagueComponent } from '../../components/league/league.component';
 import { CategoryService } from 'src/app/models/category_service';
+import { FAQ, LOGO_PATH } from '../../app.constants';
 
+import { Section } from '../../models/section';
+import { SwiperComponent } from 'swiper/angular';
+import { SwiperOptions } from 'swiper';
+import SwiperCore, {Pagination, EffectCube, EffectCoverflow, EffectFlip} from 'swiper/core';
+
+
+SwiperCore.use([Pagination, EffectCube]);
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss']
+  styleUrls: ['./dashboard.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDestroy {
+export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDestroy, AfterContentChecked {
   @ViewChild('slideNotice') slideNoti: IonSlides;
+  @ViewChild('swiper') swiper: SwiperComponent;
+
+  config: SwiperOptions={
+    slidesPerView: 1,
+    spaceBetween: 50,
+    pagination: true, 
+    effect: 'cube'
+
+  };
+
   // Empleado actual
   user: Employee;
+  logo = LOGO_PATH;
 
   // Content label show
   dataLabel = DATA_LABELS;
-  sections = [
-    { title: 'LISTA DE SERVICIOS', icon: 'newspaper' },
-    { title: 'MI PLAN DE INCENTIVOS', icon: 'trending-up' },
-    { title: 'REGISTRO DE VENTA', icon: 'logo-euro' },
-    { title: 'RANKINGS', icon: 'podium' },
-    { title: 'LIGA DE CENTROS', icon: 'medal' }
-  ];
+  sections: Observable<Section[]>;
+
 
   // Base notices/promotions
   noticesPromotions = [{ id: 0, title: SEND_SUGGESTIONS, icon: 'mail', active: true }];
@@ -68,6 +83,9 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
   centers: any;
   servicesSubcription: Subscription;
 
+  username: string;
+  token: string;
+
   constructor(
     private platform: Platform,
     private notification: NotificationsService,
@@ -77,6 +95,14 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
     private utils: UtilsService,
     private connection: ConnectionService,
     private checkSvc: DatacheckService) {
+    if (this.employeeSvc.employee == undefined) {
+      this.employeeSvc.get(USERNAME).then(async (nick) => {
+        this.username = nick;
+      });
+    } else {
+      this.username = this.employeeSvc.employee.username;
+    }
+
     this.backButton = this.platform.backButton.subscribeWithPriority(9999, () => {
       this.notification.modalCrtl.getTop().then(res => {
         // Gestion btn atras formulario de venta
@@ -103,10 +129,31 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
     });
   }
 
+  ngAfterContentChecked() {
+    if(this.swiper){
+      this.swiper.updateSwiper({});
+    }
+    
+  }
+
   async ngOnInit() {
     // Recogida de datos del usuario
     this.user = this.employeeSvc.employee;
-    
+    this.sections= this.checkSvc.getSections();
+
+    if (this.user !== undefined) {
+      this.username = this.employeeSvc.employee.username;
+      this.token = this.employeeSvc.actualToken;
+      this.getEmployeeInfo(this.username, this.token);
+    } else {
+      this.employeeSvc.get(USERNAME).then(async (nick) => {
+        this.username = nick;
+        this.token = this.employeeSvc.getToken();
+        this.getEmployeeInfo(this.username, this.token);
+      });
+
+    }
+
     if (this.utils.version !== undefined && this.utils.version !== MIN_VERSION_APP) {
       this.version = this.utils.version;
     } else {
@@ -117,21 +164,6 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
       });
       this.notification.loadingData(LOADING_CONTENT);
     }
-
-    // Comprobacion centro empleado y auxiliares
-    await this.checkSvc.getEmployeeCenter(this.employeeSvc.employee.username, this.employeeSvc.actualToken)
-      .then((result) => {
-        this.auxSub = result.subscribe((data: any) => {
-          this.employeeSvc.employee.centreAux = data.data.user.centres;
-          this.employeeSvc.createCenter(data.data.user).then((objCentre) => {
-            this.employeeSvc.center = objCentre;
-          });
-          this.notification.cancelLoad();
-          this.utils.cancelControlNotifications();
-          this.auxSub.unsubscribe();
-        });
-      });
-
     this.slideOpts.speed = SLIDES_PROMOTIONS_TIME;
   }
 
@@ -139,13 +171,18 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
     if (this.centersUtls.centers === undefined) {
       await this.centersUtls.localCenters();
     }
+    console.log(this.token);
+    if (this.token == undefined) {
+      this.token = this.employeeSvc.getToken();
+    }
+    // console.log(this.employeeSvc.actualToken);
 
     // Se recogen las promociones actuales
-    this.promoSubcription = (await this.checkSvc.getPromotionsForApp(this.employeeSvc.actualToken))
+    this.promoSubcription = (await this.checkSvc.getPromotionsForApp(this.token))
       .subscribe((promos: any) => {
         for (let x = 0; x < promos.data.length; x++) {
           if (promos.data[x] !== undefined) {
-            if (x < promos.data.length-1) {
+            if (x < promos.data.length - 1) {
               this.noticesPromotions.push(promos.data[x]);
             } else {
               this.promoServices = promos.data[x];
@@ -156,21 +193,22 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
         }
         this.slideNoti?.startAutoplay();
       });
+
   }
 
   async ionViewDidEnter() {
     this.utils.controlToNotifications(MAX_TIME_LOADING);
     if (this.centersUtls.centers === undefined) {
       this.notification.loadingData(LOADING_CONTENT);
+      await this.centersUtls.localCenters();
       setTimeout(() => {
         this.notification.cancelLoad();
       }, 2000);
     }
     if (this.platform.is(ANDROID_TYPE)) {
       // Comprobación actualizacion app
-      await this.utils.checkingUpdate(this.employeeSvc.actualToken);
+      await this.utils.checkingUpdate(this.token);
     }
-
     // Check lista de cambios, ¿version actualizada?
     this.employeeSvc.get(VERSION_APP).then(ver => {
       if (ver !== this.utils.version) {
@@ -182,9 +220,9 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
                 this.notification.alertChangeList(CHANGE_LIST, partes[0], partes[1]);
                 // Se establece la nueva version en dispositivo y se graba la nueva en version en bd
                 this.employeeSvc.set(VERSION_APP, this.utils.version);
-                this.checkSvc.refreshUpdateVersion(this.employeeSvc.employee.username, VERSION_APP);
+                this.checkSvc.refreshUpdateVersion(this.username, VERSION_APP);
                 // Por ultimo se reestablece el contador de obligacion para actualizacion de la aplicacion
-                this.checkSvc.resetUpdateCount(this.employeeSvc.employee.username);
+                this.checkSvc.resetUpdateCount(this.username);
               }
             });
           }).catch(ex => {
@@ -194,6 +232,30 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
           });
       }
     });
+  }
+
+
+  /**
+   * Se obtienen los datos del empleado
+   * @param username 
+   * @param token 
+   */
+  async getEmployeeInfo(username: string, token: string) {
+    await this.checkSvc.getEmployeeInfo(username, token)
+      .then((result) => {
+        this.auxSub = result.subscribe((data: any) => {
+          console.log(data);
+          // this.employeeSvc.employee.centreAux = data.data.user.centres;
+          this.employeeSvc.createCenter(data.data.user).then((objCentre) => {
+            // console.log(objCentre);
+            this.employeeSvc.center = objCentre;
+          });
+          this.notification.cancelLoad();
+          this.utils.cancelControlNotifications();
+          this.auxSub.unsubscribe();
+        });
+      });
+
   }
 
   /**
@@ -234,6 +296,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
    * @param option Opción seleccionada
    */
   async goAction(option: number) {
+    console.log(this.username);
     if (this.auxSub !== undefined) {
       this.auxSub.unsubscribe();
     }
@@ -290,4 +353,9 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
       this.connection.disconnectSubscription.unsubscribe();
     }
   }
+
+  swiperSlideChanged(e){
+    console.log('changed: ', e);
+  }
+
 }

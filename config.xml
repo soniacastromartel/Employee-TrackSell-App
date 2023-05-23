@@ -2,7 +2,7 @@
 <widget id="com.icot.pdi" version="0.1.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ICOT PDI</name>
     <description>App interna para la gestion del plan de incentivos</description>
-    <author email="desarrollo2@grupoicot.es" href="http://www.grupoicot.es/">Informatic ICOT</author>
+    <author email="desarrollo@grupoicot.es" href="http://www.grupoicot.es/">Informatic ICOT</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

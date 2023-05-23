@@ -1,0 +1,14 @@
+ion-button {
+    --background: var(--ion-color-icot);
+    --background-hover: var(--ion-color-icot);
+    --background-activated: var(--ion-color-icot);
+    --color-hover: white;
+    --color: white;
+    margin: 16px;
+    font-weight: bold;
+    font-size: small;
+}
+
+ion-icon {
+    color: white;
+}

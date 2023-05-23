@@ -1,7 +1,11 @@
 {
   "name": "icotPersonal",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "watchPatterns": [
+    "www"
+  ]
 }

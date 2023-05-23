@@ -1,4 +1,6 @@
-<ion-header class="ion-no-border">
+<app-header title="PREGUNTAS FRECUENTES"></app-header>
+
+<!-- <ion-header class="ion-no-border">
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-button (click)="backFAQ()">
@@ -13,14 +15,19 @@
         <ion-searchbar #search debounce="800" placeholder='Su búsqueda aquí' (ionChange)="userSearching()"
             (ionCancel)="cancelSearch()" (ionClear)="cancelSearch()"></ion-searchbar>
     </div>
-</ion-header>
+</ion-header> -->
 
 <ion-content #content>
+    <div class="searchContainer">
+        <ion-searchbar #search debounce="800" placeholder='Su búsqueda aquí' (ionChange)="userSearching()"
+            (ionCancel)="cancelSearch()" (ionClear)="cancelSearch()"></ion-searchbar>
+    </div>
+
     <ng-container *ngIf="optionsFAQ !== undefined; else emptyFaq">
         <div class="containerFAQ">
 
-            <ion-list *ngFor="let question of optionsShow;let i=index">
-                <ion-item class="sectionFAQ" lines="none" *ngIf="!optionsShow[i]?.hidden">
+            <ion-list class="bg-transparent" *ngFor="let question of optionsShow;let i=index">
+                <ion-item lines="none" color="none" class="sectionFAQ" lines="none" *ngIf="!optionsShow[i]?.hidden">
                     <ion-segment-button id="questionFAQ" (click)="openOptFAQ(i)">
                         <ion-icon class="icFaq" name="{{optionsShow[i]?.ic}}"></ion-icon>
                         <ion-note class="baseOpt">{{optionsShow[i]?.categoria}}</ion-note>
@@ -45,13 +52,14 @@
             <ion-label class="emptyDataLbl">{{noData}}</ion-label>
         </div>
     </ng-template>
+
+    <div class="containerVersion">
+        <ion-segment-button (click)="reUpdatingApp()" *ngIf="isShowPendingUpdate">
+            <ion-icon name="warning" class="icUpdate" size="large"></ion-icon><br>ACTUALIZACIÓN PENDIENTE
+        </ion-segment-button>
+        <hr class="separator">
+        <ion-img class="logoVersion" src="assets/imgs/logo.png"></ion-img>
+        <ion-label class="versionApp">VERSIÓN {{version}}</ion-label>
+    </div>
 </ion-content>
 
-<div class="containerVersion">
-    <ion-segment-button (click)="reUpdatingApp()" *ngIf="isShowPendingUpdate">
-        <ion-icon name="warning" class="icUpdate" size="large"></ion-icon><br>ACTUALIZACIÓN PENDIENTE
-    </ion-segment-button>
-    <hr class="separator">
-    <ion-img class="logoVersion" src="assets/imgs/logo.png"></ion-img>
-    <ion-label class="versionApp">VERSIÓN {{version}}</ion-label>
-</div>

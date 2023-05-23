@@ -1,0 +1,754 @@
+> ng run app:serve --host=localhost --port=8100 --verbose
+[ng] 2023-02-07T15:58:29.690Z ng:analytics getGlobalAnalytics
+[ng] 2023-02-07T15:58:29.694Z ng:analytics Client Analytics config found: "4a61bc3b-7565-4a7e-813b-41b62ff9bbb5"
+[ng] 2023-02-07T15:58:29.694Z ng:analytics client id: "4a61bc3b-7565-4a7e-813b-41b62ff9bbb5"
+[ng] 2023-02-07T15:58:29.698Z ng:analytics getWorkspaceAnalytics
+[ng] 2023-02-07T15:58:29.698Z ng:analytics Workspace Analytics config found: false
+[ng] 2023-02-07T15:58:29.698Z ng:analytics Analytics disabled. Ignoring all analytics.
+[ng] 2023-02-07T15:58:29.698Z ng:analytics getSharedAnalytics
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "x-powered-by" to true
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "etag" to 'weak'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "etag fn" to [Function: generateETag]
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "env" to 'development'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "query parser" to 'extended'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "query parser fn" to [Function: parseExtendedQueryString]
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "subdomain offset" to 2
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "trust proxy" to false
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "trust proxy fn" to [Function: trustNone]
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application booting in development mode
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "view" to [Function: View]
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "views" to '/mnt/c/Users/casso01/development/appicotpersonal/views'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:application set "jsonp callback name" to 'callback'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router use '/' query
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router use '/' expressInit
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route new '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route acl '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route bind '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route checkout '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route connect '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route copy '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route delete '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route get '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route head '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route link '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route lock '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route m-search '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route merge '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route mkactivity '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route mkcalendar '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route mkcol '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route move '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route notify '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route options '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route patch '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route post '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route pri '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route propfind '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route proppatch '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route purge '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route put '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route rebind '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route report '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route search '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route source '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route subscribe '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route trace '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route unbind '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route unlink '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route unlock '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:route unsubscribe '*'
+[ng] Tue, 07 Feb 2023 15:59:14 GMT express:router:layer new '/'
+[ng] - Generating browser application bundles...
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route new '/__webpack_dev_server__/live.bundle.js'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/__webpack_dev_server__/live.bundle.js'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route get '/__webpack_dev_server__/live.bundle.js'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route new '/__webpack_dev_server__/sockjs.bundle.js'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/__webpack_dev_server__/sockjs.bundle.js'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route get '/__webpack_dev_server__/sockjs.bundle.js'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route new '/webpack-dev-server.js'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/webpack-dev-server.js'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route get '/webpack-dev-server.js'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route new '/webpack-dev-server/invalidate'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/webpack-dev-server/invalidate'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route get '/webpack-dev-server/invalidate'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route new '/webpack-dev-server/*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/webpack-dev-server/*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route get '/webpack-dev-server/*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route new '/webpack-dev-server'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/webpack-dev-server'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route get '/webpack-dev-server'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route new '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route acl '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route bind '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route checkout '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route connect '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route copy '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route delete '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route get '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route head '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route link '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route lock '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route m-search '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route merge '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route mkactivity '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route mkcalendar '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route mkcol '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route move '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route notify '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route options '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route patch '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route post '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route pri '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route propfind '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route proppatch '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route purge '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route put '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route rebind '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route report '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route search '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route source '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route subscribe '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route trace '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route unbind '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route unlink '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route unlock '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route unsubscribe '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router use '/' middleware
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router use '/' <anonymous>
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router use '/' middleware
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route new '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:route get '*'
+[ng] Tue, 07 Feb 2023 15:59:19 GMT express:router:layer new '/'
+[ng] 2023-02-07T15:59:27.452Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/index.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:27.452Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:28.979Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/src/main.ts" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:28.980Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/src/polyfills.ts" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:28.985Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/socket.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:28.993Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/overlay.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.004Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/utils/reloadApp.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.010Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/utils/log.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.014Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/utils/sendMessage.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.026Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/utils/createSocketUrl.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.068Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/clients/SockJSClient.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.086Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/utils/getCurrentScriptSource.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.091Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack/hot/log.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.131Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack/hot/emitter.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.138Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/clients/BaseClient.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.143Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/strip-ansi/index.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.159Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/ansi-html-community/index.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.173Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/html-entities/lib/index.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.374Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/url/url.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.392Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/loglevel/lib/loglevel.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.475Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/html-entities/lib/html5-entities.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.501Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/html-entities/lib/html4-entities.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.508Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/html-entities/lib/xml-entities.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.523Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/url/util.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.545Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/sockjs-client/dist/sockjs.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.653Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/events/events.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.662Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/html-entities/lib/surrogate-pairs.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.852Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/ansi-regex/index.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:29.890Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/url/node_modules/punycode/punycode.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:30.054Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/querystring/index.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:30.081Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack/buildin/module.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:30.221Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/querystring/decode.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:30.225Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/querystring/encode.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:30.399Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/css-loader/dist/runtime/cssWithMappingToString.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:30.405Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/css-loader/dist/runtime/api.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:31.067Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/css-loader/dist/runtime/cssWithMappingToString.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] 2023-02-07T15:59:31.067Z babel:config:config-chain No config is applied to "/mnt/c/Users/casso01/development/appicotpersonal/node_modules/css-loader/dist/runtime/api.js" because it matches one of `ignore: [null]` from "/mnt/c/Users/casso01/development/appicotpersonal"
+[ng] ✔ Browser application bundle generation complete.
+[ng] Hash: df694cb925a3234dd4d2
+[ng] Version: webpack 4.44.2
+[ng] Time: 16279ms
+[ng] Built at: 02/07/2023 3:59:31 PM
+[ng]  10 assets
+[ng] chunk {main} main.js, main.js.map (main) 210 bytes ={runtime}= ={vendor}= [initial] [rendered]
+[ng]  [0] multi (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node ./src/main.ts 40 bytes {main} [built]
+[ng]      multi entry 
+[ng]  [i3Xp] (webpack)/hot sync nonrecursive ^\.\/log$ 170 bytes {main} [built]
+[ng]      require.context webpack/hot [QM51] (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node 76:17-67
+[ng]  [zUnb] ./src/main.ts 0 bytes {main} [built]
+[ng]      single entry /mnt/c/Users/casso01/development/appicotpersonal/src/main.ts [0] multi (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node ./src/main.ts main[1]
+[ng] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 74.5 KiB ={runtime}= [initial] [rendered]
+[ng]  [1] multi ./src/polyfills.ts ./node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js 40 bytes {polyfills} [built]
+[ng]      multi entry 
+[ng]  [++zV] ./node_modules/core-js/modules/esnext.reflect.define-metadata.js 670 bytes {polyfills} [built]
+[ng]      cjs require ../modules/esnext.reflect.define-metadata [6PKz] ./node_modules/core-js/proposals/reflect-metadata.js 1:0-52
+[ng]  [/GqU] ./node_modules/core-js/internals/to-indexed-object.js 285 bytes {polyfills} [built]
+[ng]      cjs require ../internals/to-indexed-object [Bs8V] ./node_modules/core-js/internals/object-get-own-property-descriptor.js 4:22-63
+[ng]      cjs require ../internals/to-indexed-object [TWQb] ./node_modules/core-js/internals/array-includes.js 1:22-63
+[ng]      cjs require ../internals/to-indexed-object [yoRg] ./node_modules/core-js/internals/object-keys-internal.js 2:22-63
+[ng]  [/b8u] ./node_modules/core-js/internals/use-symbol-as-uid.js 228 bytes {polyfills} [built]
+[ng]      cjs require ../internals/use-symbol-as-uid [tiKp] ./node_modules/core-js/internals/well-known-symbol.js 6:24-65
+[ng]  [0BK2] ./node_modules/core-js/internals/hidden-keys.js 21 bytes {polyfills} [built]
+[ng]      cjs require ../internals/hidden-keys [8YOa] ./node_modules/core-js/internals/internal-metadata.js 1:17-52
+[ng]      cjs require ../internals/hidden-keys [afO8] ./node_modules/core-js/internals/internal-state.js 8:17-52
+[ng]      cjs require ../internals/hidden-keys [fHMY] ./node_modules/core-js/internals/object-create.js 4:17-52
+[ng]      cjs require ../internals/hidden-keys [yoRg] ./node_modules/core-js/internals/object-keys-internal.js 4:17-52
+[ng]  [0Dky] ./node_modules/core-js/internals/fails.js 108 bytes {polyfills} [built]
+[ng]      cjs require ../internals/fails [4Xet] ./node_modules/core-js/internals/correct-prototype-getter.js 1:12-41
+[ng]      cjs require ../internals/fails [DPsx] ./node_modules/core-js/internals/ie8-dom-define.js 2:12-41
+[ng]      cjs require ../internals/fails [RK3t] ./node_modules/core-js/internals/indexed-object.js 1:12-41
+[ng]      cjs require ../internals/fails [STAE] ./node_modules/core-js/internals/native-symbol.js 1:12-41
+[ng]      cjs require ../internals/fails [bWFh] ./node_modules/core-js/internals/collection.js 10:12-41
+[ng]      cjs require ../internals/fails [g6v/] ./node_modules/core-js/internals/descriptors.js 1:12-41
+[ng]      cjs require ../internals/fails [lMq5] ./node_modules/core-js/internals/is-forced.js 1:12-41
+[ng]      cjs require ../internals/fails [rpNk] ./node_modules/core-js/internals/iterators-core.js 2:12-41
+[ng]      cjs require ../internals/fails [uy83] ./node_modules/core-js/internals/freezing.js 1:12-41
+[ng]  [0GbY] ./node_modules/core-js/internals/get-built-in.js 434 bytes {polyfills} [built]
+[ng]      cjs require ../internals/get-built-in [G+Rx] ./node_modules/core-js/internals/html.js 1:17-53
+[ng]      cjs require ../internals/get-built-in [JiZb] ./node_modules/core-js/internals/set-species.js 2:17-53
+[ng]      cjs require ../internals/get-built-in [Vu81] ./node_modules/core-js/internals/own-keys.js 1:17-53
+[ng]  [0eef] ./node_modules/core-js/internals/object-property-is-enumerable.js 583 bytes {polyfills} [built]
+[ng]      cjs require ../internals/object-property-is-enumerable [Bs8V] ./node_modules/core-js/internals/object-get-own-property-descriptor.js 2:33-86
+[ng]  [0rvr] ./node_modules/core-js/internals/object-set-prototype-of.js 852 bytes {polyfills} [built]
+[ng]      cjs require ../internals/object-set-prototype-of [cVYH] ./node_modules/core-js/internals/inherit-if-required.js 2:21-68
+[ng]      cjs require ../internals/object-set-prototype-of [fdAy] ./node_modules/core-js/internals/define-iterator.js 5:21-68
+[ng]  [1E5z] ./node_modules/core-js/internals/set-to-string-tag.js 425 bytes {polyfills} [built]
+[ng]      cjs require ../internals/set-to-string-tag [bWFh] ./node_modules/core-js/internals/collection.js 12:21-62
+[ng]      cjs require ../internals/set-to-string-tag [fdAy] ./node_modules/core-js/internals/define-iterator.js 6:21-62
+[ng]      cjs require ../internals/set-to-string-tag [ntOU] ./node_modules/core-js/internals/create-iterator-constructor.js 5:21-62
+[ng]  [2oRo] ./node_modules/core-js/internals/global.js 501 bytes {polyfills} [built]
+[ng]      cjs require ../internals/global [0GbY] ./node_modules/core-js/internals/get-built-in.js 2:13-43
+[ng]      cjs require ../internals/global [ENF9] ./node_modules/core-js/modules/es.weak-map.js 2:13-43
+[ng]      cjs require ../internals/global [I+eb] ./node_modules/core-js/internals/export.js 1:13-43
+[ng]      cjs require ../internals/global [Qo9l] ./node_modules/core-js/internals/path.js 1:13-43
+[ng]      cjs require ../internals/global [afO8] ./node_modules/core-js/internals/internal-state.js 2:13-43
+[ng]      cjs require ../internals/global [bWFh] ./node_modules/core-js/internals/collection.js 3:13-43
+[ng]      cjs require ../internals/global [busE] ./node_modules/core-js/internals/redefine.js 1:13-43
+[ng]      cjs require ../internals/global [f5p1] ./node_modules/core-js/internals/native-weak-map.js 1:13-43
+[ng]      cjs require ../internals/global [tiKp] ./node_modules/core-js/internals/well-known-symbol.js 1:13-43
+[ng]      cjs require ../internals/global [xs3f] ./node_modules/core-js/internals/shared-store.js 1:13-43
+[ng]      cjs require ../internals/global [zBJ4] ./node_modules/core-js/internals/document-create-element.js 1:13-43
+[ng]      cjs require ../internals/global [zk60] ./node_modules/core-js/internals/set-global.js 1:13-43
+[ng]  [33Wh] ./node_modules/core-js/internals/object-keys.js 296 bytes {polyfills} [built]
+[ng]      cjs require ../internals/object-keys [N+g0] ./node_modules/core-js/internals/object-define-properties.js 4:17-52
+[ng]  [4WOD] ./node_modules/core-js/internals/object-get-prototype-of.js 706 bytes {polyfills} [built]
+[ng]      cjs require ../internals/object-get-prototype-of [ZsH6] ./node_modules/core-js/modules/esnext.reflect.get-metadata.js 4:21-68
+[ng]      cjs require ../internals/object-get-prototype-of [bdeN] ./node_modules/core-js/modules/esnext.reflect.has-metadata.js 4:21-68
+[ng]      cjs require ../internals/object-get-prototype-of [fdAy] ./node_modules/core-js/internals/define-iterator.js 4:21-68
+[ng]      cjs require ../internals/object-get-prototype-of [rpNk] ./node_modules/core-js/internals/iterators-core.js 3:21-68
+[ng]      cjs require ../internals/object-get-prototype-of [vZi8] ./node_modules/core-js/modules/esnext.reflect.get-metadata-keys.js 6:21-68
+[ng]  [4Xet] ./node_modules/core-js/internals/correct-prototype-getter.js 208 bytes {polyfills} [built]
+[ng]      cjs require ../internals/correct-prototype-getter [4WOD] ./node_modules/core-js/internals/object-get-prototype-of.js 4:31-79
+[ng]  [4syw] ./node_modules/core-js/internals/redefine-all.js 186 bytes {polyfills} [built]
+[ng]      cjs require ../internals/redefine-all [ENF9] ./node_modules/core-js/modules/es.weak-map.js 3:18-54
+[ng]      cjs require ../internals/redefine-all [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 4:18-54
+[ng]      cjs require ../internals/redefine-all [rKzb] ./node_modules/core-js/internals/collection-weak.js 2:18-54
+[ng]  [5r1n] ./node_modules/core-js/modules/esnext.reflect.get-own-metadata.js 641 bytes {polyfills} [built]
+[ng]      cjs require ../modules/esnext.reflect.get-own-metadata [6PKz] ./node_modules/core-js/proposals/reflect-metadata.js 5:0-53
+[ng]  [6JNq] ./node_modules/core-js/internals/copy-constructor-properties.js 616 bytes {polyfills} [built]
+[ng]      cjs require ../internals/copy-constructor-properties [I+eb] ./node_modules/core-js/internals/export.js 6:32-83
+[ng]  [6LWA] ./node_modules/core-js/internals/is-array.js 219 bytes {polyfills} [built]
+[ng]      cjs require ../internals/is-array [ZfDv] ./node_modules/core-js/internals/array-species-create.js 2:14-46
+[ng]  [6PKz] ./node_modules/core-js/proposals/reflect-metadata.js 483 bytes {polyfills} [built]
+[ng]      harmony side effect evaluation core-js/proposals/reflect-metadata [rZy+] ./node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js 8:0-44
+[ng]  [6VoE] ./node_modules/core-js/internals/is-array-iterator-method.js 361 bytes {polyfills} [built]
+[ng]      cjs require ../internals/is-array-iterator-method [ImZN] ./node_modules/core-js/internals/iterate.js 2:28-76
+[ng]  [8YOa] ./node_modules/core-js/internals/internal-metadata.js 1.72 KiB {polyfills} [built]
+[ng]      cjs require ../internals/internal-metadata [ENF9] ./node_modules/core-js/modules/es.weak-map.js 4:29-70
+[ng]      cjs require ../internals/internal-metadata [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 11:14-55
+[ng]      cjs require ../internals/internal-metadata [bWFh] ./node_modules/core-js/internals/collection.js 6:29-70
+[ng]      cjs require ../internals/internal-metadata [rKzb] ./node_modules/core-js/internals/collection-weak.js 3:18-59
+[ng]  [93I0] ./node_modules/core-js/internals/shared-key.js 196 bytes {polyfills} [built]
+[ng]      cjs require ../internals/shared-key [4WOD] ./node_modules/core-js/internals/object-get-prototype-of.js 3:16-50
+[ng]      cjs require ../internals/shared-key [afO8] ./node_modules/core-js/internals/internal-state.js 7:16-50
+[ng]      cjs require ../internals/shared-key [fHMY] ./node_modules/core-js/internals/object-create.js 7:16-50
+[ng]  [9d/t] ./node_modules/core-js/internals/classof.js 1010 bytes {polyfills} [built]
+[ng]      cjs require ../internals/classof [NaFW] ./node_modules/core-js/internals/get-iterator-method.js 1:14-45
+[ng]  [A2ZE] ./node_modules/core-js/internals/function-bind-context.js 599 bytes {polyfills} [built]
+[ng]      cjs require ../internals/function-bind-context [ImZN] ./node_modules/core-js/internals/iterate.js 4:11-56
+[ng]      cjs require ../internals/function-bind-context [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 5:11-56
+[ng]      cjs require ../internals/function-bind-context [tycR] ./node_modules/core-js/internals/array-iteration.js 1:11-56
+[ng]  [AO7/] ./node_modules/core-js/internals/to-string-tag-support.js 210 bytes {polyfills} [built]
+[ng]      cjs require ../internals/to-string-tag-support [9d/t] ./node_modules/core-js/internals/classof.js 1:28-73
+[ng]  [AwgR] ./node_modules/core-js/modules/esnext.reflect.has-own-metadata.js 641 bytes {polyfills} [built]
+[ng]      cjs require ../modules/esnext.reflect.has-own-metadata [6PKz] ./node_modules/core-js/proposals/reflect-metadata.js 8:0-53
+[ng]  [Bs8V] ./node_modules/core-js/internals/object-get-own-property-descriptor.js 994 bytes {polyfills} [built]
+[ng]      cjs require ../internals/object-get-own-property-descriptor [6JNq] ./node_modules/core-js/internals/copy-constructor-properties.js 3:37-95
+[ng]      cjs require ../internals/object-get-own-property-descriptor [I+eb] ./node_modules/core-js/internals/export.js 2:31-89
+[ng]  [DPsx] ./node_modules/core-js/internals/ie8-dom-define.js 378 bytes {polyfills} [built]
+[ng]      cjs require ../internals/ie8-dom-define [Bs8V] ./node_modules/core-js/internals/object-get-own-property-descriptor.js 7:21-59
+[ng]      cjs require ../internals/ie8-dom-define [m/L8] ./node_modules/core-js/internals/object-define-property.js 2:21-59
+[ng]  [ENF9] ./node_modules/core-js/modules/es.weak-map.js 2.74 KiB {polyfills} [built]
+[ng]      cjs require ../modules/es.weak-map [eDxR] ./node_modules/core-js/internals/reflect-metadata.js 3:14-47
+[ng]  [G+Rx] ./node_modules/core-js/internals/html.js 116 bytes {polyfills} [built]
+[ng]      cjs require ../internals/html [fHMY] ./node_modules/core-js/internals/object-create.js 5:11-39
+[ng]  [GarU] ./node_modules/core-js/internals/an-instance.js 185 bytes {polyfills} [built]
+[ng]      cjs require ../internals/an-instance [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 6:17-52
+[ng]      cjs require ../internals/an-instance [bWFh] ./node_modules/core-js/internals/collection.js 8:17-52
+[ng]      cjs require ../internals/an-instance [rKzb] ./node_modules/core-js/internals/collection-weak.js 6:17-52
+[ng]  [HAuM] ./node_modules/core-js/internals/a-function.js 140 bytes {polyfills} [built]
+[ng]      cjs require ../internals/a-function [A2ZE] ./node_modules/core-js/internals/function-bind-context.js 1:16-50
+[ng]  [HH4o] ./node_modules/core-js/internals/check-correctness-of-iteration.js 936 bytes {polyfills} [built]
+[ng]      cjs require ../internals/check-correctness-of-iteration [bWFh] ./node_modules/core-js/internals/collection.js 11:34-88
+[ng]  [HYAF] ./node_modules/core-js/internals/require-object-coercible.js 221 bytes {polyfills} [built]
+[ng]      cjs require ../internals/require-object-coercible [/GqU] ./node_modules/core-js/internals/to-indexed-object.js 3:29-77
+[ng]      cjs require ../internals/require-object-coercible [ewvW] ./node_modules/core-js/internals/to-object.js 1:29-77
+[ng]  [I+eb] ./node_modules/core-js/internals/export.js 2.46 KiB {polyfills} [built]
+[ng]      cjs require ../internals/export [++zV] ./node_modules/core-js/modules/esnext.reflect.define-metadata.js 1:8-38
+[ng]      cjs require ../internals/export [5r1n] ./node_modules/core-js/modules/esnext.reflect.get-own-metadata.js 1:8-38
+[ng]      cjs require ../internals/export [AwgR] ./node_modules/core-js/modules/esnext.reflect.has-own-metadata.js 1:8-38
+[ng]      cjs require ../internals/export [Y4C7] ./node_modules/core-js/modules/esnext.reflect.delete-metadata.js 1:8-38
+[ng]      cjs require ../internals/export [ZsH6] ./node_modules/core-js/modules/esnext.reflect.get-metadata.js 1:8-38
+[ng]      cjs require ../internals/export [bWFh] ./node_modules/core-js/internals/collection.js 2:8-38
+[ng]      cjs require ../internals/export [bdeN] ./node_modules/core-js/modules/esnext.reflect.has-metadata.js 1:8-38
+[ng]      cjs require ../internals/export [fdAy] ./node_modules/core-js/internals/define-iterator.js 2:8-38
+[ng]      cjs require ../internals/export [qgGA] ./node_modules/core-js/modules/esnext.reflect.metadata.js 1:8-38
+[ng]      cjs require ../internals/export [sQ9d] ./node_modules/core-js/modules/esnext.reflect.get-own-metadata-keys.js 1:8-38
+[ng]      cjs require ../internals/export [vZi8] ./node_modules/core-js/modules/esnext.reflect.get-metadata-keys.js 1:8-38
+[ng]  [I8vh] ./node_modules/core-js/internals/to-absolute-index.js 439 bytes {polyfills} [built]
+[ng]      cjs require ../internals/to-absolute-index [TWQb] ./node_modules/core-js/internals/array-includes.js 3:22-63
+[ng]  [ImZN] ./node_modules/core-js/internals/iterate.js 2.01 KiB {polyfills} [built]
+[ng]      cjs require ../internals/iterate [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 7:14-45
+[ng]      cjs require ../internals/iterate [bWFh] ./node_modules/core-js/internals/collection.js 7:14-45
+[ng]      cjs require ../internals/iterate [rKzb] ./node_modules/core-js/internals/collection-weak.js 7:14-45
+[ng]      cjs require ../internals/iterate [vZi8] ./node_modules/core-js/modules/esnext.reflect.get-metadata-keys.js 7:14-45
+[ng]  [JBy8] ./node_modules/core-js/internals/object-get-own-property-names.js 411 bytes {polyfills} [built]
+[ng]      cjs require ../internals/object-get-own-property-names [Vu81] ./node_modules/core-js/internals/own-keys.js 2:32-85
+[ng]  [JiZb] ./node_modules/core-js/internals/set-species.js 638 bytes {polyfills} [built]
+[ng]      cjs require ../internals/set-species [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 9:17-52
+[ng]  [KmKo] ./node_modules/core-js/internals/iterator-close.js 230 bytes {polyfills} [built]
+[ng]      cjs require ../internals/iterator-close [ImZN] ./node_modules/core-js/internals/iterate.js 6:20-58
+[ng]  [N+g0] ./node_modules/core-js/internals/object-define-properties.js 640 bytes {polyfills} [built]
+[ng]      cjs require ../internals/object-define-properties [fHMY] ./node_modules/core-js/internals/object-create.js 2:23-71
+[ng]  [NaFW] ./node_modules/core-js/internals/get-iterator-method.js 343 bytes {polyfills} [built]
+[ng]      cjs require ../internals/get-iterator-method [ImZN] ./node_modules/core-js/internals/iterate.js 5:24-67
+[ng]  [O741] ./node_modules/core-js/internals/a-possible-prototype.js 208 bytes {polyfills} [built]
+[ng]      cjs require ../internals/a-possible-prototype [0rvr] ./node_modules/core-js/internals/object-set-prototype-of.js 2:25-69
+[ng]  [P4y1] ./node_modules/core-js/internals/iterators.js 21 bytes {polyfills} [built]
+[ng]      cjs require ../internals/iterators [6VoE] ./node_modules/core-js/internals/is-array-iterator-method.js 2:16-49
+[ng]      cjs require ../internals/iterators [NaFW] ./node_modules/core-js/internals/get-iterator-method.js 2:16-49
+[ng]      cjs require ../internals/iterators [fdAy] ./node_modules/core-js/internals/define-iterator.js 11:16-49
+[ng]      cjs require ../internals/iterators [ntOU] ./node_modules/core-js/internals/create-iterator-constructor.js 6:16-49
+[ng]  [Qo9l] ./node_modules/core-js/internals/path.js 71 bytes {polyfills} [built]
+[ng]      cjs require ../internals/path [0GbY] ./node_modules/core-js/internals/get-built-in.js 1:11-39
+[ng]  [RK3t] ./node_modules/core-js/internals/indexed-object.js 503 bytes {polyfills} [built]
+[ng]      cjs require ../internals/indexed-object [/GqU] ./node_modules/core-js/internals/to-indexed-object.js 2:20-58
+[ng]      cjs require ../internals/indexed-object [tycR] ./node_modules/core-js/internals/array-iteration.js 2:20-58
+[ng]  [STAE] ./node_modules/core-js/internals/native-symbol.js 243 bytes {polyfills} [built]
+[ng]      cjs require ../internals/native-symbol [/b8u] ./node_modules/core-js/internals/use-symbol-as-uid.js 1:20-57
+[ng]      cjs require ../internals/native-symbol [tiKp] ./node_modules/core-js/internals/well-known-symbol.js 5:20-57
+[ng]  [TWQb] ./node_modules/core-js/internals/array-includes.js 1.24 KiB {polyfills} [built]
+[ng]      cjs require ../internals/array-includes [yoRg] ./node_modules/core-js/internals/object-keys-internal.js 3:14-52
+[ng]  [Tskq] ./node_modules/core-js/modules/es.map.js 367 bytes {polyfills} [built]
+[ng]      cjs require ../modules/es.map [eDxR] ./node_modules/core-js/internals/reflect-metadata.js 2:10-38
+[ng]  [UMSQ] ./node_modules/core-js/internals/to-length.js 297 bytes {polyfills} [built]
+[ng]      cjs require ../internals/to-length [ImZN] ./node_modules/core-js/internals/iterate.js 3:15-48
+[ng]      cjs require ../internals/to-length [TWQb] ./node_modules/core-js/internals/array-includes.js 2:15-48
+[ng]      cjs require ../internals/to-length [tycR] ./node_modules/core-js/internals/array-iteration.js 4:15-48
+[ng]  [UTVS] ./node_modules/core-js/internals/has.js 121 bytes {polyfills} [built]
+[ng]      cjs require ../internals/has [1E5z] ./node_modules/core-js/internals/set-to-string-tag.js 2:10-37
+[ng]      cjs require ../internals/has [4WOD] ./node_modules/core-js/internals/object-get-prototype-of.js 1:10-37
+[ng]      cjs require ../internals/has [6JNq] ./node_modules/core-js/internals/copy-constructor-properties.js 1:10-37
+[ng]      cjs require ../internals/has [8YOa] ./node_modules/core-js/internals/internal-metadata.js 3:10-37
+[ng]      cjs require ../internals/has [Bs8V] ./node_modules/core-js/internals/object-get-own-property-descriptor.js 6:10-37
+[ng]      cjs require ../internals/has [afO8] ./node_modules/core-js/internals/internal-state.js 5:16-43
+[ng]      cjs require ../internals/has [busE] ./node_modules/core-js/internals/redefine.js 3:10-37
+[ng]      cjs require ../internals/has [rKzb] ./node_modules/core-js/internals/collection-weak.js 9:11-38
+[ng]      cjs require ../internals/has [rpNk] ./node_modules/core-js/internals/iterators-core.js 5:10-37
+[ng]      cjs require ../internals/has [tiKp] ./node_modules/core-js/internals/well-known-symbol.js 3:10-37
+[ng]      cjs require ../internals/has [yoRg] ./node_modules/core-js/internals/object-keys-internal.js 1:10-37
+[ng]  [VpIT] ./node_modules/core-js/internals/shared.js 352 bytes {polyfills} [built]
+[ng]      cjs require ../internals/shared [93I0] ./node_modules/core-js/internals/shared-key.js 1:13-43
+[ng]      cjs require ../internals/shared [eDxR] ./node_modules/core-js/internals/reflect-metadata.js 4:13-43
+[ng]      cjs require ../internals/shared [tiKp] ./node_modules/core-js/internals/well-known-symbol.js 2:13-43
+[ng]  [Vu81] ./node_modules/core-js/internals/own-keys.js 616 bytes {polyfills} [built]
+[ng]      cjs require ../internals/own-keys [6JNq] ./node_modules/core-js/internals/copy-constructor-properties.js 2:14-46
+[ng]  [XGwC] ./node_modules/core-js/internals/create-property-descriptor.js 173 bytes {polyfills} [built]
+[ng]      cjs require ../internals/create-property-descriptor [Bs8V] ./node_modules/core-js/internals/object-get-own-property-descriptor.js 3:31-81
+[ng]      cjs require ../internals/create-property-descriptor [kRJp] ./node_modules/core-js/internals/create-non-enumerable-property.js 3:31-81
+[ng]      cjs require ../internals/create-property-descriptor [ntOU] ./node_modules/core-js/internals/create-iterator-constructor.js 4:31-81
+[ng]  [Y4C7] ./node_modules/core-js/modules/esnext.reflect.delete-metadata.js 963 bytes {polyfills} [built]
+[ng]      cjs require ../modules/esnext.reflect.delete-metadata [6PKz] ./node_modules/core-js/proposals/reflect-metadata.js 2:0-52
+[ng]  [YGK4] ./node_modules/core-js/modules/es.set.js 367 bytes {polyfills} [built]
+[ng]      cjs require ../modules/es.set [vZi8] ./node_modules/core-js/modules/esnext.reflect.get-metadata-keys.js 3:10-38
+[ng]  [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 6.59 KiB {polyfills} [built]
+[ng]      cjs require ../internals/collection-strong [Tskq] ./node_modules/core-js/modules/es.map.js 3:23-64
+[ng]      cjs require ../internals/collection-strong [YGK4] ./node_modules/core-js/modules/es.set.js 3:23-64
+[ng]  [ZfDv] ./node_modules/core-js/internals/array-species-create.js 714 bytes {polyfills} [built]
+[ng]      cjs require ../internals/array-species-create [tycR] ./node_modules/core-js/internals/array-iteration.js 5:25-69
+[ng]  [ZsH6] ./node_modules/core-js/modules/esnext.reflect.get-metadata.js 1.03 KiB {polyfills} [built]
+[ng]      cjs require ../modules/esnext.reflect.get-metadata [6PKz] ./node_modules/core-js/proposals/reflect-metadata.js 3:0-49
+[ng]  [afO8] ./node_modules/core-js/internals/internal-state.js 1.64 KiB {polyfills} [built]
+[ng]      cjs require ../internals/internal-state [ENF9] ./node_modules/core-js/modules/es.weak-map.js 8:26-64
+[ng]      cjs require ../internals/internal-state [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 12:26-64
+[ng]      cjs require ../internals/internal-state [busE] ./node_modules/core-js/internals/redefine.js 6:26-64
+[ng]      cjs require ../internals/internal-state [rKzb] ./node_modules/core-js/internals/collection-weak.js 10:26-64
+[ng]  [bWFh] ./node_modules/core-js/internals/collection.js 4.21 KiB {polyfills} [built]
+[ng]      cjs require ../internals/collection [ENF9] ./node_modules/core-js/modules/es.weak-map.js 5:17-51
+[ng]      cjs require ../internals/collection [Tskq] ./node_modules/core-js/modules/es.map.js 2:17-51
+[ng]      cjs require ../internals/collection [YGK4] ./node_modules/core-js/modules/es.set.js 2:17-51
+[ng]  [bdeN] ./node_modules/core-js/modules/esnext.reflect.has-metadata.js 959 bytes {polyfills} [built]
+[ng]      cjs require ../modules/esnext.reflect.has-metadata [6PKz] ./node_modules/core-js/proposals/reflect-metadata.js 7:0-49
+[ng]  [busE] ./node_modules/core-js/internals/redefine.js 1.55 KiB {polyfills} [built]
+[ng]      cjs require ../internals/redefine [4syw] ./node_modules/core-js/internals/redefine-all.js 1:15-47
+[ng]      cjs require ../internals/redefine [I+eb] ./node_modules/core-js/internals/export.js 4:15-47
+[ng]      cjs require ../internals/redefine [bWFh] ./node_modules/core-js/internals/collection.js 5:15-47
+[ng]      cjs require ../internals/redefine [fdAy] ./node_modules/core-js/internals/define-iterator.js 8:15-47
+[ng]  [cVYH] ./node_modules/core-js/internals/inherit-if-required.js 693 bytes {polyfills} [built]
+[ng]      cjs require ../internals/inherit-if-required [bWFh] ./node_modules/core-js/internals/collection.js 13:24-67
+[ng]  [dBg+] ./node_modules/core-js/internals/object-get-own-property-symbols.js 42 bytes {polyfills} [built]
+[ng]      cjs require ../internals/object-get-own-property-symbols [Vu81] ./node_modules/core-js/internals/own-keys.js 3:34-89
+[ng]  [eDl+] ./node_modules/core-js/internals/enum-bug-keys.js 178 bytes {polyfills} [built]
+[ng]      cjs require ../internals/enum-bug-keys [33Wh] ./node_modules/core-js/internals/object-keys.js 2:18-55
+[ng]      cjs require ../internals/enum-bug-keys [JBy8] ./node_modules/core-js/internals/object-get-own-property-names.js 2:18-55
+[ng]      cjs require ../internals/enum-bug-keys [fHMY] ./node_modules/core-js/internals/object-create.js 3:18-55
+[ng]  [eDxR] ./node_modules/core-js/internals/reflect-metadata.js 1.84 KiB {polyfills} [built]
+[ng]      cjs require ../internals/reflect-metadata [++zV] ./node_modules/core-js/modules/esnext.reflect.define-metadata.js 2:28-68
+[ng]      cjs require ../internals/reflect-metadata [5r1n] ./node_modules/core-js/modules/esnext.reflect.get-own-metadata.js 2:28-68
+[ng]      cjs require ../internals/reflect-metadata [AwgR] ./node_modules/core-js/modules/esnext.reflect.has-own-metadata.js 2:28-68
+[ng]      cjs require ../internals/reflect-metadata [Y4C7] ./node_modules/core-js/modules/esnext.reflect.delete-metadata.js 2:28-68
+[ng]      cjs require ../internals/reflect-metadata [ZsH6] ./node_modules/core-js/modules/esnext.reflect.get-metadata.js 2:28-68
+[ng]      cjs require ../internals/reflect-metadata [bdeN] ./node_modules/core-js/modules/esnext.reflect.has-metadata.js 2:28-68
+[ng]      cjs require ../internals/reflect-metadata [qgGA] ./node_modules/core-js/modules/esnext.reflect.metadata.js 2:28-68
+[ng]      cjs require ../internals/reflect-metadata [sQ9d] ./node_modules/core-js/modules/esnext.reflect.get-own-metadata-keys.js 2:28-68
+[ng]      cjs require ../internals/reflect-metadata [vZi8] ./node_modules/core-js/modules/esnext.reflect.get-metadata-keys.js 4:28-68
+[ng]  [ewvW] ./node_modules/core-js/internals/to-object.js 247 bytes {polyfills} [built]
+[ng]      cjs require ../internals/to-object [4WOD] ./node_modules/core-js/internals/object-get-prototype-of.js 2:15-48
+[ng]      cjs require ../internals/to-object [tycR] ./node_modules/core-js/internals/array-iteration.js 3:15-48
+[ng]  [f5p1] ./node_modules/core-js/internals/native-weak-map.js 231 bytes {polyfills} [built]
+[ng]      cjs require ../internals/native-weak-map [ENF9] ./node_modules/core-js/modules/es.weak-map.js 9:22-61
+[ng]      cjs require ../internals/native-weak-map [afO8] ./node_modules/core-js/internals/internal-state.js 1:22-61
+[ng]  [fHMY] ./node_modules/core-js/internals/object-create.js 2.81 KiB {polyfills} [built]
+[ng]      cjs require ../internals/object-create [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 3:13-50
+[ng]      cjs require ../internals/object-create [ntOU] ./node_modules/core-js/internals/create-iterator-constructor.js 3:13-50
+[ng]  [fdAy] ./node_modules/core-js/internals/define-iterator.js 3.95 KiB {polyfills} [built]
+[ng]      cjs require ../internals/define-iterator [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 8:21-60
+[ng]  [g6v/] ./node_modules/core-js/internals/descriptors.js 226 bytes {polyfills} [built]
+[ng]      cjs require ../internals/descriptors [Bs8V] ./node_modules/core-js/internals/object-get-own-property-descriptor.js 1:18-53
+[ng]      cjs require ../internals/descriptors [DPsx] ./node_modules/core-js/internals/ie8-dom-define.js 1:18-53
+[ng]      cjs require ../internals/descriptors [JiZb] ./node_modules/core-js/internals/set-species.js 5:18-53
+[ng]      cjs require ../internals/descriptors [N+g0] ./node_modules/core-js/internals/object-define-properties.js 1:18-53
+[ng]      cjs require ../internals/descriptors [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 10:18-53
+[ng]      cjs require ../internals/descriptors [kRJp] ./node_modules/core-js/internals/create-non-enumerable-property.js 1:18-53
+[ng]      cjs require ../internals/descriptors [m/L8] ./node_modules/core-js/internals/object-define-property.js 1:18-53
+[ng]  [glrk] ./node_modules/core-js/internals/an-object.js 180 bytes {polyfills} [built]
+[ng]      cjs require ../internals/an-object [++zV] ./node_modules/core-js/modules/esnext.reflect.define-metadata.js 3:15-48
+[ng]      cjs require ../internals/an-object [0rvr] ./node_modules/core-js/internals/object-set-prototype-of.js 1:15-48
+[ng]      cjs require ../internals/an-object [5r1n] ./node_modules/core-js/modules/esnext.reflect.get-own-metadata.js 3:15-48
+[ng]      cjs require ../internals/an-object [AwgR] ./node_modules/core-js/modules/esnext.reflect.has-own-metadata.js 3:15-48
+[ng]      cjs require ../internals/an-object [ImZN] ./node_modules/core-js/internals/iterate.js 1:15-48
+[ng]      cjs require ../internals/an-object [KmKo] ./node_modules/core-js/internals/iterator-close.js 1:15-48
+[ng]      cjs require ../internals/an-object [N+g0] ./node_modules/core-js/internals/object-define-properties.js 3:15-48
+[ng]      cjs require ../internals/an-object [Vu81] ./node_modules/core-js/internals/own-keys.js 4:15-48
+[ng]      cjs require ../internals/an-object [Y4C7] ./node_modules/core-js/modules/esnext.reflect.delete-metadata.js 3:15-48
+[ng]      cjs require ../internals/an-object [ZsH6] ./node_modules/core-js/modules/esnext.reflect.get-metadata.js 3:15-48
+[ng]      cjs require ../internals/an-object [bdeN] ./node_modules/core-js/modules/esnext.reflect.has-metadata.js 3:15-48
+[ng]      cjs require ../internals/an-object [fHMY] ./node_modules/core-js/internals/object-create.js 1:15-48
+[ng]      cjs require ../internals/an-object [m/L8] ./node_modules/core-js/internals/object-define-property.js 3:15-48
+[ng]      cjs require ../internals/an-object [qgGA] ./node_modules/core-js/modules/esnext.reflect.metadata.js 3:15-48
+[ng]      cjs require ../internals/an-object [rKzb] ./node_modules/core-js/internals/collection-weak.js 4:15-48
+[ng]      cjs require ../internals/an-object [sQ9d] ./node_modules/core-js/modules/esnext.reflect.get-own-metadata-keys.js 3:15-48
+[ng]      cjs require ../internals/an-object [vZi8] ./node_modules/core-js/modules/esnext.reflect.get-metadata-keys.js 5:15-48
+[ng]  [hN/g] ./src/polyfills.ts 0 bytes {polyfills} [built]
+[ng]      single entry /mnt/c/Users/casso01/development/appicotpersonal/src/polyfills.ts [1] multi ./src/polyfills.ts ./node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js polyfills[0]
+[ng]  [hh1v] ./node_modules/core-js/internals/is-object.js 110 bytes {polyfills} [built]
+[ng]      cjs require ../internals/is-object [8YOa] ./node_modules/core-js/internals/internal-metadata.js 2:15-48
+[ng]      cjs require ../internals/is-object [ENF9] ./node_modules/core-js/modules/es.weak-map.js 7:15-48
+[ng]      cjs require ../internals/is-object [O741] ./node_modules/core-js/internals/a-possible-prototype.js 1:15-48
+[ng]      cjs require ../internals/is-object [ZfDv] ./node_modules/core-js/internals/array-species-create.js 1:15-48
+[ng]      cjs require ../internals/is-object [afO8] ./node_modules/core-js/internals/internal-state.js 3:15-48
+[ng]      cjs require ../internals/is-object [bWFh] ./node_modules/core-js/internals/collection.js 9:15-48
+[ng]      cjs require ../internals/is-object [cVYH] ./node_modules/core-js/internals/inherit-if-required.js 1:15-48
+[ng]      cjs require ../internals/is-object [glrk] ./node_modules/core-js/internals/an-object.js 1:15-48
+[ng]      cjs require ../internals/is-object [rKzb] ./node_modules/core-js/internals/collection-weak.js 5:15-48
+[ng]      cjs require ../internals/is-object [wE6v] ./node_modules/core-js/internals/to-primitive.js 1:15-48
+[ng]      cjs require ../internals/is-object [zBJ4] ./node_modules/core-js/internals/document-create-element.js 2:15-48
+[ng]  [iSVu] ./node_modules/core-js/internals/inspect-source.js 338 bytes {polyfills} [built]
+[ng]      cjs require ../internals/inspect-source [busE] ./node_modules/core-js/internals/redefine.js 5:20-58
+[ng]      cjs require ../internals/inspect-source [f5p1] ./node_modules/core-js/internals/native-weak-map.js 2:20-58
+[ng]  [kOOl] ./node_modules/core-js/internals/uid.js 177 bytes {polyfills} [built]
+[ng]      cjs require ../internals/uid [8YOa] ./node_modules/core-js/internals/internal-metadata.js 5:10-37
+[ng]      cjs require ../internals/uid [93I0] ./node_modules/core-js/internals/shared-key.js 2:10-37
+[ng]      cjs require ../internals/uid [tiKp] ./node_modules/core-js/internals/well-known-symbol.js 4:10-37
+[ng]  [kRJp] ./node_modules/core-js/internals/create-non-enumerable-property.js 438 bytes {polyfills} [built]
+[ng]      cjs require ../internals/create-non-enumerable-property [I+eb] ./node_modules/core-js/internals/export.js 3:34-88
+[ng]      cjs require ../internals/create-non-enumerable-property [afO8] ./node_modules/core-js/internals/internal-state.js 4:34-88
+[ng]      cjs require ../internals/create-non-enumerable-property [busE] ./node_modules/core-js/internals/redefine.js 2:34-88
+[ng]      cjs require ../internals/create-non-enumerable-property [fdAy] ./node_modules/core-js/internals/define-iterator.js 7:34-88
+[ng]      cjs require ../internals/create-non-enumerable-property [rpNk] ./node_modules/core-js/internals/iterators-core.js 4:34-88
+[ng]      cjs require ../internals/create-non-enumerable-property [zk60] ./node_modules/core-js/internals/set-global.js 2:34-88
+[ng]  [lMq5] ./node_modules/core-js/internals/is-forced.js 573 bytes {polyfills} [built]
+[ng]      cjs require ../internals/is-forced [I+eb] ./node_modules/core-js/internals/export.js 7:15-48
+[ng]      cjs require ../internals/is-forced [bWFh] ./node_modules/core-js/internals/collection.js 4:15-48
+[ng]  [m/L8] ./node_modules/core-js/internals/object-define-property.js 798 bytes {polyfills} [built]
+[ng]      cjs require ../internals/object-define-property [1E5z] ./node_modules/core-js/internals/set-to-string-tag.js 1:21-67
+[ng]      cjs require ../internals/object-define-property [6JNq] ./node_modules/core-js/internals/copy-constructor-properties.js 4:27-73
+[ng]      cjs require ../internals/object-define-property [8YOa] ./node_modules/core-js/internals/internal-metadata.js 4:21-67
+[ng]      cjs require ../internals/object-define-property [JiZb] ./node_modules/core-js/internals/set-species.js 3:27-73
+[ng]      cjs require ../internals/object-define-property [N+g0] ./node_modules/core-js/internals/object-define-properties.js 2:27-73
+[ng]      cjs require ../internals/object-define-property [ZWaQ] ./node_modules/core-js/internals/collection-strong.js 2:21-67
+[ng]      cjs require ../internals/object-define-property [kRJp] ./node_modules/core-js/internals/create-non-enumerable-property.js 2:27-73
+[ng]  [ntOU] ./node_modules/core-js/internals/create-iterator-constructor.js 746 bytes {polyfills} [built]
+[ng]      cjs require ../internals/create-iterator-constructor [fdAy] ./node_modules/core-js/internals/define-iterator.js 3:32-83
+[ng]  [ppGB] ./node_modules/core-js/internals/to-integer.js 249 bytes {polyfills} [built]
+[ng]      cjs require ../internals/to-integer [I8vh] ./node_modules/core-js/internals/to-absolute-index.js 1:16-50
+[ng]      cjs require ../internals/to-integer [UMSQ] ./node_modules/core-js/internals/to-length.js 1:16-50
+[ng]  [qgGA] ./node_modules/core-js/modules/esnext.reflect.metadata.js 605 bytes {polyfills} [built]
+[ng]      cjs require ../modules/esnext.reflect.metadata [6PKz] ./node_modules/core-js/proposals/reflect-metadata.js 9:0-45
+[ng]  [rKzb] ./node_modules/core-js/internals/collection-weak.js 3.81 KiB {polyfills} [built]
+[ng]      cjs require ../internals/collection-weak [ENF9] ./node_modules/core-js/modules/es.weak-map.js 6:21-60
+[ng]  [rZy+] ./node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js 247 bytes {polyfills} [built]
+[ng]      single entry /mnt/c/Users/casso01/development/appicotpersonal/node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js [1] multi ./src/polyfills.ts ./node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js polyfills[1]
+[ng]  [rpNk] ./node_modules/core-js/internals/iterators-core.js 1.57 KiB {polyfills} [built]
+[ng]      cjs require ../internals/iterators-core [fdAy] ./node_modules/core-js/internals/define-iterator.js 12:20-58
+[ng]      cjs require ../internals/iterators-core [ntOU] ./node_modules/core-js/internals/create-iterator-constructor.js 2:24-62
+[ng]  [sQ9d] ./node_modules/core-js/modules/esnext.reflect.get-own-metadata-keys.js 630 bytes {polyfills} [built]
+[ng]      cjs require ../modules/esnext.reflect.get-own-metadata-keys [6PKz] ./node_modules/core-js/proposals/reflect-metadata.js 6:0-58
+[ng]  [tiKp] ./node_modules/core-js/internals/well-known-symbol.js 752 bytes {polyfills} [built]
+[ng]      cjs require ../internals/well-known-symbol [1E5z] ./node_modules/core-js/internals/set-to-string-tag.js 3:22-63
+[ng]      cjs require ../internals/well-known-symbol [6VoE] ./node_modules/core-js/internals/is-array-iterator-method.js 1:22-63
+[ng]      cjs require ../internals/well-known-symbol [9d/t] ./node_modules/core-js/internals/classof.js 3:22-63
+[ng]      cjs require ../internals/well-known-symbol [AO7/] ./node_modules/core-js/internals/to-string-tag-support.js 1:22-63
+[ng]      cjs require ../internals/well-known-symbol [HH4o] ./node_modules/core-js/internals/check-correctness-of-iteration.js 1:22-63
+[ng]      cjs require ../internals/well-known-symbol [JiZb] ./node_modules/core-js/internals/set-species.js 4:22-63
+[ng]      cjs require ../internals/well-known-symbol [NaFW] ./node_modules/core-js/internals/get-iterator-method.js 3:22-63
+[ng]      cjs require ../internals/well-known-symbol [ZfDv] ./node_modules/core-js/internals/array-species-create.js 3:22-63
+[ng]      cjs require ../internals/well-known-symbol [fdAy] ./node_modules/core-js/internals/define-iterator.js 9:22-63
+[ng]      cjs require ../internals/well-known-symbol [rpNk] ./node_modules/core-js/internals/iterators-core.js 6:22-63
+[ng]  [tycR] ./node_modules/core-js/internals/array-iteration.js 2.73 KiB {polyfills} [built]
+[ng]      cjs require ../internals/array-iteration [rKzb] ./node_modules/core-js/internals/collection-weak.js 8:27-66
+[ng]  [uy83] ./node_modules/core-js/internals/freezing.js 146 bytes {polyfills} [built]
+[ng]      cjs require ../internals/freezing [8YOa] ./node_modules/core-js/internals/internal-metadata.js 6:15-47
+[ng]  [vZi8] ./node_modules/core-js/modules/esnext.reflect.get-metadata-keys.js 1.28 KiB {polyfills} [built]
+[ng]      cjs require ../modules/esnext.reflect.get-metadata-keys [6PKz] ./node_modules/core-js/proposals/reflect-metadata.js 4:0-54
+[ng]  [wE6v] ./node_modules/core-js/internals/to-primitive.js 772 bytes {polyfills} [built]
+[ng]      cjs require ../internals/to-primitive [Bs8V] ./node_modules/core-js/internals/object-get-own-property-descriptor.js 5:18-54
+[ng]      cjs require ../internals/to-primitive [m/L8] ./node_modules/core-js/internals/object-define-property.js 4:18-54
+[ng]  [xDBR] ./node_modules/core-js/internals/is-pure.js 24 bytes {polyfills} [built]
+[ng]      cjs require ../internals/is-pure [VpIT] ./node_modules/core-js/internals/shared.js 1:14-45
+[ng]      cjs require ../internals/is-pure [fdAy] ./node_modules/core-js/internals/define-iterator.js 10:14-45
+[ng]      cjs require ../internals/is-pure [rpNk] ./node_modules/core-js/internals/iterators-core.js 7:14-45
+[ng]  [xrYK] ./node_modules/core-js/internals/classof-raw.js 106 bytes {polyfills} [built]
+[ng]      cjs require ../internals/classof-raw [6LWA] ./node_modules/core-js/internals/is-array.js 1:14-49
+[ng]      cjs require ../internals/classof-raw [9d/t] ./node_modules/core-js/internals/classof.js 2:17-52
+[ng]      cjs require ../internals/classof-raw [RK3t] ./node_modules/core-js/internals/indexed-object.js 2:14-49
+[ng]  [xs3f] ./node_modules/core-js/internals/shared-store.js 211 bytes {polyfills} [built]
+[ng]      cjs require ../internals/shared-store [VpIT] ./node_modules/core-js/internals/shared.js 2:12-48
+[ng]      cjs require ../internals/shared-store [afO8] ./node_modules/core-js/internals/internal-state.js 6:13-49
+[ng]      cjs require ../internals/shared-store [iSVu] ./node_modules/core-js/internals/inspect-source.js 1:12-48
+[ng]  [yoRg] ./node_modules/core-js/internals/object-keys-internal.js 582 bytes {polyfills} [built]
+[ng]      cjs require ../internals/object-keys-internal [33Wh] ./node_modules/core-js/internals/object-keys.js 1:25-69
+[ng]      cjs require ../internals/object-keys-internal [JBy8] ./node_modules/core-js/internals/object-get-own-property-names.js 1:25-69
+[ng]  [zBJ4] ./node_modules/core-js/internals/document-create-element.js 340 bytes {polyfills} [built]
+[ng]      cjs require ../internals/document-create-element [DPsx] ./node_modules/core-js/internals/ie8-dom-define.js 3:20-67
+[ng]      cjs require ../internals/document-create-element [fHMY] ./node_modules/core-js/internals/object-create.js 6:28-75
+[ng]  [zk60] ./node_modules/core-js/internals/set-global.js 304 bytes {polyfills} [built]
+[ng]      cjs require ../internals/set-global [I+eb] ./node_modules/core-js/internals/export.js 5:16-50
+[ng]      cjs require ../internals/set-global [busE] ./node_modules/core-js/internals/redefine.js 4:16-50
+[ng]      cjs require ../internals/set-global [xs3f] ./node_modules/core-js/internals/shared-store.js 2:16-50
+[ng] chunk {runtime} runtime.js, runtime.js.map (runtime) 0 bytes ={main}= ={polyfills}= ={styles}= ={vendor}= [entry] [rendered]
+[ng] chunk {styles} styles.css, styles.css.map (styles) 48.4 KiB ={runtime}= [initial] [rendered]
+[ng]  [2] multi ./src/theme/variables.scss ./src/global.scss 40 bytes {styles} [built]
+[ng]      multi entry 
+[ng]  [8oQk] ./src/global.scss 50 bytes {styles} [built]
+[ng]      single entry /mnt/c/Users/casso01/development/appicotpersonal/src/global.scss [2] multi ./src/theme/variables.scss ./src/global.scss styles[1]
+[ng]  [fFqt] ./src/theme/variables.scss 50 bytes {styles} [built]
+[ng]      single entry /mnt/c/Users/casso01/development/appicotpersonal/src/theme/variables.scss [2] multi ./src/theme/variables.scss ./src/global.scss styles[0]
+[ng]      + 2 hidden modules
+[ng] chunk {vendor} vendor.js, vendor.js.map (vendor) 299 KiB ={main}= ={runtime}= [initial] [rendered] split chunk (cache group: defaultVendors) (name: vendor)
+[ng]  [+gfj] (webpack)-dev-server/client/overlay.js 3.52 KiB {vendor} [built]
+[ng]      cjs require ./overlay [QM51] (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node 10:14-34
+[ng]  [+qE3] ./node_modules/events/events.js 14.5 KiB {vendor} [built]
+[ng]      cjs require events [k+Kj] (webpack)/hot/emitter.js 1:19-36
+[ng]  [3waI] ./node_modules/ansi-html-community/index.js 4.16 KiB {vendor} [built]
+[ng]      cjs require ansi-html-community [+gfj] (webpack)-dev-server/client/overlay.js 4:15-45
+[ng]  [6MUB] ./node_modules/querystring/encode.js 2.04 KiB {vendor} [built]
+[ng]      cjs require ./encode [r8II] ./node_modules/querystring/index.js 4:37-56
+[ng]  [A4US] (webpack)-dev-server/client/utils/log.js 964 bytes {vendor} [built]
+[ng]      cjs require ./log [FWmP] (webpack)-dev-server/client/utils/reloadApp.js 4:15-31
+[ng]      cjs require ./utils/log [QM51] (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node 12:15-37
+[ng]  [BfSG] (webpack)-dev-server/client/utils/createSocketUrl.js 2.91 KiB {vendor} [built]
+[ng]      cjs require ./utils/createSocketUrl [QM51] (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node 20:22-56
+[ng]  [CxY0] ./node_modules/url/url.js 22.8 KiB {vendor} [built]
+[ng]      cjs require url [BfSG] (webpack)-dev-server/client/utils/createSocketUrl.js 4:10-24
+[ng]  [EUBx] (webpack)-dev-server/client/clients/SockJSClient.js 4.08 KiB {vendor} [built]
+[ng]      require.resolve ./SockJSClient [EUBx] (webpack)-dev-server/client/clients/SockJSClient.js 73:13-46
+[ng]      cjs require ./clients/SockJSClient [R6Jb] (webpack)-dev-server/client/socket.js 15:0-33
+[ng]  [F//3] ./node_modules/html-entities/lib/html5-entities.js 48.9 KiB {vendor} [built]
+[ng]      cjs require ./html5-entities [wr9r] ./node_modules/html-entities/lib/index.js 7:23-50
+[ng]  [FFrt] (webpack)-dev-server/client/clients/BaseClient.js 1.03 KiB {vendor} [built]
+[ng]      cjs require ./BaseClient [EUBx] (webpack)-dev-server/client/clients/SockJSClient.js 30:17-40
+[ng]  [FWmP] (webpack)-dev-server/client/utils/reloadApp.js 1.59 KiB {vendor} [built]
+[ng]      cjs require ./utils/reloadApp [QM51] (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node 18:16-44
+[ng]  [HwU6] ./node_modules/html-entities/lib/html4-entities.js 7.32 KiB {vendor} [built]
+[ng]      cjs require ./html4-entities [wr9r] ./node_modules/html-entities/lib/index.js 5:23-50
+[ng]  [L2CI] ./node_modules/html-entities/lib/surrogate-pairs.js 668 bytes {vendor} [built]
+[ng]      cjs require ./surrogate-pairs [F//3] ./node_modules/html-entities/lib/html5-entities.js 3:24-52
+[ng]      cjs require ./surrogate-pairs [HwU6] ./node_modules/html-entities/lib/html4-entities.js 3:24-52
+[ng]      cjs require ./surrogate-pairs [UClF] ./node_modules/html-entities/lib/xml-entities.js 3:24-52
+[ng]  [Nehr] ./node_modules/url/util.js 314 bytes {vendor} [built]
+[ng]      cjs require ./util [CxY0] ./node_modules/url/url.js 25:11-28
+[ng]  [QM51] (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node 4.29 KiB {vendor} [built]
+[ng]      single entry /mnt/c/Users/casso01/development/appicotpersonal/node_modules/webpack-dev-server/client/index.js?http://0.0.0.0:0&sockPath=/sockjs-node [0] multi (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node ./src/main.ts main[0]
+[ng]  [R6Jb] (webpack)-dev-server/client/socket.js 1.53 KiB {vendor} [built]
+[ng]      cjs require ./socket [QM51] (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node 8:13-32
+[ng]  [UClF] ./node_modules/html-entities/lib/xml-entities.js 3.7 KiB {vendor} [built]
+[ng]      cjs require ./xml-entities [wr9r] ./node_modules/html-entities/lib/index.js 3:21-46
+[ng]  [XH0y] ./node_modules/loglevel/lib/loglevel.js 9.34 KiB {vendor} [built]
+[ng]      cjs require loglevel [A4US] (webpack)-dev-server/client/utils/log.js 3:10-29
+[ng]  [YcCt] ./node_modules/querystring/decode.js 2.34 KiB {vendor} [built]
+[ng]      cjs require ./decode [r8II] ./node_modules/querystring/index.js 3:33-52
+[ng]  [YuTi] (webpack)/buildin/module.js 497 bytes {vendor} [built]
+[ng]      cjs require module [rWzI] ./node_modules/url/node_modules/punycode/punycode.js 1:0-47
+[ng]  [dZZH] (webpack)/hot/log.js 1.34 KiB {vendor} [optional] [built]
+[ng]      context element ./log [i3Xp] (webpack)/hot sync nonrecursive ^\.\/log$ ./log
+[ng]  [dnEP] ./node_modules/strip-ansi/index.js 161 bytes {vendor} [built]
+[ng]      cjs require strip-ansi [QM51] (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node 6:16-37
+[ng]  [k+Kj] (webpack)/hot/emitter.js 75 bytes {vendor} [built]
+[ng]      cjs require webpack/hot/emitter [FWmP] (webpack)-dev-server/client/utils/reloadApp.js 21:21-51
+[ng]  [m+JY] ./node_modules/sockjs-client/dist/sockjs.js 145 KiB {vendor} [built]
+[ng]      cjs require sockjs-client/dist/sockjs [EUBx] (webpack)-dev-server/client/clients/SockJSClient.js 28:13-49
+[ng]  [ngz8] (webpack)-dev-server/client/utils/getCurrentScriptSource.js 658 bytes {vendor} [built]
+[ng]      cjs require ./getCurrentScriptSource [BfSG] (webpack)-dev-server/client/utils/createSocketUrl.js 6:29-64
+[ng]  [nu5z] ./node_modules/ansi-regex/index.js 135 bytes {vendor} [built]
+[ng]      cjs require ansi-regex [dnEP] ./node_modules/strip-ansi/index.js 2:16-37
+[ng]  [peec] (webpack)-dev-server/client/utils/sendMessage.js 402 bytes {vendor} [built]
+[ng]      cjs require ./utils/sendMessage [QM51] (webpack)-dev-server/client?http://0.0.0.0:0&sockPath=/sockjs-node 16:18-48
+[ng]  [r8II] ./node_modules/querystring/index.js 127 bytes {vendor} [built]
+[ng]      cjs require querystring [CxY0] ./node_modules/url/url.js 100:18-40
+[ng]  [rWzI] ./node_modules/url/node_modules/punycode/punycode.js 14.3 KiB {vendor} [built]
+[ng]      cjs require punycode [CxY0] ./node_modules/url/url.js 24:15-34
+[ng]  [wr9r] ./node_modules/html-entities/lib/index.js 449 bytes {vendor} [built]
+[ng]      cjs require html-entities [+gfj] (webpack)-dev-server/client/overlay.js 6:15-39
+[ng] LOG from webpack.buildChunkGraph.visitModules
+[ng] <t> prepare: 0.328588ms
+[ng] <t> visiting: 0.348776ms
+[ng] ERROR in Maximum call stack size exceeded
+[ng] Child mini-css-extract-plugin node_modules/css-loader/dist/cjs.js??ref--14-1!node_modules/postcss-loader/dist/cjs.js??ref--14-2!node_modules/resolve-url-loader/index.js??ref--14-3!node_modules/sass-loader/dist/cjs.js??ref--14-4!src/global.scss:
+[ng]     chunk {mini-css-extract-plugin} * (mini-css-extract-plugin) 109 KiB [entry] [rendered]
+[ng]      [JPst] ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB {mini-css-extract-plugin} [built]
+[ng]          harmony side effect evaluation ../node_modules/css-loader/dist/runtime/api.js [vF7B] ./node_modules/css-loader/dist/cjs.js??ref--14-1!./node_modules/postcss-loader/dist/cjs.js??ref--14-2!./node_modules/resolve-url-loader??ref--14-3!./node_modules/sass-loader/dist/cjs.js??ref--14-4!./src/global.scss 3:0-89
+[ng]          harmony import specifier ../node_modules/css-loader/dist/runtime/api.js [vF7B] ./node_modules/css-loader/dist/cjs.js??ref--14-1!./node_modules/postcss-loader/dist/cjs.js??ref--14-2!./node_modules/resolve-url-loader??ref--14-3!./node_modules/sass-loader/dist/cjs.js??ref--14-4!./src/global.scss 4:30-57
+[ng]      [denP] ./node_modules/css-loader/dist/runtime/cssWithMappingToString.js 2.21 KiB {mini-css-extract-plugin} [built]
+[ng]          harmony side effect evaluation ../node_modules/css-loader/dist/runtime/cssWithMappingToString.js [vF7B] ./node_modules/css-loader/dist/cjs.js??ref--14-1!./node_modules/postcss-loader/dist/cjs.js??ref--14-2!./node_modules/resolve-url-loader??ref--14-3!./node_modules/sass-loader/dist/cjs.js??ref--14-4!./src/global.scss 2:0-118
+[ng]          harmony import specifier ../node_modules/css-loader/dist/runtime/cssWithMappingToString.js [vF7B] ./node_modules/css-loader/dist/cjs.js??ref--14-1!./node_modules/postcss-loader/dist/cjs.js??ref--14-2!./node_modules/resolve-url-loader??ref--14-3!./node_modules/sass-loader/dist/cjs.js??ref--14-4!./src/global.scss 4:58-95
+[ng]      [vF7B] ./node_modules/css-loader/dist/cjs.js??ref--14-1!./node_modules/postcss-loader/dist/cjs.js??ref--14-2!./node_modules/resolve-url-loader??ref--14-3!./node_modules/sass-loader/dist/cjs.js??ref--14-4!./src/global.scss 105 KiB {mini-css-extract-plugin} [built]
+[ng]          single entry !!/mnt/c/Users/casso01/development/appicotpersonal/node_modules/css-loader/dist/cjs.js??ref--14-1!/mnt/c/Users/casso01/development/appicotpersonal/node_modules/postcss-loader/dist/cjs.js??ref--14-2!/mnt/c/Users/casso01/development/appicotpersonal/node_modules/resolve-url-loader/index.js??ref--14-3!/mnt/c/Users/casso01/development/appicotpersonal/node_modules/sass-loader/dist/cjs.js??ref--14-4!/mnt/c/Users/casso01/development/appicotpersonal/src/global.scss  mini-css-extract-plugin
+[ng]     
+[ng]     LOG from webpack.buildChunkGraph.visitModules
+[ng]     <t> prepare: 0.102055ms
+[ng]     <t> visiting: 0.032041ms
+[ng] Child mini-css-extract-plugin node_modules/css-loader/dist/cjs.js??ref--14-1!node_modules/postcss-loader/dist/cjs.js??ref--14-2!node_modules/resolve-url-loader/index.js??ref--14-3!node_modules/sass-loader/dist/cjs.js??ref--14-4!src/theme/variables.scss:
+[ng]     chunk {mini-css-extract-plugin} * (mini-css-extract-plugin) 22.8 KiB [entry] [rendered]
+[ng]      [JPst] ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB {mini-css-extract-plugin} [built]
+[ng]          harmony side effect evaluation ../../node_modules/css-loader/dist/runtime/api.js [sCvf] ./node_modules/css-loader/dist/cjs.js??ref--14-1!./node_modules/postcss-loader/dist/cjs.js??ref--14-2!./node_modules/resolve-url-loader??ref--14-3!./node_modules/sass-loader/dist/cjs.js??ref--14-4!./src/theme/variables.scss 3:0-92
+[ng]          harmony import specifier ../../node_modules/css-loader/dist/runtime/api.js [sCvf] ./node_modules/css-loader/dist/cjs.js??ref--14-1!./node_modules/postcss-loader/dist/cjs.js??ref--14-2!./node_modules/resolve-url-loader??ref--14-3!./node_modules/sass-loader/dist/cjs.js??ref--14-4!./src/theme/variables.scss 4:30-57
+[ng]      [denP] ./node_modules/css-loader/dist/runtime/cssWithMappingToString.js 2.21 KiB {mini-css-extract-plugin} [built]
+[ng]          harmony side effect evaluation ../../node_modules/css-loader/dist/runtime/cssWithMappingToString.js [sCvf] ./node_modules/css-loader/dist/cjs.js??ref--14-1!./node_modules/postcss-loader/dist/cjs.js??ref--14-2!./node_modules/resolve-url-loader??ref--14-3!./node_modules/sass-loader/dist/cjs.js??ref--14-4!./src/theme/variables.scss 2:0-121
+[ng]          harmony import specifier ../../node_modules/css-loader/dist/runtime/cssWithMappingToString.js [sCvf] ./node_modules/css-loader/dist/cjs.js??ref--14-1!./node_modules/postcss-loader/dist/cjs.js??ref--14-2!./node_modules/resolve-url-loader??ref--14-3!./node_modules/sass-loader/dist/cjs.js??ref--14-4!./src/theme/variables.scss 4:58-95
+[ng]      [sCvf] ./node_modules/css-loader/dist/cjs.js??ref--14-1!./node_modules/postcss-loader/dist/cjs.js??ref--14-2!./node_modules/resolve-url-loader??ref--14-3!./node_modules/sass-loader/dist/cjs.js??ref--14-4!./src/theme/variables.scss 19 KiB {mini-css-extract-plugin} [built]
+[ng]          single entry !!/mnt/c/Users/casso01/development/appicotpersonal/node_modules/css-loader/dist/cjs.js??ref--14-1!/mnt/c/Users/casso01/development/appicotpersonal/node_modules/postcss-loader/dist/cjs.js??ref--14-2!/mnt/c/Users/casso01/development/appicotpersonal/node_modules/resolve-url-loader/index.js??ref--14-3!/mnt/c/Users/casso01/development/appicotpersonal/node_modules/sass-loader/dist/cjs.js??ref--14-4!/mnt/c/Users/casso01/development/appicotpersonal/src/theme/variables.scss  mini-css-extract-plugin
+[ng]     
+[ng]     LOG from webpack.buildChunkGraph.visitModules
+[ng]     <t> prepare: 0.357143ms
+[ng]     <t> visiting: 0.100502ms
+[ng] Initial Chunk Files | Names         |    Size
+[ng] main.js             | main          | 0 bytes
+[ng] polyfills.js        | polyfills     | 0 bytes
+[ng] runtime.js          | runtime       | 0 bytes
+[ng] styles.css          | styles        | 0 bytes
+[ng] vendor.js           | vendor        | 0 bytes
+[ng] | Initial Total | 0 bytes
+[ng] Build at: 2023-02-07T15:59:31.237Z - Hash: df694cb925a3234dd4d2 - Time: 16301ms
+[ng] Error: Maximum call stack size exceeded
+
+[[40mINFO[49m] Development server running!
+       
+       Local: http://localhost:8100
+       
+       Use Ctrl+C to quit this process
+
+[[40mINFO[49m] Browser window opened to http://localhost:8100!
+
+[ng] Tue, 07 Feb 2023 15:59:32 GMT express:router dispatching GET /
+[ng] Tue, 07 Feb 2023 15:59:32 GMT express:router query  : /
+[ng] Tue, 07 Feb 2023 15:59:32 GMT express:router expressInit  : /
+[ng] Tue, 07 Feb 2023 15:59:32 GMT express:router middleware  : /
+[ng] Tue, 07 Feb 2023 15:59:32 GMT express:router <anonymous>  : /
+[ng] Tue, 07 Feb 2023 15:59:32 GMT express:router middleware  : /
+[ng] Tue, 07 Feb 2023 15:59:32 GMT finalhandler default 404

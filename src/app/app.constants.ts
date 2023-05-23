@@ -9,7 +9,9 @@ export const BIENVENIDA = 'assets/imgs/planincent.png';
 export const NO_CONNECTION_IMG = 'assets/imgs/no-connection.gif';
 export const IC_ARROW_UP = 'arrow-up-circle';
 export const IC_ARROW_DOWN = 'arrow-down-circle';
-export const BASE_URL = 'https://pdi.grupoicot.es:8000/';
+//export const BASE_URL = 'https://pdi.grupoicot.es:8000/';
+//export const BASE_URL = 'https://pdipre.grupoicot.es:8000/';
+export const BASE_URL = 'https://localhost:8000/';
 export const BASE_UPDATE_LINK = 'storage/versiones/';
 export const BASE_UPATE_IOS_PWA_LINK = 'storage/versiones/ios/latest/';
 export const ANDROID_ENVIRONMENT_FILE_PATH = 'files/';
@@ -148,7 +150,8 @@ export const CENTRE_NO_ACTIVE = 'Error no hay definido objetivo';
 */
 export const SPANISH_MONTHS_VALUES = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
 export const LABELS_FOR_SELECT_INCENTIVES = ['CORTE ACTUAL', 'POR AÑO', 'POR MES Y AÑO'];
-export const DATA_LABELS = ['USUARIO: ', 'TELÉFONO:', 'CATEGORÍA:', 'EMAIL:'];
+export const DATA_LABELS = ['Usuario ', 'Email', 'Categoría', 'Teléfono'];
+export const CENTER_LABELS = ['Dirección ', 'Teléfono', 'Email', 'Horario', 'Supervisor'];
 export const IDENTIFICATION_LABELS = ['HISTORIAL CLÍNICO', 'TELÉFONO', 'DNI'];
 export const CONTENT_LABELS = ['TOTAL SERVICIOS RECOMENDADOS:', 'INCENTIVOS ACUMULADOS:'];
 export const INFO_ACEPTACION_PACIENTE = 'CONFIRMO QUE HE INFORMADO AL PACIENTE DEL PROCESO DE CONFIRMACIÓN Y DE LA ACEPTACIÓN DE LOS TÉRMINOS Y DEL SERVICIO';
@@ -186,6 +189,7 @@ export const INFO_VERSION = ', VERSION: ';
 export const INFO_MANUFACTURE = ', FABRICANTE: ';
 export const INFO_SYSTEM = ', SISTEMA: ';
 export const ENCRIPTING_KEY= 'secretKey';
+export const USER_ICONS= ['person-sharp', 'mail-sharp', 'briefcase-sharp', 'call-sharp'];
 
 /** 
 * LOGS MESSAGES & TYPES
@@ -519,4 +523,4 @@ export const SLIDES_PROMOTIONS_TIME = 1500;
 export const COLUMNS_HEADER_GLOBAL_LEAGUE = ['POSICIÓN', 'CENTRO', 'PUNTOS', 'PCV', 'ACCIÓN'];
 export const COLUMNS_HEADER_GLOBAL_WITH_DETAILS = ['POSICIÓN', 'CENTRO', 'PUNTOS', 'PCV', 'ACCIÓN'];
 export const COLUMNS_HEADER_CENTRE_LEAGUE = ['MES', 'PUNTOS RECIBIDOS', 'COEFICIENTE DE VENTA'];
-export const COPY_MAIL = ['desarrollo@grupoicot.es', 'desarrollo2@grupoicot.es'];
+export const COPY_MAIL = ['desarrollo@grupoicot.es', 'desarrollo2@grupoicot.es', 'desarrollo3@grupoicot.es', 'cau@grupoicot.es'];

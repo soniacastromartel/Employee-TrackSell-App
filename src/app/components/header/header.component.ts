@@ -18,8 +18,9 @@ faq = FAQ;
 
 constructor(private notification: NotificationsService) { }
 
-  // Open FAQ App
-    openFAQ() {
-    this.notification.pageSvc.openFAQ(FaqComponent, true);
+  goBack() {
+    this.notification.closeModal();
   }
+
+
 }

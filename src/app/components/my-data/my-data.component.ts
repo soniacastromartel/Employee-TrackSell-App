@@ -7,7 +7,7 @@ import { FaqComponent } from '../faq/faq.component';
 import { Centre } from '../../models/centre';
 import { UtilsService } from '../../services/utils.service';
 import { Subscription } from 'rxjs';
-import { CONTACT_SUPERVISOR, COPY_MAIL, BAD_OPERATION } from '../../app.constants';
+import { CONTACT_SUPERVISOR, COPY_MAIL, BAD_OPERATION, CENTER_LABELS } from '../../app.constants';
 
 @Component({
   selector: 'app-my-data',
@@ -17,6 +17,8 @@ import { CONTACT_SUPERVISOR, COPY_MAIL, BAD_OPERATION } from '../../app.constant
 export class MyDataComponent implements OnInit {
   // Centro de empleado
   centro: Centre;
+  centerLabels = CENTER_LABELS;
+
 
   // Subcription de control
   auxSub: Subscription;

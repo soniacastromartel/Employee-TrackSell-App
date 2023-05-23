@@ -2,15 +2,20 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Employee } from '../models/employee';
 import { DNI, NAME, USERNAME, ROUTE_CONTROL_ACCESS, ENCRIPTING_KEY, UNLOCK_REQUESTED } from '../app.constants';
-import { BehaviorSubject } from 'rxjs';
-import * as CryptoJS from 'crypto-js';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+//import * as CryptoJS from 'crypto-js';
+
+// TODO: JDCR
+import { CookieService } from 'ngx-cookie-service';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
   employeeBd: Storage = null;
-
   employee: Employee;
   actualToken: string;
   center: any = {};
@@ -21,10 +26,16 @@ export class EmployeeService {
 
   // listener data user
   employeeListener: BehaviorSubject<any>;
+  public readonly token: Observable<any>;
+  // currentUserListener: BehaviorSubject<Employee>;
+  // public readonly currentUser: Observable<Employee>;
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, private cookies: CookieService) {
     this.init();
     this.employeeListener = new BehaviorSubject(this.actualToken);
+    this.token = this.employeeListener.asObservable();
+    // this.currentUserListener= new BehaviorSubject (this.employee);
+    // this.currentUser= this.currentUserListener.asObservable();
   }
 
   /**
@@ -32,7 +43,7 @@ export class EmployeeService {
    *
    * @param data Empleado que accede
    */
-  async setUser(data: any){
+  async setUser(data: any) {
     // Se establecen los datos del empleado
     // en el servicio dedicado
     this.employee = data.data.user;
@@ -44,7 +55,8 @@ export class EmployeeService {
     this.updateEmployeeData().then(res => {
       if (res !== undefined) {
         if (res.dni !== this.employee.dni) {
-          this.set(DNI, CryptoJS.AES.encrypt(this.employee.dni, ENCRIPTING_KEY).toString());
+          //this.set(DNI, CryptoJS.AES.encrypt(this.employee.dni, ENCRIPTING_KEY).toString());
+          this.set(DNI, this.employee.dni);
         }
         if (res.name !== this.employee.name) {
           this.set(NAME, this.employee.name);
@@ -58,9 +70,27 @@ export class EmployeeService {
         this.set(USERNAME, this.employee.username);
       }
     });
+
     this.actualToken = data.data.access_token;
-    this.employeeListener.next(this.actualToken);
+    this.setToken(this.actualToken);
+    this.saveCurrentToken(this.actualToken);
+    // this.saveCurrentUser(this.employee);
   }
+
+
+
+  saveCurrentToken(token): void {
+    this.employeeListener.next(token);
+  }
+
+  // saveCurrentUser(user: Employee): void {
+  //   this.employeeListener.next(user);
+  // }
+
+  // getCurrentUser(): Employee {
+  //   return this.currentUserListener.getValue();
+
+  // }
 
   /**
    * Actualizacion de datos locales guardados
@@ -68,7 +98,7 @@ export class EmployeeService {
    *
    * @returns Objeto de datos
    */
-  async updateEmployeeData(){
+  async updateEmployeeData() {
     let employeeData: any;
     await this.get(DNI).then((val) => {
       employeeData = {};
@@ -89,8 +119,8 @@ export class EmployeeService {
    * @param center
    * @returns Center object
    */
-  async createCenter(data: any){
-    if (data !== undefined && data.centres !== undefined){
+  async createCenter(data: any) {
+    if (data !== undefined && data.centres !== undefined) {
       this.center.centre = data.centres[0].centre;
       this.center.centre_address = data.centres[0].centre_address;
       this.center.centre_phone = data.centres[0].centre_phone;
@@ -117,8 +147,8 @@ export class EmployeeService {
    * @param key Key
    * @param value Value save
    */
-  public set(key: string, value: any) {
-    this.employeeBd?.set(key, value);
+  public async set(key: string, value: any) {
+    await this.employeeBd?.set(key, value);
   }
 
   /**
@@ -127,8 +157,9 @@ export class EmployeeService {
    * @param key key search bd
    * @returns Value
    */
-  public get(key: string) {
-    return this.employeeBd?.get(key);
+  public async get(key: string) {
+    const value = await this.employeeBd?.get(key);
+    return value;
   }
 
 
@@ -138,10 +169,11 @@ export class EmployeeService {
    *
    * @returns Collection keys
    */
-  public all() {
+  public getAll() {
     const collection = [];
     this.employeeBd.forEach(value => {
       collection.push(value);
+      console.log(value);
     });
     return collection;
   }
@@ -151,7 +183,7 @@ export class EmployeeService {
    *
    * @returns Count
    */
-  public count(){
+  public count() {
     return this.employeeBd?.length();
   }
 
@@ -160,13 +192,31 @@ export class EmployeeService {
    *
    * @returns Status operation
    */
-  async deleteInfo() {
+  async delete(key: string) {
     try {
-      this.employeeBd?.remove('name');
-      this.employeeBd.remove('dni');
+      await this.employeeBd?.remove(key);
       return true;
     } catch (ex) {
+      console.log(ex);
       return false;
     }
   }
+
+
+  async clearStorage() {
+    await this.employeeBd?.clear();
+  }
+
+  setToken(token: string) {
+    this.cookies.set("token", token);
+  }
+
+  getToken() {
+    return this.cookies.get("token");
+  }
+
+  deleteToken() {
+    return this.cookies.delete("token");
+  }
+
 }

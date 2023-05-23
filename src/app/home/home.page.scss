@@ -95,9 +95,18 @@ ion-input {
     font-weight: 600;
     margin-bottom: 10px;
     margin-top: 10px;
-    caret-color: var(--ion-color-icot);
-    padding-left: 1em;
-    float: inline-start;
+    // caret-color: var(--ion-color-icot);
+    // padding-left: 1em;
+    // float: inline-start;
+
+
+    border-radius: 30px !important;
+    padding-left: 30px !important;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    border: 1px solid #ffffff;
+    border-bottom: 0px !important;
+    box-shadow: none !important;
 }
 
 ion-item.item-has-focus>ion-label {
@@ -153,6 +162,7 @@ form {
 
 .containerForm {
     margin-bottom: 2em;
+    margin-top: 2em;
 }
 
 .containerInput{
@@ -175,11 +185,12 @@ form {
 .recovery {
     font-weight: bolder;
     font-family: monospace;
-    text-align: center;
+    text-align: right;
     font-size: small;
     display: block;
     font-weight: bold;
     color: var(--ion-mycolor-black);
+    margin-top: 10px;
 }
 
 .newAccess {
@@ -220,4 +231,16 @@ form {
     50% {
         transform: translateY(-5%);
     }
+}
+
+ion-content{
+    --background: transparent;
+    background-image: url('../../assets/imgs/bck.png');
+    background-position: center center;
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+ion-toolbar{
+    --background: transparent;
 }
