@@ -14,7 +14,6 @@ import { MIN_VERSION_APP, PASS_FORMAT, BASE_UPDATE_LINK, BASE_URL, TIME_OUT_RESP
   MAX_TIME_LOADING,
   NORMAL_TIME_WAIT,
   BASE_UPATE_IOS_PWA_LINK,
-  UNLOCK_REQUEST,
   REQUEST_IN_PROCESS} from '../app.constants';
 import { NotificationsService } from './notifications.service';
 import { AccessToService } from './access-to.service';
@@ -24,7 +23,7 @@ import ApkUpdater from 'cordova-plugin-apkupdater';
 import { Platform, IonContent } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { File, DirectoryEntry} from '@ionic-native/file/ngx';
-import { EmployeeService } from './employee.service';
+import { StorageService } from './storage.service';
 import { ConnectionService } from './connection.service';
 import { Error } from '../models/Error';
 
@@ -48,14 +47,14 @@ export class UtilsService {
   // Base Url
   base = '';
 
-  // Options slide notices/promotions and images FAQ Viewew
-  slideOpts = {
+  // // Options slide notices/promotions and images FAQ Viewew
+   slideOpts = {
     initialSlide: 0,
     speed: DEFAULT_TIME_1S
   };
 
   constructor(
-    private employeSvc: EmployeeService,
+    private storage: StorageService,
     private notification: NotificationsService,
     private accesstInfo: AccessToService,
     private appVersion: AppVersion,
@@ -70,9 +69,8 @@ export class UtilsService {
      */
     async maxAccessPermited(accesos: number){
       if (accesos >= 3) {
-        this.employeSvc.employeeListener.next(undefined);
+        this.storage.employeeListener.next(undefined);
         this.notification.alertBaseNotifications(SESION_EXPIRED.title, SESION_EXPIRED.msg);
-        // this.checkSvc.actionLog(LOG_TYPE[1], '[' + LOG_PLACE[0] + '] ' + SESION_EXPIRED.title, user.username + ' ' + user.pass);
         return {block: true};
       } else{
         return true;
@@ -292,7 +290,7 @@ export class UtilsService {
             this.actionsCatch(ex);
           });
         } else {
-          this.checkSvc.resetUpdateCount(this.employeSvc.employee.username);
+          this.checkSvc.resetUpdateCount(this.storage.employee.username);
           this.actionsCatch();
           }
         });
@@ -395,7 +393,7 @@ export class UtilsService {
           await ApkUpdater.install(async () => {
             }, (ex) => {
               this.notification.baseThrowAlerts(ERROR_DOWNLOAD_UPDATE, ex);
-              this.createError(ex, this.employeSvc.employee?.phone, 'UtilsService').then(result => {
+              this.createError(ex, this.storage.employee?.phone, 'UtilsService').then(result => {
                 this.checkSvc.setErrors(result , UtilsService);
                 });
             });
@@ -431,7 +429,7 @@ export class UtilsService {
    * de 3 veces, si los supera se fuera la actualizacion).
    */
   async checkNotUpdate(isSum: boolean = false) {
-    return await this.checkSvc.notUpdate(this.employeSvc.employee.username, isSum)
+    return await this.checkSvc.notUpdate(this.storage.employee.username, isSum)
       .then((count)=>{
         this.notification.cancelLoad();
         this.cancelControlNotifications();

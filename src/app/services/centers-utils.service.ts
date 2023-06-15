@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
-import { EmployeeService } from './employee.service';
+import { StorageService } from './storage.service';
 import { DatacheckService } from './datacheck.service';
 import { Subscription } from 'rxjs';
 import { Centre } from '../models/centre';
@@ -18,19 +18,18 @@ export class CentersUtilsService {
   // Subcription control
   centersSubcription: Subscription;
 
-  constructor(private employeeSvc: EmployeeService, private checkSvc: DatacheckService) { }
+  constructor(private storage: StorageService, private checkSvc: DatacheckService) { }
 
   /***
    * Comprobacion centros en local
    */
   async localCenters() {
     if (this.centers === undefined) {
-      this.employeeSvc.employeeBd.get('centers').then(async (res) => {
+      this.storage.employeeBd.get('centers').then(async (res) => {
+        console.log(res);
         if (res == null) {
-          console.log(res);
           await this.getCenterOfSystem();
         } else {
-          console.log(res);
           this.centers = res;
           return true;
         }
@@ -46,7 +45,7 @@ export class CentersUtilsService {
       this.centersSubcription = res.subscribe((listCenters: any) => {
         if (listCenters !== undefined) {
           this.centers = listCenters.data;
-          this.employeeSvc.employeeBd.set('centers', this.centers);
+          this.storage.employeeBd.set('centers', this.centers);
           return true;
         }
       });

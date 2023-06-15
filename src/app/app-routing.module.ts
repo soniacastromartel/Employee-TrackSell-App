@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from './services/auth-guard.service';
 
+import { MiCentroComponent } from './components/mi-centro/mi-centro.component';
+import {GrupoComponent}from './components/grupo/grupo.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -15,9 +18,12 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule),
-    canActivate: [AuthGuardService]
+    // canActivate: [AuthGuardService]
   },
-
+  {
+    path: 'rankings',
+    loadChildren: () => import('./pages/rankings/rankings.module').then( m => m.RankingsPageModule)
+  }
   
 ];
 

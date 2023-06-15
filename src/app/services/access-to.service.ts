@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Device } from '@ionic-native/device/ngx';
-import { EmployeeService } from './employee.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class AccessToService {
   };
 
   constructor(private device: Device,
-              private employeeSvc: EmployeeService){}
+              private storage: StorageService){}
 
   /**
    * Get info Device
@@ -41,10 +41,10 @@ export class AccessToService {
    * para el bloqueo del usuario
    */
   async userBlock(){
-    this.employeeSvc.actualToken = undefined;
-    this.employeeSvc.employee = undefined;
-    this.employeeSvc.center = undefined;
-    this.employeeSvc.isValid = false;
+    this.storage.actualToken = undefined;
+    this.storage.employee = undefined;
+    this.storage.center = undefined;
+    this.storage.isValid = false;
   }
 
 }

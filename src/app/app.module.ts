@@ -11,10 +11,11 @@ import { DatacheckService } from './services/datacheck.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AppVersion } from '@ionic-native/app-version/ngx';
-import { EmployeeService } from './services/employee.service';
+import { StorageService } from './services/storage.service';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SliceLargeTextPipe } from './pipes/slice-large-text.pipe';
 import { TextTransformPipe } from './pipes/text-transform.pipe';
+import { StringToArrayPipe } from './pipes/string-to-array.pipe';
 import { Device } from '@ionic-native/device/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import ApkUpdater from 'cordova-plugin-apkupdater';
@@ -23,14 +24,19 @@ import { File } from '@ionic-native/file/ngx';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 import { ErrorHandlerInterceptor } from './interceptors/error-handler.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { HeadersInterceptor } from './interceptors/header.interceptor';
+
+import { UserActivityService } from './services/user-activity.service';
+
 
 
 import { CookieService } from 'ngx-cookie-service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment'; 
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, SliceLargeTextPipe, TextTransformPipe],
+  declarations: [AppComponent, SliceLargeTextPipe, TextTransformPipe, StringToArrayPipe],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -53,16 +59,16 @@ import { environment } from '../environments/environment';
 
   ],
   exports: [ReactiveFormsModule, FormsModule, ComponentsModule], 
-  //exports: [ReactiveFormsModule, FormsModule],
   providers: [
     Storage, 
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     NotificationsService, 
     DatacheckService, 
     AppVersion, 
-    EmployeeService,   
+    StorageService,
+    UserActivityService,
     Device, 
     Network, 
     ApkUpdater, 

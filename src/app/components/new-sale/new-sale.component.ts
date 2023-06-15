@@ -14,7 +14,7 @@ import { LOADING_CENTERS, LOADING_DATA,
 import { NavParams, ViewWillEnter, IonContent, IonSelect} from '@ionic/angular';
 import { CentersUtilsService } from '../../services/centers-utils.service';
 import { UtilsService } from '../../services/utils.service';
-import { EmployeeService } from '../../services/employee.service';
+import { StorageService } from '../../services/storage.service';
 import { DatacheckService } from '../../services/datacheck.service';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
@@ -88,7 +88,7 @@ export class NewSaleComponent implements ViewWillEnter{
               private params: NavParams,
               private utils: UtilsService,
               private centersUtils: CentersUtilsService,
-              private employeeSvc: EmployeeService,
+              private storage: StorageService,
               private checkSvc: DatacheckService,
               public textTransform: TextTransformPipe,
               private pageSvc: PageService) { }
@@ -133,12 +133,12 @@ export class NewSaleComponent implements ViewWillEnter{
     this.venta.controls.quantity.setValue(MIN_SERVICE_COUNT);
 
     // Centro empleado
-    if(this.employeeSvc.employee.centreAux !== undefined) {
-      this.employeeSvc.employee.centreAux.forEach((c: any) => {
+    if(this.storage.employee.centreAux !== undefined) {
+      this.storage.employee.centreAux.forEach((c: any) => {
         this.employeeCenters.push({id: c.centre_id, name: c.centre});
       });
     } else {
-      this.employeeCenters = this.centersUtils.centers.filter(reg => reg.id === this.employeeSvc.employee.centre_id);
+      this.employeeCenters = this.centersUtils.centers.filter(reg => reg.id === this.storage.employee.centre_id);
       this.venta.controls.cEmployee.setValue(this.employeeCenters[0]);
     }
 
@@ -168,7 +168,7 @@ export class NewSaleComponent implements ViewWillEnter{
       const cRealizador = this.venta.controls.cRealizador.value;
         if(cRealizador !== undefined){
           // Recogida de servicios segun centro
-          this.checkSvc.getServicesOf(cRealizador.id, true, this.employeeSvc.actualToken).then((result) => {
+          this.checkSvc.getServicesOf(cRealizador.id, true, this.storage.actualToken).then((result) => {
             this.serviceSubcription = result.subscribe((collection: any) => {
               const services: any[] = collection.data;
               this.categoryImgCardList = [];
@@ -247,7 +247,7 @@ export class NewSaleComponent implements ViewWillEnter{
 
       // Obj temporal de venta
     this.builderSale = {
-      employee: this.employeeSvc.employee.username,
+      employee: this.storage.employee.username,
       cRealizador: this.venta.controls.cRealizador.value,
       service: this.venta.controls.service.value,
       cEmployee: this.venta.controls.cEmployee.value,
@@ -266,7 +266,7 @@ export class NewSaleComponent implements ViewWillEnter{
           this.utils.controlToNotifications(MAX_TIME_LOADING);
           this.notification.loadingData(LOADING_CONTENT);
           // Registro de venta de empleado
-          await this.checkSvc.saleForEmployee(this.builderSale, this.employeeSvc.actualToken)
+          await this.checkSvc.saleForEmployee(this.builderSale, this.storage.actualToken)
           .then((result) => {
             this.saleSubcription = result.subscribe(() => {
               this.notification.cancelLoad();
@@ -366,7 +366,7 @@ export class NewSaleComponent implements ViewWillEnter{
     private async loadServiceToSale(dataService: any){
       this.utils.controlToNotifications(MAX_TIME_LOADING);
       this.notification.loadingData(LOADING_CONTENT);
-      this.checkSvc.getDataTracking(this.serviceSale.tracking_id, this.employeeSvc.actualToken)
+      this.checkSvc.getDataTracking(this.serviceSale.tracking_id, this.storage.actualToken)
         .then((r) => {
           this.serviceSubcription = r.subscribe((data)=>{
             const servPrice = data['service'][0];
@@ -399,7 +399,7 @@ export class NewSaleComponent implements ViewWillEnter{
    */
   private buildingSale() {
     return {
-      employee: this.employeeSvc.employee.username,
+      employee: this.storage.employee.username,
       idType: this.venta.controls.idType.value,
       patientId: this.venta.controls.patientId.value,
       patient_name: this.venta.controls.patientName.value,

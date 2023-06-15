@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button>
+        <ion-icon name="arrow-back-circle" color="light" size="large"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-note>RANKINGS</ion-note>
+    <ion-buttons slot="end">
+      <img class="logo" src="assets/imgs/whitelogo.png" translucent />
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="bg-transparent">
+  <ion-tabs (ionTabsDidChange) = "tabChanged($event)">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button id="micentro" tab="mi-centro" selected>
+        <ion-icon name="person-circle"></ion-icon>
+        MI CENTRO
+      </ion-tab-button>
+      <ion-tab-button id="grupo" tab="grupo">
+        <ion-icon name="people-circle"></ion-icon>
+        GRUPO
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>
+
+

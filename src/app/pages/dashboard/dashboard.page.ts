@@ -1,60 +1,72 @@
-import { IMG_FIELD, USERNAME } from './../../app.constants';
+import { IMG_FIELD, RANKINGS } from './../../app.constants';
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/quotes */
-import { AfterContentChecked, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NotificationsService } from '../../services/notifications.service';
 import { PageService } from '../../services/page.service';
 import { MyDataComponent } from '../../components/my-data/my-data.component';
-import { EmployeeService } from '../../services/employee.service';
+import { StorageService } from '../../services/storage.service';
 import {
   SUGERENCIAS, SEND_SUGGESTIONS, LOADING_CONTENT,
   EXIT_ERROR, ACTION_PROMO_SERVICES, SUGGESTIONS_TEXT, VENTA_FORM_ID, EXIT_FORM_SALE,
-  COPY_MAIL, VERSION_APP, CHANGE_LIST, SLIDES_PROMOTIONS_TIME,
+  COPY_MAIL, VERSION_APP, CHANGE_LIST,
   MAX_TIME_LOADING, QUERY_COUNT_ACCESS, ANDROID_TYPE, DATA_LABELS, MIN_VERSION_APP
 } from '../../app.constants';
-import { Platform, ViewWillEnter, IonSlides, ViewDidEnter } from '@ionic/angular';
+import { Platform, ViewWillEnter } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { Employee } from '../../models/employee';
 import { MyIncentivesComponent } from '../../components/my-incentives/my-incentives.component';
 import { ListOfServicesComponent } from '../../components/list-of-services/list-of-services.component';
 import { CentersUtilsService } from '../../services/centers-utils.service';
 import { NewSaleComponent } from '../../components/new-sale/new-sale.component';
-import { RankingsComponent } from '../../components/rankings/rankings.component';
 import { UtilsService } from '../../services/utils.service';
 import { ConnectionService } from '../../services/connection.service';
 import { DatacheckService } from '../../services/datacheck.service';
 import { LeagueComponent } from '../../components/league/league.component';
 import { CategoryService } from 'src/app/models/category_service';
-import { FAQ, LOGO_PATH } from '../../app.constants';
+import { LOGO_PATH } from '../../app.constants';
 
 import { Section } from '../../models/section';
 import { SwiperComponent } from 'swiper/angular';
 import { SwiperOptions } from 'swiper';
-import SwiperCore, {Pagination, EffectCube, EffectCoverflow, EffectFlip} from 'swiper/core';
+import SwiperCore, { Pagination, EffectFlip, Autoplay } from 'swiper/core';
+import { UserActivityService } from 'src/app/services/user-activity.service';
+import { Route, Router } from '@angular/router';
 
 
-SwiperCore.use([Pagination, EffectCube]);
+SwiperCore.use([Pagination, EffectFlip, Autoplay]);
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDestroy, AfterContentChecked {
-  @ViewChild('slideNotice') slideNoti: IonSlides;
+export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterContentChecked, AfterViewInit {
   @ViewChild('swiper') swiper: SwiperComponent;
+  @ViewChild('swiper') swiperComponent: SwiperComponent;
 
-  config: SwiperOptions={
+  config: SwiperOptions = {
     slidesPerView: 1,
     spaceBetween: 50,
-    pagination: true, 
-    effect: 'cube'
+    pagination: true,
+    effect: 'flip',
+    autoplay: false
+
+  };
+
+  promotionsConfig: SwiperOptions = {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    autoplay: {
+      delay: 3500
+    }
 
   };
 
   // Empleado actual
   user: Employee;
   logo = LOGO_PATH;
+  empleado: any;
 
   // Content label show
   dataLabel = DATA_LABELS;
@@ -62,10 +74,13 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
 
 
   // Base notices/promotions
-  noticesPromotions = [{ id: 0, title: SEND_SUGGESTIONS, icon: 'mail', active: true }];
+  noticesPromotions = [{
+    id: 0,
+    title: SEND_SUGGESTIONS,
+    icon: 'mail',
+    active: true
+  }];
 
-  // Options slide notices/promotions
-  slideOpts = this.utils.slideOpts;
 
   // Actual version
   version: string;
@@ -81,7 +96,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
   backButton: Subscription;
   auxSub: Subscription;
   centers: any;
-  servicesSubcription: Subscription;
+  employeeSubscription: Subscription;
 
   username: string;
   token: string;
@@ -90,18 +105,13 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
     private platform: Platform,
     private notification: NotificationsService,
     private pageSvc: PageService,
-    protected employeeSvc: EmployeeService,
+    protected storage: StorageService,
     private centersUtls: CentersUtilsService,
     private utils: UtilsService,
     private connection: ConnectionService,
-    private checkSvc: DatacheckService) {
-    if (this.employeeSvc.employee == undefined) {
-      this.employeeSvc.get(USERNAME).then(async (nick) => {
-        this.username = nick;
-      });
-    } else {
-      this.username = this.employeeSvc.employee.username;
-    }
+    private checkSvc: DatacheckService,
+    private userActivityService: UserActivityService,
+    private route: Router) {
 
     this.backButton = this.platform.backButton.subscribeWithPriority(9999, () => {
       this.notification.modalCrtl.getTop().then(res => {
@@ -130,30 +140,31 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
   }
 
   ngAfterContentChecked() {
-    if(this.swiper){
+    if (this.swiper) {
       this.swiper.updateSwiper({});
     }
-    
+
   }
 
   async ngOnInit() {
     // Recogida de datos del usuario
-    this.user = this.employeeSvc.employee;
-    this.sections= this.checkSvc.getSections();
+    this.user = this.storage.employee;
+    this.sections = this.checkSvc.getSections();
 
     if (this.user !== undefined) {
-      this.username = this.employeeSvc.employee.username;
-      this.token = this.employeeSvc.actualToken;
+      this.username = this.storage.employee.username;
+      this.token = this.storage.actualToken;
       this.getEmployeeInfo(this.username, this.token);
+      this.processUserAndCenter();
     } else {
-      this.employeeSvc.get(USERNAME).then(async (nick) => {
-        this.username = nick;
-        this.token = this.employeeSvc.getToken();
-        this.getEmployeeInfo(this.username, this.token);
+      this.token = this.userActivityService.getToken();
+      await this.storage.getAll().then(async (result: any) => {
+        this.storage.setUser(result, this.token);
+        this.user = result;
+        this.username = result.username;
+        this.processUserAndCenter();
       });
-
     }
-
     if (this.utils.version !== undefined && this.utils.version !== MIN_VERSION_APP) {
       this.version = this.utils.version;
     } else {
@@ -164,19 +175,15 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
       });
       this.notification.loadingData(LOADING_CONTENT);
     }
-    this.slideOpts.speed = SLIDES_PROMOTIONS_TIME;
   }
 
   async ionViewWillEnter() {
     if (this.centersUtls.centers === undefined) {
       await this.centersUtls.localCenters();
     }
-    console.log(this.token);
     if (this.token == undefined) {
-      this.token = this.employeeSvc.getToken();
+      this.token = this.userActivityService.getToken();
     }
-    // console.log(this.employeeSvc.actualToken);
-
     // Se recogen las promociones actuales
     this.promoSubcription = (await this.checkSvc.getPromotionsForApp(this.token))
       .subscribe((promos: any) => {
@@ -191,48 +198,84 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
             break;
           }
         }
-        this.slideNoti?.startAutoplay();
       });
 
   }
 
-  async ionViewDidEnter() {
+  /**
+   * Solucion provisional al problema de las cargas
+   */
+  ionViewDidEnter() {
+    this.notification.cancelLoad();
+    this.utils.cancelControlNotifications();
+
+  }
+
+  ngAfterViewInit() {
+    console.log("ionViewDidLoad");
+    this.swiperComponent.swiperRef.autoplay.running = true;
+
+  }
+
+  processUserAndCenter() {
+    console.log(this.centersUtls.centers);
+    console.log(this.username);
     this.utils.controlToNotifications(MAX_TIME_LOADING);
     if (this.centersUtls.centers === undefined) {
       this.notification.loadingData(LOADING_CONTENT);
-      await this.centersUtls.localCenters();
+      this.centersUtls.localCenters();
       setTimeout(() => {
         this.notification.cancelLoad();
       }, 2000);
     }
     if (this.platform.is(ANDROID_TYPE)) {
       // Comprobación actualizacion app
-      await this.utils.checkingUpdate(this.token);
+      this.utils.checkingUpdate(this.token);
+      setTimeout(() => {
+        this.notification.cancelLoad();
+      }, 2000);
     }
     // Check lista de cambios, ¿version actualizada?
-    this.employeeSvc.get(VERSION_APP).then(ver => {
+    this.storage.get(VERSION_APP).then(ver => {
+      console.log(ver);
+      console.log(this.utils.version);
       if (ver !== this.utils.version) {
         this.checkSvc.getLastChangesUpdate({ version: this.utils.version })
           .then(changes => {
             changes.subscribe((content: any) => {
+              console.log(content);
               if (content.data.changes !== false) {
                 const partes = content.data.changes.split(':');
                 this.notification.alertChangeList(CHANGE_LIST, partes[0], partes[1]);
                 // Se establece la nueva version en dispositivo y se graba la nueva en version en bd
-                this.employeeSvc.set(VERSION_APP, this.utils.version);
+                this.storage.set(VERSION_APP, this.utils.version);
                 this.checkSvc.refreshUpdateVersion(this.username, VERSION_APP);
                 // Por ultimo se reestablece el contador de obligacion para actualizacion de la aplicacion
                 this.checkSvc.resetUpdateCount(this.username);
+
               }
             });
           }).catch(ex => {
-            this.utils.createError(ex, this.employeeSvc.employee.phone, 'dashboard').then((result) => {
+            this.utils.createError('ex', this.storage.employee.phone, 'dashboard').then((result) => {
               this.checkSvc.setErrors(result, UtilsService);
             });
           });
       }
     });
   }
+
+  async fetchUserData(): Promise<any> {
+    try {
+      const userData = await this.storage.getAll();
+      // Process userData or return it as needed
+      return userData;
+    } catch (error) {
+      // Handle error if necessary
+      console.error('Error fetching user data:', error);
+      throw error;
+    }
+  }
+
 
 
   /**
@@ -243,13 +286,32 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
   async getEmployeeInfo(username: string, token: string) {
     await this.checkSvc.getEmployeeInfo(username, token)
       .then((result) => {
-        this.auxSub = result.subscribe((data: any) => {
+        this.auxSub = result.subscribe(async (data: any) => {
           console.log(data);
-          // this.employeeSvc.employee.centreAux = data.data.user.centres;
-          this.employeeSvc.createCenter(data.data.user).then((objCentre) => {
-            // console.log(objCentre);
-            this.employeeSvc.center = objCentre;
+          // this.storage.employee.centreAux = data.data.user.centres;
+          this.storage.createCenter(data.data.user).then(async (objCentre) => {
+            console.log(objCentre);
+           await this.storage.set('centre', objCentre).then(async (res) => {
+            await this.storage.getAll().then(async(user: any) => {
+            console.log(user); 
+              this.storage.saveCurrentUser(user);
+              this.storage.currentUserListener.subscribe(res => {
+                console.log(res);
+                this.user = res;
+              });
+  
+            });
+           });
+           
           });
+          
+
+          // this.token = this.userActivityService.getToken();
+          // await this.storage.getAll().then(async (result: any) => {
+          //   this.storage.setUser(result, this.token);
+          //   this.user = result;
+          //   this.username = result.username;
+
           this.notification.cancelLoad();
           this.utils.cancelControlNotifications();
           this.auxSub.unsubscribe();
@@ -266,28 +328,20 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
       case 0: //sugerencias
         this.notification.alertBaseQuestions(SUGGESTIONS_TEXT.title, SUGGESTIONS_TEXT.msg).then(result => {
           if (result) {
-            this.utils.sendMail(this.employeeSvc.center.centre_email, COPY_MAIL, SUGERENCIAS);
+            this.utils.sendMail(this.storage.center.centre_email, COPY_MAIL, SUGERENCIAS);
           }
         });
         break;
-      case 1://recomendaciones 
-        this.notification.alertBaseQuestions(ACTION_PROMO_SERVICES.title, ACTION_PROMO_SERVICES.msg, this.promoServices[1].service.name + '?')
+      default://recomendaciones 
+        this.notification.alertBaseQuestions(ACTION_PROMO_SERVICES.title, ACTION_PROMO_SERVICES.msg, this.promoServices[id - 1].service.name + '?')
           .then(res => {
             if (res) {
-              this.pageSvc.recomendedService(NewSaleComponent, (this.checkSvc.base + this.promoServices[1].category[IMG_FIELD]), this.promoServices[1].centre[0].name, this.promoServices[1].service);
-            }
-          });
-        break;
-      case 2:
-        this.notification.alertBaseQuestions(ACTION_PROMO_SERVICES.title, ACTION_PROMO_SERVICES.msg, this.promoServices[0].service.name + '?')
-          .then(res => {
-            if (res) {
-              this.pageSvc.recomendedService(NewSaleComponent, (this.checkSvc.base + this.promoServices[0].category[IMG_FIELD]), this.promoServices[0].centre[0].name, this.promoServices[0].service);
+              this.pageSvc.recomendedService(NewSaleComponent, (this.checkSvc.base + this.promoServices[id - 1].category[IMG_FIELD]), this.promoServices[id - 1].centre[0].name, this.promoServices[id - 1].service);
             }
           });
         break;
     }
-    this.slideNoti.startAutoplay();
+    this.swiperComponent.swiperRef.autoplay.running = true;
   }
 
   /**
@@ -297,10 +351,11 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
    */
   async goAction(option: number) {
     console.log(this.username);
+    console.log(this.storage.employee);
     if (this.auxSub !== undefined) {
       this.auxSub.unsubscribe();
     }
-    this.checkSvc.checkAccountAccess(this.employeeSvc.employee.username, QUERY_COUNT_ACCESS)
+    this.checkSvc.checkAccountAccess(this.storage.employee.username, QUERY_COUNT_ACCESS)
       .then(res => {
         this.auxSub = res.subscribe(count => {
           this.utils.maxAccessPermited(count);
@@ -318,13 +373,13 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
         this.pageSvc.recomendedService(NewSaleComponent, undefined, undefined);
         break;
       case 3:
-        this.pageSvc.getRankings(RankingsComponent);
+        this.route.navigate([RANKINGS]);
         break;
       case 4:
         this.pageSvc.getClasificationLeague(LeagueComponent);
         break;
       case 5:
-        if (this.employeeSvc.center.centre === undefined) {
+        if (this.storage.center.centre === undefined) {
           this.notification.loadingData(LOADING_CONTENT);
           this.utils.controlToNotifications(MAX_TIME_LOADING);
           this.pageSvc.userMyData(MyDataComponent);
@@ -354,8 +409,11 @@ export class DashboardPage implements OnInit, ViewWillEnter, ViewDidEnter, OnDes
     }
   }
 
-  swiperSlideChanged(e){
-    console.log('changed: ', e);
+  swiperSlideChanged(e) {
+    // console.log('changed: ', e);
+  }
+
+  promotionSlideChanged(e) {
   }
 
 }

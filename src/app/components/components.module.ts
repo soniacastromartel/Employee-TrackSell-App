@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { MyIncentivesComponent } from './my-incentives/my-incentives.component';
 import { ListOfServicesComponent } from './list-of-services/list-of-services.component';
 import { NewSaleComponent } from './new-sale/new-sale.component';
-import { RankingsComponent } from './rankings/rankings.component';
 import { SelectSubTypeComponent } from './select-sub-type/select-sub-type.component';
 import { SaleConfirmationComponent } from './sale-confirmation/sale-confirmation.component';
 import { InfoFAQComponent } from './info-faq/info-faq.component';
@@ -26,7 +25,6 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     MyIncentivesComponent,
     ListOfServicesComponent,
-    RankingsComponent,
     NewSaleComponent,
     SelectSubTypeComponent,
     SaleConfirmationComponent,
@@ -50,7 +48,6 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     MyIncentivesComponent,
     ListOfServicesComponent,
-    RankingsComponent,
     NewSaleComponent,
     SelectSubTypeComponent,
     SaleConfirmationComponent,

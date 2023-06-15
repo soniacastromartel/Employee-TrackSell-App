@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { EmployeeService } from "../services/employee.service";
+import { StorageService } from "../services/storage.service";
 import { Router } from "@angular/router";
+import { tap } from "rxjs/operators";
+import { UserActivityService } from '../services/user-activity.service';
 
 @Injectable()
 /**
@@ -10,7 +12,7 @@ import { Router } from "@angular/router";
    *
    */
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private employeeSvc: EmployeeService, private router: Router
+    constructor(private storage: StorageService, private router: Router, private userActivityService: UserActivityService
     ) { 
         
     }
@@ -18,22 +20,25 @@ export class AuthInterceptor implements HttpInterceptor {
 
         const clonedReq = request.clone({
             headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.employeeSvc.actualToken}`
+                // 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.storage.actualToken}`,
+              
             })
         });
         return next.handle(clonedReq).pipe(
-            // tap(
-            //     (event : HttpEvent<any>) => {
-            //         if (event instanceof HttpResponse) {
-            //           }
-            //     },
-            //     (error : HttpErrorResponse ) => {
-            //         if (error.status == 401) {
-            //             this.router.navigateByUrl('/home');
-            //         }
-            //     }
-            // )
+            tap(
+                (event : HttpEvent<any>) => {
+                    if (event instanceof HttpResponse) {
+                            //Manejar la respuesta
+                      }
+                },
+                (error : HttpErrorResponse ) => {
+                    if (error.status == 401) {
+                        this.userActivityService.logout();
+                        this.router.navigate(['/login']);
+                    }
+                }
+            )
         )
     }
 }

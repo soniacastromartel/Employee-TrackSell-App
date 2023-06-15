@@ -96,7 +96,7 @@
         </ion-grid>
     </ion-card>
     <br>
-    <ion-item lines="none">
+    <ion-item lines="none" color="none">
         <ion-checkbox slot="start" [(ngModel)]="confirm"></ion-checkbox>
         <ion-note class="lblSale">{{infoAceptacion}}</ion-note>
     </ion-item>
@@ -108,7 +108,7 @@
                 <ion-button class="btnCancel" expand="full" color="light" (click)="actionSale(false)">CANCELAR</ion-button>
             </ion-col>
             <ion-col size="6">
-                <ion-button [disabled]="!confirm" class="btnConfirm" expand="full" (click)="actionSale(true)">CONFIRMAR</ion-button>
+                <ion-button [disabled]="!confirm" class="btnConfirm" expand="full" color="light" (click)="actionSale(true)">CONFIRMAR</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

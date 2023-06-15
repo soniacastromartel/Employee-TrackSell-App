@@ -1,0 +1,56 @@
+<ion-content #content [scrollEvents]="true" (ionScroll)="onScroll($event)" (ionScrollEnd)="hiddenArrow()">
+  <ion-row>
+    <ion-col size="4"></ion-col>
+    <ion-col size="8">
+      <ion-item lines="none" color="none">
+        <ion-icon name="calendar" slot="start"></ion-icon>
+        <ion-datetime *ngIf="selectedRadioItem != 'actual'" [(ngModel)]="rankingDate"
+          [displayFormat]="displayFormatDate" [pickerFormat]="displayFormatDate" doneText="SELECCIONAR"
+          cancelText="CANCELAR" value="{{rankingDate}}" [monthNames]="monthsValues"
+          (ionChange)="rankingRefresh()"></ion-datetime>
+        <ion-icon name="caret-down" slot="end"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ng-container *ngIf="rankings != undefined && rankings.length > 0 && !isLoading; else emptyView;">
+    <ion-list class="bg-transparent" color="none">
+
+      <ion-card *ngIf="userPosition != undefined" class="card">
+        <div class="img-wrapper">
+          <img src="assets/imgs/copa_prizes.png" />
+        </div>
+        <ion-card-header>
+          <ion-card-subtitle class="myPosition">Mi Posición</ion-card-subtitle>
+          <ion-card-title class="myPositionLbl">{{userPosition}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-item *ngFor="let ranking of rankings; let i= index;" color="none">
+        <div class="container">
+          <ion-avatar slot="start">
+            <img src="assets/imgs/user.svg" />
+            <ion-badge class="bottomleft">{{i + 1}}</ion-badge>
+          </ion-avatar>
+        </div>
+        <div style="margin-left: 10px;">
+        <ion-label>
+          <h3>{{ranking.employee | uppercase |stringToArray}}</h3>
+          <p> <ion-icon slot="start" name="business-outline"></ion-icon> {{ranking.centre}}</p>
+          <p><ion-icon slot="start" name="card-outline"></ion-icon> VENTA: {{ranking.total_price}} €</p>
+        </ion-label>
+      </div>
+      </ion-item>
+
+    </ion-list>
+  </ng-container>
+  <ng-template #emptyView>
+    <div class="center" *ngIf="!isLoading">
+      <app-empty-view></app-empty-view>
+    </div>
+  </ng-template>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-icon class="upDownScroll" [name]="utils.typeScroll" size="large" (click)="onScrolling()"></ion-icon>
+  </ion-fab>
+</ion-content>

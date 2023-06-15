@@ -12,9 +12,9 @@
 </ion-header>
 
 <ion-content>
-    <swiper #swiper [config]="config" (slideChange)="swiperSlideChanged($event)">
+    <swiper id="swiper1" #swiper [config]="config" (slideChange)="swiperSlideChanged($event)">
         <ng-template swiperSlide *ngFor="let section of sections | async;let i= index;">
-            <ion-card>
+            <ion-card class="mycard">
                 <img class="full-image" [src]="section.img">
                 <ion-card-header>
                     <ion-card-subtitle></ion-card-subtitle>
@@ -24,43 +24,26 @@
                     <p>{{section.description}}</p>
                 </ion-card-content>
                 ​ <ion-footer>
-                    <ion-button fill="clear" (click)="goAction(i)"> Ir a {{section.subtitle}}
-                        <ion-icon slot="end" class="icSection" [name]="section.icon"></ion-icon>
+                    <ion-button fill="clear" (click)="goAction(i)"> Ir a {{section.subtitle}}                    
+                        <ion-icon  slot="end" class="icSection" [name]="section.icon"></ion-icon>
                     </ion-button>
                 </ion-footer>
             </ion-card> 
         </ng-template>  
     </swiper>
-
-
-    <!-- <ion-card *ngFor="let section of sections | async;let i= index;">
-        <img class="full-image" [src]="section.img">
-        <ion-card-header>
-            <ion-card-subtitle></ion-card-subtitle>
-            <ion-card-title>{{section.title}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            <p>{{section.description}}</p>
-        </ion-card-content>
-        ​ <ion-footer>
-            <ion-button fill="clear" (click)="goAction(i)"> Ir a {{section.subtitle}}
-                <ion-icon class="icSection" [name]="section.icon"></ion-icon>
-            </ion-button>
-        </ion-footer>
-    </ion-card> -->
 </ion-content>
 
 <ion-footer class="myfooter">
-    <ion-slides #slideNotice [options]="slideOpts">
-        <ion-slide *ngFor="let notice of noticesPromotions">
+    <swiper id="swiper2" #swiperComponent [config]="promotionsConfig" (slideChange)="promotionSlideChanged($event)">
+        <ng-template swiperSlide  *ngFor="let notice of noticesPromotions;let i=index">
             <ion-row>
                 <ion-col size="1" *ngIf="notice.icon !== undefined">
                     <ion-icon [name]="notice.icon" class="icPromo"></ion-icon>
                 </ion-col>
                 <ion-col [size]="notice.icon !== undefined ? 11 : 12">
-                    <ion-note class="loadingLbl" (click)="goSlide(notice.id)">{{ notice.title }}</ion-note>
+                    <ion-note class="loadingLbl" (click)="goSlide(i)">{{ notice.title }}</ion-note>
                 </ion-col>
             </ion-row>
-        </ion-slide>
-    </ion-slides>
+        </ng-template>
+    </swiper>
 </ion-footer>

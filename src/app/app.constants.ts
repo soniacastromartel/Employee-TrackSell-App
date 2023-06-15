@@ -24,6 +24,7 @@ export const LINK_PRIVACY = BASE_URL + 'storage/condiciones/POLITICA-PRIVACIDAD-
 */
 export const HOME = 'home';
 export const DASHBOARD = 'dashboard';
+export const RANKINGS = 'rankings';
 export const LOGIN_APP = 'api/login';
 export const NEW_ACCESS = 'api/register';
 export const CHANGING_PASS = 'api/changingPass';
@@ -58,7 +59,10 @@ export const DISPLAY_BLOCK = 'block';
 export const NONE = 'none';
 export const NAME = 'name';
 export const DNI = 'dni';
+export const CATEGORY = 'category';
+export const EMAIL = 'email';
 export const CENTRE = 'center';
+export const CENTRE_ID = 'centre_id';
 export const USERNAME = 'username';
 export const PASSWORD = 'password';
 export const ROUTE_CONTROL_ACCESS = 'routeAccess';
@@ -507,9 +511,9 @@ export const FILE_NOT_EXISTS = {
 /** DURATIONS AND TIMES **/
 
 export const TIME_WAIT_INIT_ACOUNT_CHECK = 10000;
-export const MAX_TIME_LOADING = 45000;
+export const MAX_TIME_LOADING = 25000;
 export const NORMAL_TIME_WAIT = 15000;
-export const UPDATE_MAX_TIME_LOADING = 60000;
+export const UPDATE_MAX_TIME_LOADING = 30000;
 export const SCROLLING_TIME = 1500;
 export const MAX_ACCESS_COUNT = 3;
 export const MIN_SERVICE_COUNT = 1;
@@ -523,4 +527,4 @@ export const SLIDES_PROMOTIONS_TIME = 1500;
 export const COLUMNS_HEADER_GLOBAL_LEAGUE = ['POSICIÓN', 'CENTRO', 'PUNTOS', 'PCV', 'ACCIÓN'];
 export const COLUMNS_HEADER_GLOBAL_WITH_DETAILS = ['POSICIÓN', 'CENTRO', 'PUNTOS', 'PCV', 'ACCIÓN'];
 export const COLUMNS_HEADER_CENTRE_LEAGUE = ['MES', 'PUNTOS RECIBIDOS', 'COEFICIENTE DE VENTA'];
-export const COPY_MAIL = ['desarrollo@grupoicot.es', 'desarrollo2@grupoicot.es', 'desarrollo3@grupoicot.es', 'cau@grupoicot.es'];
+export const COPY_MAIL = ['desarrollo@grupoicot.es', 'cau@grupoicot.es'];

@@ -9,7 +9,7 @@ import { FaqComponent } from '../components/faq/faq.component';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { DatacheckService } from '../services/datacheck.service';
-import { EmployeeService } from '../services/employee.service';
+import { StorageService } from '../services/storage.service';
 import { UtilsService } from '../services/utils.service';
 import {
   MAX_TIME_LOADING, DEV_WORD_CREATE_FILE_ENVIRONMENT, CONFIRMATION_CREATION_IOS_FILE, ERROR_CREATE_FILE,
@@ -72,7 +72,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
   constructor(
     private notification: NotificationsService,
     private checkSvc: DatacheckService,
-    private employeeSvc: EmployeeService,
+    private storage: StorageService,
     private platform: Platform,
     private route: Router,
     private utils: UtilsService) {
@@ -85,7 +85,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
           }
         }).catch((ex) => {
           this.notification.baseThrowAlerts(ERROR.title, ERROR.msg);
-          this.utils.createError(ex, this.employeeSvc.employee.phone, this.route.url).then(result => {
+          this.utils.createError(ex, this.storage.employee.phone, this.route.url).then(result => {
             this.checkSvc.setErrors(result, UtilsService);
           });
         });
@@ -100,10 +100,10 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
   async ionViewWillEnter() {
     this.iconAux = PERSON_ICON;
     this.acceptToPolicy();
-    await this.employeeSvc.get(UNLOCK_REQUESTED).then((result) => {
+    await this.storage.get(UNLOCK_REQUESTED).then((result) => {
       this.isRequested = result;
     })
-    this.employeeSvc.get(ROUTE_CONTROL_ACCESS).then(async result => { //digito (validated) de control de solicitud de acceso
+    this.storage.get(ROUTE_CONTROL_ACCESS).then(async result => { //digito (validated) de control de solicitud de acceso
       if (result === null) {//aun no ha intentado acceder nunca
         await this.getLocaleEmployeeDt().then(res => {
           if (res === undefined || (res.dni === null || res.name === null)) {
@@ -113,14 +113,14 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
           }
         });
       } else {
-        this.employeeSvc.get(USERNAME).then((nick) => {
+        this.storage.get(USERNAME).then((nick) => {
           this.userForm.controls.user.setValue(nick);
         });
         this.routeAccessEmployee = result;
       }
-      this.employeeSvc.set(ROUTE_CONTROL_ACCESS, this.routeAccessEmployee);
+      this.storage.set(ROUTE_CONTROL_ACCESS, this.routeAccessEmployee);
     }).catch(ex => {
-      const contactEmployee = this.employeeSvc.employee !== undefined ? this.employeeSvc.employee?.phone : null;
+      const contactEmployee = this.storage.employee !== undefined ? this.storage.employee?.phone : null;
       this.utils.createError(ex, contactEmployee, this.route.url).then(result => {
         this.checkSvc.setErrors(result, UtilsService);
       });
@@ -143,7 +143,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
                 this.checkSvc.base = contenido;
               }
             }).catch(err => {
-              this.utils.createError(err, this.employeeSvc.employee.phone, this.route.url).then(result => {
+              this.utils.createError(err, this.storage.employee.phone, this.route.url).then(result => {
                 this.checkSvc.setErrors(result, UtilsService);
               });
             });
@@ -160,20 +160,20 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
    * politica de privacidad
    */
   acceptToPolicy() {
-    this.employeeSvc.get(PRIVACY_WORD).then(async (result) => {
+    this.storage.get(PRIVACY_WORD).then(async (result) => {
       if (result == null) {
         await this.notification.showPrivacy(POLICY_PRIVACY)
           .then(resultado => {
             if (resultado) {
               // Save aceptacion policy privacy
-              this.employeeSvc.set(PRIVACY_WORD, true);
+              this.storage.set(PRIVACY_WORD, true);
             } else {
               navigator['app'].exitApp();
             }
           });
       }
     }).catch(ex => {
-      this.utils.createError(ex, this.employeeSvc.employee?.phone, this.route.url).then(result => {
+      this.utils.createError(ex, this.storage.employee?.phone, this.route.url).then(result => {
         this.checkSvc.setErrors(result, UtilsService);
       });
     });
@@ -188,19 +188,19 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
     let totalData: number;
     let employeeData: any;
     // Registros locales
-    await this.employeeSvc.count().then((count) => {
+    await this.storage.count().then((count) => {
       totalData = count;
     });
 
     if (totalData > 1) {
       employeeData = {};
-      await this.employeeSvc.get(DNI).then((val) => {
+      await this.storage.get(DNI).then((val) => {
         employeeData.dni = val;
       });
-      await this.employeeSvc.get(NAME).then((val) => {
+      await this.storage.get(NAME).then((val) => {
         employeeData.name = val;
       });
-      await this.employeeSvc.get(USERNAME).then((value) => {
+      await this.storage.get(USERNAME).then((value) => {
         employeeData.username = value;
       });
       return employeeData;
@@ -217,7 +217,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
     }
 
     if (this.utils.version === undefined) {
-      await this.employeeSvc.get(VERSION_APP).then(result => {
+      await this.storage.get(VERSION_APP).then(result => {
         version = result;
       });
     } else {
@@ -257,7 +257,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
             this.notification.cancelLoad();
             this.utils.cancelControlNotifications();
             this.notification.baseThrowAlerts(ERROR_IN_LOGIN.title, ERROR_IN_LOGIN.msg);
-            this.utils.createError(ex, this.employeeSvc.employee.phone, this.route.url).then(result => {
+            this.utils.createError(ex, this.storage.employee.phone, this.route.url).then(result => {
             this.checkSvc.setErrors(result, UtilsService);
           });
         });
@@ -275,8 +275,8 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
     const msg = result.message;
     if (result.success && result.data !== undefined &&
       result.data.access_token !== undefined && msg === RESPONSE_LOGIN_SUCCESFULL) {
-        console.log(result);
-      await this.employeeSvc.setUser(result);
+        console.log(result.data.user);
+      await this.storage.setUser(result.data.user, result.data.access_token);
       this.route.navigate([DASHBOARD]);
       this.resetForm();
     } else {
@@ -355,8 +355,8 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
 
   async changingUserPass(userName?: string) {
     let user: any = {};
-    if (this.employeeSvc.employee === undefined) {
-      await this.employeeSvc.employeeBd.get(USERNAME).then((username_local) => {//employeSvc Storage Local
+    if (this.storage.employee === undefined) {
+      await this.storage.employeeBd.get(USERNAME).then((username_local) => {//employeSvc Storage Local
         if (username_local !== null && user.username !== null) {
           user.username = username_local;
         } else {
@@ -426,7 +426,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
         break;
       case RESPONSE_BLOCK_ACCOUNT:
         //CUENTA BLOQUEADA POR INTENTOS DE ACCESO SUPERADOS
-        this.isRequested = await this.employeeSvc.get(UNLOCK_REQUESTED);
+        this.isRequested = await this.storage.get(UNLOCK_REQUESTED);
         await this.notification.alertBaseNotifications(BLOCK_ACCOUNT.title, BLOCK_ACCOUNT.msg, true, this.isRequested, data).then(() => {
           if (!this.isRequested || this.isRequested == null) {
             this.lockAccount(data, true);
@@ -460,7 +460,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
               infoDevice = await this.checkSvc.getUuid();
             } catch (ex) {
               infoDevice = undefined;
-              this.utils.createError(ex, this.employeeSvc.employee.phone, this.route.url).then(result => {
+              this.utils.createError(ex, this.storage.employee.phone, this.route.url).then(result => {
                 this.checkSvc.setErrors(result, UtilsService);
               });
               this.notification.baseThrowAlerts(ERROR.title, ex);
@@ -505,7 +505,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
         }
       }).catch((ex) => {
         this.notification.baseThrowAlerts(ERROR.title, ex);
-        this.utils.createError(ex, this.employeeSvc.employee?.phone, this.route.url).then(result => {
+        this.utils.createError(ex, this.storage.employee?.phone, this.route.url).then(result => {
           this.checkSvc.setErrors(result, UtilsService);
         });
       });
@@ -534,14 +534,14 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
     if (result.message === RESPONSE_OK_RESULT || result.message === RESPONSE_REQUESTED) {
       if (result.data !== undefined) {
         const usernameEmployee = result.data.user;
-        this.employeeSvc.set(USERNAME, usernameEmployee);
+        this.storage.set(USERNAME, usernameEmployee);
       }
       // Se guardan los datos en el dispositivo [NOMBRE, DNI, USERNAME]
-      this.employeeSvc.set(NAME, fullName);
-      this.employeeSvc.set(DNI, dni);
+      this.storage.set(NAME, fullName);
+      this.storage.set(DNI, dni);
       this.routeAccessEmployee = 0;
-      this.employeeSvc.set(ROUTE_CONTROL_ACCESS, this.routeAccessEmployee);
-      this.employeeSvc.set(UNLOCK_REQUESTED, this.isRequested);
+      this.storage.set(ROUTE_CONTROL_ACCESS, this.routeAccessEmployee);
+      this.storage.set(UNLOCK_REQUESTED, this.isRequested);
     }
   }
 
@@ -637,8 +637,8 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
       this.loginSubcription.unsubscribe();
     }
     this.platform.pause.subscribe(() => {
-      this.employeeSvc.employeeListener.next(undefined);
-      this.notification.alertBaseNotifications(SESION_EXPIRED.title, SESION_EXPIRED.msg);
+      // this.storage.employeeListener.next(undefined);
+      // this.notification.alertBaseNotifications(SESION_EXPIRED.title, SESION_EXPIRED.msg);
     });
   }
 
@@ -668,7 +668,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
 
   async lockAccount(data: any, isRequested) {
     await this.checkSvc.unlockRequest(data).then(() => {
-      this.employeeSvc.set(UNLOCK_REQUESTED, isRequested);
+      this.storage.set(UNLOCK_REQUESTED, isRequested);
     });
   }
 

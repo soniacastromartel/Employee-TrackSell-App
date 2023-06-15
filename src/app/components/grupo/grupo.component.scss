@@ -1,0 +1,105 @@
+.center {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 10px;
+  }
+  
+  ion-note {
+    color: var(--ion-color-myblack);
+    font-size: smaller;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  h3 {
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  
+  }
+  
+  p {
+    font-size: small;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  
+  }
+  ion-datetime {
+    text-align: right !important;
+    font-weight: 900;
+    font-size: small;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    // padding-top: 0%;
+    display: inline;
+    float: right;
+    color: #000;
+    text-transform: uppercase;
+  }
+  
+  ion-icon{
+    color: #000;
+  }
+  ion-card {
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: visible;
+    margin: 16px 0 24px;
+    position: relative;
+    padding-top: 10px;
+    margin-top: 45px;
+  
+    .img-wrapper {
+      position: absolute;
+      left: 50%;
+      top: -50px;
+      transform: translateX(-50%);
+      img {
+        border-radius: 40px;
+        width: 80px;
+        height: 80px;
+      }
+  
+      ion-button {
+        --border-width: 1px;
+        --border-color: var(--ion-color-light-shade);
+        --border-style: solid;
+        --padding-start: 0;
+        --padding-end: 0;
+        --padding-bottom: 0;
+        --padding-top: 0;
+  
+        --border-radius: 50%;
+        height: 26px;
+        width: 26px;
+  
+        position: absolute;
+        right: -5px;
+        bottom: -10px;
+  
+        ion-icon {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+
+  .myPositionLbl {
+    color: var(--ion-color-myblack);
+    font-weight: 600;
+    text-align: center;
+}
+
+.myPosition {
+    color: var(--ion-color-myblack);
+    font-size: x-large;
+    font-weight: 900;
+    text-align: center;
+
+}
+.card {
+  --background: rgb(37, 179, 129);
+ }
+
+ img{
+  width: 60px;
+  height: auto;
+
+ }

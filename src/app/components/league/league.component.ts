@@ -6,7 +6,7 @@ import { IonDatetime, ViewWillLeave, IonRadioGroup, IonContent } from '@ionic/an
 import { NotificationsService } from '../../services/notifications.service';
 import { PageService } from '../../services/page.service';
 import { DatacheckService } from '../../services/datacheck.service';
-import { EmployeeService } from '../../services/employee.service';
+import { StorageService } from '../../services/storage.service';
 import { UtilsService } from '../../services/utils.service';
 import {
   LOADING_CONTENT, COLUMNS_HEADER_CENTRE_LEAGUE,
@@ -53,7 +53,7 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
 
   constructor(private pageSvc: PageService,
     private checkSvc: DatacheckService,
-    private employeeSvc: EmployeeService,
+    private storage: StorageService,
     private notification: NotificationsService,
     private screenOrientation: ScreenOrientation,
     public utils: UtilsService) {
@@ -108,7 +108,7 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
       this.columnsHeader = COLUMNS_HEADER_GLOBAL_LEAGUE;
       this.utils.controlToNotifications(MAX_TIME_LOADING);
       this.notification.loadingData(LOADING_CONTENT);
-      await this.checkSvc.getClasificationLeague(centre, this.searchMonth, this.actualYear, this.employeeSvc.actualToken)
+      await this.checkSvc.getClasificationLeague(centre, this.searchMonth, this.actualYear, this.storage.actualToken)
         .then(data => {
           this.subcriptionLeague = data.subscribe(res => {
             this.notification.cancelLoad();

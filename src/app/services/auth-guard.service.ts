@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { EmployeeService } from './employee.service';
-import { HOME } from '../app.constants';
+import { StorageService } from './storage.service';
+import { DASHBOARD, HOME } from '../app.constants';
 import { NotificationsService } from './notifications.service';
 
 @Injectable({
@@ -11,12 +11,12 @@ export class AuthGuardService implements CanActivate {
 
   constructor(
     private router: Router,
-    private employeeSvc: EmployeeService,
+    private storage: StorageService,
     private notification: NotificationsService) { }
 
 canActivate(): Promise<boolean> {
     return new Promise(async (resolve) => {
-      this.employeeSvc.employeeListener.subscribe(res => {
+      this.storage.employeeListener.subscribe(res => {
         if(res){
           resolve(true);
         } else{

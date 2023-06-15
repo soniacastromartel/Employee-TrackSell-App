@@ -79,29 +79,31 @@ export class DatacheckService {
     this.updatingVersion = UPDATING_VERSION;
     this.getDiscounts = AVAILABLES_DISCOUNTS;
     this.logsApp = APP_LOGS;
-    this.unlock_request= UNLOCK_REQUEST;
-    
+    this.unlock_request = UNLOCK_REQUEST;
+
 
     this.options = {
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': '*'
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "*",
+
       }
     };
   }
 
-    /**
- * Crea la cabecera de la consulta (Reutilizable)
- *
- * @param tk Token de acceso de empleado
- * @returns Cabecera generada
- */
+  /**
+   * Crea la cabecera de la consulta (Reutilizable)
+   *
+   * @param tk Token de acceso de empleado
+   * @returns Cabecera generada
+   */
   setHeader(tk: string) {
     return {
       headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + tk
+        "Accept": "application/json",
+        "Authorization": "Bearer " + tk
       })
     };
   }
@@ -109,15 +111,15 @@ export class DatacheckService {
   /**
    * Devuelve un array con las opciones del menú
    */
-  getMenuOpts(){
-    return this.http.get <Componente[]>('/assets/data/sidebar-opts.json');
+  getMenuOpts() {
+    return this.http.get<Componente[]>('/assets/data/sidebar-opts.json');
   }
 
   /**
    * Devuelve un array con las secciones del home
    */
-  getSections(){
-    return this.http.get <Section[]>('/assets/data/sections.json');
+  getSections() {
+    return this.http.get<Section[]>('/assets/data/sections.json');
   }
 
   /**
@@ -127,6 +129,7 @@ export class DatacheckService {
    * @returns Nueva version estable disponible o no
    */
   async checkingVersion(version: string, tk: string) {
+    if(version==undefined){version = "0.0.1";}
     return this.http.get(this.base + this.checkVersion + '?version=' + version, this.setHeader(tk));
   }
 
@@ -226,15 +229,15 @@ export class DatacheckService {
     return this.http.post(this.base + this.newAccess, info, this.options);
   }
 
-   /**
-   * Solicitud de desbloqueo de cuenta de usuario
-   *
-   * @param data User data
-   * @returns request response
-   */
-    async unlockRequest(data: any) {
-      return this.http.post(this.base + this.unlock_request, data, this.options).subscribe();
-    }
+  /**
+  * Solicitud de desbloqueo de cuenta de usuario
+  *
+  * @param data User data
+  * @returns request response
+  */
+  async unlockRequest(data: any) {
+    return this.http.post(this.base + this.unlock_request, data, this.options).subscribe();
+  }
 
   /**
    * Realiza solicitud de restauración de contraseña

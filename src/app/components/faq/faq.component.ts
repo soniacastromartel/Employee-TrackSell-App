@@ -7,7 +7,7 @@ import { UtilsService } from '../../services/utils.service';
 import { LOADING_CONTENT, NO_DATA_FAQ, MAX_TIME_LOADING, MIN_VERSION_APP, EMPTY_STRING } from '../../app.constants';
 import { Subscription } from 'rxjs';
 import { InfoFAQComponent } from '../info-faq/info-faq.component';
-import { EmployeeService } from '../../services/employee.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-faq',
@@ -46,7 +46,7 @@ export class FaqComponent implements OnInit, ViewWillEnter {
     private notification: NotificationsService,
     private checkSvc: DatacheckService,
     private utils: UtilsService,
-    public employeeSvc: EmployeeService
+    public storage: StorageService
   ) { }
 
   /**
@@ -81,7 +81,7 @@ export class FaqComponent implements OnInit, ViewWillEnter {
 
   ionViewWillEnter(){
     // Mostrar opcion descarga actualizacion en FAQ?
-    this.isShowPendingUpdate = this.employeeSvc.employee !== undefined &&
+    this.isShowPendingUpdate = this.storage.employee !== undefined &&
     this.utils.pendingUpdate;
   }
 

@@ -9,7 +9,7 @@ import { LOADING_CENTERS, SCROLLING_TIME, LOADING_SERVICES, MAX_TIME_LOADING, EM
 import { CategoryService } from '../../models/category_service';
 import { DatacheckService } from '../../services/datacheck.service';
 import { CentersUtilsService } from '../../services/centers-utils.service';
-import { EmployeeService } from '../../services/employee.service';
+import { StorageService } from '../../services/storage.service';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../../services/utils.service';
 import { PageService } from '../../services/page.service';
@@ -60,7 +60,7 @@ export class ListOfServicesComponent implements ViewWillEnter, ViewWillLeave {
 
 
   constructor(
-    private employeeSvc: EmployeeService,
+    private storage: StorageService,
     private notification: NotificationsService,
     public sliceText: SliceLargeTextPipe,
     private centersUtls: CentersUtilsService,
@@ -116,7 +116,7 @@ async ionViewWillEnter(){
   selectCenter(centro: any) {
     this.utils.controlToNotifications(MAX_TIME_LOADING);
     this.notification.loadingData(LOADING_SERVICES);
-    this.checkSvc.getServicesOf(centro.id, false, this.employeeSvc.actualToken).then((result) => {
+    this.checkSvc.getServicesOf(centro.id, false, this.storage.actualToken).then((result) => {
           this.servicesSubcription = result.subscribe((category: any) => {
           this.categoryOfServices = category.data;
           this.destino = centro;

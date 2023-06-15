@@ -12,7 +12,7 @@ import {
   CANCEL_OPTION
 } from '../../app.constants';
 import { DatacheckService } from '../../services/datacheck.service'; //llamadas http
-import { EmployeeService } from '../../services/employee.service';
+import { StorageService } from '../../services/storage.service';
 import * as moment from 'moment';
 import { UtilsService } from '../../services/utils.service';
 import { ViewWillEnter } from '@ionic/angular';
@@ -62,7 +62,7 @@ export class MyIncentivesComponent implements ViewWillEnter, AfterContentInit {
 
   constructor(private notification: NotificationsService,
     private checkSvc: DatacheckService,
-    private employeeSvc: EmployeeService,
+    private storage: StorageService,
     private utils: UtilsService,
     public pipeLargeTxt: SliceLargeTextPipe
   ) { }
@@ -149,6 +149,7 @@ export class MyIncentivesComponent implements ViewWillEnter, AfterContentInit {
    * @param year Año a consultar, si es undefined se omite.
    */
   async searchingIncentivesEmployee(month?: number, year?: number) {
+    console.log(this.storage.user);
     this.notification.loadData = true;
     if (this.subcriptionData !== undefined) {
       this.subcriptionData.unsubscribe();
@@ -165,7 +166,7 @@ export class MyIncentivesComponent implements ViewWillEnter, AfterContentInit {
       }
     }
 
-    await this.checkSvc.getIncentivesForEmployee(this.employeeSvc.employee.username, this.employeeSvc.actualToken, month, year)
+    await this.checkSvc.getIncentivesForEmployee(this.storage.employee.username, this.storage.actualToken, month, year)
       .then(result => {
         this.subcriptionData = result.subscribe((incentives: any) => {
           if (incentives.data) {

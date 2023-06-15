@@ -12,6 +12,7 @@ export interface Employee {
   email: string;
   centre_id: number;
   centreAux: Centre[];
+  centre: Centre;
   category: number;
   validated: number;
   pending_password: string;
