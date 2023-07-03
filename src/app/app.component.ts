@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { Componente } from './models/componente';
@@ -11,6 +11,8 @@ import { PageService } from './services/page.service';
 import { Router } from '@angular/router';
 import { StorageService } from './services/storage.service';
 import { UserActivityService } from './services/user-activity.service';
+import { MenuService } from './services/menu.service';
+
 
 import { DASHBOARD, USERNAME } from './app.constants';
 import { Employee } from './models/employee';
@@ -26,10 +28,27 @@ export class AppComponent implements OnInit {
   componentes: Observable<Componente[]>;
   user: Employee;
   token: string;
+  isLandscape = false;
+
   private tokenSubscription: Subscription | undefined;
 
-  constructor(private platform: Platform, private pageSvc: PageService, private router: Router, private userActivityService: UserActivityService, private cookieService: CookieService,
-    private datacheck: DatacheckService, private notification: NotificationsService, private storage: StorageService, private swUpdate: SwUpdate) {
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: any) {
+    const isLandscape = window.innerWidth > window.innerHeight;
+    this.menuService.setIsLandscape(isLandscape);
+    this.menuService.updateMenuVisibility(!isLandscape);
+  }
+
+  constructor(private platform: Platform, 
+    private pageSvc: PageService, 
+    private router: Router, 
+    private userActivityService: UserActivityService, 
+    private cookieService: CookieService,
+    private datacheck: DatacheckService, 
+    private notification: NotificationsService, 
+    private storage: StorageService, 
+    private swUpdate: SwUpdate,
+    private menuService: MenuService) {
     this.platform.ready().then(() => {
       this.initializeApp();
       // the native platform puts the application into the background
@@ -40,9 +59,13 @@ export class AppComponent implements OnInit {
       });
 
     });
+
   }
 
   ngOnInit() {
+    const isLandscape = window.innerWidth > window.innerHeight;
+    this.menuService.setIsLandscape(isLandscape);
+    this.menuService.updateMenuVisibility(!isLandscape);
     this.componentes = this.datacheck.getMenuOpts();
     this.tokenSubscription = this.storage.token.subscribe(token => {
       this.token = token;

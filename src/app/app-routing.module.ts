@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from './services/auth-guard.service';
 
-import { MiCentroComponent } from './components/mi-centro/mi-centro.component';
-import {GrupoComponent}from './components/grupo/grupo.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -23,6 +20,14 @@ const routes: Routes = [
   {
     path: 'rankings',
     loadChildren: () => import('./pages/rankings/rankings.module').then( m => m.RankingsPageModule)
+  },
+  {
+    path: 'incentives',
+    loadChildren: () => import('./pages/incentives/incentives.module').then( m => m.IncentivesPageModule)
+  },
+  {
+    path: 'league',
+    loadChildren: () => import('./pages/league/league.module').then( m => m.LeaguePageModule)
   }
   
 ];

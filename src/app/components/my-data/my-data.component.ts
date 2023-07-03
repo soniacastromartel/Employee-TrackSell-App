@@ -33,6 +33,7 @@ export class MyDataComponent implements OnInit {
    * mostrar su informacion
    */
   ngOnInit() {
+    console.log('onInit');
     this.storage.currentUserListener.subscribe(res => {
       console.log(res);
         if(res){

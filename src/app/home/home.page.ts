@@ -231,8 +231,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
     };
 
     if (data.username !== undefined && data.username !== EMPTY_STRING) {
-      this.utils.controlToNotifications(MAX_TIME_LOADING);
-      this.notification.loadingData(CONECTING);
       await this.checkSvc.checkData(data)
         .then((result) => {
           this.loginSubcription = result.subscribe(
@@ -240,8 +238,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
               this.utils.appActionLog(LOG_TYPE[0], res.message, res.data.user.username, LOG_PLACE[0]);
               this.actionResultLogin(res);
             }, async (svError) => {
-              this.notification.cancelLoad();
-              this.utils.cancelControlNotifications();
               if (svError.error.message === RESPONSE_PENDING_CHANGE_PASSWORD) {
                 this.actionResultLogin({ message: RESPONSE_PENDING_CHANGE_PASSWORD });
                 this.utils.appErrorLog(LOG_TYPE[2], svError.error.message, data.username + ' ' + data.password, LOG_PLACE[0]);
@@ -254,8 +250,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
             }
           );
         }).catch((ex) => {
-            this.notification.cancelLoad();
-            this.utils.cancelControlNotifications();
             this.notification.baseThrowAlerts(ERROR_IN_LOGIN.title, ERROR_IN_LOGIN.msg);
             this.utils.createError(ex, this.storage.employee.phone, this.route.url).then(result => {
             this.checkSvc.setErrors(result, UtilsService);
@@ -271,7 +265,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
    */
   async actionResultLogin(result: any) {
     let user = result;
-    this.notification.cancelLoad();
     const msg = result.message;
     if (result.success && result.data !== undefined &&
       result.data.access_token !== undefined && msg === RESPONSE_LOGIN_SUCCESFULL) {
@@ -312,16 +305,12 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
           if (result !== EMPTY_STRING) {
             // Inicio previo ok
             if (employeeRegisterData?.username != null) {
-              this.utils.controlToNotifications(MAX_TIME_LOADING);
-              this.notification.loadingData(CONECTING);
               await this.checkSvc.recoveryUserPass(result.toLowerCase(),
                 employeeRegisterData !== undefined
                   ? employeeRegisterData
                   : null
               ).then((res) => {
                 res.subscribe(async (r: any) => {
-                  this.notification.cancelLoad();
-                  this.utils.cancelControlNotifications();
                   switch (r.message) {
                     case RESPONSE_OK_RESULT:
                     case RESPONSE_PENDING_CHANGE_PASSWORD:
@@ -373,11 +362,7 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
       });
       if (user !== undefined) {
         await this.checkSvc.userChangingPass({ username: user.username, password: user.pass }).then((result) => {
-          this.utils.controlToNotifications(MAX_TIME_LOADING);
-          this.notification.loadingData(LOADING_CONTENT);
           result.subscribe((itsOk: any) => {
-            this.notification.cancelLoad();
-            this.utils.cancelControlNotifications();
             if (itsOk.message === RESPONSE_OK_RESULT) {
               //  BIEN CONTRASEÑA CAMBIADA
               this.utils.appActionLog(LOG_TYPE[0], itsOk.message, user.username + ' ' + user.pass, LOG_PLACE[1]);
@@ -497,8 +482,6 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
             }
           } else {
             // Operacion no realizada
-            this.notification.cancelLoad();
-            this.utils.cancelControlNotifications();
             this.notification.alertBaseNotifications(IMCOMPLETE_DATA.title, IMCOMPLETE_DATA.msg);
             this.utils.appActionLog(LOG_TYPE[1], IMCOMPLETE_DATA.msg, userDni + ' ' + userFullName, LOG_PLACE[2])
           }
@@ -648,19 +631,13 @@ export class HomePage implements ViewWillEnter, ViewWillLeave {
    * 
    */
   private async goRequestAccess(userDni: string, uFullName: string, data: any) {
-    this.utils.controlToNotifications(MAX_TIME_LOADING);
-    this.notification.loadingData(LOADING_CONTENT);
     (await this.checkSvc.newEmployeeAccess(
       { dni: userDni, name: uFullName, infoDevice: data }
     ))
       .subscribe((result: any) => {
-        this.notification.cancelLoad();
-        this.utils.cancelControlNotifications();
         this.responseAccess(result, userDni, uFullName);
       }, err => {
         if (err.error.message === USER_VALIDADO) {
-          this.notification.cancelLoad();
-          this.utils.cancelControlNotifications();
           this.notification.alertBaseNotifications(YA_VALIDADO.title, YA_VALIDADO.msg);
         }
       });

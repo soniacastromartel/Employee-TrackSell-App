@@ -74,14 +74,11 @@ export class ListOfServicesComponent implements ViewWillEnter, ViewWillLeave {
   */
 async ionViewWillEnter(){
   if (this.centersUtls.centers === undefined){
-    this.notification.loadingData(LOADING_CENTERS);
     await this.centersUtls.getCenterOfSystem().then(() => {
       this.centros = this.centersUtls.centers;
       this.centrosShow = this.centros;
-      this.notification.cancelLoad();
-      this.utils.cancelControlNotifications();
     }).catch(ex => {
-      this.notification.cancelLoad();
+
     });
   } else{
     this.centros = this.centersUtls.centers;
@@ -114,15 +111,11 @@ async ionViewWillEnter(){
    * @param centro Centro elegido
    */
   selectCenter(centro: any) {
-    this.utils.controlToNotifications(MAX_TIME_LOADING);
-    this.notification.loadingData(LOADING_SERVICES);
     this.checkSvc.getServicesOf(centro.id, false, this.storage.actualToken).then((result) => {
           this.servicesSubcription = result.subscribe((category: any) => {
           this.categoryOfServices = category.data;
           this.destino = centro;
           this.destino.centre = centro.name;
-          this.notification.cancelLoad();
-          this.utils.cancelControlNotifications();
         });
       });
   }

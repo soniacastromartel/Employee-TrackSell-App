@@ -25,10 +25,9 @@ import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/n
 import { ErrorHandlerInterceptor } from './interceptors/error-handler.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HeadersInterceptor } from './interceptors/header.interceptor';
+import { HttpLoadingInterceptor } from './interceptors/http-loading.interceptor';
 
 import { UserActivityService } from './services/user-activity.service';
-
-
 
 import { CookieService } from 'ngx-cookie-service';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -64,6 +63,7 @@ import { HeaderComponent } from './components/header/header.component';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     // { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpLoadingInterceptor, multi: true },
     NotificationsService, 
     DatacheckService, 
     AppVersion, 

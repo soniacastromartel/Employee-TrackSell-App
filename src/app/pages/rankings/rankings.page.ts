@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IonTabs, Platform } from '@ionic/angular';
+import { Location } from '@angular/common';
+import { UtilsService } from 'src/app/services/utils.service';
+
 
 
 @Component({
@@ -10,7 +11,7 @@ import { IonTabs, Platform } from '@ionic/angular';
 })
 export class RankingsPage implements OnInit {
 
-  constructor(private platform: Platform, private activatedRoute: ActivatedRoute) {
+  constructor(private location: Location, private utils: UtilsService) {
 
   }
 
@@ -22,10 +23,8 @@ export class RankingsPage implements OnInit {
     // Get the selected tab's ID from the event
     const selectedTabId = $event.tab;
     if (selectedTabId === 'mi-centro') {
-      // Reload content for 'mi-centro' tab
       this.reloadMiCentroContent();
     } else if (selectedTabId === 'grupo') {
-      // Reload content for 'grupo' tab
       this.reloadGrupoContent();
     }
   }
@@ -39,7 +38,12 @@ export class RankingsPage implements OnInit {
   }
 
 
+  goBack() {
+    this.location.back();
+  }
 
+
+ 
 
 
 }

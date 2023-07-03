@@ -63,9 +63,6 @@ export class FaqComponent implements OnInit, ViewWillEnter {
         this.version = MIN_VERSION_APP;
         });
     }
-
-      this.notification.loadingData(LOADING_CONTENT);
-      this.utils.controlToNotifications(MAX_TIME_LOADING);
       this.subcriptionFAQ = (await this.checkSvc.getOptionsFAQ())
         .subscribe((result: any) => {
           if (result !== undefined) {
@@ -74,8 +71,7 @@ export class FaqComponent implements OnInit, ViewWillEnter {
               this.categorizeFAQ(element, false);
             });
           }
-          this.notification.cancelLoad();
-          this.utils.cancelControlNotifications();
+
       });
   }
 

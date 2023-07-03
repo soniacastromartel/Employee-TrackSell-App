@@ -1,4 +1,7 @@
 <ion-content #content [scrollEvents]="true" (ionScroll)="onScroll($event)" (ionScrollEnd)="hiddenArrow()">
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-row>
     <ion-col size="4"></ion-col>
     <ion-col size="8">
@@ -34,12 +37,12 @@
           </ion-avatar>
         </div>
         <div style="margin-left: 10px;">
-        <ion-label>
-          <h3>{{ranking.employee | uppercase |stringToArray}}</h3>
-          <p> <ion-icon slot="start" name="business-outline"></ion-icon> {{ranking.centre}}</p>
-          <p><ion-icon slot="start" name="card-outline"></ion-icon> VENTA: {{ranking.total_price}} €</p>
-        </ion-label>
-      </div>
+          <ion-label>
+            <h3>{{ranking.employee | uppercase |stringToArray}}</h3>
+            <p> <ion-icon slot="start" name="business-outline"></ion-icon> {{ranking.centre}}</p>
+            <p><ion-icon slot="start" name="card-outline"></ion-icon> VENTA: {{ranking.total_price}} €</p>
+          </ion-label>
+        </div>
       </ion-item>
 
     </ion-list>

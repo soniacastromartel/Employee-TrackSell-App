@@ -20,3 +20,11 @@ ion-content{
 ion-icon{
     color: var(--ion-color-icot);
 }
+
+.custom-menu {
+    display: block; /* or any other styling you use for the menu when it's shown */
+  }
+  
+  .custom-menu.menu-open {
+    display: none; /* hide the menu when isLandscape is true */
+  }

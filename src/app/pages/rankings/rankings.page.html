@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button>
+      <ion-button (click)="goBack()">
         <ion-icon name="arrow-back-circle" color="light" size="large"></ion-icon>
-      </ion-back-button>
+      </ion-button>
     </ion-buttons>
     <ion-note>RANKINGS</ion-note>
     <ion-buttons slot="end">
@@ -14,7 +14,8 @@
 
 
 <ion-content class="bg-transparent">
-  <ion-tabs (ionTabsDidChange) = "tabChanged($event)">
+
+  <ion-tabs (ionTabsDidChange)="tabChanged($event)">
     <ion-tab-bar slot="bottom">
       <ion-tab-button id="micentro" tab="mi-centro" selected>
         <ion-icon name="person-circle"></ion-icon>
@@ -27,5 +28,3 @@
     </ion-tab-bar>
   </ion-tabs>
 </ion-content>
-
-

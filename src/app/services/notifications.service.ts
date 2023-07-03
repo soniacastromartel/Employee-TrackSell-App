@@ -90,6 +90,9 @@ export class NotificationsService {
     return await updating.onDidDismiss();
   }
 
+  /**
+   * Loads on updating the app version
+   */
   async updatingApp() {
     this.loadOp = true;
     this.loadData = true;
@@ -109,6 +112,7 @@ export class NotificationsService {
       this.loadOp = false;
       this.loadData = false;
     }, (ex) => {
+      console.log(ex);
       this.loadOp = false;
       this.loadData = false;
     });
@@ -599,7 +603,7 @@ export class NotificationsService {
     const infoToast = await this.toastCtrl.create({
       header: header,
       message: '<br>' + info,
-      duration: 2000,
+      duration: 4000,
       animated: true,
       cssClass: 'toastNotifications',
       mode: 'ios',
@@ -872,7 +876,6 @@ export class NotificationsService {
     this.closeAlert();
     this.closeModal();
     this.closePopover();
-    this.cancelLoad();
   }
 
   async closeModal(extra?) {
@@ -893,12 +896,12 @@ export class NotificationsService {
     }
   }
 
-  async cancelLoad() {
-    const loader = await this.loadingCtrl.getTop();
-    if (loader !== undefined) {
-      await this.loadingCtrl.dismiss();
-    }
-  }
+  // async cancelLoad() {
+  //   const loader = await this.loadingCtrl.getTop();
+  //   if (loader !== undefined) {
+  //     await this.loadingCtrl.dismiss();
+  //   }
+  // }
 
   async closePopover(extra?) {
     const notification = await this.popoCtrl.getTop();

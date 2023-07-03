@@ -102,8 +102,6 @@ export class StorageService {
     // Se comprueban y actualizan los datos en
     // caso necesario.
     this.updateEmployeeData().then(res => {
-      console.log(res);
-      console.log(this.employee);
       if (res !== undefined) {
         if (res.category !== this.employee.category) {
           this.set(CATEGORY, this.employee.category);
@@ -132,7 +130,6 @@ export class StorageService {
         this.set(CENTRE_ID, this.employee.centre_id);
       }
     });
-console.log(token);
     this.actualToken = token;
     // this.setToken(this.actualToken);
     this.userActivityService.login(this.actualToken);

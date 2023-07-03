@@ -26,6 +26,7 @@ import { File, DirectoryEntry} from '@ionic-native/file/ngx';
 import { StorageService } from './storage.service';
 import { ConnectionService } from './connection.service';
 import { Error } from '../models/Error';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -188,14 +189,14 @@ export class UtilsService {
    * mantener una notification en
    * pantalla
    */
-  async controlToNotifications(duration: number) {
-    if (this.timeControl !== undefined) {
-      clearTimeout(this.timeControl);
-    }
-    this.timeControl = setTimeout(() => {
-      this.notification.cancelLoad();
-    }, duration);
-  }
+  // async controlToNotifications(duration: number) {
+  //   if (this.timeControl !== undefined) {
+  //     clearTimeout(this.timeControl);
+  //   }
+  //   this.timeControl = setTimeout(() => {
+  //     this.notification.cancelLoad();
+  //   }, duration);
+  // }
 
   /**
    * Cancela el control de tiempo
@@ -254,8 +255,8 @@ export class UtilsService {
    * @param tk Token employee
    */
     async checkingUpdate(tk: string){
-    this.notification.loadingData(COLLECTING_INFO);
-    this.controlToNotifications(MAX_TIME_LOADING);
+    // this.notification.loadingData(COLLECTING_INFO);
+    // this.controlToNotifications(MAX_TIME_LOADING);
       // Comprobacion de version actual instalada en dispositivo
     await this.checkSvc.checkingVersion(this.version, tk)
     .then(result => {
@@ -353,7 +354,6 @@ export class UtilsService {
         this.notification.alertOp = false;
       }
     } catch(ex) {
-      this.notification.cancelLoad();
       this.notification.baseThrowAlerts(ERROR.title, UPDATE_ERROR.msg);
     }
   }
@@ -374,10 +374,6 @@ export class UtilsService {
      */
   async updateAndroidApp(fileName: string) {
     this.base = this.checkSvc.base;
-    if (!this.notification.loadData){
-      this.controlToNotifications(NORMAL_TIME_WAIT);
-      this.notification.loadingData(LOADING_CONTENT);
-    }
     // Control extra para la descarga de actualizacion
     const controlUpdate = setTimeout(()=>{
       ApkUpdater.stop();
@@ -385,8 +381,6 @@ export class UtilsService {
     await ApkUpdater.download(this.base + BASE_UPDATE_LINK + fileName)
       .then(async res => {
         if (res !== undefined) {
-          this.notification.cancelLoad();
-          this.notification.loadingData(LOADING_CONTENT);
           // Si en este punto llega ok (sin tardar) se cancela control extra
           clearTimeout(controlUpdate);
           // Se realiza la instalación y continúa el flujo normal
@@ -399,10 +393,8 @@ export class UtilsService {
             });
         }
       }).then(() => {
-        this.notification.cancelLoad();
       }).catch((ex: any) => {
         this.pendingUpdate = true;
-        this.notification.cancelLoad();
         if (!ex.stack.startsWith(ERROR_CANCEL_UPDATE)) {
           this.notification.baseThrowAlerts(UPDATE_ERROR.title, UPDATE_ERROR.msg);
         } else {
@@ -431,8 +423,6 @@ export class UtilsService {
   async checkNotUpdate(isSum: boolean = false) {
     return await this.checkSvc.notUpdate(this.storage.employee.username, isSum)
       .then((count)=>{
-        this.notification.cancelLoad();
-        this.cancelControlNotifications();
         return count;
       });
   }
@@ -561,12 +551,27 @@ export class UtilsService {
    * @param ex 
    */
   async actionsCatch(ex: any = null){
-    this.notification.cancelLoad();
-    this.cancelControlNotifications();
     if (ex !== null) {
       this.notification.baseThrowAlerts(ERROR.title, ex);
     }
   }
+
+  /**
+ * Handle the page reload when pulling down the page
+ * @param event 
+ */
+  handleRefresh(event) {
+    console.log('refresing')
+    setTimeout(() => {
+      ngOnInit();
+      // Any calls to load data go here
+      event.target.complete();
+    }, 2000);
+  }
 }
 
+
+function ngOnInit() {
+  throw new Error('Function not implemented.');
+}
 

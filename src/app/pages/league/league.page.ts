@@ -1,29 +1,25 @@
-import { COLUMNS_HEADER_GLOBAL_LEAGUE, YEAR, COLUMNS_HEADER_GLOBAL_WITH_DETAILS } from './../../app.constants';
-/* eslint-disable radix */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonDatetime, ViewWillLeave, IonRadioGroup, IonContent } from '@ionic/angular';
-import { NotificationsService } from '../../services/notifications.service';
-import { PageService } from '../../services/page.service';
-import { DatacheckService } from '../../services/datacheck.service';
-import { StorageService } from '../../services/storage.service';
-import { UtilsService } from '../../services/utils.service';
-import {
-  LOADING_CONTENT, COLUMNS_HEADER_CENTRE_LEAGUE,
-  SPANISH_MONTHS_VALUES, MONTH, MAX_TIME_LOADING,
-  NONE, DISPLAY_BLOCK
-} from '../../app.constants';
+import { IonContent, IonDatetime, IonRadioGroup, ViewWillLeave } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { SPANISH_MONTHS_VALUES, COLUMNS_HEADER_GLOBAL_LEAGUE, COLUMNS_HEADER_GLOBAL_WITH_DETAILS, COLUMNS_HEADER_CENTRE_LEAGUE, MONTH, NONE, DISPLAY_BLOCK } from 'src/app/app.constants';
+import { DatacheckService } from 'src/app/services/datacheck.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
+import { PageService } from 'src/app/services/page.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { UtilsService } from 'src/app/services/utils.service';
+
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
-import * as moment from 'moment';
+import { Location } from '@angular/common';
+import { MenuService } from 'src/app/services/menu.service';
+
 
 @Component({
   selector: 'app-league',
-  templateUrl: './league.component.html',
-  styleUrls: ['./league.component.scss'],
+  templateUrl: './league.page.html',
+  styleUrls: ['./league.page.scss'],
 })
-export class LeagueComponent implements OnInit, ViewWillLeave {
-  @ViewChild('selectorDate') selectorDate: IonDatetime;
+export class LeaguePage implements OnInit, ViewWillLeave {
+ @ViewChild('selectorDate') selectorDate: IonDatetime;
   @ViewChild('typeGroup') typeGroup: IonRadioGroup;
   @ViewChild('content') content: IonContent;
 
@@ -39,6 +35,7 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
   actualYear: number;
   searchMonth: number;
   isScrolling: boolean;
+  // isLandscape: boolean;
 
   date = new Date();
   myDate;
@@ -52,11 +49,13 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
   subcriptionLeague: Subscription;
 
   constructor(private pageSvc: PageService,
+    private location: Location,
     private checkSvc: DatacheckService,
     private storage: StorageService,
     private notification: NotificationsService,
     private screenOrientation: ScreenOrientation,
-    public utils: UtilsService) {
+    public utils: UtilsService,
+    private menuService: MenuService) {
     this.myDate = this.date.toISOString();
     this.dateValue = this.date;
   }
@@ -65,6 +64,9 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
    * Bloquea la orientación de la pantalla del dispositivo a horizontal y carga los datos de la liga según la fecha default del selector.
    */
   async ngOnInit() {
+    this.menuService.setIsLandscape(true);
+    this.menuService.updateMenuVisibility(false);
+    console.log('onInit');
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
     this.columnsHeader = COLUMNS_HEADER_GLOBAL_LEAGUE;
     this.selectingType();
@@ -80,9 +82,7 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
    * @param centre Centro a consultar
    */
   async getClasificationLeague(centre: string, ev: any = null) {
-    if (!this.loadingData) {
       this.loadingData = true;
-
       if (this.subcriptionLeague !== undefined) {
         this.subcriptionLeague.unsubscribe();
       }
@@ -106,12 +106,9 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
       }
 
       this.columnsHeader = COLUMNS_HEADER_GLOBAL_LEAGUE;
-      this.utils.controlToNotifications(MAX_TIME_LOADING);
-      this.notification.loadingData(LOADING_CONTENT);
       await this.checkSvc.getClasificationLeague(centre, this.searchMonth, this.actualYear, this.storage.actualToken)
         .then(data => {
           this.subcriptionLeague = data.subscribe(res => {
-            this.notification.cancelLoad();
             this.utils.cancelControlNotifications();
             centre !== null ? this.centreDetails = centre : this.centreDetails = undefined;
             if (centre === null && this.consultingMonth) {
@@ -126,19 +123,17 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
             this.centreDetails !== undefined ?
               this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT) :
               this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
-            setTimeout(() => {
-              this.notification.cancelLoad();
-              this.utils.cancelControlNotifications();
-            }, 1000);
+          
           });
         });
-    }
+    
   }
 
   /** Detecta cambio del radioGroup
    * Cambia la consulta [MENSUAL - ANUAL]
    */
   async selectingType() {
+    console.log(this.dateSearch);
     if (this.typeGroup) {
       this.consultingMonth = this.typeGroup.value === MONTH;
       await this.getDateFormat(this.typeGroup.value);
@@ -146,6 +141,7 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
       this.consultingMonth = true;
       await this.getDateFormat(MONTH);
     }
+    console.log(this.consultingMonth);
   }
 
   /**
@@ -153,18 +149,19 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
    * @param typeSearch 
    */
   async getDateFormat(typeSearch: string) {
-    if (!this.loadingData) {
-      if (typeSearch !== MONTH) {
-        this.dateValue = new Date();
-      }
-      this.searchMonth = this.dateValue.getMonth() + 1;
+    if (this.consultingMonth) {
       this.actualYear = this.dateValue.getFullYear();
+      this.searchMonth = new Date(this.dateValue).getMonth() + 1;
       this.dateSearch = SPANISH_MONTHS_VALUES[this.searchMonth - 1] + '/' + this.actualYear;
+    } else {
+      this.dateValue = new Date();
+      this.actualYear = this.dateValue.getFullYear();
+      this.dateSearch = this.actualYear + '';
+    }
       this.selectorDate !== undefined ?
         this.selectorDate.value = this.dateSearch :
         undefined;
       !this.loadingData ? this.getClasificationLeague(null) : undefined;
-    }
 
   }
 
@@ -230,7 +227,7 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
    * Cierra la liga de centros
    */
   closedLeague(): void {
-    this.pageSvc.closeModal();
+    this.location.back();
   }
 
   /**
@@ -240,4 +237,5 @@ export class LeagueComponent implements OnInit, ViewWillLeave {
   ionViewWillLeave(): void {
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
   }
+
 }

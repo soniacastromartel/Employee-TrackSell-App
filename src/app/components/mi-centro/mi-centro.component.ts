@@ -25,7 +25,6 @@ export class MiCentroComponent implements OnInit{
   year: number;
 
   constructor(private storage: StorageService,
-    private notification: NotificationsService,
     public utils: UtilsService,
     private checkSvc: DatacheckService,
 
@@ -58,8 +57,6 @@ export class MiCentroComponent implements OnInit{
    */
   getEmployeeRanking(centre: number, month?: number, year?: number) {
     this.isLoading = true;
-    this.notification.loadingData(LOADING_RANKING);
-    this.utils.controlToNotifications(NORMAL_TIME_WAIT);
     // Control para el corte de fecha
     if (month == undefined && year == undefined) {
       const fecha = new Date();
@@ -84,11 +81,11 @@ export class MiCentroComponent implements OnInit{
         } else {
           this.rankings = collection;
         }
-        this.notification.cancelLoad();
-        this.utils.cancelControlNotifications();
+
         this.isLoading = false;
       });
     });
+
   }
 
   /**
@@ -118,6 +115,15 @@ export class MiCentroComponent implements OnInit{
   ionViewWillLeave() {
 
   };
+
+  handleRefresh(event) {
+    console.log('refresing')
+    setTimeout(() => {
+      this.ngOnInit();
+      // Any calls to load data go here
+      event.target.complete();
+    }, 2000);
+   }
 
 
 }

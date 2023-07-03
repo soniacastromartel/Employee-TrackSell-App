@@ -1,0 +1,138 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-circle" color="light" size="large"></ion-icon>
+      </ion-button>
+      <ion-button (click)="newSale()">
+        <ion-icon name="add-circle" color="light" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-label class="mylabel">MIS INCENTIVOS</ion-label>
+    <ion-buttons slot="end">
+      <img class="logo" src="assets/imgs/whitelogo.png" translucent />
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="bg-transparent" #content [scrollEvents]="true" (ionScroll)="onScroll($event)"
+  (ionScrollEnd)="hiddenArrow()">
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row>
+    <ion-col>
+      <ion-segment value="RESUMEN" color="tertiary" scrollable="true" mode="ios" [(ngModel)]="dateSearch"
+        (ionChange)="filterFor()">
+        <ion-segment-button value="MENSUAL">
+          <ion-label>MENSUAL</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="ANUAL">
+          <ion-label>ANUAL</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-col>
+  </ion-row>
+
+  <!-- <ion-tabs (ionTabsDidChange) = "tabChanged($event)">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button id="monthly" tab="monthly" selected>
+        <ion-icon name="calendar-number"></ion-icon>
+        MENSUAL
+      </ion-tab-button>
+      <ion-tab-button id="anual" tab="annual">
+        <ion-icon name="time"></ion-icon>
+        ANUAL
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs> -->
+
+  <ion-row>
+    <ion-col size="4"></ion-col>
+    <ion-col size="8">
+      <ion-item lines="none" color="none" *ngIf="fechaIncentivos">
+        <ion-icon class="my-icon" name="calendar" slot="start"></ion-icon>
+        <ion-datetime [(ngModel)]="fechaIncentivos" doneText="SELECCIONAR" cancelText="CANCELAR"
+          value="{{fechaIncentivos}}" displayFormat="{{dateSearch == 'ANUAL' ? 'YYYY':'MMMM-YYYY'}}"
+          [monthNames]="monthsValues" (ionChange)="updateSelection($event)">
+        </ion-datetime>
+        <ion-icon class="my-icon" name="caret-down" slot="end"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-card>
+    <img class="full-image" src="assets/imgs/incent.jpg">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row *ngFor="let label of contentLabel; let i=index;">
+          <ion-col class="ion-text-left" size="9">
+            <ion-note>{{label}}</ion-note>
+          </ion-col>
+          <ion-col class="ion-text-right" size="3">
+            <ion-note>{{contentData[i]}}</ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <br>
+
+  <ion-grid class="table">
+    <ion-row class="header">
+      <ion-col size="6">
+        SERVICIO
+      </ion-col>
+      <ion-col class="dateService" size="3">
+        FECHA
+      </ion-col>
+      <ion-col class="dateService" size="3">
+        ACCIÓN
+      </ion-col>
+    </ion-row>
+    <ion-row class="incentivosContent" *ngFor="let service of services;">
+      <!-- <ion-col size="1" *ngIf="service.state === 'Validado' || service.state === 'Pagado'">
+        <div class="containerQuantity">
+          <img src="assets/imgs/circle1.png" />
+          <div>
+            <ion-note class="quantityStl"></ion-note>
+          </div>
+        </div>
+      </ion-col> -->
+      <ion-col class="nameService" size="6">
+        <ion-note class="content">{{service.service}} ({{service.quantity}})</ion-note>
+        <ion-note class="pending" *ngIf="service.state === 'Pendiente'"> *</ion-note>
+      </ion-col>
+      <ion-col class="fechaService" size="3">
+        <ion-note>{{service.date}}</ion-note>
+      </ion-col>
+      <ion-col size="2">
+        <ion-buttons>
+          <ion-button (click)="moreInfo(service)">
+            <ion-icon class="my-icon" name="search-outline" size="large"></ion-icon>
+          </ion-button>
+          <ion-button (click)="newSale(service)">
+            <ion-icon class="my-icon" name="sync-outline" size="large"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-footer>
+    <ion-note>* Servicios Pendientes de Validar</ion-note>
+  </ion-footer>
+
+  <!-- <ng-template #emptyIncentives>
+    <app-empty-view *ngIf="!loadingData"></app-empty-view>
+</ng-template> -->
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-icon class="upDownScroll" [name]="utils.typeScroll" size="large" (click)="onScrolling()"></ion-icon>
+  </ion-fab>
+
+</ion-content>

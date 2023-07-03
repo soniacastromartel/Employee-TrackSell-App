@@ -5,13 +5,11 @@ import { IonicModule } from '@ionic/angular';
 import { FaqComponent } from './faq/faq.component';
 import { MyDataComponent } from './my-data/my-data.component';
 import { HeaderComponent } from './header/header.component';
-import { MyIncentivesComponent } from './my-incentives/my-incentives.component';
 import { ListOfServicesComponent } from './list-of-services/list-of-services.component';
 import { NewSaleComponent } from './new-sale/new-sale.component';
 import { SelectSubTypeComponent } from './select-sub-type/select-sub-type.component';
 import { SaleConfirmationComponent } from './sale-confirmation/sale-confirmation.component';
 import { InfoFAQComponent } from './info-faq/info-faq.component';
-import { LeagueComponent } from './league/league.component';
 import { EmptyViewComponent } from './empty-view/empty-view.component';
 import { ImgViewerComponent } from './img-viewer/img-viewer.component';
 import { UserDataComponent } from './user-data/user-data.component';
@@ -23,13 +21,11 @@ import { FooterComponent } from './footer/footer.component';
     FaqComponent,
     MyDataComponent,
     HeaderComponent,
-    MyIncentivesComponent,
     ListOfServicesComponent,
     NewSaleComponent,
     SelectSubTypeComponent,
     SaleConfirmationComponent,
     InfoFAQComponent,
-    LeagueComponent,
     EmptyViewComponent,
     ImgViewerComponent,
     UserDataComponent,
@@ -46,13 +42,11 @@ import { FooterComponent } from './footer/footer.component';
     FaqComponent,
     MyDataComponent,
     HeaderComponent,
-    MyIncentivesComponent,
     ListOfServicesComponent,
     NewSaleComponent,
     SelectSubTypeComponent,
     SaleConfirmationComponent,
     InfoFAQComponent,
-    LeagueComponent,
     EmptyViewComponent,
     ImgViewerComponent,
     FooterComponent

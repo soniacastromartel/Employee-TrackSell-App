@@ -57,9 +57,6 @@ export class GrupoComponent implements OnInit {
  */
   getEmployeeRanking(centre: number, month?: number, year?: number) {
     this.isLoading = true;
-    this.notification.loadingData(LOADING_RANKING);
-    this.utils.controlToNotifications(MAX_TIME_LOADING);
-
     // Control para el corte de fecha
     if (month == undefined && year == undefined) {
       const fecha = new Date();
@@ -86,8 +83,7 @@ export class GrupoComponent implements OnInit {
         } else {
           this.rankings = collection;
         }
-        this.notification.cancelLoad();
-        this.utils.cancelControlNotifications();
+  
         this.isLoading = false;
       });
     });
@@ -115,5 +111,13 @@ export class GrupoComponent implements OnInit {
     hiddenArrow(){
       this.utils.hiddenArrow();
     }
+
+    handleRefresh(event) {
+      setTimeout(() => {
+        this.ngOnInit();
+        // Any calls to load data go here
+        event.target.complete();
+      }, 2000);
+     }
 
 }

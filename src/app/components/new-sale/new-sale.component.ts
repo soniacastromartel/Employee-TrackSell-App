@@ -97,8 +97,6 @@ export class NewSaleComponent implements ViewWillEnter{
    * Comprobacion/recogida de datos iniciales
    */
   async ionViewWillEnter() {
-    this.utils.controlToNotifications(MAX_TIME_LOADING);
-
     // Opciones de configurador (Repetido?, preconfigurado?, ..)
     const centerRealizador = this.params.get(CENTRE);
     this.serviceSale = this.params.get(EXTRA_DATA);
@@ -108,11 +106,8 @@ export class NewSaleComponent implements ViewWillEnter{
         // Carga de centros (Realizador)
         if (centerRealizador === undefined) {
           if (this.centersUtils.centers === undefined) {
-            this.notification.loadingData(LOADING_CENTERS);
             await this.centersUtils.getCenterOfSystem().then(() => {
               this.centers = this.centersUtils.centers;
-              this.notification.cancelLoad();
-              this.utils.cancelControlNotifications();
             });
           } else {
             this.centers = this.centersUtils.centers;
@@ -150,8 +145,6 @@ export class NewSaleComponent implements ViewWillEnter{
     } else {
       await this.loadServiceToSale(this.serviceSale);
     }
-    this.notification.cancelLoad();
-    this.utils.cancelControlNotifications();
   }
 
   /**
@@ -160,10 +153,6 @@ export class NewSaleComponent implements ViewWillEnter{
    */
   servicesOfCenter() {
     if (this.venta.controls.cRealizador.value !== null) {
-      if (!this.notification.loadData){
-        this.utils.controlToNotifications(MAX_TIME_LOADING);
-        this.notification.loadingData(LOADING_DATA);
-      }
       this.servicesAvailables = [];
       const cRealizador = this.venta.controls.cRealizador.value;
         if(cRealizador !== undefined){
@@ -175,8 +164,6 @@ export class NewSaleComponent implements ViewWillEnter{
               services.forEach((s: any) => {
                 this.servicesAvailables.push(s);
               });
-              this.notification.cancelLoad();
-              this.utils.cancelControlNotifications();
               this.serviceSubcription.unsubscribe();
             });
           });
@@ -263,19 +250,13 @@ export class NewSaleComponent implements ViewWillEnter{
       .then(async res => {
         if (res) {
           this.builderSale = this.buildingSale();
-          this.utils.controlToNotifications(MAX_TIME_LOADING);
-          this.notification.loadingData(LOADING_CONTENT);
           // Registro de venta de empleado
           await this.checkSvc.saleForEmployee(this.builderSale, this.storage.actualToken)
           .then((result) => {
             this.saleSubcription = result.subscribe(() => {
-              this.notification.cancelLoad();
-              this.utils.cancelControlNotifications();
               this.notification.alertBaseNotifications(VENTA_CONFIRMADA.title, VENTA_CONFIRMADA.msg);
               this.goBack();
             }, (ex)=>{
-              this.notification.cancelLoad();
-              this.utils.cancelControlNotifications();
                 if((ex.error.message === NO_VALIDATION_FORM && ex.error.data !== undefined && ex.error.data.tracking_date !== undefined &&
                   ex.error.data.tracking_date[0] === ERROR_TRACKING_DATE) || ex.error.message == ERROR_CORTE_INCENTIVES){
                   this.notification.baseThrowAlerts(FECHA_INVALID.title, FECHA_INVALID.msg);
@@ -364,8 +345,6 @@ export class NewSaleComponent implements ViewWillEnter{
    * Recoge el tracking anterior y extrae los datos necesarios para la recreacion
    */
     private async loadServiceToSale(dataService: any){
-      this.utils.controlToNotifications(MAX_TIME_LOADING);
-      this.notification.loadingData(LOADING_CONTENT);
       this.checkSvc.getDataTracking(this.serviceSale.tracking_id, this.storage.actualToken)
         .then((r) => {
           this.serviceSubcription = r.subscribe((data)=>{
@@ -381,8 +360,6 @@ export class NewSaleComponent implements ViewWillEnter{
             this.venta.controls.patientId.setValue(data['patientId']);
             this.venta.controls.patientName.setValue(data['patient_name']);
             this.venta.controls.observaciones.setValue('');
-            this.notification.cancelLoad();
-            this.utils.cancelControlNotifications();
             this.servicesOfCenter();
             this.venta.updateValueAndValidity();
             this.getDiscountsServices();

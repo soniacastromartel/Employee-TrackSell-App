@@ -1,4 +1,4 @@
-import { IMG_FIELD, RANKINGS } from './../../app.constants';
+import { IMG_FIELD, INCENTIVES, LEAGUE, RANKINGS } from './../../app.constants';
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/quotes */
 import { AfterContentChecked, AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
@@ -12,17 +12,15 @@ import {
   COPY_MAIL, VERSION_APP, CHANGE_LIST,
   MAX_TIME_LOADING, QUERY_COUNT_ACCESS, ANDROID_TYPE, DATA_LABELS, MIN_VERSION_APP
 } from '../../app.constants';
-import { Platform, ViewWillEnter } from '@ionic/angular';
+import { IonContent, ModalController, Platform, ViewWillEnter } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { Employee } from '../../models/employee';
-import { MyIncentivesComponent } from '../../components/my-incentives/my-incentives.component';
 import { ListOfServicesComponent } from '../../components/list-of-services/list-of-services.component';
 import { CentersUtilsService } from '../../services/centers-utils.service';
 import { NewSaleComponent } from '../../components/new-sale/new-sale.component';
 import { UtilsService } from '../../services/utils.service';
 import { ConnectionService } from '../../services/connection.service';
 import { DatacheckService } from '../../services/datacheck.service';
-import { LeagueComponent } from '../../components/league/league.component';
 import { CategoryService } from 'src/app/models/category_service';
 import { LOGO_PATH } from '../../app.constants';
 
@@ -32,6 +30,10 @@ import { SwiperOptions } from 'swiper';
 import SwiperCore, { Pagination, EffectFlip, Autoplay } from 'swiper/core';
 import { UserActivityService } from 'src/app/services/user-activity.service';
 import { Route, Router } from '@angular/router';
+
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { LoaderService } from 'src/app/services/loader.service';
+
 
 
 SwiperCore.use([Pagination, EffectFlip, Autoplay]);
@@ -44,6 +46,8 @@ SwiperCore.use([Pagination, EffectFlip, Autoplay]);
 export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterContentChecked, AfterViewInit {
   @ViewChild('swiper') swiper: SwiperComponent;
   @ViewChild('swiper') swiperComponent: SwiperComponent;
+  @ViewChild('modal') modalCrtl: ModalController;
+  @ViewChild('content') content: IonContent;
 
   config: SwiperOptions = {
     slidesPerView: 1,
@@ -111,8 +115,11 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
     private connection: ConnectionService,
     private checkSvc: DatacheckService,
     private userActivityService: UserActivityService,
-    private route: Router) {
+    private route: Router,
+    private screenOrientation: ScreenOrientation,
+    private loaderSvc: LoaderService
 
+  ) {
     this.backButton = this.platform.backButton.subscribeWithPriority(9999, () => {
       this.notification.modalCrtl.getTop().then(res => {
         // Gestion btn atras formulario de venta
@@ -123,6 +130,8 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
                 this.notification.closeModal();
               }
             });
+        } if (res !== undefined && res.id === VENTA_FORM_ID) {
+
         } else if (!this.notification.loadOp && !this.notification.exitPresent) {
           this.notification.exitApp().then((result) => {
             if (result) {
@@ -173,7 +182,6 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
       }).catch(() => {
         this.version = MIN_VERSION_APP;
       });
-      this.notification.loadingData(LOADING_CONTENT);
     }
   }
 
@@ -202,48 +210,26 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
 
   }
 
-  /**
-   * Solucion provisional al problema de las cargas
-   */
-  ionViewDidEnter() {
-    this.notification.cancelLoad();
-    this.utils.cancelControlNotifications();
-
-  }
-
   ngAfterViewInit() {
-    console.log("ionViewDidLoad");
     this.swiperComponent.swiperRef.autoplay.running = true;
-
   }
 
-  processUserAndCenter() {
+  async processUserAndCenter() {
     console.log(this.centersUtls.centers);
     console.log(this.username);
-    this.utils.controlToNotifications(MAX_TIME_LOADING);
     if (this.centersUtls.centers === undefined) {
-      this.notification.loadingData(LOADING_CONTENT);
-      this.centersUtls.localCenters();
-      setTimeout(() => {
-        this.notification.cancelLoad();
-      }, 2000);
+       await this.centersUtls.localCenters();
     }
     if (this.platform.is(ANDROID_TYPE)) {
       // Comprobación actualizacion app
       this.utils.checkingUpdate(this.token);
-      setTimeout(() => {
-        this.notification.cancelLoad();
-      }, 2000);
     }
     // Check lista de cambios, ¿version actualizada?
     this.storage.get(VERSION_APP).then(ver => {
-      console.log(ver);
-      console.log(this.utils.version);
       if (ver !== this.utils.version) {
         this.checkSvc.getLastChangesUpdate({ version: this.utils.version })
           .then(changes => {
             changes.subscribe((content: any) => {
-              console.log(content);
               if (content.data.changes !== false) {
                 const partes = content.data.changes.split(':');
                 this.notification.alertChangeList(CHANGE_LIST, partes[0], partes[1]);
@@ -252,7 +238,6 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
                 this.checkSvc.refreshUpdateVersion(this.username, VERSION_APP);
                 // Por ultimo se reestablece el contador de obligacion para actualizacion de la aplicacion
                 this.checkSvc.resetUpdateCount(this.username);
-
               }
             });
           }).catch(ex => {
@@ -264,24 +249,22 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
     });
   }
 
-  async fetchUserData(): Promise<any> {
-    try {
-      const userData = await this.storage.getAll();
-      // Process userData or return it as needed
-      return userData;
-    } catch (error) {
-      // Handle error if necessary
-      console.error('Error fetching user data:', error);
-      throw error;
-    }
-  }
-
-
+  // async fetchUserData(): Promise<any> {
+  //   try {
+  //     const userData = await this.storage.getAll();
+  //     // Process userData or return it as needed
+  //     return userData;
+  //   } catch (error) {
+  //     // Handle error if necessary
+  //     console.error('Error fetching user data:', error);
+  //     throw error;
+  //   }
+  // }
 
   /**
    * Se obtienen los datos del empleado
-   * @param username 
-   * @param token 
+   * @param username
+   * @param token
    */
   async getEmployeeInfo(username: string, token: string) {
     await this.checkSvc.getEmployeeInfo(username, token)
@@ -291,30 +274,19 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
           // this.storage.employee.centreAux = data.data.user.centres;
           this.storage.createCenter(data.data.user).then(async (objCentre) => {
             console.log(objCentre);
-           await this.storage.set('centre', objCentre).then(async (res) => {
-            await this.storage.getAll().then(async(user: any) => {
-            console.log(user); 
-              this.storage.saveCurrentUser(user);
-              this.storage.currentUserListener.subscribe(res => {
-                console.log(res);
-                this.user = res;
+            await this.storage.set('centre', objCentre).then(async (res) => {
+              await this.storage.getAll().then(async (user: any) => {
+                console.log(user);
+                this.storage.saveCurrentUser(user);
+                this.storage.currentUserListener.subscribe(res => {
+                  console.log(res);
+                  this.user = res;
+                });
+
               });
-  
             });
-           });
-           
+
           });
-          
-
-          // this.token = this.userActivityService.getToken();
-          // await this.storage.getAll().then(async (result: any) => {
-          //   this.storage.setUser(result, this.token);
-          //   this.user = result;
-          //   this.username = result.username;
-
-          this.notification.cancelLoad();
-          this.utils.cancelControlNotifications();
-          this.auxSub.unsubscribe();
         });
       });
 
@@ -332,7 +304,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
           }
         });
         break;
-      default://recomendaciones 
+      default://recomendaciones
         this.notification.alertBaseQuestions(ACTION_PROMO_SERVICES.title, ACTION_PROMO_SERVICES.msg, this.promoServices[id - 1].service.name + '?')
           .then(res => {
             if (res) {
@@ -350,8 +322,6 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
    * @param option Opción seleccionada
    */
   async goAction(option: number) {
-    console.log(this.username);
-    console.log(this.storage.employee);
     if (this.auxSub !== undefined) {
       this.auxSub.unsubscribe();
     }
@@ -367,7 +337,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
         this.pageSvc.listOfServices(ListOfServicesComponent);
         break;
       case 1:
-        this.pageSvc.employeeIncentives(MyIncentivesComponent);
+        this.route.navigate([INCENTIVES]);
         break;
       case 2:
         this.pageSvc.recomendedService(NewSaleComponent, undefined, undefined);
@@ -376,16 +346,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
         this.route.navigate([RANKINGS]);
         break;
       case 4:
-        this.pageSvc.getClasificationLeague(LeagueComponent);
-        break;
-      case 5:
-        if (this.storage.center.centre === undefined) {
-          this.notification.loadingData(LOADING_CONTENT);
-          this.utils.controlToNotifications(MAX_TIME_LOADING);
-          this.pageSvc.userMyData(MyDataComponent);
-        } else {
-          this.pageSvc.userMyData(MyDataComponent);
-        }
+        this.route.navigate([LEAGUE]);
         break;
     }
   }
@@ -410,10 +371,17 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
   }
 
   swiperSlideChanged(e) {
-    // console.log('changed: ', e);
   }
 
   promotionSlideChanged(e) {
+  }
+
+  handleRefresh(event) {
+    setTimeout(() => {
+      this.ngOnInit();
+      // Any calls to load data go here
+      event.target.complete();
+    }, 2000);
   }
 
 }
