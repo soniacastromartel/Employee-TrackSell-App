@@ -61,7 +61,7 @@
 
 ion-button {
     --background: var(--ion-color-icot) !important;
-    --color-hover: white !important;
+    --color-hover: var(--ion-color-light-tint);
     --color-activated: var(--ion-color-icot) !important;
     --background-hover: var(--ion-color-icot) !important;
     margin-left: 16px;
@@ -73,7 +73,7 @@ ion-button {
 
 .md ion-button {
     --background: var(--ion-color-icot) !important;
-    --color-hover: white !important;
+    --color-hover:var(--ion-color-light-tint);
     --color-activated: var(--ion-color-icot) !important;
     --background-hover: var(--ion-color-icot) !important;
     margin-left: 16px;
@@ -240,14 +240,6 @@ ion-input {
             transform: translateY(-5%);
         }
     }
-
-    // ion-content {
-    //     --background: transparent;
-    //     background-image: url('../../assets/imgs/bck.png');
-    //     background-position: center center;
-    //     background-repeat: repeat;
-    //     background-size: cover;
-    // }
 
     ion-toolbar {
         --background: transparent;

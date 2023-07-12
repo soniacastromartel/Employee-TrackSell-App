@@ -66,7 +66,7 @@ ion-searchbar {
     font-weight: bold;
     width: 100%;
     --placeholder-color: var(--ion-color-myblack);
-    --background: #fafafa;
+    --background: var(--ion-color-light-tint);
 }
 
 ion-chip {
@@ -84,7 +84,7 @@ ion-label {
 }
 
 p {
-    color: white;
+    color: var(--ion-color-light-tint);
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
@@ -113,7 +113,7 @@ ion-segment-button {
 }
 
 .searchContainer {
-    background-color: var(white);
+    background-color:var(--ion-color-light-tint);
 }
 
 .separator {

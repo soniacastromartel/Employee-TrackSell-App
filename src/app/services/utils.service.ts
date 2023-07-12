@@ -260,6 +260,7 @@ export class UtilsService {
       // Comprobacion de version actual instalada en dispositivo
     await this.checkSvc.checkingVersion(this.version, tk)
     .then(result => {
+      console.log(this.version);
       const updateSubcription = result.subscribe(async (response: any) => {
         if(response.data === UPDATE_VALID){
           // Comprobacion de omision de actualizacion de la app

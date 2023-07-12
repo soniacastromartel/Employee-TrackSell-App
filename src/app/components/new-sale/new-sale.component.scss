@@ -15,7 +15,7 @@
 }
 
 ion-icon {
-    color: white;
+    color:var(--ion-color-light-tint);
 }
 
 ion-item {
@@ -75,8 +75,8 @@ ion-button {
     --background: var(--ion-color-icot);
     --background-hover: var(--ion-color-icot);
     --background-activated: var(--ion-color-icot);
-    --color-hover: white;
-    --color: white;
+    --color-hover: var(--ion-color-light-tint);;
+    --color:var(--ion-color-light-tint);;
     margin-top: 1em;
     margin-bottom: 1em;
     text-align: center;
@@ -169,5 +169,5 @@ form {
 }
 
 .lblBtn{
-  color: white;
+  color:var(--ion-color-light-tint);
 }

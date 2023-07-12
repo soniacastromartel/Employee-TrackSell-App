@@ -30,7 +30,7 @@ hr {
 ion-checkbox {
   --border-color: var(--ion-color-icot);
   --background-checked: var(--ion-color-icot);
-  --border-color-checked: white;
+  --border-color-checked: var(--ion-color-light-tint);
 }
 
 .titleCard {
@@ -83,7 +83,7 @@ ion-checkbox {
     --background: var(--ion-color-icot);
     --background-hover: var(--ion-color-icot);
     --background-activated: var(--ion-color-icot);
-    --color: white !important;
+    --color:var(--ion-color-light-tint) !important;
     font-weight: 900;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

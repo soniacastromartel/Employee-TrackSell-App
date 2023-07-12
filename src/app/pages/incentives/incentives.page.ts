@@ -111,6 +111,8 @@ export class IncentivesPage implements OnInit {
    * @param mode Tipo de filtro [1: FILTRO AÑO, 2: FILTRO MES Y AÑO]
    */
   filterForDate(date: string, mode: number) {
+    console.log(date);
+    console.log(mode);
     this.services = [];
     if (mode === 1) {
       this.searchingIncentivesEmployee(undefined, Number.parseInt(date, 0));
@@ -126,19 +128,29 @@ export class IncentivesPage implements OnInit {
  * Refresca la busqueda de incentivos
  * según la selección del usuario
  */
-  updateSelection(event: any) {
+  updateSelection(event: any, dateSearch: string) {
+    console.log(event);
+    console.log(this.contentData);
+    console.log(this.fechaIncentivos);
+    console.log(this.dateSearch);
     //si hay datos en contentData y el datetime no se ha tocado, se sale y los datos quedan estáticos. No hay actualización en el componente
-    if (this.contentData && this.contentData.length != 0 && event.target.className.split(' ')[0] == 'ng-untouched') {
+    if (event.target.className.split(' ')[0] == 'ng-untouched') {
       return;
     }
 
+    console.log(!this.notification.loadOp);
     if (!this.notification.loadOp) {
       this.contentData = [];
       this.services = [];
       const monthNumber = Number.parseInt(this.fechaIncentivos.split('-')[1]);
-      this.searchingIncentivesEmployee(monthNumber, Number.parseInt(this.fechaIncentivos.substr(0, 4)));
+      if (this.dateSearch == 'ANUAL') {
+        this.searchingIncentivesEmployee(undefined, Number.parseInt(this.fechaIncentivos.substr(0, 4)));
+      } else {
+        this.searchingIncentivesEmployee(monthNumber, Number.parseInt(this.fechaIncentivos.substr(0, 4)));
 
-     }
+      }
+
+    }
   }
 
   /**
@@ -156,8 +168,10 @@ export class IncentivesPage implements OnInit {
     if (month === 1 && day < 20) {
       year = year - 1;
     } else if (day < 20) {
-      month = month - 1;
+      // month = month - 1;
     }
+
+    console.log(month);
     await this.checkSvc.getIncentivesForEmployee(this.storage.employee.username, this.storage.actualToken, month, year)
       .then(result => {
         this.subcriptionData = result.subscribe((incentives: any) => {
@@ -223,7 +237,7 @@ export class IncentivesPage implements OnInit {
       // Any calls to load data go here
       event.target.complete();
     }, 2000);
-   }
+  }
 
 
 }

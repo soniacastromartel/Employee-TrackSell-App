@@ -215,8 +215,6 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
   }
 
   async processUserAndCenter() {
-    console.log(this.centersUtls.centers);
-    console.log(this.username);
     if (this.centersUtls.centers === undefined) {
        await this.centersUtls.localCenters();
     }
@@ -248,18 +246,6 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
       }
     });
   }
-
-  // async fetchUserData(): Promise<any> {
-  //   try {
-  //     const userData = await this.storage.getAll();
-  //     // Process userData or return it as needed
-  //     return userData;
-  //   } catch (error) {
-  //     // Handle error if necessary
-  //     console.error('Error fetching user data:', error);
-  //     throw error;
-  //   }
-  // }
 
   /**
    * Se obtienen los datos del empleado

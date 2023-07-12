@@ -129,7 +129,7 @@ export class DatacheckService {
    * @returns Nueva version estable disponible o no
    */
   async checkingVersion(version: string, tk: string) {
-    if(version==undefined){version = "0.0.1";}
+    // if(version==undefined){version = "0.0.1";}
     return this.http.get(this.base + this.checkVersion + '?version=' + version, this.setHeader(tk));
   }
 

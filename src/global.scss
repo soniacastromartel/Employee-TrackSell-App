@@ -15,7 +15,7 @@
         padding-right: 0.5em;
 
         h2 {
-            color: white;
+            color:var(--ion-color-light-tint);
         }
     }
 
@@ -96,7 +96,7 @@
         margin-bottom: 1em;
 
         h2 {
-            color: white;
+            color:var(--ion-color-light-tint);
         }
     }
 
@@ -126,7 +126,7 @@
         background-color: var(--ion-color-icot);
 
         h2 {
-            color: white;
+            color:var(--ion-color-light-tint);
         }
     }
 
@@ -311,7 +311,7 @@
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     --background: var(--ion-color-icot);
-    color: white;
+    color:var(--ion-color-light-tint);
 }
 
 .toastStl {
@@ -335,7 +335,7 @@
     h2 {
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         background-color: var(--ion-color-icot);
-        color: white !important;
+        color:var(--ion-color-light-tint) !important;
         margin: 0.5em;
     }
 
@@ -368,7 +368,7 @@
     }
 
     .btnAlert {
-        color: ghostwhite;
+        color:var(--ion-color-light-tint);
         background-color: var(--ion-color-icot);
         font-weight: 900;
         font-size: large;
@@ -404,7 +404,7 @@
 .exitAppStl {
     h2 {
         font-weight: 900;
-        color: white !important;
+        color:var(--ion-color-light-tint) !important;
         margin: 0 !important;
         padding: 5px !important;
     }
@@ -661,7 +661,7 @@ input.native-input.sc-ion-input-ios {
 
 // Background no content
 app-dashboard.ion-page {
-    background-color: white;
+    background-color:var(--ion-color-light-tint);;
 }
 
 .action-sheet-group.sc-ion-action-sheet-md:last-child {
@@ -674,7 +674,7 @@ app-dashboard.ion-page {
 
 div.action-sheet-group.action-sheet-group-cancel.sc-ion-action-sheet-ios {
     --background: var(--ion-color-icot);
-    --button-color-hover: white;
+    --button-color-hover:var(--ion-color-light-tint);
     --button-color: var(--ion-color-icot);
 }
 
@@ -802,7 +802,7 @@ ion-tab-bar {
 ion-tab-button {
     // --background: var(--ion-color-icot);
     --color: var(--ion-color-medium);
-    --color-selected:  white;
+    --color-selected: var(--ion-color-light-tint);
 
 
     &::before {
@@ -816,7 +816,7 @@ ion-tab-button {
     }
 
     &.tab-selected::before {
-        background-color: white;
+        background-color:var(--ion-color-light-tint);
 
     }
 }
@@ -849,19 +849,11 @@ ion-content {
     display: block;
     text-align: center;
     font-weight: bold;
-    color: white;
+    color:var(--ion-color-light-tint);
     font-size: small;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin-bottom: 0.5em;
 }
-
-// .custom-badge {
-//     position: absolute;
-//     top: 49px;
-//     right: 362px;
-//     --background: #333333;
-//     --color: white;
-// }
 
 
 .container {
@@ -875,7 +867,7 @@ ion-content {
     left: 16px;
     font-size: 12px;
     --background: #333333;
-    --color: white;
+    --color:var(--ion-color-light-tint);
   }
 
 

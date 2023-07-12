@@ -18,6 +18,7 @@ export const ANDROID_ENVIRONMENT_FILE_PATH = 'files/';
 export const IOS_ENVIRONMENT_FILEDIR_PATH = 'Library/';
 export const ENVIRONMENT_FILENAME = 'environment.txt';
 export const LINK_PRIVACY = BASE_URL + 'storage/condiciones/POLITICA-PRIVACIDAD-ICOT-PDI-APP.pdf';
+export const APP_ID= '5f2ef6ae-93cc-4194-9350-dab41b514e3b';
 
 /**
 * NAME ROUTER

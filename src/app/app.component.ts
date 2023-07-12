@@ -14,11 +14,13 @@ import { UserActivityService } from './services/user-activity.service';
 import { MenuService } from './services/menu.service';
 
 
-import { DASHBOARD, USERNAME } from './app.constants';
+import { APP_ID, DASHBOARD, USERNAME } from './app.constants';
 import { Employee } from './models/employee';
 
 import { SwUpdate } from '@angular/service-worker';
 import { CookieService } from 'ngx-cookie-service';
+import OneSignal from 'onesignal-cordova-plugin';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -29,6 +31,7 @@ export class AppComponent implements OnInit {
   user: Employee;
   token: string;
   isLandscape = false;
+  isDarkTheme = false;
 
   private tokenSubscription: Subscription | undefined;
 
@@ -50,7 +53,10 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate,
     private menuService: MenuService) {
     this.platform.ready().then(() => {
+      document.body.setAttribute('data-theme', 'light');
+      document.body.classList.toggle('dark', false);
       this.initializeApp();
+      this.OneSignalInit();
       // the native platform puts the application into the background
       this.platform.pause.subscribe(async () => {
       });
@@ -74,15 +80,27 @@ export class AppComponent implements OnInit {
 
   }
 
+  OneSignalInit(): void {
+    // NOTE: Update the setAppId value below with your OneSignal 
+    OneSignal.setAppId(APP_ID);
+    OneSignal.setNotificationOpenedHandler(function (jsonData) {
+      console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+    });
+    // Prompts the user for notification permissions.
+    OneSignal.promptForPushNotificationsWithUserResponse(function (accepted) {
+      console.log("User accepted notifications: " + accepted);
+    });
+  }
+
   ngOnDestroy() {
     this.tokenSubscription.unsubscribe();
   }
 
   async initializeApp() {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    if (prefersDark.matches) {
-      document.body.classList.toggle('dark');
-    }
+    // const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    // if (prefersDark.matches) {
+    //   document.body.classList.toggle('dark');
+    // }
 
     //it checks token validity and depending on it, redirects to dashboard or to login.
     const token = await this.cookieService.get('token');
@@ -96,7 +114,6 @@ export class AppComponent implements OnInit {
     } else {
       this.router.navigate(['/home']);
     }
-
     //it checks if there’s an update available and subscribes to it.
     if (this.swUpdate.available) {
       this.swUpdate.available.subscribe(() => {
@@ -110,6 +127,19 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       location.reload();
     });
+  }
+
+  /**
+   * Switches from ligh to dark mode
+   */
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    document.body.classList.toggle('dark', this.isDarkTheme);
+  }
+
+  // Add or remove the "dark" class based on if the media query matches
+  toggleDarkTheme(shouldAdd) {
+    document.body.classList.toggle('dark', false);
   }
 
   click(i) {
