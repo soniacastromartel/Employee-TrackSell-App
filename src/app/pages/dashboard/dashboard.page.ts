@@ -159,6 +159,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
     // Recogida de datos del usuario
     this.user = this.storage.employee;
     this.sections = this.checkSvc.getSections();
+    console.log(this.version);
 
     if (this.user !== undefined) {
       this.username = this.storage.employee.username;
@@ -220,7 +221,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
     }
     if (this.platform.is(ANDROID_TYPE)) {
       // Comprobación actualizacion app
-      this.utils.checkingUpdate(this.token);
+     await this.utils.checkingUpdate(this.token);
     }
     // Check lista de cambios, ¿version actualizada?
     this.storage.get(VERSION_APP).then(ver => {

@@ -255,6 +255,7 @@ export class UtilsService {
    * @param tk Token employee
    */
     async checkingUpdate(tk: string){
+      console.log(this.version);
     // this.notification.loadingData(COLLECTING_INFO);
     // this.controlToNotifications(MAX_TIME_LOADING);
       // Comprobacion de version actual instalada en dispositivo

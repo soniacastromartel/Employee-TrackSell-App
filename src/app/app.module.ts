@@ -34,6 +34,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment'; 
 import { HeaderComponent } from './components/header/header.component';
 
+import { Camera } from '@ionic-native/camera/ngx';
+
 @NgModule({
   declarations: [AppComponent, SliceLargeTextPipe, TextTransformPipe, StringToArrayPipe],
   entryComponents: [],
@@ -60,6 +62,7 @@ import { HeaderComponent } from './components/header/header.component';
   exports: [ReactiveFormsModule, FormsModule, ComponentsModule], 
   providers: [
     Storage, 
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     // { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

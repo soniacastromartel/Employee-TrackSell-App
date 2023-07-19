@@ -10,6 +10,7 @@ import {
   TITLE_UPDATE, INFO_UPDATE, CREDENTIALS_FORMAT_ERROR, CREDENTIALS_EMPTY
 } from '../app.constants';
 import {
+  ActionSheetController,
   AlertController,
   LoadingController,
   ModalController,
@@ -40,6 +41,7 @@ export class NotificationsService {
     protected loadingCtrl: LoadingController,
     protected popoCtrl: PopoverController,
     protected toastCtrl: ToastController,
+    protected actionSheetCtrl: ActionSheetController,
     public pageSvc: PageService
   ) { }
 
@@ -951,4 +953,40 @@ export class NotificationsService {
       return undefined;
     });
   }
+
+  async presentActionSheet(): Promise<string> {
+    return new Promise<string>(async (resolve, reject) => {
+      const actionSheet = await this.actionSheetCtrl.create({
+        header: 'Seleccionar Imagen',
+        buttons: [
+          {
+            text: 'Tomar Foto',
+            icon: 'camera',
+            handler: () => {
+              resolve('takePhoto');
+            }
+          },
+          {
+            text: 'Abrir Galería',
+            icon: 'image',
+            handler: () => {
+              resolve('chooseFromGallery');
+            }
+          },
+          {
+            text: 'Cancelar',
+            icon: 'close',
+            role: 'cancel',
+            handler: () => {
+              resolve('cancel');
+            }
+          }
+        ]
+      });
+
+      await actionSheet.present();
+    });
+  }
+
+  
 }

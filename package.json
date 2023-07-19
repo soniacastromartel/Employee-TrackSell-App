@@ -13,13 +13,13 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^11.2.14",
-    "@angular/core": "^11.2.14",
-    "@angular/forms": "^11.2.14",
-    "@angular/platform-browser": "^11.2.14",
-    "@angular/platform-browser-dynamic": "^11.2.14",
-    "@angular/router": "^11.2.14",
-    "@angular/service-worker": "^11.2.14",
+    "@angular/common": "^13.4.0",
+    "@angular/core": "^13.4.0",
+    "@angular/forms": "^13.4.0",
+    "@angular/platform-browser": "^13.4.0",
+    "@angular/platform-browser-dynamic": "^13.4.0",
+    "@angular/router": "^13.4.0",
+    "@angular/service-worker": "^13.4.0",
     "@awesome-cordova-plugins/core": "^5.40.0",
     "@awesome-cordova-plugins/screen-orientation": "^5.40.0",
     "@ionic-native/app-version": "^5.36.0",
@@ -41,6 +41,8 @@
     "cordova-common": "^4.0.2",
     "cordova-plugin-android-dark-mode-support": "^1.0.0",
     "cordova-plugin-apkupdater": "^2.6.1",
+    "cordova-plugin-camera": "^6.0.0",
+    "firebase": "10.0.0",
     "human-signals": "^2.1.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
@@ -50,23 +52,23 @@
     "onesignal-cordova-plugin": "^3.3.1",
     "osenv": "^0.1.5",
     "properties-parser": "^0.3.1",
-    "rxjs": "^6.6.7",
+    "rxjs": "6.6.7",
     "string.prototype.codepointat": "^0.2.1",
     "strip-final-newline": "^2.0.0",
     "swiper": "^6.7.5",
     "tslib": "^2.3.1",
-    "zone.js": "^0.10.3"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1102.13",
+    "@angular-devkit/build-angular": "^13.3.11",
     "@angular-eslint/builder": "2.0.2",
     "@angular-eslint/eslint-plugin": "2.0.2",
     "@angular-eslint/eslint-plugin-template": "2.0.2",
     "@angular-eslint/template-parser": "2.0.2",
-    "@angular/cli": "~11.2.4",
-    "@angular/compiler": "^11.2.14",
-    "@angular/compiler-cli": "~11.2.0",
-    "@angular/language-service": "^11.2.14",
+    "@angular/cli": "~13.3.11",
+    "@angular/compiler": "^13.4.0",
+    "@angular/compiler-cli": "~13.4.0",
+    "@angular/language-service": "^13.4.0",
     "@ionic/angular-toolkit": "^3.1.1",
     "@ionic/lab": "3.2.10",
     "@types/jasmine": "~3.6.0",
@@ -107,7 +109,7 @@
     "protractor": "~7.0.0",
     "source-map": "^0.7.3",
     "ts-node": "~8.3.0",
-    "typescript": "^4.1.6"
+    "typescript": "^5.1.6"
   },
   "description": "Project app for employee Icot",
   "cordova": {
@@ -135,7 +137,10 @@
       "cordova-plugin-file": {},
       "cordova-plugin-privacyscreen": {},
       "cordova-plugin-screen-orientation": {},
-      "onesignal-cordova-plugin": {}
+      "onesignal-cordova-plugin": {},
+      "cordova-plugin-camera": {
+        "ANDROIDX_CORE_VERSION": "1.6.+"
+      }
     },
     "platforms": [
       "android"
