@@ -14,6 +14,7 @@ import { EmptyViewComponent } from './empty-view/empty-view.component';
 import { ImgViewerComponent } from './img-viewer/img-viewer.component';
 import { UserDataComponent } from './user-data/user-data.component';
 import { FooterComponent } from './footer/footer.component';
+import { RefresherComponent } from './refresher/refresher.component';
 
 @NgModule({
 
@@ -29,7 +30,8 @@ import { FooterComponent } from './footer/footer.component';
     EmptyViewComponent,
     ImgViewerComponent,
     UserDataComponent,
-    FooterComponent
+    FooterComponent,
+    RefresherComponent
   ],
 
   imports: [

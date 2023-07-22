@@ -84,6 +84,16 @@ ion-card {
   }
 }
 
+ion-segment {
+  background: var(--ion-color-icot);
+}
+
+ion-segment-button {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  --color: grey;
+}
+
 .myPositionLbl {
   color: var(--ion-color-myblack);
   font-weight: 600;

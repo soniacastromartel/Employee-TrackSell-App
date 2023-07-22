@@ -21,7 +21,7 @@ import { SwUpdate } from '@angular/service-worker';
 import { CookieService } from 'ngx-cookie-service';
 import OneSignal from 'onesignal-cordova-plugin';
 
-import firebase from 'firebase/compat';
+// import firebase from 'firebase/compat';
 
 export const firebaseConfig = {
   production: false,
@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
       this.platform.resume.subscribe(async () => {
       });
 
-      firebase.initializeApp(firebaseConfig);
+      // firebase.initializeApp(firebaseConfig);
     });
 
   }

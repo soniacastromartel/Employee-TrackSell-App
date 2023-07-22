@@ -12,7 +12,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './mi-centro.component.html',
   styleUrls: ['./mi-centro.component.scss'],
 })
-export class MiCentroComponent implements OnInit{
+export class MiCentroComponent implements OnInit {
   @ViewChild('content') content: IonContent;
 
   rankings: Array<EmployeeRanking>;
@@ -23,6 +23,7 @@ export class MiCentroComponent implements OnInit{
   displayFormatDate = MONTH_YEAR_FORMAT;
   month: number;
   year: number;
+  dateSearch: string = 'MENSUAL'; // Set the initial segment
 
   constructor(private storage: StorageService,
     public utils: UtilsService,
@@ -32,22 +33,43 @@ export class MiCentroComponent implements OnInit{
 
   ngOnInit() {
     this.rankingDate = new Date().toISOString();
-    const dateSeparator = this.rankingDate.split('-');
-    this.month = (Number.parseInt(dateSeparator[1])) - 1;
-    this.year = Number.parseInt(dateSeparator[0]);
-    this.getEmployeeRanking(this.storage.employee.centre_id, this.month, this.year);
+    this.rankingRefresh(this.dateSearch);
+  }
+
+  /**
+ * Opciones para consultar incentivos
+ */
+  async filterFor($event) {
+    this.rankingRefresh($event.detail.value);
+
   }
 
   /**
    * Refresca la lista del ranking
    * al seleccionar una nueva fecha
    */
-  rankingRefresh() {
+  rankingRefresh(type: string) {
+    console.log(this.rankingDate);
     const dateSeparator = this.rankingDate.split('-');
     this.month = Number.parseInt(dateSeparator[1]);
     this.year = Number.parseInt(dateSeparator[0]);
     const centre = this.storage.employee.centre_id;
-    this.getEmployeeRanking(centre, this.month, this.year);
+    switch (type) {
+      case 'MENSUAL':
+        this.getEmployeeRanking(centre, this.month, this.year);
+        break;
+      case 'ANUAL':
+        this.getEmployeeRanking(centre, undefined, this.year);
+        break;
+    }
+    // this.getEmployeeRanking(centre, this.month, this.year);
+  }
+
+  updateSelection($event){
+    if ($event.target.className.split(' ')[0] == 'ng-untouched') {
+      return;
+    }
+    this.rankingRefresh(this.dateSearch);
   }
 
 
@@ -56,6 +78,7 @@ export class MiCentroComponent implements OnInit{
    * del empleado
    */
   getEmployeeRanking(centre: number, month?: number, year?: number) {
+    console.log(month);
     this.isLoading = true;
     // Control para el corte de fecha
     if (month == undefined && year == undefined) {
@@ -112,18 +135,13 @@ export class MiCentroComponent implements OnInit{
     this.utils.hiddenArrow();
   }
 
-  ionViewWillLeave() {
-
-  };
-
   handleRefresh(event) {
-    console.log('refresing')
     setTimeout(() => {
       this.ngOnInit();
       // Any calls to load data go here
       event.target.complete();
     }, 2000);
-   }
+  }
 
 
 }

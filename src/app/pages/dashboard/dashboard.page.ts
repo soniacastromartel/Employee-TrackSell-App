@@ -221,7 +221,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
     }
     if (this.platform.is(ANDROID_TYPE)) {
       // Comprobación actualizacion app
-     await this.utils.checkingUpdate(this.token);
+    //  await this.utils.checkingUpdate(this.token);
     }
     // Check lista de cambios, ¿version actualizada?
     this.storage.get(VERSION_APP).then(ver => {

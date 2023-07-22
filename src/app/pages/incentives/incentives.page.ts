@@ -137,8 +137,6 @@ export class IncentivesPage implements OnInit {
     if (event.target.className.split(' ')[0] == 'ng-untouched') {
       return;
     }
-
-    console.log(!this.notification.loadOp);
     if (!this.notification.loadOp) {
       this.contentData = [];
       this.services = [];
