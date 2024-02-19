@@ -5,13 +5,15 @@ import { Component, ViewChild } from '@angular/core';
 import { NotificationsService } from '../../services/notifications.service';
 import { Service } from '../../models/service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LOADING_CENTERS, LOADING_DATA,
-          SCROLLING_TIME, DAY_MONTH_YEAR_FORMAT, DNI, PHONE, HC, EXTRA_DATA, IMG_WORD,
-          LOADING_CONTENT, VENTA_CONFIRMADA, NO_VALIDATION_FORM, ERROR_TRACKING_DATE,
-          FECHA_INVALID, CENTER_REQUIRED, CENTER_REQUIRED_RESPONSE, ERROR_CORTE_INCENTIVES, RESET_FORM_SALE,
-          SALE_ERROR, ERROR, CENTRE, MIN_SERVICE_COUNT, MAX_TIME_LOADING, FORMAT_DATE_SPANISH, NOT_DISCOUNT,
-          FORMAT_DATE_SPANISH_SHORT, REPEAT_SERVICE, ERROR_RECONFIGURE_SALE} from '../../app.constants';
-import { NavParams, ViewWillEnter, IonContent, IonSelect} from '@ionic/angular';
+import {
+  LOADING_CENTERS, LOADING_DATA,
+  SCROLLING_TIME, DAY_MONTH_YEAR_FORMAT, DNI, PHONE, HC, EXTRA_DATA, IMG_WORD,
+  LOADING_CONTENT, VENTA_CONFIRMADA, NO_VALIDATION_FORM, ERROR_TRACKING_DATE,
+  FECHA_INVALID, CENTER_REQUIRED, CENTER_REQUIRED_RESPONSE, ERROR_CORTE_INCENTIVES, RESET_FORM_SALE,
+  SALE_ERROR, ERROR, CENTRE, MIN_SERVICE_COUNT, MAX_TIME_LOADING, FORMAT_DATE_SPANISH, NOT_DISCOUNT,
+  FORMAT_DATE_SPANISH_SHORT, REPEAT_SERVICE, ERROR_RECONFIGURE_SALE
+} from '../../app.constants';
+import { NavParams, ViewWillEnter, IonContent, IonSelect } from '@ionic/angular';
 import { CentersUtilsService } from '../../services/centers-utils.service';
 import { UtilsService } from '../../services/utils.service';
 import { StorageService } from '../../services/storage.service';
@@ -28,7 +30,7 @@ import { SaleConfirmationComponent } from '../sale-confirmation/sale-confirmatio
   styleUrls: ['./new-sale.component.scss'],
   providers: [TextTransformPipe]
 })
-export class NewSaleComponent implements ViewWillEnter{
+export class NewSaleComponent implements ViewWillEnter {
   @ViewChild('content') content: IonContent;
   @ViewChild('selectSV') selectSV: IonSelect;
   @ViewChild('selectCR') selectCR: IonSelect;
@@ -60,17 +62,17 @@ export class NewSaleComponent implements ViewWillEnter{
 
   // Enlace de venta
   venta = new FormGroup({
-    cRealizador: new FormControl(undefined,  [Validators.required]),
+    cRealizador: new FormControl(undefined, [Validators.required]),
     service: new FormControl(undefined, Validators.required),
     cEmployee: new FormControl(undefined, Validators.required),
-    fechaVenta: new FormControl({value: '', disabled: true}),
+    fechaVenta: new FormControl({ value: '', disabled: true }),
     quantity: new FormControl(undefined, [Validators.min(MIN_SERVICE_COUNT), Validators.required]),
     idType: new FormControl(undefined, Validators.required),
     patientId: new FormControl(undefined, [Validators.minLength(6), Validators.required]),
     patientName: new FormControl(undefined, [Validators.minLength(9), Validators.required]),
     observaciones: new FormControl(''),
     discount: new FormControl(NOT_DISCOUNT)
-  }, {updateOn: 'change'});
+  }, { updateOn: 'change' });
 
   // Obj venta final
   builderSale: any = {};
@@ -85,52 +87,59 @@ export class NewSaleComponent implements ViewWillEnter{
   discountSubcription: Subscription;
 
   constructor(private notification: NotificationsService,
-              private params: NavParams,
-              private utils: UtilsService,
-              private centersUtils: CentersUtilsService,
-              private storage: StorageService,
-              private checkSvc: DatacheckService,
-              public textTransform: TextTransformPipe,
-              private pageSvc: PageService) { }
+    private params: NavParams,
+    private utils: UtilsService,
+    private centersUtils: CentersUtilsService,
+    private storage: StorageService,
+    private checkSvc: DatacheckService,
+    public textTransform: TextTransformPipe,
+    private pageSvc: PageService) { }
 
   /**
    * Comprobacion/recogida de datos iniciales
    */
   async ionViewWillEnter() {
+    console.log(this.params);
     // Opciones de configurador (Repetido?, preconfigurado?, ..)
     const centerRealizador = this.params.get(CENTRE);
     this.serviceSale = this.params.get(EXTRA_DATA);
     this.categoryImgCard = this.params.get(IMG_WORD);
     const isRepeat = this.params.get(REPEAT_SERVICE);
-
-        // Carga de centros (Realizador)
-        if (centerRealizador === undefined) {
-          if (this.centersUtils.centers === undefined) {
-            await this.centersUtils.getCenterOfSystem().then(() => {
-              this.centers = this.centersUtils.centers;
-            });
-          } else {
+    // Carga de centros (Realizador)
+    
+    if (Array.isArray(centerRealizador)) {
+      this.centers = centerRealizador;
+      console.log(this.centers);
+      this.venta.controls.cRealizador.setValue(centerRealizador);
+    } else {
+      if (centerRealizador === undefined) {
+        if (this.centersUtils.centers === undefined) {
+          await this.centersUtils.getCenterOfSystem().then(() => {
             this.centers = this.centersUtils.centers;
-          }
-        } else {
-          let cRealizador;
-          this.centersUtils.centers.forEach((reg: any) =>{
-            if (reg.name === centerRealizador){
-              cRealizador = reg;
-            }
           });
-          this.centers.push(cRealizador);
-          this.venta.controls.cRealizador.setValue(cRealizador);
+        } else {
+          this.centers = this.centersUtils.centers;
+        }
+      } else {
+        let cRealizador;
+        this.centersUtils.centers.forEach((reg: any) => {
+          if (reg.name === centerRealizador) {
+            cRealizador = reg;
+          }
+        });
+        this.centers.push(cRealizador);
+        this.venta.controls.cRealizador.setValue(cRealizador);
       }
+    }
 
     moment.locale('es');
     this.venta.controls.fechaVenta.setValue(moment().format(FORMAT_DATE_SPANISH));
     this.venta.controls.quantity.setValue(MIN_SERVICE_COUNT);
 
     // Centro empleado
-    if(this.storage.employee.centreAux !== undefined) {
+    if (this.storage.employee.centreAux !== undefined) {
       this.storage.employee.centreAux.forEach((c: any) => {
-        this.employeeCenters.push({id: c.centre_id, name: c.centre});
+        this.employeeCenters.push({ id: c.centre_id, name: c.centre });
       });
     } else {
       this.employeeCenters = this.centersUtils.centers.filter(reg => reg.id === this.storage.employee.centre_id);
@@ -155,19 +164,19 @@ export class NewSaleComponent implements ViewWillEnter{
     if (this.venta.controls.cRealizador.value !== null) {
       this.servicesAvailables = [];
       const cRealizador = this.venta.controls.cRealizador.value;
-        if(cRealizador !== undefined){
-          // Recogida de servicios segun centro
-          this.checkSvc.getServicesOf(cRealizador.id, true, this.storage.actualToken).then((result) => {
-            this.serviceSubcription = result.subscribe((collection: any) => {
-              const services: any[] = collection.data;
-              this.categoryImgCardList = [];
-              services.forEach((s: any) => {
-                this.servicesAvailables.push(s);
-              });
-              this.serviceSubcription.unsubscribe();
+      if (cRealizador !== undefined) {
+        // Recogida de servicios segun centro
+        this.checkSvc.getServicesOf(cRealizador.id, true, this.storage.actualToken).then((result) => {
+          this.serviceSubcription = result.subscribe((collection: any) => {
+            const services: any[] = collection.data;
+            this.categoryImgCardList = [];
+            services.forEach((s: any) => {
+              this.servicesAvailables.push(s);
             });
+            this.serviceSubcription.unsubscribe();
           });
-        }
+        });
+      }
     }
   }
 
@@ -191,7 +200,7 @@ export class NewSaleComponent implements ViewWillEnter{
   /**
    * Comprobacion de venta
    */
-  checkService(ev: any){
+  checkService(ev: any) {
     const check1 = this.venta.controls.cRealizador.value != undefined;
     const check2 = this.venta.controls.service.value != undefined;
     const check3 = this.venta.controls.cEmployee.value != undefined;
@@ -203,13 +212,13 @@ export class NewSaleComponent implements ViewWillEnter{
    * Completa la identificacion cuando se elige [HC], completando
    * el contenido a 6 digitos si no se han completado.
    */
-  completeFields(){
+  completeFields() {
     if (this.venta.controls.patientId.value !== undefined && this.venta.controls.idType.value === HC &&
       this.venta.controls.patientId.value.length < 6) {
       const len = this.venta.controls.patientId.value.length;
       const fillZero = 6 - len;
       let aux = '';
-      for(let x=0; x<fillZero; x++){
+      for (let x = 0; x < fillZero; x++) {
         aux += '0';
       }
       aux = aux + this.venta.controls.patientId.value;
@@ -221,7 +230,7 @@ export class NewSaleComponent implements ViewWillEnter{
    * Cambio de tipo de identificacion
    * para los pacientes
    */
-  changeIdentification(){
+  changeIdentification() {
     this.venta.controls.idType.setValue(undefined);
     this.venta.controls.patientId.setValue(undefined);
   }
@@ -232,7 +241,7 @@ export class NewSaleComponent implements ViewWillEnter{
   async sendSale() {
     await this.selectingCategoryImg();
 
-      // Obj temporal de venta
+    // Obj temporal de venta
     this.builderSale = {
       employee: this.storage.employee.username,
       cRealizador: this.venta.controls.cRealizador.value,
@@ -244,48 +253,48 @@ export class NewSaleComponent implements ViewWillEnter{
       pacienteName: this.venta.controls.patientName.value,
       fecha: moment().format(FORMAT_DATE_SPANISH_SHORT),
       observaciones: this.venta.controls.observaciones.value,
-      discount : this.venta.controls.discount.value
+      discount: this.venta.controls.discount.value
     };
-    await this.pageSvc.viewContentModal(SaleConfirmationComponent, this.builderSale )
+    await this.pageSvc.viewContentModal(SaleConfirmationComponent, this.builderSale)
       .then(async res => {
         if (res) {
           this.builderSale = this.buildingSale();
           // Registro de venta de empleado
           await this.checkSvc.saleForEmployee(this.builderSale, this.storage.actualToken)
-          .then((result) => {
-            this.saleSubcription = result.subscribe(() => {
-              this.notification.alertBaseNotifications(VENTA_CONFIRMADA.title, VENTA_CONFIRMADA.msg);
-              this.goBack();
-            }, (ex)=>{
-                if((ex.error.message === NO_VALIDATION_FORM && ex.error.data !== undefined && ex.error.data.tracking_date !== undefined &&
-                  ex.error.data.tracking_date[0] === ERROR_TRACKING_DATE) || ex.error.message == ERROR_CORTE_INCENTIVES){
+            .then((result) => {
+              this.saleSubcription = result.subscribe(() => {
+                this.notification.alertBaseNotifications(VENTA_CONFIRMADA.title, VENTA_CONFIRMADA.msg);
+                this.goBack();
+              }, (ex) => {
+                if ((ex.error.message === NO_VALIDATION_FORM && ex.error.data !== undefined && ex.error.data.tracking_date !== undefined &&
+                  ex.error.data.tracking_date[0] === ERROR_TRACKING_DATE) || ex.error.message == ERROR_CORTE_INCENTIVES) {
                   this.notification.baseThrowAlerts(FECHA_INVALID.title, FECHA_INVALID.msg);
-                } else if(ex.error.message === NO_VALIDATION_FORM && ex.error.data.centre_employee_id[0] === CENTER_REQUIRED_RESPONSE){
-                    this.notification.baseThrowAlerts(CENTER_REQUIRED.title, CENTER_REQUIRED.msg);
-                } else{
+                } else if (ex.error.message === NO_VALIDATION_FORM && ex.error.data.centre_employee_id[0] === CENTER_REQUIRED_RESPONSE) {
+                  this.notification.baseThrowAlerts(CENTER_REQUIRED.title, CENTER_REQUIRED.msg);
+                } else {
                   this.notification.baseThrowAlerts(ERROR.title, ERROR.msg);
                 }
+              });
+            }).catch(ex => {
+              this.notification.baseThrowAlerts(SALE_ERROR.title, SALE_ERROR.msg);
             });
-          }).catch(ex => {
-            this.notification.baseThrowAlerts(SALE_ERROR.title, SALE_ERROR.msg);
-          });
         }
       });
   }
 
-/**
- * Actualizacion tras carga automatica
- *
- * @param idx Posicion
- * @param ev Evento a gestionar
- */
-  updateFields(idx: number, ev: any){
-    switch(idx) {
-      case 1: 
-      this.selectSV.selectedText = ev.target.value.name;
+  /**
+   * Actualizacion tras carga automatica
+   *
+   * @param idx Posicion
+   * @param ev Evento a gestionar
+   */
+  updateFields(idx: number, ev: any) {
+    switch (idx) {
+      case 1:
+        this.selectSV.selectedText = ev.target.value.name;
         break;
-      case 2: 
-      this.selectCR.selectedText = ev.target.value.name;
+      case 2:
+        this.selectCR.selectedText = ev.target.value.name;
         break;
     }
   }
@@ -294,27 +303,27 @@ export class NewSaleComponent implements ViewWillEnter{
    * Recoger los descuentos disponibles para el servicio y el
    * centro seleccionado
    */
-  async getDiscountsServices(){
+  async getDiscountsServices() {
     this.discountAvailables = [];
-    if( this.venta.controls.cRealizador.value !== -1 && this.venta.controls.service.value !== -1) {
+    if (this.venta.controls.cRealizador.value !== -1 && this.venta.controls.service.value !== -1) {
       const centreId = this.venta.controls.cRealizador.value?.id;
       const serviceId = this.venta.controls.service.value?.id;
 
       if (centreId !== undefined && centreId !== -1 && serviceId !== undefined && serviceId !== -1) {
-          // Se recogen los descuentos disponibles
-          this.checkSvc.getAvailablesDiscounts(serviceId, centreId)
+        // Se recogen los descuentos disponibles
+        this.checkSvc.getAvailablesDiscounts(serviceId, centreId)
           .then((discounts) => {
-            this.discountSubcription = discounts.subscribe((res)=>{
-              this.discountAvailables.push({name: 'NO SE APLICA', type:'none'});
+            this.discountSubcription = discounts.subscribe((res) => {
+              this.discountAvailables.push({ name: 'NO SE APLICA', type: 'none' });
               const availablesDiscounts = new Array(res.slice(0, res.byteLength));
-              for (let i=0; i<4; i++) {
+              for (let i = 0; i < 4; i++) {
                 if (availablesDiscounts[0][i] !== undefined) {
                   this.discountAvailables.push(availablesDiscounts[0][i]);
                 }
               }
               this.discountSubcription.unsubscribe();
             });
-        });
+          });
       } else {
         this.discountAvailables = [];
       }
@@ -322,7 +331,7 @@ export class NewSaleComponent implements ViewWillEnter{
   }
 
   /* CLOSE SECTION */
-  goBack(){
+  goBack() {
     this.notification.closeModal();
   }
 
@@ -344,30 +353,30 @@ export class NewSaleComponent implements ViewWillEnter{
   /**
    * Recoge el tracking anterior y extrae los datos necesarios para la recreacion
    */
-    private async loadServiceToSale(dataService: any){
-      this.checkSvc.getDataTracking(this.serviceSale.tracking_id, this.storage.actualToken)
-        .then((r) => {
-          this.serviceSubcription = r.subscribe((data)=>{
-            const servPrice = data['service'][0];
-            servPrice.price = dataService.price;
-            servPrice.category_image_port = data['category'][0].image_portrait;
-            this.serviceSale = servPrice;
-            this.venta.controls.cRealizador.setValue({id: data['centre'][0]['id'], name: data['centre'][0]['name']});
-            this.venta.controls.service.setValue(this.serviceSale);
-            this.venta.controls.cEmployee.setValue({id: data['centre_employee_id'][0]['id'], name: data['centre_employee_id'][0]['name']});
-            this.venta.controls.quantity.setValue(data['quantity']);
-            this.venta.controls.idType.setValue(data['idType']);
-            this.venta.controls.patientId.setValue(data['patientId']);
-            this.venta.controls.patientName.setValue(data['patient_name']);
-            this.venta.controls.observaciones.setValue('');
-            this.servicesOfCenter();
-            this.venta.updateValueAndValidity();
-            this.getDiscountsServices();
-          });
-        }).catch((ex) =>{
-          this.notification.baseThrowAlerts(SALE_ERROR.title, ERROR_RECONFIGURE_SALE);
+  private async loadServiceToSale(dataService: any) {
+    this.checkSvc.getDataTracking(this.serviceSale.tracking_id, this.storage.actualToken)
+      .then((r) => {
+        this.serviceSubcription = r.subscribe((data) => {
+          const servPrice = data['service'][0];
+          servPrice.price = dataService.price;
+          servPrice.category_image_port = data['category'][0].image_portrait;
+          this.serviceSale = servPrice;
+          this.venta.controls.cRealizador.setValue({ id: data['centre'][0]['id'], name: data['centre'][0]['name'] });
+          this.venta.controls.service.setValue(this.serviceSale);
+          this.venta.controls.cEmployee.setValue({ id: data['centre_employee_id'][0]['id'], name: data['centre_employee_id'][0]['name'] });
+          this.venta.controls.quantity.setValue(data['quantity']);
+          this.venta.controls.idType.setValue(data['idType']);
+          this.venta.controls.patientId.setValue(data['patientId']);
+          this.venta.controls.patientName.setValue(data['patient_name']);
+          this.venta.controls.observaciones.setValue('');
+          this.servicesOfCenter();
+          this.venta.updateValueAndValidity();
+          this.getDiscountsServices();
         });
-    }
+      }).catch((ex) => {
+        this.notification.baseThrowAlerts(SALE_ERROR.title, ERROR_RECONFIGURE_SALE);
+      });
+  }
 
   /**
    * Crea y retorna el registro de venta final
@@ -390,15 +399,15 @@ export class NewSaleComponent implements ViewWillEnter{
     };
   }
 
-/**
- * Metodo de ayuda para mostrar/ocultar opciones
- * en formulario
- *
- * @param value Condicional
- */
-  private showUnshowDataPatient(value: boolean){
+  /**
+   * Metodo de ayuda para mostrar/ocultar opciones
+   * en formulario
+   *
+   * @param value Condicional
+   */
+  private showUnshowDataPatient(value: boolean) {
     this.active = value;
-    if(this.active){
+    if (this.active) {
       this.content.scrollByPoint(0, 250, SCROLLING_TIME);
     }
   }

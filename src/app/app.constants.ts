@@ -9,9 +9,9 @@ export const BIENVENIDA = 'assets/imgs/planincent.png';
 export const NO_CONNECTION_IMG = 'assets/imgs/no-connection.gif';
 export const IC_ARROW_UP = 'arrow-up-circle';
 export const IC_ARROW_DOWN = 'arrow-down-circle';
-export const BASE_URL = 'https://pdi.grupoicot.es:8000/';
-//export const BASE_URL = 'https://pdipre.grupoicot.es:8000/';
-//export const BASE_URL = 'https://localhost:8000/';
+// export const BASE_URL = 'https://pdi.grupoicot.es:8000/';
+// export const BASE_URL = 'https://pdipre.grupoicot.es:8000/';
+export const BASE_URL = 'https://localhost:8000/';
 export const BASE_UPDATE_LINK = 'storage/versiones/';
 export const BASE_UPATE_IOS_PWA_LINK = 'storage/versiones/ios/latest/';
 export const ANDROID_ENVIRONMENT_FILE_PATH = 'files/';
@@ -19,7 +19,7 @@ export const IOS_ENVIRONMENT_FILEDIR_PATH = 'Library/';
 export const ENVIRONMENT_FILENAME = 'environment.txt';
 export const LINK_PRIVACY = BASE_URL + 'storage/condiciones/POLITICA-PRIVACIDAD-ICOT-PDI-APP.pdf';
 //App Id for the OneSignal Account
-export const APP_ID= '5f2ef6ae-93cc-4194-9350-dab41b514e3b';
+export const APP_ID = '5f2ef6ae-93cc-4194-9350-dab41b514e3b';
 
 /**
 * NAME ROUTER
@@ -27,15 +27,22 @@ export const APP_ID= '5f2ef6ae-93cc-4194-9350-dab41b514e3b';
 export const HOME = 'home';
 export const DASHBOARD = 'dashboard';
 export const RANKINGS = 'rankings';
+export const SERVICES = 'health_services';
 export const INCENTIVES = 'incentives';
 export const LEAGUE = 'league';
+/**
+ * API ROUTES
+ */
 export const LOGIN_APP = 'api/login';
 export const NEW_ACCESS = 'api/register';
 export const CHANGING_PASS = 'api/changingPass';
 export const USER_RECOVERY_PASS = 'api/recoveryPass';
 export const CENTER_EMPLOYEE = 'api/employee_info/';
 export const CENTERS_LIST = 'api/getCenters';
+export const CENTERS_BY_SERVICE = 'api/getCentersByService/';
 export const CATEGORIES_LIST = 'api/employee_categories/';
+export const SERVICECATEGORIES_LIST = 'api/getCategoriesWithServices';
+export const SERVICES_LIST = 'api/getServicesList';
 export const INCENTIVES_EMPLOYEE = 'api/incentives';
 export const SEARCH_TRACKING = 'api/tracking/search';
 export const SERVICES_OF_CENTER = 'api/services/';
@@ -54,8 +61,7 @@ export const LAST_CHANGES = 'api/getLastChanges';
 export const UPDATING_VERSION = 'api/updateVersion';
 export const AVAILABLES_DISCOUNTS = 'api/discounts/';
 export const APP_LOGS = 'api/logs';
-export const UNLOCK_REQUEST= 'api/unlockRequest';
-
+export const UNLOCK_REQUEST = 'api/unlockRequest';
 /**
 * KEY WORDS
 */
@@ -137,7 +143,7 @@ export const PASS_FORMAT = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[$€+-=<
 /**
 * RESPONSES BACK-END
 */
-export const EMPTY_STRING = '';
+export const EMPTY_STRING = ' ';
 export const CANCEL_OPTION = 'cancel';
 export const RESPONSE_NO_VALID = 'no_valid';
 export const RESPONSE_PENDING_VALIDATION = 'pending_validation';
@@ -197,8 +203,8 @@ export const INFO_UUID = ', UUID: ';
 export const INFO_VERSION = ', VERSION: ';
 export const INFO_MANUFACTURE = ', FABRICANTE: ';
 export const INFO_SYSTEM = ', SISTEMA: ';
-export const ENCRIPTING_KEY= 'secretKey';
-export const USER_ICONS= ['person-sharp', 'mail-sharp', 'briefcase-sharp', 'call-sharp'];
+export const ENCRIPTING_KEY = 'secretKey';
+export const USER_ICONS = ['person-sharp', 'mail-sharp', 'briefcase-sharp', 'call-sharp'];
 
 /** 
 * LOGS MESSAGES & TYPES

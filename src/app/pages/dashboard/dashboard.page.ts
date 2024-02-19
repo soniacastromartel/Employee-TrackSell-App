@@ -1,4 +1,4 @@
-import { IMG_FIELD, INCENTIVES, LEAGUE, RANKINGS } from './../../app.constants';
+import { IMG_FIELD, INCENTIVES, LEAGUE, RANKINGS, SERVICES } from './../../app.constants';
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/quotes */
 import { AfterContentChecked, AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
@@ -159,8 +159,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
     // Recogida de datos del usuario
     this.user = this.storage.employee;
     this.sections = this.checkSvc.getSections();
-    console.log(this.version);
-
+    // console.log(this.version);
     if (this.user !== undefined) {
       this.username = this.storage.employee.username;
       this.token = this.storage.actualToken;
@@ -321,8 +320,8 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
 
     switch (option) {
       case 0:
-        this.pageSvc.listOfServices(ListOfServicesComponent);
-        break;
+        this.route.navigate([SERVICES]);
+                break;
       case 1:
         this.route.navigate([INCENTIVES]);
         break;

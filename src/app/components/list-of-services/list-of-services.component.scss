@@ -77,7 +77,7 @@ ion-searchbar {
     --cancel-button-color: var(--ion-color-icot);
     --icon-color: var(--ion-color-icot);
     --color: var(--ion-color-myblack);
-    float: inline-start;
+    // float: inline-start;
     --placeholder-color: var(--ion-color-myblack);
     --background: #fafafa;
 }
@@ -395,7 +395,17 @@ hr {
     text-align: center;
 }
 
-
 .home{
   color: white;
 }
+
+.upDownScroll {
+    color: var(--ion-color-icot);
+  }
+
+  .hr {
+    border-bottom: 1px solid #ccc;
+    margin: 10px 0;
+    width: 100%;
+    margin-top: 20px !important;
+  }

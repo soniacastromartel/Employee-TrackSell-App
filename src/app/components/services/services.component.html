@@ -1,0 +1,13 @@
+<ion-content #content [scrollEvents]="true">
+  <ion-list class="bg-transparent" color="none" lines="none">
+    <ion-item *ngFor="let category of categories" color="none">
+      <ion-label position="floating" class="categoryName">{{ category.name }}</ion-label>
+      <ion-select class="always-flip" toggleIcon="caret-down-sharp" (ionCancel)="handleCancel()"
+        [(ngModel)]="selectedCategory" (ngModelChange)="categoryChanged($event)" interface="alert" cancelText="CANCELAR"
+        [interfaceOptions]="customOptions">
+        <ion-select-option *ngFor="let service of category.services" [value]="service"> {{service.name |
+          titlecase}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-content>

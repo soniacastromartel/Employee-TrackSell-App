@@ -2,12 +2,15 @@
  * Modelo para Servicios
  */
 
+import { Centre } from "./centre";
+
 export interface Service {
   id: number;
   name: string;
-  image: string;
   description: string;
+  url: string;
+  image: string;
   fecha: Date;
   price: string;
-  url: string;
+  centers: Array <Centre>;
 }

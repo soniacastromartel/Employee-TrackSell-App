@@ -129,8 +129,7 @@ export class IncentivesPage implements OnInit {
  * según la selección del usuario
  */
   updateSelection(event: any, dateSearch: string) {
-    console.log(event);
-    console.log(this.contentData);
+    // console.log(this.contentData);
     console.log(this.fechaIncentivos);
     console.log(this.dateSearch);
     //si hay datos en contentData y el datetime no se ha tocado, se sale y los datos quedan estáticos. No hay actualización en el componente
@@ -158,18 +157,18 @@ export class IncentivesPage implements OnInit {
    * @param year Año a consultar, si es undefined se omite.
    */
   async searchingIncentivesEmployee(month?: number, year?: number) {
+    console.log(month);
     if (this.subcriptionData !== undefined) {
       this.subcriptionData.unsubscribe();
     }
     // MES ACTUAL
-    const day = this.actualDate.getDate();
-    if (month === 1 && day < 20) {
-      year = year - 1;
-    } else if (day < 20) {
-      // month = month - 1;
-    }
-
-    console.log(month);
+    // const day = this.actualDate.getDate();
+    // if (month === 1 && day < 20) {
+    //   month= 12;
+    //   year = year - 1;
+    // } else if (day < 20) {
+    //   month = month - 1;
+    // }
     await this.checkSvc.getIncentivesForEmployee(this.storage.employee.username, this.storage.actualToken, month, year)
       .then(result => {
         this.subcriptionData = result.subscribe((incentives: any) => {

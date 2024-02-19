@@ -71,7 +71,7 @@ export class UserActivityService {
       this.resetTimer();
       return true;
     } catch (error) {
-      console.error('Error validating token:', error);
+      console.error('Error validating token: ', error);
       return false;
     }
   }

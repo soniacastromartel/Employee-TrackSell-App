@@ -1,0 +1,81 @@
+ion-searchbar {
+    --cancel-button-color: var(--ion-color-icot);
+    --icon-color: var(--ion-color-icot);
+    --color: var(--ion-color-myblack);
+    float: inline-start;
+    --placeholder-color: var(--ion-color-myblack);
+    --background: #fafafa;
+}
+
+ion-fab-button {
+    --background: var(--ion-color-icot);
+    --background-hover: var(--ion-color-icot);
+    --background-activated: var(--ion-color-icot);
+}
+
+ion-select {
+    --background-color: var(--ion-color-mygradient);
+}
+
+ion-select::part(icon) {
+    color: var(--ion-color-icot);
+    opacity: 1;
+}
+
+ion-select.always-flip::part(icon) {
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+ion-select.always-flip.select-expanded::part(icon) {
+    transform: rotate(180deg);
+}
+
+ion-select:active {
+    border-bottom: 2px solid green;
+    box-shadow: none;
+  }
+
+hr {
+    margin: 16px;
+    height: 3px;
+    background-color: black !important;
+}
+
+.selectCenter {
+    font-size: small;
+    font-family: monospace;
+    color: var(--ion-color-myblack);
+    font-weight: bold;
+    margin: 16px;
+    text-align: left;
+    display: block;
+}
+
+.hr {
+    border-bottom: 1px solid #ccc;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.searchbar {
+    margin-bottom: 80px;
+}
+
+.bg-transparent {
+    background: transparent !important;
+    margin-top: 20px !important;
+}
+
+.categoryName {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.selectService {
+    font-weight: bold !important;
+}
+
+.myClass {
+    border: 8px solid black !important;
+    width: 100% !important;
+}

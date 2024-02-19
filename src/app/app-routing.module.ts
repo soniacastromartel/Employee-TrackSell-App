@@ -28,6 +28,10 @@ const routes: Routes = [
   {
     path: 'league',
     loadChildren: () => import('./pages/league/league.module').then( m => m.LeaguePageModule)
+  },
+  {
+    path: 'health_services',
+    loadChildren: () => import('./pages/health-services/health-services.module').then( m => m.HealthServicesPageModule)
   }
   
 ];

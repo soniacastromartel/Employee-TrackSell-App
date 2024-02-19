@@ -1,21 +1,23 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable quote-props */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpEvent, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   SERVICES_OF_CENTER, SELLING_SERVICES, RANKINGS_OF_EMPLOYEES,
   NEW_ACCESS, ERROR_APP, ACCESS_COUNT, LOGIN_APP,
   USER_RECOVERY_PASS, SECRET, CHANGING_PASS, CENTER_EMPLOYEE as EMPLOYEE_INFO,
-  CATEGORIES_LIST, CENTERS_LIST, INCENTIVES_EMPLOYEE, GET_VERSION, CHECKING_VERSION, DATA_PROMO, QUESTIONS_FAQ,
+  CATEGORIES_LIST, CENTERS_LIST, CENTERS_BY_SERVICE, INCENTIVES_EMPLOYEE, GET_VERSION, CHECKING_VERSION, DATA_PROMO, QUESTIONS_FAQ,
   LAST_CHANGES, CLASIFICATION_LEAGUE, BASE_URL, SEARCH_TRACKING, AVAILABLES_DISCOUNTS, APP_LOGS, CHECK_NOT_UPDATE,
-  RESET_COUNT_UPDATE, LOG_TYPE, UPDATING_VERSION, UNLOCK_REQUEST
+  RESET_COUNT_UPDATE, LOG_TYPE, UPDATING_VERSION, UNLOCK_REQUEST, SERVICECATEGORIES_LIST, SERVICES_LIST
 } from '../app.constants';
 import { AccessToService } from './access-to.service';
 import { map } from 'rxjs/operators';
 import { EventEmitter } from '@angular/core';
 import { Componente } from '../models/componente';
 import { Section } from '../models/section';
+import { CategoryService } from '../models/category_service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +30,11 @@ export class DatacheckService {
   private changingPass: string;
   private recoveryPass: string;
   private getCategories: string;
+  private getCategoriesOfServices: string;
+  private getServicesList: string;
   private employeeInfo: string;
   private getAllCenters: string;
+  private getCenterByService: string;
   private incentives: string;
   private searchTracking: string;
   private servicesOfCenter: string;
@@ -60,7 +65,10 @@ export class DatacheckService {
     this.recoveryPass = USER_RECOVERY_PASS;
     this.employeeInfo = EMPLOYEE_INFO;
     this.getAllCenters = CENTERS_LIST;
+    this.getCenterByService= CENTERS_BY_SERVICE;
     this.getCategories = CATEGORIES_LIST;
+    this.getCategoriesOfServices = SERVICECATEGORIES_LIST;
+    this.getServicesList = SERVICES_LIST;
     this.incentives = INCENTIVES_EMPLOYEE;
     this.searchTracking = SEARCH_TRACKING;
     this.servicesOfCenter = SERVICES_OF_CENTER;
@@ -87,8 +95,7 @@ export class DatacheckService {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Methods": "*",
-
+        "Access-Control-Allow-Methods": "*"
       }
     };
   }
@@ -277,10 +284,32 @@ export class DatacheckService {
   }
 
   /**
-   * @returns Lista de categorías disponibles
+   * @returns Lista de centros para un servicio
+   */
+  async getCentersByService(id:any) {
+    return this.http.get(this.base + this.getCenterByService+id);
+  }
+
+  /**
+   * @returns Lista de servicios
+   */
+  async getServices() {
+    return this.http.get(this.base + this.getServicesList, this.options);
+  }
+
+  /**
+   * @returns Lista de categorías laborales disponibles
    */
   async getJobCategory() {
     return this.http.get(this.base + this.getCategories);
+  }
+
+  /**
+   * @returns Lista de categorías de servicios disponibles
+   */
+  async getServiceCategories() {
+    return this.http.get(this.base + this.getCategoriesOfServices, this.options);
+
   }
 
   /**

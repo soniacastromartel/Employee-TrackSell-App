@@ -575,14 +575,14 @@ export class NotificationsService {
       mode: 'ios',
       buttons: [
         {
-          text: 'REPETIR SERVICIO',
-          role: 'repeat',
-          cssClass: 'btnAlert'
-        },
-        {
           text: 'CERRAR',
           role: 'cancel',
           cssClass: 'btnCancel'
+        },
+        {
+          text: 'REPETIR',
+          role: 'repeat',
+          cssClass: 'btnAlert'
         }
       ]
     });

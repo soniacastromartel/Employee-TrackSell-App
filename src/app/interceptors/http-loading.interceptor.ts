@@ -47,6 +47,7 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             catchError(err => {
                 if (err instanceof HttpErrorResponse) {
+                    console.log ((<HttpErrorResponse>err));
                     // switch ((<HttpErrorResponse>err).status) {
                     //     case 401:
                     //         //handle refresh token

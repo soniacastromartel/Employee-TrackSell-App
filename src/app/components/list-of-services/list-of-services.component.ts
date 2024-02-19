@@ -78,6 +78,7 @@ async ionViewWillEnter(){
       this.centros = this.centersUtls.centers;
       this.centrosShow = this.centros;
     }).catch(ex => {
+      console.log(ex);
 
     });
   } else{
@@ -235,6 +236,30 @@ async ionViewWillEnter(){
   goBack(){
     this.notification.closeModal();
   }
+
+    /**
+ * Escucha scroll
+ *
+ * @param ev Evento touch
+ */
+    onScroll(ev: any) {
+      this.utils.onScroll(ev, this.content);
+    }
+  
+    /**
+     * Scroll in lista de rankings
+     */
+    onScrolling() {
+      this.utils.onScrolling(this.content);
+    }
+  
+    /**
+     * Oculta el icono de flecha para
+     * subir o bajar de la lista
+     */
+    hiddenArrow() {
+      this.utils.hiddenArrow();
+    }
 
   /**
    * Al salir se destruye la subcripcion de los servicios

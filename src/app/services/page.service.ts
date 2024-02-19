@@ -146,7 +146,7 @@ export class PageService {
    * @param extras Servicio a configurar
    * @param centro Centro realizador elegido
    */
-  async recomendedService(compo: any, categoryImg: string, centro?: string, extras: Service = undefined, isRepeat = false) {
+  async recomendedService(compo: any, categoryImg: string, centro?: any, extras: Service = undefined, isRepeat = false) {
     this.modalOp = true;
     const newSale = await this.modalCrtl.create({
       component: compo,
