@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import {SwiperModule} from 'swiper/angular';
+// import {SwiperModule} from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import {SwiperModule} from 'swiper/angular';
     IonicModule,
     HomePageRoutingModule,
     ReactiveFormsModule,
-    SwiperModule
+    // SwiperModule
   ],
   declarations: [HomePage],
 })

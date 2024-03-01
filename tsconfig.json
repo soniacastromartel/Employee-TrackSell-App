@@ -4,7 +4,7 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "baseUrl": "./",
-    "watch": true,
+    //  "watch": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -12,7 +12,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": false,
-    "target": "es2015",
+    "target": "es2020",
     "module": "es2020",
     "lib": ["es2018", "dom"]
   },

@@ -1,0 +1,207 @@
+[
+    {
+        "coordinate": {
+            "lat": 28.13428,
+            "lng": -15.43015
+          },
+          "title": "ICOT POLICLÍNICO LAS PALMAS",
+          "snippet": "C. Pdte. Alvear, 10. Tlf: 928296300"
+    },
+    {
+        "coordinate": {
+            "lat": 28.01521,
+            "lng": -15.38472
+          },
+          "title": "ICOT HOSPITAL CIUDAD DE TELDE",
+          "snippet": "Urb. La Estrella, C. Míster Blisse, s/n. Tlf: 928707555"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.14479,
+            "lng": -15.65037
+          },
+          "title": "ICOT GÁLDAR",
+          "snippet": "C. Franciscanos, 9. Tlf:928551811"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.00048,
+            "lng": -15.41941
+          },
+          "title": "ICOT ARNAO-TELDE",
+          "snippet": "C. Roque, 63. Tlf:928704044"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.12935,
+            "lng": -15.43206
+          },
+          "title": "ICOT INSURE",
+          "snippet": "C. Puccini, 14. Tlf:928243993"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.09692,
+            "lng": -15.41429
+          },
+          "title": "ICOT VEGUETA",
+          "snippet": "C. Granadera Canaria, 26. Tlf:928333334"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.10419,
+            "lng": -15.45261
+          },
+          "title": "ICOT 7 PALMAS",
+          "snippet": "Av Pintor Felo Monzón, 21. Teléfono:928424344"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 27.85520,
+            "lng": -15.43106
+          },
+          "title": "ICOT POLICLÍNICO VECINDARIO",
+          "snippet": "C. Segovia,4. Tlf:928948744"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 27.77314,
+            "lng": -15.53973
+          },
+          "title": "ICOT SAN AGUSTÍN",
+          "snippet": "C. Los Jazmines, 79-81. Tlf:928757273"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 27.77314,
+            "lng": -15.53973
+          },
+          "title": "ICOT SAN AGUSTÍN",
+          "snippet": "C. Los Jazmines, 79-81. Tlf:928757273"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.03585,
+            "lng": -15.47472
+          },
+          "title": "ICOT MONTEBELLO",
+          "snippet": "Centro Comercial Tafira. Tlf:928351212"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.12038,
+            "lng": -15.43709
+          },
+          "title": "ICOT ESCALERITAS",
+          "snippet": "Av. Escaleritas, 54. Tlf:928398953"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.96411,
+            "lng": -13.55157
+          },
+          "title": "ICOT PARQUE LANZAROTE",
+          "snippet": "C.Dr. Gómez Ulla, 29. Tlf:928855841"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.11793,
+            "lng": -15.42617
+          },
+          "title": "CENTRO SOCIOSANITARIO EL PINO",
+          "snippet": "Av. Juan XXIII, 13. Tlf:928292545"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.49903,
+            "lng": -13.86139
+          },
+          "title": "ICOT PARQUE FUERTEVENTURA",
+          "snippet": "C. Secundino Alonso, 17. Tlf:928851500"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.46615,
+            "lng": -16.25182
+          },
+          "title": "ICOT PARQUE Tenerife",
+          "snippet": "C. Puerta Canseco, 9. Tlf:922100270"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.07110,
+            "lng": -16.55693
+          },
+          "title": "ICOT SAN ISIDRO",
+          "snippet": "C. Paisaje Lunar, 13. Tlf:922086180"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.35913,
+            "lng": -16.37126
+          },
+          "title": "ICOT CANDELARIA",
+          "snippet": "C. Al Alba, Local 5. Tlf:922106226"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.39351,
+            "lng": -16.51934
+          },
+          "title": "ICOT LA OROTAVA",
+          "snippet": "C. Alfonso Trujillo, s/n. Tlf:922206270"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.46812,
+            "lng": -16.28451
+          },
+          "title": "ICOT LA LAGUNA",
+          "snippet": "Av. Leonardo Torriani, 12. Tlf:922206270"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.46846,
+            "lng": -16.28424
+          },
+          "title": "ICOT LA CUESTA",
+          "snippet": "Av. de los Menceyes, 364. Tlf:922661090"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.06383,
+            "lng": -16.73159
+          },
+          "title": "ICOT LAS AMÉRICAS",
+          "snippet": "C. Managua, s/n. Tlf:922206270"
+    }
+    ,
+    {
+        "coordinate": {
+            "lat": 28.46221,
+            "lng": -16.25528
+          },
+          "title": "ICOT SANTA CRUZ",
+          "snippet": "C. Leoncio Rodríguez, 56. Tlf:922206270"
+    }
+]

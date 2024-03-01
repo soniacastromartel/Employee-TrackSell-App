@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="goBack()">
+                <ion-icon name="close-circle" color="light" size="large"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-note>{{marker?.title}}</ion-note>
+        <ion-buttons slot="end">
+            <img class="logo" src="assets/imgs/whitelogo.png" translucent />
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-content>
+        <ion-item>
+            <ion-icon slot="start" name="location-sharp"></ion-icon>
+            {{marker?.latitude}}/{{marker?.longitude}}
+        </ion-item>
+    </ion-content>
+</ion-header>

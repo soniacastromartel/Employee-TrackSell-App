@@ -1,7 +1,19 @@
-ion-img{
+ion-img {
     object-fit: fill;
 }
 
-ion-slide{
+ion-slide {
     height: 100% !important;
 }
+
+ion-fab {
+    --margin-top: var(--ion-safe-area-top, 0);
+}
+
+ion-fab-button {
+    --background: #bc012e;
+    --background-activated: #bc012e;
+    --background-hover: #bd1a40;
+    --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    --color: black;
+  }

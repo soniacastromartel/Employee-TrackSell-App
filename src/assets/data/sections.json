@@ -34,11 +34,19 @@
 
     },
     {
-        "title": "LIGA DE CENTROS",
+        "title": "LIGA INTERCENTROS",
         "subtitle": "LIGA",
         "icon": "medal",
         "img": "assets/imgs/liga2.jpg",
         "description": "Liga de los centros por puntos. ¿Quién será el ganador del año?"
+
+    },
+    {
+        "title": "RED DE CENTROS",
+        "subtitle": "CENTROS",
+        "icon": "storefront",
+        "img": "assets/imgs/map_hand.webp",
+        "description": "¿Conocías ya todos nuestros centros?"
 
     }
 ]

@@ -7,6 +7,7 @@
         display: block;
         text-align: center;
     }
+
     .resOpt {
         width: 100% !important;
         text-align: center;
@@ -26,6 +27,7 @@
         display: block;
         text-align: center;
     }
+
     .resOpt {
         width: 100% !important;
         text-align: center;
@@ -45,6 +47,7 @@
         display: block;
         text-align: center;
     }
+
     .resOpt {
         width: 100% !important;
         text-align: center;
@@ -108,12 +111,32 @@ ion-segment-button {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+ion-searchbar {
+    --cancel-button-color: var(--ion-color-icot);
+    --icon-color: var(--ion-color-icot);
+    --color: var(--ion-color-myblack);
+    // float: inline-start;
+    --placeholder-color: var(--ion-color-myblack);
+    --background: #fafafa;
+}
+
 .icFaq {
     color: var(--ion-color-icot);
 }
 
 .searchContainer {
-    background-color:var(--ion-color-light-tint);
+    // background-color:var(--ion-color-light-tint);
+}
+
+.upDownScroll {
+    color: var(--ion-color-icot);
+}
+
+.hr {
+    border-bottom: 1px solid #ccc;
+    margin: 10px 0;
+    width: 100%;
+    margin-top: 20px !important;
 }
 
 .separator {
@@ -194,10 +217,21 @@ ion-segment-button {
     animation-iteration-count: infinite;
 }
 
+.selectCenter {
+    font-size: small;
+    font-family: monospace;
+    color: var(--ion-color-myblack);
+    font-weight: bold;
+    margin: 16px;
+    text-align: left;
+    display: block;
+}
+
 @keyframes alerting {
     25% {
         opacity: 15%;
     }
+
     75% {
         opacity: 100%;
     }

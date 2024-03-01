@@ -38,7 +38,7 @@ export class UserDataComponent implements OnInit {
   async presentActionSheet() {
     var type;
     try {
-      const resultado = await this.notification.presentActionSheet();
+      const resultado = await this.notification.cameraActionSheet();
       // Handle the selected action
       if (resultado === 'takePhoto') {
         type=1;

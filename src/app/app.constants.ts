@@ -20,6 +20,7 @@ export const ENVIRONMENT_FILENAME = 'environment.txt';
 export const LINK_PRIVACY = BASE_URL + 'storage/condiciones/POLITICA-PRIVACIDAD-ICOT-PDI-APP.pdf';
 //App Id for the OneSignal Account
 export const APP_ID = '5f2ef6ae-93cc-4194-9350-dab41b514e3b';
+export const API_KEY1 = 'AIzaSyBwx7I4prD_2nxICzConKB0io096Z0VJvk'; 
 
 /**
 * NAME ROUTER
@@ -30,6 +31,8 @@ export const RANKINGS = 'rankings';
 export const SERVICES = 'health_services';
 export const INCENTIVES = 'incentives';
 export const LEAGUE = 'league';
+export const CENTERS = 'centers';
+
 /**
  * API ROUTES
  */
@@ -62,6 +65,7 @@ export const UPDATING_VERSION = 'api/updateVersion';
 export const AVAILABLES_DISCOUNTS = 'api/discounts/';
 export const APP_LOGS = 'api/logs';
 export const UNLOCK_REQUEST = 'api/unlockRequest';
+
 /**
 * KEY WORDS
 */
@@ -143,7 +147,7 @@ export const PASS_FORMAT = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[$€+-=<
 /**
 * RESPONSES BACK-END
 */
-export const EMPTY_STRING = ' ';
+export const EMPTY_STRING = '';
 export const CANCEL_OPTION = 'cancel';
 export const RESPONSE_NO_VALID = 'no_valid';
 export const RESPONSE_PENDING_VALIDATION = 'pending_validation';
@@ -516,11 +520,7 @@ export const FILE_NOT_EXISTS = {
   msg: 'EL ARCHIVO NO EXISTE'
 };
 
-
-
-
 /** DURATIONS AND TIMES **/
-
 export const TIME_WAIT_INIT_ACOUNT_CHECK = 10000;
 export const MAX_TIME_LOADING = 25000;
 export const NORMAL_TIME_WAIT = 15000;
@@ -532,9 +532,7 @@ export const WAIT_TO_SLIDE = 3000;
 export const DEFAULT_TIME_1S = 1000;
 export const SLIDES_PROMOTIONS_TIME = 1500;
 
-
 /** ARRAYS **/
-
 export const COLUMNS_HEADER_GLOBAL_LEAGUE = ['POSICIÓN', 'CENTRO', 'PUNTOS', 'PCV', 'ACCIÓN'];
 export const COLUMNS_HEADER_GLOBAL_WITH_DETAILS = ['POSICIÓN', 'CENTRO', 'PUNTOS', 'PCV', 'ACCIÓN'];
 export const COLUMNS_HEADER_CENTRE_LEAGUE = ['MES', 'PUNTOS RECIBIDOS', 'COEFICIENTE DE VENTA'];

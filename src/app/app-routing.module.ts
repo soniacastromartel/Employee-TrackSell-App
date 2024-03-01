@@ -32,7 +32,11 @@ const routes: Routes = [
   {
     path: 'health_services',
     loadChildren: () => import('./pages/health-services/health-services.module').then( m => m.HealthServicesPageModule)
+  },  {
+    path: 'centers',
+    loadChildren: () => import('./pages/centers/centers.module').then( m => m.CentersPageModule)
   }
+
   
 ];
 

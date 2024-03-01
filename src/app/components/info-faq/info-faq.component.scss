@@ -97,6 +97,7 @@
 
 ion-icon{
   color: white;
+  --background: var(--ion-color-myblack);
 }
 
 hr {
@@ -120,6 +121,7 @@ hr {
     text-align: left;
     letter-spacing: 0.1em;
     white-space: pre-wrap;
+
 }
 
 .info {
@@ -129,34 +131,26 @@ hr {
     font-weight: 900;
     font-size: small;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
+    margin-left: 50px;
 
-.containerImgs {
-    text-align: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
-.imgs {
-    width: 80px;
-    height: 120px;
-    object-fit: contain;
-    border: 2px solid var(--ion-color-icot);
-    margin-right: 0.5em;
-    margin-left: 0.5em;
-    display: inline-block;
-}
-
-.goBack {
-    --background: var(--ion-color-icot);
-    --background-hover: var(--ion-color-icot);
-    --color-hover: white;
-    --color: var(--ion-color-always-white);
-    margin: 16px;
-    font-weight: bold;
-    font-size: small;
 }
 
 .lblBtn{
   color: white
+}
+
+.mycard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+ion-thumbnail {
+  --size: 300px;
+}
+
+ion-item{
+  --size: 800px;
 }

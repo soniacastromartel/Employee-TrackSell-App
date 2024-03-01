@@ -1,11 +1,4 @@
-<ion-header class="ion-no-border">
-    <ion-toolbar>
-        <ion-note class="title">{{data.title}}</ion-note>
-        <ion-buttons slot="start">
-            <img class="logo" [src]="logo"/>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
+<app-header title="{{data.title}}"></app-header>
 <ion-content>
     <div>
         <ion-note class="question">{{data.pregunta}}</ion-note>
@@ -14,21 +7,16 @@
             <ion-note class="answer">{{data.respuesta}}</ion-note>
         </div>
     </div>
-    <br>
-    <ion-grid>
-        <ion-row class="ion-text-center">
-            <ion-col size="4" *ngFor="let photo of data.images; let i=index;">
-                <ion-note class="info">{{i+1}} </ion-note>
-                <div class="containerImgs">
-                    <img [ngClass]="['animated', 'fadeIn', 'fast', 'imgs']" [src]="photo" (click)="seeImg(i)"/>
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <div>
+        <ion-item *ngFor="let img of data.images; let i=index;" lines="none" color="none">
+            <ion-thumbnail slot="start">
+                <img alt="" [src]="img" (click)="seeImg()" />
+            </ion-thumbnail>
+            <ion-label>
+                <p>Hola</p>
+                <p>Mundo</p>
+            </ion-label>
+            <ion-icon slot="icon-only" name="eye-sharp" (click)="seeImg()"></ion-icon>
+        </ion-item>
+    </div>
 </ion-content>
-<ion-toolbar>
-    <ion-button class="goBack" expand="block" (click)="back()">
-        <ion-icon name="return-up-back" slot="start" class="home"></ion-icon>
-        <ion-note class="lblBtn">ATRÁS</ion-note>
-    </ion-button>
-</ion-toolbar>

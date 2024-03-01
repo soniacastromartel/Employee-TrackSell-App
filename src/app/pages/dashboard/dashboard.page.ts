@@ -1,4 +1,4 @@
-import { IMG_FIELD, INCENTIVES, LEAGUE, RANKINGS, SERVICES } from './../../app.constants';
+import { CENTERS, IMG_FIELD, INCENTIVES, LEAGUE, RANKINGS, SERVICES } from './../../app.constants';
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/quotes */
 import { AfterContentChecked, AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
@@ -23,27 +23,27 @@ import { ConnectionService } from '../../services/connection.service';
 import { DatacheckService } from '../../services/datacheck.service';
 import { CategoryService } from 'src/app/models/category_service';
 import { LOGO_PATH } from '../../app.constants';
-
 import { Section } from '../../models/section';
-import { SwiperComponent } from 'swiper/angular';
-import { SwiperOptions } from 'swiper';
-import SwiperCore, { Pagination, EffectFlip, Autoplay } from 'swiper/core';
+
 import { UserActivityService } from 'src/app/services/user-activity.service';
 import { Route, Router } from '@angular/router';
 
-import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 import { LoaderService } from 'src/app/services/loader.service';
 
+import Swiper from 'swiper';
+import { SwiperComponent } from 'swiper/angular';
+import { SwiperOptions } from 'swiper';
+import SwiperCore, { Pagination, EffectFlip, Autoplay } from 'swiper/core';
 
 
-SwiperCore.use([Pagination, EffectFlip, Autoplay]);
+ SwiperCore.use([Pagination, EffectFlip, Autoplay]);
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterContentChecked, AfterViewInit {
+export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy,AfterContentChecked, AfterViewInit {
   @ViewChild('swiper') swiper: SwiperComponent;
   @ViewChild('swiper') swiperComponent: SwiperComponent;
   @ViewChild('modal') modalCrtl: ModalController;
@@ -116,7 +116,6 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
     private checkSvc: DatacheckService,
     private userActivityService: UserActivityService,
     private route: Router,
-    private screenOrientation: ScreenOrientation,
     private loaderSvc: LoaderService
 
   ) {
@@ -299,7 +298,7 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
           });
         break;
     }
-    this.swiperComponent.swiperRef.autoplay.running = true;
+     this.swiperComponent.swiperRef.autoplay.running = true;
   }
 
   /**
@@ -333,6 +332,9 @@ export class DashboardPage implements OnInit, ViewWillEnter, OnDestroy, AfterCon
         break;
       case 4:
         this.route.navigate([LEAGUE]);
+        break;
+      case 5:
+        this.route.navigate([CENTERS]);
         break;
     }
   }

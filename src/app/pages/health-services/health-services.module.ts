@@ -10,6 +10,7 @@ import { HealthServicesPage } from './health-services.page';
 import { ServicesComponent } from 'src/app/components/services/services.component';
 import { ListOfServicesComponent } from 'src/app/components/list-of-services/list-of-services.component';
 import { Routes } from '@angular/router';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,12 @@ const routes: Routes = [
   declarations: [
     HealthServicesPage,
     ListOfServicesComponent,
-    ServicesComponent
+    ServicesComponent, 
+    HeaderComponent
+  ],
+  exports: [
+    HeaderComponent,
+    ListOfServicesComponent
   ]
 })
 export class HealthServicesPageModule {}

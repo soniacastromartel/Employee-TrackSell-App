@@ -20,16 +20,12 @@ export class FaqComponent implements OnInit, ViewWillEnter {
 
   // Version app
   version: string;
-
   // Control de seccion de tipo de pregunta
-  optCtrl = [false, false, false, false, false, false];
-
+  optCtrl = [false, false, false, false, false, false, false];
   // Info empty view
   noData = NO_DATA_FAQ;
-
   // Time base search
   timeOutSearch;
-
   // Control muestra actualizacion pendiente
   isShowPendingUpdate: boolean;
 
@@ -54,31 +50,31 @@ export class FaqComponent implements OnInit, ViewWillEnter {
    * y se cargan el contenido
    */
   async ngOnInit() {
-      if (this.utils.version !== undefined) {
-        this.version = this.utils.version;
-      } else {
+    if (this.utils.version !== undefined) {
+      this.version = this.utils.version;
+    } else {
       await this.utils.getVersionApp().then(version => {
-          this.version = version + '';
+        this.version = version + '';
       }).catch(() => {
         this.version = MIN_VERSION_APP;
-        });
+      });
     }
-      this.subcriptionFAQ = (await this.checkSvc.getOptionsFAQ())
-        .subscribe((result: any) => {
-          if (result !== undefined) {
-            this.optionsFAQ = result.data;
-            this.optionsFAQ?.forEach((element) => {
-              this.categorizeFAQ(element, false);
-            });
-          }
+    this.subcriptionFAQ = (await this.checkSvc.getOptionsFAQ())
+      .subscribe((result: any) => {
+        if (result !== undefined) {
+          this.optionsFAQ = result.data;
+          this.optionsFAQ?.forEach((element) => {
+            this.categorizeFAQ(element, false);
+          });
+        }
 
       });
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     // Mostrar opcion descarga actualizacion en FAQ?
     this.isShowPendingUpdate = this.storage.employee !== undefined &&
-    this.utils.pendingUpdate;
+      this.utils.pendingUpdate;
   }
 
   /**
@@ -87,21 +83,21 @@ export class FaqComponent implements OnInit, ViewWillEnter {
    * @param opt opción de usuario
    */
   async openOptFAQ(opt: number) {
-    for (let x = 0; x < this.optCtrl.length; x++){
+    for (let x = 0; x < this.optCtrl.length; x++) {
       if (x === opt) {
-        if (this.optCtrl[opt]){
+        if (this.optCtrl[opt]) {
           this.optCtrl[opt] = false;
-        } else{
+        } else {
           this.optCtrl[opt] = true;
         }
-        if (this.optionsShow[opt].ic === 'add-circle'){
+        if (this.optionsShow[opt].ic === 'add-circle') {
           this.optionsShow[opt].ic = 'remove-circle';
-        } else{
+        } else {
           this.optionsShow[opt].ic = 'add-circle';
         }
       } else {
         this.optCtrl[x] = false;
-        if (this.optionsShow[x] !== undefined){
+        if (this.optionsShow[x] !== undefined) {
           this.optionsShow[x].ic = 'add-circle';
         }
       }
@@ -109,8 +105,8 @@ export class FaqComponent implements OnInit, ViewWillEnter {
     const yOffset = document.getElementById('questionFAQ')?.offsetHeight;
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     opt < 2 ?
-      this.content.scrollByPoint(0, yOffset+20, 1500) :
-      this.content.scrollByPoint(0, yOffset+180, 1500) ;
+      this.content.scrollByPoint(0, yOffset + 20, 1500) :
+      this.content.scrollByPoint(0, yOffset + 180, 1500);
   }
 
   /**
@@ -131,7 +127,7 @@ export class FaqComponent implements OnInit, ViewWillEnter {
    * 
    */
   showQuestion(question: any, posCategory: number) {
-      this.notification.showQuestionFAQ(
+    this.notification.showQuestionFAQ(
       InfoFAQComponent,
       this.optionsShow[posCategory].categoria,
       question.pregunta.toUpperCase(),
@@ -152,24 +148,24 @@ export class FaqComponent implements OnInit, ViewWillEnter {
       this.resetValues();
       this.optionsShow = [];
       const exclude = [];
-        this.optionsFAQ.forEach((r) => {
-          // Si existe la información se desoculta el grupo
-          if (r.categoria.toUpperCase().includes(search.toUpperCase()) ||
-            r.pregunta.toUpperCase().includes(search.toUpperCase())) {
-            this.categorizeFAQ(r, false);
-            exclude.push(r.categoria);
-            // Comprobacion ocurrencias encontradas
-            const existe = this.optionsShow.filter(reg => reg.categoria === r.categoria);
-            existe.forEach(element => {
-              element.hidden = false;
-            });
-          } else {
-            // En caso contrario se recategorizan y se ocultan
-            if (!exclude.includes(r.categoria)) {
-              this.categorizeFAQ(r, true);
-            }
+      this.optionsFAQ.forEach((r) => {
+        // Si existe la información se desoculta el grupo
+        if (r.categoria.toUpperCase().includes(search.toUpperCase()) ||
+          r.pregunta.toUpperCase().includes(search.toUpperCase())) {
+          this.categorizeFAQ(r, false);
+          exclude.push(r.categoria);
+          // Comprobacion ocurrencias encontradas
+          const existe = this.optionsShow.filter(reg => reg.categoria === r.categoria);
+          existe.forEach(element => {
+            element.hidden = false;
+          });
+        } else {
+          // En caso contrario se recategorizan y se ocultan
+          if (!exclude.includes(r.categoria)) {
+            this.categorizeFAQ(r, true);
+          }
         }
-        });
+      });
     }
     this.timeOutSearch = setTimeout(() => {
       if (search === '') {
@@ -183,26 +179,26 @@ export class FaqComponent implements OnInit, ViewWillEnter {
    *
    * @param element Elemento a comprobar
    */
-    categorizeFAQ(element: any, status: boolean) {
+  categorizeFAQ(element: any, status: boolean) {
     const code = element.code + ''.split('.');
     if (this.optionsShow[code[0]] === undefined) {
-          this.optionsShow[code[0]] = {
-            code: element.code,
-            ic: element.ic,
-            hidden: status,
-            categoria: element.categoria,
-            data: [{
-              pregunta: element.pregunta,
-              respuesta: element.respuesta,
-              images: element.images,
-            }]
-          };
+      this.optionsShow[code[0]] = {
+        code: element.code,
+        ic: element.ic,
+        hidden: status,
+        categoria: element.categoria,
+        data: [{
+          pregunta: element.pregunta,
+          respuesta: element.respuesta,
+          images: element.images,
+        }]
+      };
     } else {
-          this.optionsShow[code[0]].data.push({
-            pregunta: element.pregunta,
-            respuesta: element.respuesta,
-            images: element.images,
-          });
+      this.optionsShow[code[0]].data.push({
+        pregunta: element.pregunta,
+        respuesta: element.respuesta,
+        images: element.images,
+      });
     }
   }
 
@@ -228,7 +224,31 @@ export class FaqComponent implements OnInit, ViewWillEnter {
    * Descarga de actualizacion pospuesta
    * por parte del usuario
    */
-  reUpdatingApp(){
+  reUpdatingApp() {
     this.utils.downloadingUpdate(false);
+  }
+
+  /**
+* Escucha scroll
+*
+* @param ev Evento touch
+*/
+  onScroll(ev: any) {
+    this.utils.onScroll(ev, this.content);
+  }
+
+  /**
+   * Scroll in lista de rankings
+   */
+  onScrolling() {
+    this.utils.onScrolling(this.content);
+  }
+
+  /**
+   * Oculta el icono de flecha para
+   * subir o bajar de la lista
+   */
+  hiddenArrow() {
+    this.utils.hiddenArrow();
   }
 }

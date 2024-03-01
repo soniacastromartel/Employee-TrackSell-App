@@ -18,6 +18,7 @@ import { Componente } from '../models/componente';
 import { Section } from '../models/section';
 import { CategoryService } from '../models/category_service';
 import { Observable } from 'rxjs';
+import { Marker } from '@capacitor/google-maps';
 
 @Injectable({
   providedIn: 'root',
@@ -127,6 +128,13 @@ export class DatacheckService {
    */
   getSections() {
     return this.http.get<Section[]>('/assets/data/sections.json');
+  }
+
+  /**
+   * Devuelve un array con las localizaciones de los centros
+   */
+  getLocations() {
+    return this.http.get<Marker[]>('/assets/data/locations.json');
   }
 
   /**

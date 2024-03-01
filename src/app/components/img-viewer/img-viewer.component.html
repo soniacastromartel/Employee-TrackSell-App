@@ -1,12 +1,18 @@
-
-    <ion-content fullscreen>
-        <ion-slides #slidesViewer (ionSlidesDidLoad)="slidePlay()" (ionSlideDidChange)="refreshViewer()" (ionSlideTap)="closeViewer()">
-            <ion-slide *ngFor="let p of imgs">
-                <ion-row>
-                        <ion-img src="{{ p }}"></ion-img>
-                </ion-row>
-            </ion-slide>
-        </ion-slides>
-    </ion-content>
-    
-
+<ion-header>
+        <ion-fab>
+            <ion-fab-button size="small"  (click)="closeViewer()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+</ion-header>
+<ion-content fullscreen>
+    <swiper id="swiper1" #swiper [config]="config">
+        <ng-template swiperSlide *ngFor="let img of imgs;let i= index;">
+            <ion-card class="mycard">
+                <ion-card-content>
+                    <img class="full-image" [src]="img">
+                </ion-card-content>
+            </ion-card>
+        </ng-template>
+    </swiper>
+</ion-content>

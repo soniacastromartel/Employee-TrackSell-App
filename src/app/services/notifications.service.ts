@@ -17,6 +17,7 @@ import {
   PopoverController,
   ToastController,
 } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +43,8 @@ export class NotificationsService {
     protected popoCtrl: PopoverController,
     protected toastCtrl: ToastController,
     protected actionSheetCtrl: ActionSheetController,
-    public pageSvc: PageService
+    public pageSvc: PageService,
+    private location: Location
   ) { }
 
   /**
@@ -884,10 +886,13 @@ export class NotificationsService {
     const modaling = await this.modalCrtl.getTop();
     if (extra !== undefined) {
       await this.modalCrtl.dismiss(extra);
-    } else {
-      if (modaling !== undefined) {
+    } else if (modaling !== undefined) {
+       
         await this.modalCrtl.dismiss();
-      }
+      
+    }else {
+      this.location.back();
+
     }
   }
 
@@ -954,7 +959,11 @@ export class NotificationsService {
     });
   }
 
-  async presentActionSheet(): Promise<string> {
+  /**
+   * 
+   * taking photos
+   */
+  async cameraActionSheet(): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
       const actionSheet = await this.actionSheetCtrl.create({
         header: 'Seleccionar Imagen',
@@ -988,5 +997,16 @@ export class NotificationsService {
     });
   }
 
+  async locationActionSheet(header:string, text: string){
+    const actionSheet= await this.actionSheetCtrl.create({
+      header: header,
+      translucent:true,
+      buttons: [{
+        text: text,
+        icon: 'compass-sharp',
+      }]
+    });
+    await  actionSheet.present();
+  }
   
 }

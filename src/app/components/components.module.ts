@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -15,6 +15,10 @@ import { ImgViewerComponent } from './img-viewer/img-viewer.component';
 import { UserDataComponent } from './user-data/user-data.component';
 import { FooterComponent } from './footer/footer.component';
 import { RefresherComponent } from './refresher/refresher.component';
+import { MapComponent } from './map/map.component';
+
+import { SwiperModule } from 'swiper/angular';
+import Swiper from 'swiper';
 
 @NgModule({
 
@@ -31,13 +35,15 @@ import { RefresherComponent } from './refresher/refresher.component';
     ImgViewerComponent,
     UserDataComponent,
     FooterComponent,
-    RefresherComponent
+    RefresherComponent,
+    MapComponent
   ],
 
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    SwiperModule,
     IonicModule.forRoot()],
 
   exports: [
@@ -51,7 +57,8 @@ import { RefresherComponent } from './refresher/refresher.component';
     InfoFAQComponent,
     EmptyViewComponent,
     ImgViewerComponent,
-    FooterComponent
+    FooterComponent,
+    MapComponent
   ]
 })
 export class ComponentsModule { }

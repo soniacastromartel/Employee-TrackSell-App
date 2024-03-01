@@ -1,9 +1,11 @@
 import { ImgViewerComponent } from './../img-viewer/img-viewer.component';
 import { PageService } from './../../services/page.service';
 import { LOGO_PATH } from './../../app.constants';
-import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { AfterContentChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { IonContent, NavParams } from '@ionic/angular';
 import { NotificationsService } from '../../services/notifications.service';
+import { UtilsService } from 'src/app/services/utils.service';
+
 
 @Component({
   selector: 'app-info-faq',
@@ -11,6 +13,7 @@ import { NotificationsService } from '../../services/notifications.service';
   styleUrls: ['./info-faq.component.scss'],
 })
 export class InfoFAQComponent implements OnInit {
+  @ViewChild('content') content: IonContent;
   // Path logo base
   logo = LOGO_PATH;
 
@@ -22,13 +25,19 @@ export class InfoFAQComponent implements OnInit {
     images: undefined
   };
 
-  constructor(private params: NavParams,
-              private notification: NotificationsService,
-              private pageSvc: PageService) { }
+  constructor(
+    private params: NavParams,
+    private notification: NotificationsService,
+    private utils: UtilsService,
+    private pageSvc: PageService
+  ) {
+
+  }
 
   // Se recoge la informacion del FAQ a mostrar
   ngOnInit() {
     const data = this.params.get('data');
+    console.log(data);
     if (data !== undefined) {
       this.data.title = data.title;
       this.data.pregunta = data.pregunta;
@@ -42,13 +51,11 @@ export class InfoFAQComponent implements OnInit {
    *
    * @param photo Imagen a visualizar
    */
-  seeImg(index: number) {
+  seeImg() {
     const extra = {
-      data : this.data.images,
-      pos : index
+      data: this.data.images,
     };
-
-    this.pageSvc.viewContentModal(ImgViewerComponent, {data : extra});
+    this.pageSvc.viewContentModal(ImgViewerComponent, { data: extra });
   }
 
   /**
